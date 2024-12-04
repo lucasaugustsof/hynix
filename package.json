@@ -8,5 +8,8 @@
   },
   "license": "MIT",
   "packageManager": "pnpm@9.14.4",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4"
+  }
 }
