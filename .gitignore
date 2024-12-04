@@ -3,3 +3,7 @@ node_modules/
 
 # misc
 .DS_Store
+
+# storybook / chromatic
+*storybook.log
+chromatic.log

@@ -1,0 +1,10 @@
+{
+  "name": "@hynix/ts-config",
+  "version": "0.0.0",
+  "description": "TypeScript predefined config.",
+  "exports": {
+    "./*.json": "./*.json"
+  },
+  "license": "MIT",
+  "private": true
+}

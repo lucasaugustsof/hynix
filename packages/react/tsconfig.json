@@ -1,0 +1,3 @@
+{
+	"extends": "@hynix/ts-config/react.json"
+}

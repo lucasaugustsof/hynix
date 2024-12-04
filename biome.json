@@ -33,5 +33,10 @@
       "semicolons": "asNeeded",
       "arrowParentheses": "asNeeded"
     }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
+    }
   }
 }
