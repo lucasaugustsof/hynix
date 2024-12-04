@@ -16,13 +16,13 @@ Furthermore, I have a strong desire to help other developers improve their inter
 
 Below, you’ll find my inspirations for building this project:
 
-- [**chakra UI**](https://www.chakra-ui.com/): Reference for component structure and concepts.
-- [**shadcn UI**](https://ui.shadcn.com/): Inspiration for the CLI that enables quick copying and usage of components.
-- [**radix UI**](https://www.radix-ui.com/): Model for efficient presentation and theming of interfaces.
-- [**IBM Carbon**](https://carbondesignsystem.com/): Renowned for its detailed and clear documentation, serving as a guide for structuring the project documentation.
-- [**Vercel**](https://vercel.com/): For its monochromatic aesthetic and seamless integration of design and technology.
-- [**aceternity UI**](https://ui.aceternity.com/): Inspiration for its well-crafted and fluid animations in components.
-- [**luxe UI**](https://www.luxeui.com/): For its elegant and sophisticated component presentation.
+- [**Chakra UI**](https://www.chakra-ui.com/): Reference for structuring and designing components with a focus on simplicity and efficiency.
+- [**shadcn UI**](https://ui.shadcn.com/): Inspiration for the CLI that enables practical and agile copying and usage of components.
+- [**Radix UI**](https://www.radix-ui.com/): A model for efficient presentation and flexible theming of interfaces.
+- [**IBM Carbon**](https://carbondesignsystem.com/): Renowned for its detailed and clear documentation, serving as an essential guide for organizing project documentation.
+- [**Vercel**](https://vercel.com/geist/introduction): For its monochromatic aesthetic and seamless integration of design and technology.
+- [**Aceternity UI**](https://ui.aceternity.com/): Inspiration for its well-crafted and fluid animations in components.
+- [**Luxe UI**](https://www.luxeui.com/): For its elegant and sophisticated component presentation, combining functionality and refined design.
 
 ## ◼️ Vision
 
