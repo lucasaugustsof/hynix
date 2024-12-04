@@ -32,5 +32,5 @@ Hynix aims to align with and embrace this evolution, leveraging AI to boost and 
 
 ## ◼️ License
 
-@lucasaugustsof – All rights reserved.
+© lucasaugusts – All rights reserved.
 Licensed under the [MIT License](https://github.com/lucasaugustsof/hynix/blob/main/LICENSE).
