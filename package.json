@@ -1,0 +1,12 @@
+{
+  "name": "hynix",
+  "description": "Beautifully designed and accessible components, built with React, TailwindCSS, and Ark UI.",
+  "type": "module",
+  "author": {
+    "name": "Lucas Augusto",
+    "email": "lucasaugustscode@gmail.com"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@9.14.4",
+  "private": true
+}
