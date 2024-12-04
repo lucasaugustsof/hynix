@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "echo 'Hello World'",
+    "lint": "biome check --write ."
+  },
   "dependencies": {
     "react": "18.3.1"
   },

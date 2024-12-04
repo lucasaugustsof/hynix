@@ -13,6 +13,8 @@
     "node": ">=20"
   },
   "scripts": {
+    "dev": "turbo dev",
+    "lint": "turbo lint",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "husky:prepare": "husky"
@@ -36,6 +38,7 @@
     "husky": "9.1.7",
     "prop-types": "^15.8.1",
     "storybook": "^8.4.6",
+    "turbo": "2.3.3",
     "typescript": "5.7.2"
   }
 }

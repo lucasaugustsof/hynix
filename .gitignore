@@ -7,3 +7,6 @@ node_modules/
 # storybook / chromatic
 *storybook.log
 chromatic.log
+
+# turborepo
+.turbo
