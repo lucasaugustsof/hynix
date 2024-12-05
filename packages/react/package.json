@@ -1,21 +1,21 @@
 {
-  "name": "@hynix/react",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "exports": {
-    "./styles": "./dist/index.css"
-  },
-  "scripts": {
-    "dev": "tailwindcss -i src/styles/index.css -o dist/index.css --watch",
-    "lint": "biome check --write ."
-  },
-  "dependencies": {
-    "react": "18.3.1"
-  },
-  "devDependencies": {
-    "@tailwindcss/cli": "4.0.0-beta.5",
-    "@types/react": "18.3.13",
-    "tailwindcss": "4.0.0-beta.5"
-  }
+	"name": "@hynix/react",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"exports": {
+		"./styles": "./dist/index.css"
+	},
+	"scripts": {
+		"dev": "tailwindcss -i src/styles/index.css -o dist/index.css --watch",
+		"lint": "biome check --write ."
+	},
+	"dependencies": {
+		"react": "18.3.1"
+	},
+	"devDependencies": {
+		"@tailwindcss/cli": "4.0.0-beta.5",
+		"@types/react": "18.3.13",
+		"tailwindcss": "4.0.0-beta.5"
+	}
 }
