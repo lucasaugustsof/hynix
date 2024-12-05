@@ -1,3 +1,5 @@
+import '@hynix/react/styles'
+
 /** @type { import('@storybook/react').Preview } */
 const preview = {
   parameters: {

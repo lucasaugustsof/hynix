@@ -1,10 +1,6 @@
 import path from 'node:path'
 
-const { pathname } = new URL(import.meta.url)
-
 const STORIES_PATH = path.resolve(
-  pathname,
-  '../..',
   'packages/react/src/__stories__/**/*.stories.tsx',
 )
 
@@ -21,6 +17,19 @@ const config = {
   framework: {
     name: '@storybook/react-vite',
     options: {},
+  },
+  viteFinal(config) {
+    return {
+      ...config,
+      resolve: {
+        alias: [
+          {
+            find: '@/registry',
+            replacement: path.resolve('packages/react/src'), // resolve react package alias
+          },
+        ],
+      },
+    }
   },
 }
 export default config

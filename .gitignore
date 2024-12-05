@@ -1,6 +1,9 @@
 # deps
 node_modules/
 
+# outputs
+dist/
+
 # misc
 .DS_Store
 

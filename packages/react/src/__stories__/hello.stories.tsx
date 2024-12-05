@@ -1,8 +1,10 @@
 import type { Meta } from '@storybook/react'
 
+import { Hello } from '@/registry/components/hello'
+
 export default {
   title: 'hello',
-  component: () => <h1>Hello World</h1>,
+  component: Hello,
 } as Meta
 
 export const Data = {}
