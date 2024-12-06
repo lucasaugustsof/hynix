@@ -1,3 +1,5 @@
 export function Hello() {
-  return <h1 className="text-red-500">Hello World</h1>
+  return (
+    <div className="size-16 bg-brand rounded-5 text-foreground-2">Hello</div>
+  )
 }

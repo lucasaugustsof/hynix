@@ -1,1 +1,87 @@
 @import "tailwindcss";
+
+@import "./themes/dark.css";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--color-surface-1: oklch(100% 0 0);
+	--color-surface-2: oklch(99.11% 0 0);
+
+	--color-fill-1: oklch(96.74% 0.0013 286.38);
+	--color-fill-2: oklch(91% 0.0013 286.37);
+	--color-fill-3: oklch(85.88% 0.0055 286.28);
+	--color-fill-4: oklch(71.18% 0.0129 286.07);
+	--color-fill-5: oklch(44.19% 0.0146 285.79);
+
+	--color-border: oklch(91% 0.0013 286.37);
+	--color-disabled: oklch(21.78% 0 0 / 18%);
+
+	--color-foreground-1: oklch(21.78% 0 0);
+	--color-foreground-2: oklch(100% 0 0);
+
+	--color-brand: oklch(21.78% 0 0);
+	--color-brand-hover: oklch(37.03% 0.0119 285.81);
+	--color-brand-selected: oklch(44.19% 0.0146 285.79);
+
+	--color-danger: oklch(57.85% 0.2138 27.17);
+	--color-danger-hover: oklch(70.3% 0.1884 23.26);
+	--color-danger-selected: oklch(88.34% 0.0616 18.39);
+
+	--color-success: oklch(57.29% 0.1544 149.22);
+	--color-success-hover: oklch(77.93% 0.1995 150.19);
+	--color-success-selected: oklch(82.91% 0.1871 156.84);
+
+	--spacing: initial;
+	--spacing-0: 0rem;
+	--spacing-1: .0625rem;
+	--spacing-2: .125rem;
+	--spacing-3: .25rem;
+	--spacing-4: .375rem;
+	--spacing-5: .5rem;
+	--spacing-6: .625rem;
+	--spacing-7: .75rem;
+	--spacing-8: 1rem;
+	--spacing-9: 1.25rem;
+	--spacing-10: 1.5rem;
+	--spacing-11: 1.75rem;
+	--spacing-12: 2rem;
+	--spacing-13: 2.25rem;
+	--spacing-14: 2.5rem;
+	--spacing-15: 2.75rem;
+	--spacing-16: 3rem;
+	--spacing-17: 3.5rem;
+	--spacing-18: 4rem;
+	--spacing-19: 4.5rem;
+	--spacing-20: 5rem;
+	--spacing-21: 6rem;
+	--spacing-22: 7rem;
+	--spacing-23: 7.5rem;
+	--spacing-24: 8rem;
+	--spacing-25: 9rem;
+	--spacing-26: 10rem;
+	--spacing-27: 12rem;
+	--spacing-28: 13rem;
+	--spacing-29: 14rem;
+	--spacing-30: 16rem;
+	--spacing-31: 18rem;
+	--spacing-32: 20rem;
+	--spacing-33: 24rem;
+}
+
+@layer base {
+	*,
+	*::after,
+	*::before {
+		@apply antialiased border-border;
+	}
+
+	html {
+		@apply scroll-smooth;
+	}
+
+	body {
+		font-synthesis-weight: none;
+		text-rendering: optimizeLegibility;
+	}
+}
