@@ -4,7 +4,7 @@ Beautifully designed and accessible components, built with React, TailwindCSS, a
 
 ## ◼️ Motivation
 
-I am developing this project as a personal expression, with the goal of creating a component library aligned with the Design System of my brand. My intention is to make it easier to develop standardized, consistent, and visually harmonious digital products.
+I am developing this project as a personal manifestation, with the goal of creating a component library aligned with the Design System of my brand. My intention is to make it easier to develop standardized, consistent, and visually harmonious digital products.
 
 The idea came from my dissatisfaction with the quality and lack of synergy I noticed in the direction of projects at companies where I have worked. This motivates me to create something that reflects my vision of well-structured, accessible, and high-quality components.
 
