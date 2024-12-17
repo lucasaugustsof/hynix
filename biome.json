@@ -23,7 +23,23 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "fix": "unsafe",
+          "options": {
+            "functions": [
+              "cn",
+              "cva"
+            ],
+            "attributes": [
+              "className",
+              "class"
+            ]
+          }
+        }
+      }
     }
   },
   "javascript": {

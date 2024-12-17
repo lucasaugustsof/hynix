@@ -1,5 +1,7 @@
 export function Hello() {
   return (
-    <div className="size-16 bg-brand rounded-5 text-foreground-2">Hello</div>
+    <div className="flex size-12 items-center justify-center bg-fill-1 text-fg-1">
+      Hello
+    </div>
   )
 }
