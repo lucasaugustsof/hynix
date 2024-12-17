@@ -7,9 +7,8 @@ dist/
 # misc
 .DS_Store
 
-# storybook / chromatic
+# storybook
 *storybook.log
-chromatic.log
 
 # turborepo
 .turbo
