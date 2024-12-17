@@ -30,16 +30,16 @@
 	--color-success-hover: var(--success-hover);
 	--color-success-selected: var(--success-selected);
 
-	--border-radius-base: var(--radi-1);
-	--border-radius-md: var(--radi-2);
-	--border-radius-lg: var(--radi-3);
-	--border-radius-xl: var(--radi-4);
-	--border-radius-2xl: var(--radi-5);
-	--border-radius-3xl: var(--radi-6);
-	--border-radius-4xl: var(--radi-7);
-	--border-radius-5xl: var(--radi-8);
-	--border-radius-6xl: var(--radi-9);
-	--border-radius-7xl: var(--radi-10);
+	--radius-base: var(--radi-1);
+	--radius-md: var(--radi-2);
+	--radius-lg: var(--radi-3);
+	--radius-xl: var(--radi-4);
+	--radius-2xl: var(--radi-5);
+	--radius-3xl: var(--radi-6);
+	--radius-4xl: var(--radi-7);
+	--radius-5xl: var(--radi-8);
+	--radius-6xl: var(--radi-9);
+	--radius-7xl: var(--radi-10);
 
 	--font-display: var(--display);
 }

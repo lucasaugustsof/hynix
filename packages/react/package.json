@@ -13,7 +13,11 @@
 		"lint": "biome check --write ."
 	},
 	"dependencies": {
-		"react": "19.0.0"
+		"@remixicon/react": "4.6.0",
+		"class-variance-authority": "0.7.1",
+		"clsx": "2.1.1",
+		"react": "19.0.0",
+		"tailwind-merge": "2.5.5"
 	},
 	"devDependencies": {
 		"@tailwindcss/cli": "4.0.0-beta.5",
