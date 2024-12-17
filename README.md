@@ -2,17 +2,15 @@
 
 Beautifully designed and accessible components, built with React, TailwindCSS, and Ark UI. Build your interfaces with extreme speed, simply by copying and pasting the components.
 
-## ◼️ Motivation
+## Motivation
 
-I am developing this project as a personal manifestation, with the goal of creating a component library aligned with the Design System of my brand. My intention is to make it easier to develop standardized, consistent, and visually harmonious digital products.
+The motivation behind Hynix comes from my desire to create one of the best component libraries in Brazil, focusing on simplicity, speed, and quality. I want to make interface development easier by providing tools that streamline and enhance the process for developers and designers.
 
-The idea came from my dissatisfaction with the quality and lack of synergy I noticed in the direction of projects at companies where I have worked. This motivates me to create something that reflects my vision of well-structured, accessible, and high-quality components.
+Beyond being a technical project, Hynix is a way for me to stand out in the community, gain recognition for my work, and build connections with companies and fellow professionals. I plan to monetize the project through paid blocks and templates, offering design system services for small startups.
 
-In addition to being a solid technical solution, I see this project as an opportunity to enhance my skills in programming, design, and accessibility, ensuring that each component meets the highest standards of usability and inclusion. I also view this initiative as an excellent chance to identify and address gaps in my knowledge, growing as a professional and developer.
+Hynix represents not only my ambition to make an impact in the development community but also the achievement of professional goals that will shape my future. 🚀
 
-Furthermore, I have a strong desire to help other developers improve their interface-building processes by offering ready-to-use components and blocks, enabling them to create efficient and elegant designs in a practical and agile way.
-
-## ◼️ Inspirations
+## Inspirations
 
 Below, you’ll find my inspirations for building this project:
 
@@ -24,13 +22,13 @@ Below, you’ll find my inspirations for building this project:
 - [**Aceternity UI**](https://ui.aceternity.com/): Inspiration for its well-crafted and fluid animations in components.
 - [**Luxe UI**](https://www.luxeui.com/): For its elegant and sophisticated component presentation, combining functionality and refined design.
 
-## ◼️ Vision
+## Vision
 
 In 2024, with the significant advancements in artificial intelligence, the way we develop user interfaces is undergoing a transformation.
 
 Hynix aims to align with and embrace this evolution, leveraging AI to boost and accelerate the development of digital products, making the process more efficient and innovative.
 
-## ◼️ License
+## License
 
 © lucasaugusts – All rights reserved.
 Licensed under the [MIT License](https://github.com/lucasaugustsof/hynix/blob/main/LICENSE).

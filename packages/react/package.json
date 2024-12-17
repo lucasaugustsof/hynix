@@ -1,5 +1,7 @@
 {
 	"name": "@hynix/react",
+	"description": "React components library built with TailwindCSS and Ark UI, providing beautifully designed and accessible components.",
+	"type": "module",
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
