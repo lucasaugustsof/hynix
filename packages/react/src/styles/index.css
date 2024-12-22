@@ -135,6 +135,6 @@
 	}
 
 	body {
-		@apply bg-surface-1 text-fg-2;
+		@apply bg-surface-1 text-fg-1;
 	}
 }
