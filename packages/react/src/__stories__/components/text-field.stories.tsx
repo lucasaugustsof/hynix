@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { TextField, type TextFieldProps } from '../components/text-field'
+import {
+  TextField,
+  type TextFieldProps,
+} from '@/registry/components/text-field'
 
 import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
 

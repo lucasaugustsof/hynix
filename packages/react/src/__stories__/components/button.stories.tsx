@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
-import { Button, type ButtonProps } from '../components/button'
+import { Button, type ButtonProps } from '@/registry/components/button'
 
 import {
   RiArrowLeftLine,
