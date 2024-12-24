@@ -2,7 +2,7 @@ import { type VariantProps, tv } from 'tailwind-variants'
 
 import { Slot } from '@/registry/components/slot'
 
-const buttonVariants = tv({
+const buttonStyles = tv({
   base: [
     'inset-ring-1 isolate inline-flex items-center justify-center gap-3 rounded-3xl font-display font-semibold outline-brand-selected outline-offset-2 transition-colors ease-out',
     'focus-visible:outline-2',
@@ -48,7 +48,7 @@ const buttonVariants = tv({
 })
 
 type ButtonProps = React.ComponentPropsWithRef<'button'> &
-  VariantProps<typeof buttonVariants> & {
+  VariantProps<typeof buttonStyles> & {
     asChild?: boolean
   }
 
@@ -72,7 +72,7 @@ function Button({
   return (
     <Comp
       {...props}
-      className={buttonVariants({
+      className={buttonStyles({
         appearance,
         size,
         disabled,
@@ -85,5 +85,5 @@ function Button({
   )
 }
 
-export { Button, buttonVariants }
+export { Button, buttonStyles }
 export type { ButtonProps }
