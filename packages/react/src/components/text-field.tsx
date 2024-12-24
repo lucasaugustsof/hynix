@@ -1,205 +1,214 @@
-import React from 'react'
+import { createContext, useContext, useRef } from 'react'
 
+import type { Assign } from '@ark-ui/react'
 import {
   Field,
+  type FieldHelperTextProps,
   type FieldInputProps,
+  type FieldLabelProps,
   type FieldRootProps,
   useFieldContext,
 } from '@ark-ui/react/field'
 
-import { type ClassValue, type VariantProps, tv } from 'tailwind-variants'
+import { type VariantProps, tv } from 'tailwind-variants'
 
 import { cn } from '@/registry/utils/cn'
 
-type Orientation = 'vertical' | 'horizontal'
-
 type TextFieldProps = FieldRootProps &
   VariantProps<typeof textFieldStyles> & {
-    orientation?: Orientation
-    startElement?: React.ReactElement
-    endElement?: React.ReactElement
+    errorText?: string
   }
-
-type OrientationSpacingMap = {
-  [O in Orientation]: Record<NonNullable<TextFieldProps['size']>, ClassValue>
-}
 
 const textFieldStyles = tv({
   slots: {
-    base: 'min-w-72 space-y-2.5',
+    base: 'min-w-72',
     label:
-      'inline-block w-fit max-w-full cursor-pointer truncate font-display font-normal text-fg-1/70',
+      'block w-fit max-w-full cursor-default truncate font-display font-normal text-fg-1/70',
     input: [
-      'inset-ring-1 inset-ring-border w-full min-w-72 rounded-3xl bg-surface-1 outline-none',
-      'hover:inset-ring-2 hover:not-focus-visible:bg-fill-1',
+      'inset-ring-1 inset-ring-border inline-flex w-full cursor-text items-center overflow-hidden rounded-3xl bg-surface-1 transition-shadow duration-100 ease-in-out',
+      'has-enabled:not-focus-within:hover:inset-ring-2 has-enabled:not-focus-within:hover:bg-fill-1',
+      'has-enabled:focus-within:inset-ring-2 has-enabled:focus-within:inset-ring-brand',
+      '[&_svg]:text-fill-5',
     ],
-    inputStartElement: 'left-0',
-    inputEndElement: 'right-0',
-    helperText: 'font-display font-medium text-fg-1/70 leading-snug',
-    errorText: '',
+    helperText:
+      'block w-fit max-w-full truncate font-display font-medium text-fg-1/70',
   },
   variants: {
     size: {
       sm: {
-        base: '',
-        label: '',
-        input: '',
-        helperText: '',
-        errorText: '',
+        base: 'space-y-2',
+        label: 'text-sm leading-snug',
+        input: [
+          'h-9 gap-2 pr-2.5 pl-3 *:data-[part=input]:text-sm *:data-[part=input]:leading-snug',
+          '[&_svg]:size-5',
+        ],
+        helperText: 'text-xs leading-5',
       },
       md: {
-        base: '',
+        base: 'space-y-2.5',
         label: 'text-base',
-        input: 'h-11 pr-3 pl-4',
-        inputStartElement: 'left-4',
-        inputEndElement: 'right-3',
-        helperText: 'text-sm',
-        errorText: '',
+        input: [
+          'h-11 gap-2.5 pr-3 pl-4 *:data-[part=input]:text-base',
+          '[&_svg]:size-6',
+        ],
+        helperText: 'text-sm leading-7',
       },
       lg: {
-        base: '',
-        label: '',
-        input: '',
-        helperText: '',
-        errorText: '',
+        base: 'space-y-3',
+        label: 'text-lg leading-7',
+        input: [
+          'h-14 gap-3 pr-4 pl-5 *:data-[part=input]:text-lg *:data-[part=input]:leading-7',
+          '[&_svg]:size-7',
+        ],
+        helperText: 'text-sm leading-7',
       },
     },
     disabled: {
       true: {
-        input: 'inset-ring-transparent cursor-not-allowed bg-fill-1',
+        input: [
+          'inset-ring-transparent cursor-not-allowed bg-fill-1',
+          '[&_svg]:text-disabled',
+        ],
+        helperText: 'text-fg-1/40',
       },
     },
   },
-  compoundSlots: [
-    {
-      slots: ['inputStartElement', 'inputEndElement'],
-      class: 'absolute [&_svg]:text-fill-5',
-    },
-    {
-      slots: ['inputStartElement', 'inputEndElement'],
-      size: 'md',
-      class: '[&_svg]:size-6',
-    },
-  ],
   defaultVariants: {
     size: 'md',
   },
 })
 
+const { base, label, input, helperText } = textFieldStyles()
+
+const TextFieldContext = createContext({} as Pick<TextFieldProps, 'size'>)
+
 function TextField({
+  className,
   children,
   size,
-  orientation = 'vertical',
-  startElement,
-  endElement,
-  className,
+  errorText,
   ...props
 }: TextFieldProps) {
-  const { invalid } = props
-
-  const {
-    base,
-    label: labelStyles,
-    input,
-    inputStartElement,
-    inputEndElement,
-    helperText: helperTextStyles,
-    errorText: errorTextStyles,
-  } = textFieldStyles({
+  const errorTextStyles = helperText({
     size,
+    className: 'text-danger',
   })
 
-  const clonedTextFieldInput = React.Children.map(children, child => {
-    if (
-      React.isValidElement<TextFieldInputProps>(child) &&
-      child.type === TextFieldInput
-    ) {
-      return React.cloneElement(child, {
-        ...child.props,
-        className: cn(child.props.className, input()),
-      })
-    }
-
-    return null
-  })?.filter(Boolean)[0]
-
   return (
-    <Field.Root
-      {...props}
-      className={base({
-        className,
-      })}
+    <TextFieldContext.Provider
+      value={{
+        size,
+      }}
     >
-      <div
-        className={cn(
-          'flex',
-          orientation === 'vertical' ? 'flex-col' : 'flex-row items-center',
-          getOrientationSpacingMap(orientation, size),
-        )}
+      <Field.Root
+        {...props}
+        className={base({
+          size,
+          className,
+        })}
       >
-        <Field.Label className={labelStyles()}>Label</Field.Label>
+        {children}
 
-        <div className={cn('relative grid items-center')}>
-          <span className={inputStartElement()}>{startElement}</span>
-
-          {React.Children.only(clonedTextFieldInput)}
-
-          <span className={inputEndElement()}>{endElement}</span>
-        </div>
-      </div>
-
-      {!invalid && (
-        <Field.HelperText className={helperTextStyles()}>
-          Please enter your E-Mail
-        </Field.HelperText>
-      )}
-
-      <Field.ErrorText className={errorTextStyles()}>
-        This field is required
-      </Field.ErrorText>
-    </Field.Root>
+        <Field.ErrorText className={errorTextStyles}>
+          {errorText}
+        </Field.ErrorText>
+      </Field.Root>
+    </TextFieldContext.Provider>
   )
 }
 
-type TextFieldInputProps = FieldInputProps
-
-function TextFieldInput({ className, ...props }: TextFieldInputProps) {
-  const { invalid } = useFieldContext()
+function TextFieldLabel({ ...props }: FieldLabelProps) {
+  const { size } = useContext(TextFieldContext)
 
   return (
-    <Field.Input
+    <Field.Label
       {...props}
-      className={cn(
-        invalid
-          ? 'inset-ring-2 inset-ring-danger'
-          : 'focus-visible:inset-ring-2 focus-visible:inset-ring-brand',
-        className,
-      )}
+      className={label({
+        size,
+      })}
     />
   )
 }
 
-function getOrientationSpacingMap(
-  orientation: Orientation,
-  size: TextFieldProps['size'],
-): ClassValue {
-  const orientationSpacingMap: OrientationSpacingMap = {
-    vertical: {
-      sm: '',
-      md: 'gap-2.5',
-      lg: '',
-    },
-    horizontal: {
-      sm: '',
-      md: 'gap-3',
-      lg: '',
-    },
-  }
-
-  return orientationSpacingMap[orientation][size!]
+type TextFieldInputProps = Exclude<
+  Assign<FieldInputProps, React.ComponentPropsWithRef<'input'>>,
+  'disabled'
+> & {
+  leftElement?: React.ReactElement
+  rightElement?: React.ReactElement
 }
 
+function TextFieldInput({
+  ref,
+  className,
+  leftElement,
+  rightElement,
+  ...props
+}: TextFieldInputProps) {
+  const { disabled, invalid } = useFieldContext()
+
+  const { size } = useContext(TextFieldContext)
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  function handleFocus() {
+    inputRef.current?.focus()
+  }
+
+  return (
+    <div
+      className={input({
+        size,
+        disabled,
+        className: invalid ? 'inset-ring-2 inset-ring-danger' : className,
+      })}
+      onClick={handleFocus}
+      onKeyUp={handleFocus}
+    >
+      {leftElement}
+
+      <Field.Input
+        {...props}
+        ref={elementNode => {
+          if (typeof ref === 'function') {
+            ref(elementNode)
+          }
+
+          inputRef.current = elementNode
+        }}
+        className={cn(
+          'size-full font-medium text-fg-1 caret-brand outline-0 placeholder:text-fg-1/40',
+          disabled &&
+            'cursor-not-allowed text-disabled placeholder:text-disabled',
+        )}
+        disabled={disabled}
+      />
+
+      {rightElement}
+    </div>
+  )
+}
+
+function TextFieldHelperText({ ...props }: FieldHelperTextProps) {
+  const { disabled, invalid } = useFieldContext()
+
+  const { size } = useContext(TextFieldContext)
+
+  return (
+    <Field.HelperText
+      {...props}
+      className={helperText({
+        size,
+        disabled,
+      })}
+      hidden={invalid}
+    />
+  )
+}
+
+TextField.Label = TextFieldLabel
 TextField.Input = TextFieldInput
+TextField.HelperText = TextFieldHelperText
 
 export { TextField }
 export type { TextFieldProps }
