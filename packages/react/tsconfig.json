@@ -1,0 +1,9 @@
+{
+	"extends": "@hynix/ts-config/react.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/registry/*": ["src/*"]
+		}
+	}
+}

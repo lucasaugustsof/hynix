@@ -1,0 +1,40 @@
+{
+	"name": "@hynix/react",
+	"version": "0.1.0",
+	"description": "Powerful and accessible components made with React, Tailwind and Ark UI.",
+	"main": "index.js",
+	"scripts": {
+		"lint": "biome check --write ."
+	},
+	"keywords": [
+		"React",
+		"Tailwind",
+		"Ark UI",
+		"Design System",
+		"Accessibility",
+		"Speed",
+		"Productivity",
+		"Components",
+		"UI",
+		"Frontend",
+		"Web Development",
+		"JavaScript",
+		"TypeScript",
+		"Responsive",
+		"Performance",
+		"Modern",
+		"Customizable",
+		"Reusable",
+		"User Interface",
+		"Developer Experience"
+	],
+	"license": "MIT",
+	"dependencies": {
+		"react": "19.0.0",
+		"react-dom": "19.0.0"
+	},
+	"devDependencies": {
+		"@types/react": "19.0.7",
+		"@types/react-dom": "19.0.3"
+	}
+}

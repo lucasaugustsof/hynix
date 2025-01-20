@@ -1,0 +1,14 @@
+{
+  "name": "hynix",
+  "author": {
+    "name": "Lucas Augusto",
+    "url": "https://github.com/lucasaugustsof"
+  },
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@hynix/ts-config": "workspace:*",
+    "typescript": "5.7.3"
+  }
+}
