@@ -1,14 +1,20 @@
 {
-  "name": "hynix",
-  "author": {
-    "name": "Lucas Augusto",
-    "url": "https://github.com/lucasaugustsof"
-  },
-  "license": "MIT",
-  "private": true,
-  "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@hynix/ts-config": "workspace:*",
-    "typescript": "5.7.3"
-  }
+	"name": "hynix",
+	"author": {
+		"name": "Lucas Augusto",
+		"url": "https://github.com/lucasaugustsof"
+	},
+	"scripts": {
+		"dev": "turbo dev",
+		"lint": "turbo lint"
+	},
+	"packageManager": "pnpm@10.0.0",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@hynix/ts-config": "workspace:*",
+		"turbo": "2.3.3",
+		"typescript": "5.7.3"
+	},
+	"license": "MIT",
+	"private": true
 }
