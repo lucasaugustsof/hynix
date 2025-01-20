@@ -1,8 +1,37 @@
 # deps
 node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
-# prod
+# build
 dist/
+build/
+out/
+.next/
+.output/
+storybook-static/
 
 # turborepo
 .turbo
+
+# testing
+coverage/
+.nyc_output/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# misc
+.DS_Store
+*.log
+*.pem
+.env
+.env.*
+!.env.example
+.cache
+.temp
+*.local
