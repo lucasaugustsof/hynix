@@ -12,6 +12,9 @@
 		"husky:prepare": "husky"
 	},
 	"packageManager": "pnpm@10.0.0",
+	"engines": {
+		"node": ">=23"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"@commitlint/cli": "19.6.1",
