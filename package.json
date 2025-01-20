@@ -8,7 +8,8 @@
 	"scripts": {
 		"dev": "turbo dev",
 		"lint": "turbo lint",
-		"prepare": "husky"
+		"test": "turbo test",
+		"husky:prepare": "husky"
 	},
 	"packageManager": "pnpm@10.0.0",
 	"devDependencies": {

@@ -5,7 +5,8 @@
 		"build": {
 			"dependsOn": ["^build"],
 			"cache": true,
-			"outputs": ["dist/*"]
+			"inputs": ["src/**", "package.json"],
+			"outputs": ["dist/**"]
 		},
 		"dev": {
 			"persistent": true,
@@ -14,6 +15,11 @@
 		"lint": {
 			"cache": true,
 			"dependsOn": ["^lint"]
+		},
+		"test": {
+			"persistent": true,
+			"cache": true
 		}
-	}
+	},
+	"globalEnv": ["NODE_ENV"]
 }
