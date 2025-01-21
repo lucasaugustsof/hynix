@@ -35,3 +35,5 @@ yarn-error.log*
 .cache
 .temp
 *.local
+
+*storybook.log

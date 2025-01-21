@@ -9,7 +9,9 @@
 		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"test": "turbo test",
-		"husky:prepare": "husky"
+		"husky:prepare": "husky",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build"
 	},
 	"packageManager": "pnpm@10.0.0",
 	"engines": {
@@ -17,10 +19,19 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
+		"@chromatic-com/storybook": "^3.2.4",
 		"@commitlint/cli": "19.6.1",
 		"@commitlint/config-conventional": "19.6.0",
 		"@hynix/ts-config": "workspace:*",
+		"@storybook/addon-essentials": "8.6.0-alpha.0",
+		"@storybook/addon-interactions": "8.6.0-alpha.0",
+		"@storybook/addon-onboarding": "8.6.0-alpha.0",
+		"@storybook/blocks": "8.6.0-alpha.0",
+		"@storybook/react": "8.6.0-alpha.0",
+		"@storybook/react-vite": "8.6.0-alpha.0",
+		"@storybook/test": "8.6.0-alpha.0",
 		"husky": "9.1.7",
+		"storybook": "8.6.0-alpha.0",
 		"turbo": "2.3.3",
 		"typescript": "5.7.3"
 	},
