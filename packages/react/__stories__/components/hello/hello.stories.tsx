@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Hello } from './hello'
+import { Hello } from '@/registry/components/hello'
 
 export default {
   title: 'components/Hello',

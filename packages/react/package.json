@@ -10,7 +10,7 @@
 	},
 	"keywords": [
 		"React",
-		"Tailwind",
+		"Tailwind CSS",
 		"Ark UI",
 		"Design System",
 		"Accessibility",
@@ -24,7 +24,6 @@
 		"TypeScript",
 		"Responsive",
 		"Performance",
-		"Modern",
 		"Customizable",
 		"Reusable",
 		"User Interface",
@@ -37,12 +36,6 @@
 	},
 	"devDependencies": {
 		"@types/react": "19.0.7",
-		"@types/react-dom": "19.0.3",
-		"@vitejs/plugin-react": "4.3.4",
-		"@vitest/browser": "3.0.2",
-		"@vitest/coverage-v8": "3.0.2",
-		"playwright": "1.49.1",
-		"vitest": "3.0.2",
-		"vitest-browser-react": "0.0.4"
+		"@types/react-dom": "19.0.3"
 	}
 }

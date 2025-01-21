@@ -1,8 +1,9 @@
-import { Hello } from './hello'
-
 import { render } from 'vitest-browser-react'
 
+import { Hello } from './hello'
+
 it('Hello', () => {
-  const sut = render(<Hello />)
-  expect(sut).toBeTruthy()
+  const screen = render(<Hello />)
+
+  expect(screen).toBeTruthy()
 })
