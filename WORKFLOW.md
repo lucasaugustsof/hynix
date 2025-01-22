@@ -1,13 +1,7 @@
-<div align="center">
-  <img src="./.github/media/gitflow.jpg"/>
-</div>
-
 # Hynix GitFlow
 
 This document outlines the GitFlow workflow that will be used in the Hynix
 project to ensure organization and control during development.
-
----
 
 ## **Main Branches**
 
@@ -21,8 +15,6 @@ project to ensure organization and control during development.
 - Contains the code under development, with features being prepared for the next
   release.
 - Accepts merges from `feat` or `hotfix` branches.
-
----
 
 ## **Supporting Branches**
 
@@ -94,8 +86,6 @@ git checkout develop
 git merge hotfix/fix-button-error
 ```
 
----
-
 ## **Workflow**
 
 ### 1. Developing a feature
@@ -117,15 +107,11 @@ git merge hotfix/fix-button-error
 2. Implement the fix.
 3. Merge it into both `main` and `develop`.
 
----
-
 ## **Naming Conventions**
 
 - **Feature:** `feat/<description>`
 - **Release:** `release/<version>`
 - **Hotfix:** `hotfix/<description>`
-
----
 
 ## **Example Commands**
 
@@ -148,3 +134,11 @@ git tag -a v1.0.0 -m "Release 1.0.0"
 ```bash
 git checkout -b hotfix/fix-login-error main
 ```
+
+## **Workflow Diagram**
+
+Below is an example diagram illustrating the GitFlow workflow:
+
+<div align="center">
+  <img src="./.github/media/gitflow.jpg"/>
+</div>
