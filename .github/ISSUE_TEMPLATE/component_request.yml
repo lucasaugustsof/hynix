@@ -16,7 +16,7 @@ body:
     attributes:
       label: Component Name
       description: Name of the component you want to request.
-      placeholder: Example: "Card", "Tooltip", "Avatar"
+      placeholder: "Card", "Tooltip", "Avatar"
       required: true
 
   - type: textarea

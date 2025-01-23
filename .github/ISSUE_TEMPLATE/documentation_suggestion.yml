@@ -10,7 +10,7 @@ body:
     attributes:
       label: Documentation Section
       description: Which part of the documentation does your suggestion refer to?
-      placeholder: Example: "Components", "Getting Started"
+      placeholder: "Components", "Getting Started"
       required: true
 
   - type: textarea

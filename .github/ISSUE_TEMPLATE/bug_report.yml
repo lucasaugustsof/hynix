@@ -15,7 +15,7 @@ body:
     attributes:
       label: Title
       description: Brief description of the problem found.
-      placeholder: Example: "Primary button does not apply hover in dark mode"
+      placeholder: "Example: Primary button does not apply hover in dark mode"
       required: true
 
   - type: textarea
@@ -31,7 +31,7 @@ body:
     attributes:
       label: Environment
       description: Please report the environment in which the problem was identified.
-      placeholder: Example: "Chrome 109, Windows 10, TailwindCSS 3.3" or "Firefox 120, macOS Sonoma, Node.js 20"
+      placeholder: "Chrome 109, Windows 10, TailwindCSS 4.0" or "Firefox 120, macOS Sonoma, Node.js 20"
       required: true
 
   - type: dropdown
