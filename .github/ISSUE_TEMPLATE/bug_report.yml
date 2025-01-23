@@ -40,10 +40,10 @@ body:
       label: Bug severity
       description: What impact does the bug have on the use of Hynix?
       options:
-        - Critical: "Critical - Prevents use of the system."
-        - High: "High - Significant impact, but there are alternatives."
-        - Medium: "Medium - Moderate impact."
-        - Low: "Baixo - Impacto mínimo."
+        - "Critical - Prevents use of the system"
+        - "High - Significant impact, but there are alternatives"
+        - "Medium - Moderate impact"
+        - "Low - Minimal impact"
       required: true
 
   - type: textarea

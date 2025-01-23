@@ -52,9 +52,9 @@ body:
       label: Component Complexity
       description: What is the expected complexity level for the component?
       options:
-        - Low: "Simple, with minimal styling and basic behavior."
-        - Medium: "Moderate, with variants and customizations."
-        - High: "Complex, with dynamic or interactive behavior."
+        - "Low - Simple, with minimal styling and basic behavior"
+        - "Medium - Moderate, with variants and customizations"
+        - "High - Complex, with dynamic or interactive behavior"
       required: true
 
   - type: textarea
