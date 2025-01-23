@@ -1,0 +1,101 @@
+name: Component Request
+description: Request the creation of a new component for the Hynix Design System.
+title: "[COMPONENT]: "
+labels: ["UI", "enhancement", "triage"]
+assignees:
+  - lucasaugustsof
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new component for Hynix!
+        Please fill out the information below to detail your request.
+
+  - type: input
+    id: component_name
+    attributes:
+      label: Component Name
+      description: Name of the component you want to request.
+      placeholder: Example: "Card", "Tooltip", "Avatar"
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Component Description
+      description: Explain the purpose and main functionality of the component.
+      placeholder: |
+        "A Card component that displays organized information in a container with image, title, and text options."
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use Case
+      description: Describe how and where the component will be used.
+      placeholder: |
+        "The Card component will be used to display product listings in an e-commerce store."
+      required: true
+
+  - type: textarea
+    id: design_references
+    attributes:
+      label: Design References
+      description: Add links, descriptions, or visual details that inspire the component design.
+      placeholder: |
+        "Reference: https://tailwindui.com/components/application-ui/cards"
+      required: false
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Component Complexity
+      description: What is the expected complexity level for the component?
+      options:
+        - Low: "Simple, with minimal styling and basic behavior."
+        - Medium: "Moderate, with variants and customizations."
+        - High: "Complex, with dynamic or interactive behavior."
+      required: true
+
+  - type: textarea
+    id: required_variants
+    attributes:
+      label: Required Variants
+      description: List the component variants, if applicable (e.g., sizes, styles, themes).
+      placeholder: |
+        "For example: Small, Medium, Large or Primary, Secondary, Destructive."
+      required: false
+
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility
+      description: What accessibility requirements should the component meet?
+      placeholder: |
+        "Must support keyboard navigation, screen readers, and sufficient contrast."
+      required: false
+
+  - type: textarea
+    id: api_spec
+    attributes:
+      label: Component API Specification
+      description: What properties should the component accept? Include examples if possible.
+      placeholder: |
+        "Example:
+         - `title` (string): Card title.
+         - `image` (URL): URL of the image to be displayed.
+         - `onClick` (function): Callback for card click."
+      required: false
+
+  - type: file
+    id: attachments
+    attributes:
+      label: Attachments
+      description: Optional. Upload designs, prototypes, or other files related to the component.
+      multiple: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Thank you for your suggestion!**
+        The Hynix team will review your request and provide updates.

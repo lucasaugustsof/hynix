@@ -1,0 +1,87 @@
+name: Bug Report
+description: Use this form to report bugs found in Hynix.
+title: '[BUG]: '
+labels: ["bug", "triage"]
+assignees:
+  - lucasaugustsof
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug in Hynix! Please fill out the information below so we can understand and fix the issue.
+
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: Brief description of the problem found.
+      placeholder: Example: "Primary button does not apply hover in dark mode"
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Detailed description
+      description: Explain the problem in as much detail as possible.
+      placeholder: "What happened? What was the expected behavior? Include additional context if necessary."
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Please report the environment in which the problem was identified.
+      placeholder: Example: "Chrome 109, Windows 10, TailwindCSS 3.3" or "Firefox 120, macOS Sonoma, Node.js 20"
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Bug severity
+      description: What impact does the bug have on the use of Hynix?
+      options:
+        - Critical: "Critical - Prevents use of the system."
+        - High: "High - Significant impact, but there are alternatives."
+        - Medium: "Medium - Moderate impact."
+        - Low: "Baixo - Impacto mínimo."
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce the problem
+      description: List the steps to reproduce the bug.
+      placeholder: |
+        1. Go to...
+        2. Click on...
+        3. Please note...
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe how the system should behave.
+      placeholder: "The primary button should change color on mouseover."
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Current behavior
+      description: Describe the actual behavior observed.
+      placeholder: "The primary button doesn't change color on hover in dark mode."
+      required: true
+
+  - type: file
+    id: attachments
+    attributes:
+      label: Attachments
+      description: Optional. Upload screenshots or videos that help demonstrate the issue.
+      multiple: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Thank you for your contribution!**
+        The Hynix team will review your issue as soon as possible.

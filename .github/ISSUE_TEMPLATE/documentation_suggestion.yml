@@ -1,0 +1,36 @@
+name: Documentation Suggestion
+description: Propose improvements or new content for Hynix documentation.
+title: "[DOCS]: "
+labels: ["documentation", "enhancement"]
+assignees:
+  - lucasaugustsof
+body:
+  - type: input
+    id: section
+    attributes:
+      label: Documentation Section
+      description: Which part of the documentation does your suggestion refer to?
+      placeholder: Example: "Components", "Getting Started"
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggestion
+      description: Briefly describe your improvement or addition suggestion.
+      placeholder: "Add usage example for Button component with icons."
+      required: true
+
+  - type: textarea
+    id: benefit
+    attributes:
+      label: Benefit
+      description: Explain how this change will help users.
+      placeholder: "Will make it easier to implement the Button component with icon support."
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        **Thank you for your contribution!**
+        The Hynix team will review your suggestion soon.
