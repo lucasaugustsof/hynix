@@ -1,4 +1,4 @@
-name: Bug Report
+name: 🐞 Bug Report
 description: Use this form to report bugs found in Hynix.
 title: '[BUG]: '
 labels: ["bug", "triage"]
