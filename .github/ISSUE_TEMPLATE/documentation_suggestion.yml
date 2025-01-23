@@ -19,7 +19,7 @@ body:
     attributes:
       label: Documentation Section
       description: Specify the part of the documentation your suggestion refers to.
-      placeholder: "Components", "Getting Started", "API Reference"
+      placeholder: Components, Getting Started, API Reference
     validations:
       required: true
 
@@ -29,7 +29,7 @@ body:
       label: Suggestion Details
       description: Describe the improvement or addition you'd like to see in the documentation.
       placeholder: |
-        "Example: Add usage example for the Button component with icons."
+        Add usage example for the Button component with icons.
     validations:
       required: true
 
@@ -39,7 +39,7 @@ body:
       label: Benefit
       description: Explain how this change will benefit users or improve the documentation.
       placeholder: |
-        "Example: This will make it easier for users to understand how to implement the Button component with icon support."
+        This will make it easier for users to understand how to implement the Button component with icon support.
     validations:
       required: true
 
@@ -49,7 +49,7 @@ body:
       label: Additional Context (Optional)
       description: Provide any other relevant information, such as examples or references.
       placeholder: |
-        "Example: Similar patterns in the documentation of other libraries or frameworks."
+        Similar patterns in the documentation of other libraries or frameworks.
 
   - type: markdown
     attributes:

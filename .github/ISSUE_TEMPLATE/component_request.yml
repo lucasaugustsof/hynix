@@ -19,7 +19,7 @@ body:
     attributes:
       label: Component Name
       description: Provide the name of the component you want to request.
-      placeholder: "Example: Card, Tooltip, Avatar"
+      placeholder: Card, Tooltip, Avatar
     validations:
       required: true
 
@@ -29,7 +29,7 @@ body:
       label: Component Description
       description: Explain the purpose and functionality of the component.
       placeholder: |
-        "Example: A Card component that displays information in a container, with options for an image, title, and text."
+        A Card component that displays information in a container, with options for an image, title, and text.
     validations:
       required: true
 
@@ -39,7 +39,7 @@ body:
       label: Use Case
       description: Describe how and where the component will be used in the application.
       placeholder: |
-        "Example: The Card component will be used for displaying product listings in an e-commerce interface."
+        The Card component will be used for displaying product listings in an e-commerce interface.
     validations:
       required: true
 
@@ -49,7 +49,7 @@ body:
       label: Design References
       description: Share links or examples that could inspire the design of the component.
       placeholder: |
-        "Example: Reference - https://tailwindui.com/components/application-ui/cards"
+        Reference - https://tailwindui.com/components/application-ui/cards
 
   - type: dropdown
     id: complexity
@@ -57,9 +57,9 @@ body:
       label: Component Complexity
       description: Indicate the expected complexity level for the component.
       options:
-        - Low - Simple, with minimal styling and basic functionality
-        - Medium - Moderate, with multiple variants and customizations
-        - High - Complex, with dynamic or interactive behavior
+        - Low (Simple, with minimal styling and basic functionality)
+        - Medium (Moderate, with multiple variants and customizations)
+        - High (Complex, with dynamic or interactive behavior)
     validations:
       required: true
 
