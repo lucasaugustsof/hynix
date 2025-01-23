@@ -51,7 +51,7 @@ process, please follow these guidelines:
 
 ### 2. Working on a Contribution
 
-- Follow the [WorkFlow](./WORKFLOW.md):
+- Follow the [GitFlow](./GITFLOW.md):
   - Use `feat/<description>` for new features.
   - Use `fix/<description>` for bug fixes.
   - Use `docs/<description>` for documentation updates.
