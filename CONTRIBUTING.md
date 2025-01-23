@@ -56,7 +56,8 @@ process, please follow these guidelines:
   - Use `fix/<description>` for bug fixes.
   - Use `docs/<description>` for documentation updates.
 - Write clear commit messages:
-  - Example: `feat: add Button component` or `fix: resolve input focus bug`.
+  - Example: `feat(...): add Button component` or
+    `fix(...): resolve input focus bug`.
 - Add tests for your changes, if applicable.
 
 ### 3. Submitting a Pull Request (PR)
