@@ -1,7 +1,10 @@
 name: 📝 Documentation Suggestion
 description: Propose improvements or new content for Hynix documentation.
-title: "[DOCS]: "
-labels: ["documentation", "enhancement", "triage"]
+title: "[DOCS]: Breve descrição da sugestão"
+labels:
+  - documentation
+  - enhancement
+  - triage
 assignees:
   - lucasaugustsof
 body:
@@ -9,49 +12,52 @@ body:
     attributes:
       value: |
         Thank you for suggesting improvements to the Hynix documentation!
-        Please fill out the information below to help us understand your suggestion.
+        Please provide the details below to help us understand and implement your suggestion.
 
   - type: input
     id: section
     attributes:
       label: Documentation Section
-      description: Which part of the documentation does your suggestion refer to?
+      description: Specify the part of the documentation your suggestion refers to.
       placeholder: "Components", "Getting Started", "API Reference"
       required: true
 
   - type: textarea
     id: suggestion
     attributes:
-      label: Suggestion
-      description: Briefly describe your improvement or addition suggestion.
-      placeholder: "Add usage example for Button component with icons."
+      label: Suggestion Details
+      description: Describe the improvement or addition you'd like to see in the documentation.
+      placeholder: |
+        "Example: Add usage example for the Button component with icons."
       required: true
 
   - type: textarea
     id: benefit
     attributes:
       label: Benefit
-      description: Explain how this change will help users.
-      placeholder: "Will make it easier to implement the Button component with icon support."
+      description: Explain how this change will benefit users or improve the documentation.
+      placeholder: |
+        "Example: This will make it easier for users to understand how to implement the Button component with icon support."
       required: true
 
   - type: textarea
     id: additional_context
     attributes:
-      label: Additional Context
-      description: Any other information that might be helpful (examples, references, etc.).
-      placeholder: "Similar documentation patterns from other libraries or frameworks."
+      label: Additional Context (Optional)
+      description: Provide any other relevant information, such as examples or references.
+      placeholder: |
+        "Example: Similar patterns in the documentation of other libraries or frameworks."
       required: false
 
   - type: file
     id: attachments
     attributes:
-      label: Attachments
-      description: Optional. Upload screenshots, diagrams, or other files to support your suggestion.
+      label: Attachments (Optional)
+      description: Upload screenshots, diagrams, or other files to support your suggestion.
       multiple: true
 
   - type: markdown
     attributes:
       value: |
         **Thank you for your contribution!**
-        The Hynix team will review your suggestion soon.
+        The Hynix team will review your suggestion and provide updates soon.
