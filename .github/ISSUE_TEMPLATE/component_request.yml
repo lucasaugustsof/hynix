@@ -20,6 +20,7 @@ body:
       label: Component Name
       description: Provide the name of the component you want to request.
       placeholder: "Example: Card, Tooltip, Avatar"
+    validations:
       required: true
 
   - type: textarea
@@ -29,6 +30,7 @@ body:
       description: Explain the purpose and functionality of the component.
       placeholder: |
         "Example: A Card component that displays information in a container, with options for an image, title, and text."
+    validations:
       required: true
 
   - type: textarea
@@ -38,6 +40,7 @@ body:
       description: Describe how and where the component will be used in the application.
       placeholder: |
         "Example: The Card component will be used for displaying product listings in an e-commerce interface."
+    validations:
       required: true
 
   - type: textarea
@@ -47,7 +50,6 @@ body:
       description: Share links or examples that could inspire the design of the component.
       placeholder: |
         "Example: Reference - https://tailwindui.com/components/application-ui/cards"
-      required: false
 
   - type: dropdown
     id: complexity
@@ -58,6 +60,7 @@ body:
         - Low - Simple, with minimal styling and basic functionality
         - Medium - Moderate, with multiple variants and customizations
         - High - Complex, with dynamic or interactive behavior
+    validations:
       required: true
 
   - type: textarea
@@ -67,7 +70,6 @@ body:
       description: Specify any variants for the component, such as sizes, styles, or themes.
       placeholder: |
         "Example: Small, Medium, Large or Primary, Secondary, Destructive."
-      required: false
 
   - type: textarea
     id: accessibility
@@ -76,7 +78,6 @@ body:
       description: Describe any accessibility requirements for the component.
       placeholder: |
         "Example: The component must support keyboard navigation, screen readers, and sufficient contrast."
-      required: false
 
   - type: textarea
     id: api_spec
@@ -88,7 +89,6 @@ body:
          - `title` (string): The title text of the card.
          - `image` (URL): The image source for the card.
          - `onClick` (function): A callback function for click events."
-      required: false
 
   - type: file
     id: attachments

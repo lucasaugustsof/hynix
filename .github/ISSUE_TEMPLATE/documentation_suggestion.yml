@@ -1,6 +1,6 @@
 name: 📝 Documentation Suggestion
 description: Propose improvements or new content for Hynix documentation.
-title: "[DOCS]: Breve descrição da sugestão"
+title: "[DOCS]: "
 labels:
   - documentation
   - enhancement
@@ -20,6 +20,7 @@ body:
       label: Documentation Section
       description: Specify the part of the documentation your suggestion refers to.
       placeholder: "Components", "Getting Started", "API Reference"
+    validations:
       required: true
 
   - type: textarea
@@ -29,6 +30,7 @@ body:
       description: Describe the improvement or addition you'd like to see in the documentation.
       placeholder: |
         "Example: Add usage example for the Button component with icons."
+    validations:
       required: true
 
   - type: textarea
@@ -38,6 +40,7 @@ body:
       description: Explain how this change will benefit users or improve the documentation.
       placeholder: |
         "Example: This will make it easier for users to understand how to implement the Button component with icon support."
+    validations:
       required: true
 
   - type: textarea
@@ -47,7 +50,6 @@ body:
       description: Provide any other relevant information, such as examples or references.
       placeholder: |
         "Example: Similar patterns in the documentation of other libraries or frameworks."
-      required: false
 
   - type: file
     id: attachments
