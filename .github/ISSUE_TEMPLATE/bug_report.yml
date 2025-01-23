@@ -83,13 +83,6 @@ body:
     validations:
       required: true
 
-  - type: file
-    id: attachments
-    attributes:
-      label: Attachments (Optional)
-      description: Upload screenshots, videos, or other files that help illustrate the issue.
-      multiple: true
-
   - type: markdown
     attributes:
       value: |

@@ -51,13 +51,6 @@ body:
       placeholder: |
         "Example: Similar patterns in the documentation of other libraries or frameworks."
 
-  - type: file
-    id: attachments
-    attributes:
-      label: Attachments (Optional)
-      description: Upload screenshots, diagrams, or other files to support your suggestion.
-      multiple: true
-
   - type: markdown
     attributes:
       value: |

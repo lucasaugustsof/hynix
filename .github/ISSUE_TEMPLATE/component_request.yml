@@ -90,13 +90,6 @@ body:
          - `image` (URL): The image source for the card.
          - `onClick` (function): A callback function for click events."
 
-  - type: file
-    id: attachments
-    attributes:
-      label: Attachments (Optional)
-      description: Upload designs, prototypes, or other related files.
-      multiple: true
-
   - type: markdown
     attributes:
       value: |
