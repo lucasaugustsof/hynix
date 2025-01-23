@@ -85,10 +85,9 @@ body:
       label: API Specification
       description: List the properties or APIs the component should support. Include examples if possible.
       placeholder: |
-        "Example:
-         - `title` (string): The title text of the card.
-         - `image` (URL): The image source for the card.
-         - `onClick` (function): A callback function for click events."
+        - `title` (string): The title text of the card.
+        - `image` (URL): The image source for the card.
+        - `onClick` (function): A callback function for click events.
 
   - type: markdown
     attributes:
