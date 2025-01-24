@@ -28,8 +28,8 @@ export const storybookTheme = {
     xlarge: 8,
   },
   fonts: {
-    display: '"Geist", serif',
-    code: '"Geist Mono", monospace',
+    display: `'Inter', serif`,
+    code: 'monospace',
   },
 }
 

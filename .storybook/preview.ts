@@ -1,3 +1,5 @@
+import '@hynix/react/styles.css'
+
 import type { Preview } from '@storybook/react'
 
 import { create } from '@storybook/theming/create'
