@@ -8,6 +8,14 @@ export default {
   parameters: {
     layout: 'centered',
   },
+  argTypes: {
+    test: {
+      type: 'boolean',
+    },
+    test1: {
+      type: 'string',
+    },
+  },
 } satisfies Meta
 
 export const Basic: StoryObj = {}
