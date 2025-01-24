@@ -8,7 +8,13 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["node_modules/", "dist/", "storybook-static/", "coverage/"]
+		"ignore": [
+			"node_modules/",
+			"dist/",
+			"storybook-static/",
+			"coverage/",
+			"__snapshots__/"
+		]
 	},
 	"formatter": {
 		"enabled": true,

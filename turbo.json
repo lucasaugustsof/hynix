@@ -15,10 +15,6 @@
 		"lint": {
 			"cache": true,
 			"dependsOn": ["^lint"]
-		},
-		"test": {
-			"persistent": true,
-			"cache": true
 		}
 	},
 	"globalEnv": ["NODE_ENV"]
