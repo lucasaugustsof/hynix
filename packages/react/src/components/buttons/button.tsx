@@ -10,7 +10,7 @@ type ButtonProps = React.ComponentPropsWithRef<'button'> &
 
 const buttonStyles = cva(
   [
-    'inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out',
+    'isolate inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out',
     'focus-visible:outline-3 focus-visible:outline-brand-selected',
   ],
   {
