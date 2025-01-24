@@ -4,9 +4,12 @@
 	"type": "module",
 	"description": "Powerful and accessible components made with React, Tailwind and Ark UI.",
 	"main": "index.js",
+	"exports": {
+		"./styles.css": "./dist/styles.css"
+	},
 	"scripts": {
-		"lint": "biome check --write .",
-		"test": "vitest"
+		"dev": "tailwindcss -i ./src/styles/globals.css -o ./dist/styles.css --watch",
+		"lint": "biome check --write ."
 	},
 	"keywords": [
 		"React",
@@ -31,11 +34,18 @@
 	],
 	"license": "MIT",
 	"dependencies": {
+		"@ark-ui/react": "4.9.1",
+		"@remixicon/react": "4.6.0",
+		"class-variance-authority": "0.7.1",
+		"clsx": "2.1.1",
 		"react": "19.0.0",
-		"react-dom": "19.0.0"
+		"react-dom": "19.0.0",
+		"tailwind-merge": "2.6.0"
 	},
 	"devDependencies": {
+		"@tailwindcss/cli": "4.0.0",
 		"@types/react": "19.0.7",
-		"@types/react-dom": "19.0.3"
+		"@types/react-dom": "19.0.3",
+		"tailwindcss": "4.0.0"
 	}
 }

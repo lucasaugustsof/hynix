@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--color-surface-1: var(--surface-1);
+	--color-surface-2: var(--surface-2);
+
+	--color-fill-1: var(--fill-1);
+	--color-fill-2: var(--fill-2);
+	--color-fill-3: var(--fill-3);
+	--color-fill-4: var(--fill-4);
+	--color-fill-5: var(--fill-5);
+
+	--color-border: var(--border);
+	--color-disabled: var(--disabled);
+
+	--color-fg-1: var(--fg-1);
+	--color-fg-2: var(--fg-2);
+
+	--color-brand: var(--brand);
+	--color-brand-hover: var(--brand-hover);
+	--color-brand-selected: var(--brand-selected);
+
+	--color-danger: var(--danger);
+	--color-danger-hover: var(--danger-hover);
+	--color-danger-selected: var(--danger-selected);
+
+	--color-success: var(--success);
+	--color-success-hover: var(--success-hover);
+	--color-success-selected: var(--success-selected);
+
+	--radius-base: var(--radi-1);
+	--radius-md: var(--radi-2);
+	--radius-lg: var(--radi-3);
+	--radius-xl: var(--radi-4);
+	--radius-2xl: var(--radi-5);
+	--radius-3xl: var(--radi-6);
+	--radius-4xl: var(--radi-7);
+	--radius-5xl: var(--radi-8);
+	--radius-6xl: var(--radi-9);
+	--radius-7xl: var(--radi-10);
+
+	--font-display: var(--display);
+}
+
+@layer base {
+	:root {
+		--surface-1: oklch(100% 0 0);
+		--surface-2: oklch(99.11% 0 0);
+
+		--fill-1: oklch(96.74% 0.0013 286.38);
+		--fill-2: oklch(91% 0.0013 286.37);
+		--fill-3: oklch(85.88% 0.0055 286.28);
+		--fill-4: oklch(71.18% 0.0129 286.07);
+		--fill-5: oklch(44.19% 0.0146 285.79);
+
+		--border: oklch(91% 0.0013 286.37);
+		--disabled: oklch(21.78% 0 0 / 18%);
+
+		--fg-1: oklch(21.78% 0 0);
+		--fg-2: oklch(100% 0 0);
+
+		--brand: oklch(21.78% 0 0);
+		--brand-hover: oklch(37.03% 0.0119 285.81);
+		--brand-selected: oklch(44.19% 0.0146 285.79);
+
+		--danger: oklch(57.85% 0.2138 27.17);
+		--danger-hover: oklch(70.3% 0.1884 23.26);
+		--danger-selected: oklch(88.34% 0.0616 18.39);
+
+		--success: oklch(57.29% 0.1544 149.22);
+		--success-hover: oklch(77.93% 0.1995 150.19);
+		--success-selected: oklch(82.91% 0.1871 156.84);
+
+		--radi-0: 0;
+		--radi-1: .125rem;
+		--radi-2: .25rem;
+		--radi-3: .375rem;
+		--radi-4: .5rem;
+		--radi-5: .625rem;
+		--radi-6: .75rem;
+		--radi-7: 1rem;
+		--radi-8: 1.375rem;
+		--radi-9: 1.75rem;
+		--radi-10: 62.5rem;
+
+		--display: "Inter", sans-serif;
+	}
+
+	.dark {
+		--surface-1: oklch(19.3% 0 0);
+		--surface-2: oklch(24.45% 0.0061 17.58);
+
+		--fill-1: oklch(32.11% 0 0);
+		--fill-2: oklch(36.08% 0 0);
+		--fill-3: oklch(48.32% 0 0);
+		--fill-4: oklch(55.47% 0 0);
+		--fill-5: oklch(69.13% 0 0);
+
+		--border: oklch(36.08% 0 0);
+		--disabled: oklch(100% 0 106.37 / 18%);
+
+		--fg-1: oklch(100% 0 0);
+		--fg-2: oklch(21.78% 0 0);
+
+		--brand: oklch(100% 0 106.37);
+		--brand-hover: oklch(78.94% 0 0);
+		--brand-selected: oklch(55.47% 0 0);
+
+		--danger: oklch(81.74% 0.10276611870546051 19.51842471892472);
+		--danger-hover: oklch(69.74% 0.1931 23.55);
+		--danger-selected: oklch(59.65% 0.1955 25.38);
+
+		--success: oklch(92.46% 0.0811 155.98);
+		--success-hover: oklch(87.12% 0.137 154.59);
+		--success-selected: oklch(72.05% 0.192 149.49);
+	}
+}
+
+@layer base {
+	*,
+	*::after,
+	*::before {
+		@apply antialiased;
+
+		border-color: var(--color-border, currentColor);
+
+		font-synthesis-weight: none;
+		text-rendering: optimizeLegibility;
+	}
+
+	html {
+		@apply scroll-smooth;
+	}
+
+	body {
+		@apply bg-surface-1 text-fg-1;
+	}
+}
