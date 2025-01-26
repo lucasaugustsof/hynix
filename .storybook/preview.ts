@@ -1,9 +1,20 @@
 import '@hynix/react/styles.css'
 
-import type { Preview } from '@storybook/react'
+import type { Preview, Decorator } from '@storybook/react'
+import { withThemeByClassName } from '@storybook/addon-themes'
 
 import { create } from '@storybook/theming/create'
 import { storybookTheme } from './storybook-theme'
+
+export const decorators: Decorator[] = [
+  withThemeByClassName({
+    themes: {
+      Light: 'light',
+      Dark: 'dark',
+    },
+    defaultTheme: 'Light',
+  }),
+]
 
 const preview: Preview = {
   parameters: {
@@ -35,6 +46,9 @@ const preview: Preview = {
         // UI
         colorSecondary: storybookTheme.colors.brand.highlight,
       }),
+    },
+    backgrounds: {
+      disable: true,
     },
   },
 }
