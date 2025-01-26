@@ -1,7 +1,9 @@
+// Hynix: Button [v0.1.0]
+
 import { ark } from '@ark-ui/react'
 import { type VariantProps, cva } from 'class-variance-authority'
 
-import { cn } from '@/registry/utils/cn'
+import { cx } from '@/registry/utils/cx'
 
 type ButtonProps = React.ComponentPropsWithRef<'button'> &
   VariantProps<typeof buttonStyles> & {
@@ -12,6 +14,7 @@ const buttonStyles = cva(
   [
     'isolate inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out',
     'focus-visible:outline-3 focus-visible:outline-brand-selected',
+    '[&_svg]:pointer-events-none [&_svg]:shrink-0',
   ],
   {
     variants: {
@@ -23,6 +26,7 @@ const buttonStyles = cva(
         secondary: [
           'inset-ring-border bg-surface-2 text-fg-1',
           'enabled:hover:bg-fill-2',
+          '[&_svg]:text-fill-5',
         ],
         ghost: [
           'inset-ring-brand bg-transparent text-brand',
@@ -82,7 +86,7 @@ function Button({
   return (
     <ark.button
       {...props}
-      className={cn(
+      className={cx(
         buttonStyles({
           className,
           variant,

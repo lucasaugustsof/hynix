@@ -32,9 +32,9 @@ importers:
       '@storybook/addon-interactions':
         specifier: 8.6.0-alpha.0
         version: 8.6.0-alpha.0(storybook@8.6.0-alpha.0)
-      '@storybook/addon-onboarding':
-        specifier: 8.6.0-alpha.0
-        version: 8.6.0-alpha.0(storybook@8.6.0-alpha.0)
+      '@storybook/addon-themes':
+        specifier: 8.5.1
+        version: 8.5.1(storybook@8.6.0-alpha.0)
       '@storybook/addons':
         specifier: 7.6.17
         version: 7.6.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -71,6 +71,9 @@ importers:
       axe-playwright:
         specifier: 2.0.3
         version: 2.0.3(playwright@1.49.1)
+      dedent:
+        specifier: 1.5.3
+        version: 1.5.3
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -1185,15 +1188,15 @@ packages:
     peerDependencies:
       storybook: ^8.6.0-alpha.0
 
-  '@storybook/addon-onboarding@8.6.0-alpha.0':
-    resolution: {integrity: sha512-UKjMrLqCoUorb3wU/hsDxpGnVAc6Ec6Sc/N844bwHDxzMh4B4zCVJdYhEchGaDhz35fz4XCOlzEYlkzuaWGdZw==}
-    peerDependencies:
-      storybook: ^8.6.0-alpha.0
-
   '@storybook/addon-outline@8.6.0-alpha.0':
     resolution: {integrity: sha512-qMGNwBERWOP/UDAxCVKmJKjfm46/2vL7umnuMtKAdNmMbH3hEj7FZnDAiFsQz+UCJqCVP9D7EeAlA0PTjm1UAQ==}
     peerDependencies:
       storybook: ^8.6.0-alpha.0
+
+  '@storybook/addon-themes@8.5.1':
+    resolution: {integrity: sha512-xgPRznXvD95iir+mK/WMJ5QmPeiWfNcCttCNeSVsqHmSlN+5OW28N91V0tZmqDstBW5/qTd1itar23Xrpf8qKA==}
+    peerDependencies:
+      storybook: ^8.5.1
 
   '@storybook/addon-toolbars@8.6.0-alpha.0':
     resolution: {integrity: sha512-5O9AGxd0SBavi8FCbRSPJVrm1VVs973VgHU9ZDyqPp6oqQaLVYDlYeCGAGGdYgTHhc5tdkIOL2cXu+HaH+zxQg==}
@@ -5362,13 +5365,14 @@ snapshots:
       storybook: 8.6.0-alpha.0
       tiny-invariant: 1.3.3
 
-  '@storybook/addon-onboarding@8.6.0-alpha.0(storybook@8.6.0-alpha.0)':
-    dependencies:
-      storybook: 8.6.0-alpha.0
-
   '@storybook/addon-outline@8.6.0-alpha.0(storybook@8.6.0-alpha.0)':
     dependencies:
       '@storybook/global': 5.0.0
+      storybook: 8.6.0-alpha.0
+      ts-dedent: 2.2.0
+
+  '@storybook/addon-themes@8.5.1(storybook@8.6.0-alpha.0)':
+    dependencies:
       storybook: 8.6.0-alpha.0
       ts-dedent: 2.2.0
 
