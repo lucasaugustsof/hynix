@@ -18,12 +18,19 @@ const inputStyles = cva(['inline-flex min-w-60 overflow-hidden'], {
     variant: {
       subtle: [
         'inset-ring-border rounded-3xl bg-surface-1',
-        // Focused
+        // Subtle - Focused
         'focus-within:inset-ring-2 focus-within:inset-ring-brand',
-        // Invalid
+        // Subtle - Invalid
         '[&:has(input[data-invalid]):hover]:bg-surface-1 [&:has(input[data-invalid])]:inset-ring-2 [&:has(input[data-invalid])]:inset-ring-danger',
       ],
-      flushed: [],
+      flushed: [
+        'relative rounded-none',
+        'before:absolute before:bottom-0 before:h-px before:w-full before:bg-border before:content-[""]',
+        // Flushed - Focused
+        'focus-within:before:h-0.5 focus-within:before:bg-brand',
+        // Flushed - Invalid
+        '[&:has(input[data-invalid]):hover]:bg-surface-1 [&:has(input[data-invalid])]:before:h-0.5 [&:has(input[data-invalid])]:before:bg-danger',
+      ],
       'combo-box': [],
     },
     size: {
@@ -38,8 +45,7 @@ const inputStyles = cva(['inline-flex min-w-60 overflow-hidden'], {
       ],
     },
     disabled: {
-      true: 'cursor-not-allowed bg-fill-1',
-      false: 'inset-ring-1',
+      true: 'cursor-not-allowed bg-fill-1 has-disabled:before:hidden',
     },
   },
   compoundVariants: [
@@ -47,8 +53,17 @@ const inputStyles = cva(['inline-flex min-w-60 overflow-hidden'], {
       variant: 'subtle',
       disabled: false,
       class: [
-        // Hover
+        'inset-ring-1',
+        // Subtle - Hover
         'not-focus-within:hover:inset-ring-2 not-focus-within:hover:bg-fill-1',
+      ],
+    },
+    {
+      variant: 'flushed',
+      disabled: false,
+      class: [
+        // Flushed - Hover
+        'not-focus-within:hover:bg-fill-1 not-focus-within:hover:before:h-0.5',
       ],
     },
   ],
@@ -76,6 +91,7 @@ export function Input({
           disabled,
         }),
       )}
+      aria-disabled={disabled}
     >
       <ArkField.Input
         {...props}

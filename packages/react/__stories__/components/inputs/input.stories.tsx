@@ -10,6 +10,10 @@ const meta: Meta<InputProps> = {
     disabled: true,
   },
   argTypes: {
+    variant: {
+      control: 'inline-radio',
+      options: ['subtle', 'flushed', 'combo-box'],
+    },
     size: {
       control: 'inline-radio',
       options: ['sm', 'md', 'lg'],
