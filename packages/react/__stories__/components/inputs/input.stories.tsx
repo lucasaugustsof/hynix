@@ -2,12 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Input, type InputProps } from '@/registry/components/inputs/input'
 
+// import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
+
 const meta: Meta<InputProps> = {
   title: 'components/Inputs/Input',
   component: Input,
   args: {
     placeholder: 'E-mail',
-    disabled: true,
+    disabled: false,
+    prefixElement: 'https://',
+    suffixElement: '.com',
   },
   argTypes: {
     variant: {

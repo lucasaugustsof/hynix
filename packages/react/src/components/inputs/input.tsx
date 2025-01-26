@@ -1,14 +1,18 @@
 // Hynix: Input [v0.1.0]
 
 import { Field as ArkField } from '@ark-ui/react/field'
+
 import { type VariantProps, cva } from 'class-variance-authority'
 
 import { cx } from '@/registry/utils/cx'
 
 type AddonElement = React.ReactElement | string | number
 
+type InputVariants = Omit<VariantProps<typeof inputStyles>, 'variant'>
+
 export type InputProps = Omit<React.ComponentPropsWithRef<'input'>, 'size'> &
-  VariantProps<typeof inputStyles> & {
+  InputVariants & {
+    variant?: 'subtle' | 'flushed' | 'combo-box'
     prefixElement?: AddonElement
     suffixElement?: AddonElement
   }
@@ -31,7 +35,6 @@ const inputStyles = cva(['inline-flex min-w-60 overflow-hidden'], {
         // Flushed - Invalid
         '[&:has(input[data-invalid]):hover]:bg-surface-1 [&:has(input[data-invalid])]:before:h-0.5 [&:has(input[data-invalid])]:before:bg-danger',
       ],
-      'combo-box': [],
     },
     size: {
       sm: [
@@ -79,20 +82,42 @@ export function Input({
   variant,
   size,
   disabled,
+  prefixElement,
+  suffixElement,
   ...props
 }: InputProps) {
+  function InputAreaElement({
+    children,
+  }: {
+    children: React.ReactNode
+  }) {
+    return (
+      <span
+        className={cx(
+          'flex h-full items-center px-3 font-display font-medium text-fg-1/30 mix-blend-darken dark:mix-blend-lighten',
+          variant === 'combo-box' ? 'bg-fill-1' : 'bg-transparent',
+          disabled && 'text-disabled',
+        )}
+      >
+        {children}
+      </span>
+    )
+  }
+
   return (
     <div
       className={cx(
         inputStyles({
           className,
-          variant,
+          variant: variant === 'combo-box' ? 'subtle' : variant,
           size,
           disabled,
         }),
       )}
       aria-disabled={disabled}
     >
+      {!!prefixElement && <InputAreaElement>{prefixElement}</InputAreaElement>}
+
       <ArkField.Input
         {...props}
         className={cx(
@@ -102,6 +127,8 @@ export function Input({
         disabled={disabled}
         tabIndex={disabled ? -1 : 0}
       />
+
+      {!!suffixElement && <InputAreaElement>{suffixElement}</InputAreaElement>}
     </div>
   )
 }
