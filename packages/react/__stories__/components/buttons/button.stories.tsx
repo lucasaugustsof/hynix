@@ -10,7 +10,7 @@ import {
 } from '@remixicon/react'
 
 const meta: Meta<ButtonProps> = {
-  title: 'components/buttons/Button',
+  title: 'components/Buttons/Button',
   component: Button,
   args: {
     variant: 'primary',

@@ -53,7 +53,10 @@ const buttonStyles = cva(
         ],
       },
       disabled: {
-        true: 'cursor-not-allowed bg-fill-1 text-disabled',
+        true: [
+          'cursor-not-allowed bg-fill-1 text-disabled',
+          '[&_svg]:text-disabled',
+        ],
         false: 'inset-ring-1 cursor-pointer',
       },
       iconOnly: {

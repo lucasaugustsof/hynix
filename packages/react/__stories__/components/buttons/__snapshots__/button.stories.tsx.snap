@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/buttons/Button Basic smoke-test 1`] = `
-<button class="inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer"
+exports[`components/Buttons/Button Basic smoke-test 1`] = `
+<button class="isolate inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer"
         tabindex="0"
 >
   Button
 </button>
 `;
 
-exports[`components/buttons/Button Disabled play-test 1`] = `
-<button class="inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected inset-ring-brand enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 cursor-not-allowed bg-fill-1 text-disabled"
+exports[`components/Buttons/Button Disabled play-test 1`] = `
+<button class="isolate inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 inset-ring-brand enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 cursor-not-allowed bg-fill-1 text-disabled [&amp;_svg]:text-disabled"
         disabled
         tabindex="-1"
 >
@@ -17,9 +17,9 @@ exports[`components/buttons/Button Disabled play-test 1`] = `
 </button>
 `;
 
-exports[`components/buttons/Button IconOnly smoke-test 1`] = `
+exports[`components/Buttons/Button IconOnly smoke-test 1`] = `
 <button aria-label="Go to GitHub"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer aspect-square px-0"
+        class="isolate inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer aspect-square px-0"
         tabindex="0"
 >
   <svg viewbox="0 0 24 24"
@@ -35,8 +35,8 @@ exports[`components/buttons/Button IconOnly smoke-test 1`] = `
 </button>
 `;
 
-exports[`components/buttons/Button WithPrefix smoke-test 1`] = `
-<button class="inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer"
+exports[`components/Buttons/Button WithPrefix smoke-test 1`] = `
+<button class="isolate inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer"
         tabindex="0"
 >
   <svg viewbox="0 0 24 24"
@@ -53,8 +53,8 @@ exports[`components/buttons/Button WithPrefix smoke-test 1`] = `
 </button>
 `;
 
-exports[`components/buttons/Button WithPrefixAndSuffix smoke-test 1`] = `
-<button class="inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer"
+exports[`components/Buttons/Button WithPrefixAndSuffix smoke-test 1`] = `
+<button class="isolate inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer"
         tabindex="0"
 >
   <svg viewbox="0 0 24 24"
@@ -81,8 +81,8 @@ exports[`components/buttons/Button WithPrefixAndSuffix smoke-test 1`] = `
 </button>
 `;
 
-exports[`components/buttons/Button WithSuffix smoke-test 1`] = `
-<button class="inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer"
+exports[`components/Buttons/Button WithSuffix smoke-test 1`] = `
+<button class="isolate inline-flex items-center justify-center whitespace-nowrap rounded-3xl font-semibold transition-colors ease-in-out focus-visible:outline-3 focus-visible:outline-brand-selected [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 inset-ring-brand bg-brand text-fg-2 enabled:hover:bg-brand-hover h-11 min-h-11 gap-2 px-4 text-base only:[&amp;_svg]:size-6 inset-ring-1 cursor-pointer"
         tabindex="0"
 >
   Button
