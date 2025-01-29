@@ -14,9 +14,8 @@ type SlotProps = React.ComponentPropsWithRef<'span'> & {
   children?: React.ReactNode
 }
 
-type InputGroupProps = {
+type InputGroupProps = Pick<InputProps, 'size' | 'disabled'> & {
   children: React.ReactElement<InputProps>
-  size?: InputProps['size']
   prefixElement?: SlottableType
   suffixElement?: SlottableType
 }
@@ -78,6 +77,7 @@ export function InputGroup({
   size = 'md',
   prefixElement,
   suffixElement,
+  disabled,
 }: InputGroupProps) {
   const slotPrefixRef = useRef<HTMLSpanElement>(null)
   const slotSuffixRef = useRef<HTMLSpanElement>(null)
@@ -91,10 +91,13 @@ export function InputGroup({
   )
 
   const child = React.Children.only<React.ReactElement<InputProps>>(children)
-  const childProps = removeSpecificProperties(child.props, ['size'])
+  const childProps = removeSpecificProperties(child.props, ['size', 'disabled'])
 
   return (
-    <div className={cx('relative')}>
+    <div
+      className={cx('relative aria-disabled:**:[svg]:fill-disabled')}
+      aria-disabled={disabled}
+    >
       {!!prefixElement && (
         <Slot ref={slotPrefixRef} className={cx(slotSpacing[size!].left)}>
           {prefixElement}
@@ -111,6 +114,7 @@ export function InputGroup({
             }
           : {}),
         size,
+        disabled,
         ...childProps,
       })}
 
@@ -133,7 +137,9 @@ function removeSpecificProperties<T extends object>(
     if (keys.includes(propKey as keyof T)) {
       console.warn(
         `The "${propKey}" property on Input will be ignored because it is wrapped in an InputGroup.`,
+        propKey,
       )
+
       continue
     }
 

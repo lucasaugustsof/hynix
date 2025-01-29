@@ -26,6 +26,9 @@ importers:
       '@storybook/addon-a11y':
         specifier: 8.5.0
         version: 8.5.0(storybook@8.6.0-alpha.0)(vitest@3.0.2)
+      '@storybook/addon-actions':
+        specifier: 8.5.2
+        version: 8.5.2(storybook@8.6.0-alpha.0)
       '@storybook/addon-essentials':
         specifier: 8.6.0-alpha.0
         version: 8.6.0-alpha.0(@types/react@19.0.7)(storybook@8.6.0-alpha.0)
@@ -1142,6 +1145,11 @@ packages:
     resolution: {integrity: sha512-dTKlnhOaDsAXxkmHz7m6/qb98IENoaXTCG3fXo2iwJ1xT27fZF+i8fz8oQprLAN5r7xlnz66ARJvEIKJ+Lxjgw==}
     peerDependencies:
       storybook: ^8.5.0
+
+  '@storybook/addon-actions@8.5.2':
+    resolution: {integrity: sha512-g0gLesVSFgstUq5QphsLeC1vEdwNHgqo2TE0m+STM47832xbxBwmK6uvBeqi416xZvnt1TTKaaBr4uCRRQ64Ww==}
+    peerDependencies:
+      storybook: ^8.5.2
 
   '@storybook/addon-actions@8.6.0-alpha.0':
     resolution: {integrity: sha512-ebY4n9twI05gWuu3Qv1o6LscFAY7pBbt3Ted22SfGH5YTvRvdstcU/4M7kqXt26X5LZeDfKCtIddnIvv/wMXsw==}
@@ -5287,6 +5295,15 @@ snapshots:
       vitest-axe: 0.1.0(vitest@3.0.2)
     transitivePeerDependencies:
       - vitest
+
+  '@storybook/addon-actions@8.5.2(storybook@8.6.0-alpha.0)':
+    dependencies:
+      '@storybook/global': 5.0.0
+      '@types/uuid': 9.0.8
+      dequal: 2.0.3
+      polished: 4.3.1
+      storybook: 8.6.0-alpha.0
+      uuid: 9.0.1
 
   '@storybook/addon-actions@8.6.0-alpha.0(storybook@8.6.0-alpha.0)':
     dependencies:
