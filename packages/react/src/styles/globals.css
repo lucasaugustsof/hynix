@@ -137,4 +137,8 @@
 	body {
 		@apply bg-surface-1 text-fg-1;
 	}
+
+	input::-webkit-calendar-picker-indicator {
+		display: none;
+	}
 }

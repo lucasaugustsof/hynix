@@ -1,8 +1,9 @@
 import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
+import { expect, fn, userEvent, within } from '@storybook/test'
 
-import { Input, type InputProps } from '@/registry/components/input'
-import { InputGroup } from '@/registry/components/input-group'
+import { Input, type InputProps } from '@/registry/components/inputs/input'
+import { InputGroup } from '@/registry/components/inputs/input-group'
 
 import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
 
@@ -11,11 +12,11 @@ type ArgumentType<T> = T & {
 }
 
 const meta: Meta<InputProps> = {
-  title: 'components/Input',
+  title: 'components/Inputs/Input',
   component: Input,
   args: {
     size: 'md',
-    placeholder: 'E-mail',
+    placeholder: 'Enter text here',
     disabled: false,
     onChange: action('onChange event was called'),
   },
@@ -63,7 +64,20 @@ const meta: Meta<InputProps> = {
 
 export default meta
 
-export const Basic: StoryObj = {}
+export const Basic: StoryObj<InputProps> = {
+  args: {
+    onChange: fn(),
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement)
+
+    const sut = canvas.getByRole('textbox')
+
+    await userEvent.type(sut, 'Typed text')
+
+    expect(args.onChange).toBeCalled()
+  },
+}
 
 export const WithPrefix: StoryObj<InputProps> = {
   render({ placeholder, ...args }) {
@@ -87,16 +101,33 @@ export const WithSuffix: StoryObj<InputProps> = {
 
 export const Disabled: StoryObj<InputProps> = {
   args: {
+    onFocus: fn(),
     disabled: true,
   },
   argTypes: {
     disabled: {
       control: false,
     },
+    onFocus: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement)
+
+    const sut = canvas.getByRole('textbox')
+
+    await userEvent.click(sut)
+
+    expect(sut.ariaDisabled).toBeTruthy()
+    expect(args.onFocus).not.toHaveBeenCalled()
   },
 }
 
-export const Warning: StoryObj<ArgumentType<InputProps>> = {
+export const Invalid: StoryObj<ArgumentType<InputProps>> = {
   args: {
     'data-invalid': true,
     disabled: false,
@@ -114,5 +145,12 @@ export const Warning: StoryObj<ArgumentType<InputProps>> = {
         disable: true,
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const sut = canvas.getByRole('textbox')
+
+    expect(sut).toHaveAttribute('data-invalid')
   },
 }

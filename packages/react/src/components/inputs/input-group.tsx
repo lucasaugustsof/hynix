@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState, useRef, forwardRef } from 'react'
 
-import type { InputProps } from '@/registry/components/input'
+import type { InputProps } from '@/registry/components/inputs/input'
 
 import { cx } from '@/registry/utils/cx'
 
@@ -59,7 +59,7 @@ const Slot = forwardRef<HTMLSpanElement, SlotProps>(
         {...props}
         ref={ref}
         className={cx(
-          'absolute inline-flex *:pointer-events-none [&_svg]:fill-fill-5',
+          'absolute inline-flex [&_svg]:pointer-events-none [&_svg]:fill-fill-5',
           '-translate-y-1/2 top-1/2',
           className,
         )}

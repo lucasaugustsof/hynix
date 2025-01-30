@@ -16,7 +16,7 @@ type InputProps = Omit<
 
 const inputStyles = cva(
   [
-    'inset-ring-border inline-flex min-w-60 cursor-text overflow-hidden rounded-3xl bg-surface-1 font-display font-medium caret-brand outline-none',
+    'inset-ring-border inline-flex min-w-60 cursor-text overflow-hidden rounded-3xl bg-surface-1 font-display font-medium caret-brand outline-none transition-colors ease-out',
     'placeholder:text-fg-1/70 focus-visible:inset-ring-2 focus-visible:inset-ring-brand',
     'data-[invalid]:inset-ring-2 data-[invalid]:inset-ring-danger data-[invalid]:hover:bg-surface-1',
   ],
