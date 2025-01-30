@@ -16,18 +16,12 @@ type InputProps = Omit<
 
 const inputStyles = cva(
   [
-    'inline-flex min-w-60 cursor-text overflow-hidden font-display font-medium caret-brand outline-none',
-    'placeholder:text-fg-1/70',
+    'inset-ring-border inline-flex min-w-60 cursor-text overflow-hidden rounded-3xl bg-surface-1 font-display font-medium caret-brand outline-none',
+    'placeholder:text-fg-1/70 focus-visible:inset-ring-2 focus-visible:inset-ring-brand',
+    'data-[invalid]:inset-ring-2 data-[invalid]:inset-ring-danger data-[invalid]:hover:bg-surface-1',
   ],
   {
     variants: {
-      variant: {
-        default: [
-          'inset-ring-border rounded-3xl bg-surface-1',
-          'focus-visible:inset-ring-2 focus-visible:inset-ring-brand',
-          'data-[invalid]:inset-ring-2 data-[invalid]:inset-ring-danger data-[invalid]:hover:bg-surface-1',
-        ],
-      },
       size: {
         sm: ['h-9 pr-2.5 pl-3 text-sm leading-snug'],
         md: ['h-11 pr-3 pl-4 text-base'],
@@ -38,12 +32,10 @@ const inputStyles = cva(
       },
     },
     defaultVariants: {
-      variant: 'default',
       size: 'md',
     },
     compoundVariants: [
       {
-        variant: 'default',
         disabled: false,
         class: [
           'inset-ring-1 not-focus-visible:hover:inset-ring-2 not-focus-visible:hover:bg-fill-1',
@@ -54,7 +46,7 @@ const inputStyles = cva(
 )
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, variant, size, disabled, ...props }, ref) => {
+  ({ className, size, disabled, ...props }, ref) => {
     return (
       <ArkField.Input
         {...props}
@@ -62,13 +54,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         className={cx(
           inputStyles({
             className,
-            variant,
             size,
             disabled,
           }),
         )}
         disabled={disabled}
         tabIndex={disabled ? -1 : 0}
+        aria-disabled={disabled}
       />
     )
   },

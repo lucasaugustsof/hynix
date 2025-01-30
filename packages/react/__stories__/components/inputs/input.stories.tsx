@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { Input, type InputProps } from '@/registry/components/input'
 import { InputGroup } from '@/registry/components/input-group'
@@ -14,23 +14,12 @@ const meta: Meta<InputProps> = {
   title: 'components/Input',
   component: Input,
   args: {
-    variant: 'default',
+    size: 'md',
     placeholder: 'E-mail',
     disabled: false,
     onChange: action('onChange event was called'),
   },
   argTypes: {
-    variant: {
-      control: 'inline-radio',
-      options: ['default', 'secondary'],
-      description: 'Defines the visual style of the input.',
-      table: {
-        category: 'Appearance',
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
     size: {
       control: 'inline-radio',
       options: ['sm', 'md', 'lg'],
