@@ -23,6 +23,10 @@
 	--color-brand-hover: var(--brand-hover);
 	--color-brand-selected: var(--brand-selected);
 
+	--color-highlight: var(--highlight);
+	--color-highlight-hover: var(--highlight-hover);
+	--color-highlight-selected: var(--highlight-selected);
+
 	--color-danger: var(--danger);
 	--color-danger-hover: var(--danger-hover);
 	--color-danger-selected: var(--danger-selected);
@@ -78,6 +82,10 @@
 		--brand-hover: oklch(37.03% 0.0119 285.81);
 		--brand-selected: oklch(44.19% 0.0146 285.79);
 
+		--highlight: oklch(63.54% 0.1893 41.55);
+		--highlight-hover: oklch(75.76% 0.159 55.93);
+		--highlight-selected: oklch(89.93% 0.0737 69.97);
+
 		--danger: oklch(57.85% 0.2138 27.17);
 		--danger-hover: oklch(70.3% 0.1884 23.26);
 		--danger-selected: oklch(88.34% 0.0616 18.39);
@@ -120,6 +128,10 @@
 		--brand: oklch(100% 0 106.37);
 		--brand-hover: oklch(78.94% 0 0);
 		--brand-selected: oklch(55.47% 0 0);
+
+		--highlight: oklch(83.63% 0.1181 67);
+		--highlight-hover: oklch(69.04% 0.1827 47.96);
+		--highlight-selected: oklch(52.68% 0.1383 38.41);
 
 		--danger: oklch(81.74% 0.10276611870546051 19.51842471892472);
 		--danger-hover: oklch(69.74% 0.1931 23.55);
