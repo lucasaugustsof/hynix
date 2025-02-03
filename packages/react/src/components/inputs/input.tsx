@@ -31,9 +31,6 @@ const inputStyles = cva(
         true: 'cursor-not-allowed bg-fill-1 text-disabled placeholder:text-disabled',
       },
     },
-    defaultVariants: {
-      size: 'md',
-    },
     compoundVariants: [
       {
         disabled: false,
@@ -42,6 +39,10 @@ const inputStyles = cva(
         ],
       },
     ],
+    defaultVariants: {
+      size: 'md',
+      disabled: false,
+    },
   },
 )
 

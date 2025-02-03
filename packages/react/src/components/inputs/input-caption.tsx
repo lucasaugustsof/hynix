@@ -13,11 +13,15 @@ import { AnimatePresence, motion } from 'motion/react'
 import { cx } from '@/registry/utils/cx'
 import { getDocumentVariable } from '@/registry/utils/get-document-variable'
 
+// ─────────────────────────────────────────────────────────────
+//  InputCaption
+// ─────────────────────────────────────────────────────────────
+
 type _VariantProps = Pick<VariantProps<typeof inputCaptionStyles>, 'size'>
 
 export type InputCaptionProps =
   | (_VariantProps & {
-      type: 'default' | 'success' | 'info' | 'requirements' | 'error'
+      type?: 'default' | 'success' | 'info' | 'requirements' | 'error'
       children: React.ReactNode
       securityLevel?: never
       stepMessages?: never
@@ -45,10 +49,6 @@ const inputCaptionStyles = cva(['inline-flex items-center'], {
       lg: 'gap-3 text-base [&_svg]:size-7',
     },
   },
-  defaultVariants: {
-    type: 'success',
-    size: 'sm',
-  },
   compoundVariants: [
     {
       type: 'password',
@@ -56,6 +56,10 @@ const inputCaptionStyles = cva(['inline-flex items-center'], {
       class: 'gap-x-2',
     },
   ],
+  defaultVariants: {
+    type: 'default',
+    size: 'sm',
+  },
 })
 
 export function InputCaption({
@@ -81,9 +85,11 @@ export function InputCaption({
         }),
       )}
     >
-      {type && type in PREFIX_ICONS
-        ? PREFIX_ICONS[type as keyof typeof PREFIX_ICONS]
-        : null}
+      {type && type in PREFIX_ICONS ? (
+        <span aria-hidden>
+          {PREFIX_ICONS[type as keyof typeof PREFIX_ICONS]}
+        </span>
+      ) : null}
 
       {type === 'password' ? (
         <StepPassword
@@ -96,6 +102,7 @@ export function InputCaption({
           className={cx(
             'inline-block max-w-60 truncate text-nowrap font-display font-medium',
           )}
+          aria-live="polite"
         >
           {children}
         </span>
@@ -104,12 +111,16 @@ export function InputCaption({
   )
 }
 
+// ─────────────────────────────────────────────────────────────
+//  StepPassword
+// ─────────────────────────────────────────────────────────────
+
 type StepPasswordProps = Pick<
   InputCaptionProps,
   'size' | 'securityLevel' | 'stepMessages'
 >
 
-export function StepPassword({
+function StepPassword({
   size = 'md',
   securityLevel = 0,
   stepMessages,
@@ -143,20 +154,27 @@ export function StepPassword({
   })
 
   return (
-    <motion.div
-      layout="position"
+    <div
       className={cx(
         'grid grid-flow-col place-items-center',
         STEP_CONFIG.containerSize[size!],
       )}
-      transition={{
-        duration: 0.4,
-        ease: 'easeInOut',
-      }}
     >
-      <div className="inline-flex min-w-[7.5rem] gap-x-1">
+      <div
+        role="progressbar"
+        className="inline-flex min-w-[7.5rem] gap-x-1"
+        aria-valuenow={securityLevel}
+        aria-valuemin={0}
+        aria-valuemax={4}
+        aria-labelledby="password-strength"
+      >
+        <span id="password-strength" className="sr-only">
+          {labelContent}
+        </span>
+
         {[...Array(TOTAL_STEP)].map((_, idx) => (
           <span
+            role="presentation"
             key={`step-${idx + 1}`}
             className={cx(
               'flex-1 overflow-hidden rounded-base bg-fill-2',
@@ -178,42 +196,48 @@ export function StepPassword({
       </div>
 
       <AnimatePresence mode="wait">
-        <motion.span
-          key={labelContent}
-          layout
-          initial={{
-            width: 0,
-            opacity: 0,
-            filter: `blur(calc(${getDocumentVariable('--blur-xs')} - 2px))`,
-          }}
-          animate={{
-            width: 'auto',
-            opacity: 1,
-            filter: 'blur(0px)',
-          }}
-          exit={{
-            width: 0,
-            opacity: 0,
-            filter: `blur(calc(${getDocumentVariable('--blur-xs')} - 2px))`,
-          }}
-          transition={{
-            ease: 'easeInOut',
-            duration: 0.3,
-          }}
-          className={cx(
-            'inline-block flex-grow font-display font-medium',
-            labelColor,
-            STEP_CONFIG.labelSize[size!],
-          )}
-        >
-          {labelContent}
-        </motion.span>
+        {labelContent && (
+          <motion.span
+            key={labelContent}
+            className={cx(
+              'inline-block grow whitespace-nowrap font-display font-medium',
+              labelColor,
+              STEP_CONFIG.labelSize[size!],
+            )}
+            variants={{
+              hide: {
+                width: 0,
+                opacity: 0,
+                scale: 0.8,
+                filter: `blur(calc(${getDocumentVariable('--blur-xs')} - 2px))`,
+              },
+              show: {
+                width: 'auto',
+                scale: 1,
+                opacity: 1,
+                filter: 'blur(0px)',
+              },
+            }}
+            initial="hide"
+            animate="show"
+            exit="hide"
+            transition={{
+              ease: 'easeInOut',
+              duration: 0.2,
+            }}
+            aria-live="assertive"
+          >
+            {labelContent}
+          </motion.span>
+        )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   )
 }
 
-// Utilities
+// ─────────────────────────────────────────────────────────────
+//  Utilities - StepPassword
+// ─────────────────────────────────────────────────────────────
 
 function getStepMessage({
   securityLevel,
@@ -246,12 +270,12 @@ function getSecurityLevelColors({
 }: Pick<InputCaptionProps, 'securityLevel'>): SecurityLevelColors {
   const STEP_COLORS = {
     weak: {
-      stepColor: 'bg-rose-500 dark:bg-rose-200',
-      labelColor: 'text-rose-500 dark:text-rose-200',
+      stepColor: 'bg-danger',
+      labelColor: 'text-danger',
     },
     medium: {
-      stepColor: 'bg-yellow-500 dark:bg-yellow-200',
-      labelColor: 'text-yellow-500 dark:text-yellow-200',
+      stepColor: 'bg-highlight',
+      labelColor: 'text-highlight',
     },
     strong: {
       stepColor: 'bg-success',
