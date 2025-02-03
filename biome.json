@@ -43,6 +43,9 @@
 			},
 			"suspicious": {
 				"noExplicitAny": "off"
+			},
+			"a11y": {
+				"useFocusableInteractive": "off"
 			}
 		}
 	},
