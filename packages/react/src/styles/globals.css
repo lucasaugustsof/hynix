@@ -47,18 +47,6 @@
 	--radius-7xl: var(--radi-10);
 
 	--font-display: var(--display);
-
-	--animate-step-password-progress: stepPasswordProgress 0.2s linear forwards;
-
-	@keyframes stepPasswordProgress {
-		from {
-			width: 0%;
-		}
-
-		to {
-			width: 100%;
-		}
-	}
 }
 
 @layer base {
