@@ -25,6 +25,7 @@
 		"@hynix/react": "workspace:*",
 		"@hynix/ts-config": "workspace:*",
 		"@storybook/addon-a11y": "8.5.0",
+		"@storybook/addon-actions": "8.5.2",
 		"@storybook/addon-essentials": "8.6.0-alpha.0",
 		"@storybook/addon-interactions": "8.6.0-alpha.0",
 		"@storybook/addon-themes": "8.5.1",
