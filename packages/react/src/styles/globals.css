@@ -35,6 +35,8 @@
 	--color-success-hover: var(--success-hover);
 	--color-success-selected: var(--success-selected);
 
+	--color-alpha: var(--alpha);
+
 	--radius-base: var(--radi-1);
 	--radius-md: var(--radi-2);
 	--radius-lg: var(--radi-3);
@@ -68,19 +70,19 @@
 
 		--brand: oklch(21.78% 0 0);
 		--brand-hover: oklch(37.03% 0.0119 285.81);
-		--brand-selected: oklch(44.19% 0.0146 285.79);
+		--brand-selected: oklch(44.19% 0.0146 285.79 / 0.7);
 
 		--highlight: oklch(63.54% 0.1893 41.55);
 		--highlight-hover: oklch(75.76% 0.159 55.93);
-		--highlight-selected: oklch(89.93% 0.0737 69.97);
+		--highlight-selected: oklch(89.93% 0.0737 69.97 / 0.7);
 
 		--danger: oklch(57.85% 0.2138 27.17);
 		--danger-hover: oklch(70.3% 0.1884 23.26);
-		--danger-selected: oklch(88.34% 0.0616 18.39);
+		--danger-selected: oklch(88.34% 0.0616 18.39 / 0.7);
 
 		--success: oklch(57.29% 0.1544 149.22);
 		--success-hover: oklch(77.93% 0.1995 150.19);
-		--success-selected: oklch(82.91% 0.1871 156.84);
+		--success-selected: oklch(82.91% 0.1871 156.84 / 0.7);
 
 		--radi-0: 0;
 		--radi-1: .125rem;
@@ -95,6 +97,8 @@
 		--radi-10: 62.5rem;
 
 		--display: "Inter", sans-serif;
+
+		--alpha: color-mix(in oklch, black 12%, transparent);
 	}
 
 	.dark {
@@ -128,6 +132,8 @@
 		--success: oklch(92.46% 0.0811 155.98);
 		--success-hover: oklch(87.12% 0.137 154.59);
 		--success-selected: oklch(72.05% 0.192 149.49);
+
+		--alpha: color-mix(in oklch, white 12%, transparent);
 	}
 }
 
