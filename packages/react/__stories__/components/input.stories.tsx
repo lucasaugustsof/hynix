@@ -2,8 +2,8 @@ import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, fn, userEvent, within } from '@storybook/test'
 
-import { Input, type InputProps } from '@/registry/components/inputs/input'
-import { InputGroup } from '@/registry/components/inputs/input-group'
+import { Input, type InputProps } from '@/registry/components/input'
+import { InputGroup } from '@/registry/components/input-group'
 
 import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
 
@@ -12,7 +12,7 @@ type ArgumentType<T> = T & {
 }
 
 const meta: Meta<InputProps> = {
-  title: 'components/Inputs/Input',
+  title: 'components/Input',
   component: Input,
   args: {
     size: 'md',

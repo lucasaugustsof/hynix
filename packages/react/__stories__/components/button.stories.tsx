@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, fn, userEvent, within } from '@storybook/test'
 
-import { Button, type ButtonProps } from '@/registry/components/buttons/button'
+import { Button, type ButtonProps } from '@/registry/components/button'
 
 import {
   RiArrowLeftLine,
@@ -10,7 +10,7 @@ import {
 } from '@remixicon/react'
 
 const meta: Meta<ButtonProps> = {
-  title: 'components/Buttons/Button',
+  title: 'components/Button',
   component: Button,
   args: {
     variant: 'primary',

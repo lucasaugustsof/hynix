@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState, useRef, forwardRef } from 'react'
 
-import type { InputProps } from '@/registry/components/inputs/input'
+import type { InputProps } from '@/registry/components/input'
 
 import { cx } from '@/registry/utils/cx'
 

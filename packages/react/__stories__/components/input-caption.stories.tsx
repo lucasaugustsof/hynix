@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import {
   InputCaption,
   type InputCaptionProps,
-} from '@/registry/components/inputs/input-caption'
+} from '@/registry/components/input-caption'
 
 const meta: Meta<InputCaptionProps> = {
-  title: 'components/Inputs/InputCaption',
+  title: 'components/InputCaption',
   component: InputCaption,
   args: {
     type: 'default',
