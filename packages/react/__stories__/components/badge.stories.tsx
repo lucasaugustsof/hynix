@@ -6,19 +6,11 @@ const meta: Meta<BadgeProps> = {
   title: 'components/Badge',
   component: Badge,
   args: {
-    appearance: 'fill',
     variant: 'informative',
     size: 'md',
     activated: false,
   },
   argTypes: {
-    appearance: {
-      control: 'inline-radio',
-      options: ['fill', 'ghost'],
-      table: {
-        category: 'appearance',
-      },
-    },
     variant: {
       control: 'inline-radio',
       options: ['informative', 'warning', 'success', 'danger'],
@@ -47,6 +39,4 @@ const meta: Meta<BadgeProps> = {
 
 export default meta
 
-export const Fill: StoryObj = {}
-
-export const Ghost: StoryObj = {}
+export const Basic: StoryObj = {}
