@@ -15,21 +15,32 @@ type BadgeProps = React.ComponentProps<'span'> &
 
 const badgeStyles = cva(
   [
-    'inset-ring-1 inline-flex cursor-default select-none items-center justify-center whitespace-nowrap rounded-3xl font-display font-semibold shadow-xs outline-hidden',
-    'transition-colors ease-in-out',
-    'focus-visible:inset-ring-0 focus-visible:outline-3',
+    // Layout and structure
+    'inline-flex cursor-default select-none items-center justify-center whitespace-nowrap rounded-3xl',
+
+    // Colors
+    'bg-(--badge-bg-color) text-(--badge-text-color)',
+
+    // Border and accent ring
+    'inset-ring-(--badge-border-color) inset-ring-1',
+
+    // Shadow and visual effects
+    'shadow-xs outline-hidden transition-colors ease-in-out',
+
+    // Typography
+    'font-display font-semibold',
+
+    // Focus (Accessibility)
+    'focus-visible:inset-ring-0 focus-visible:outline-(--badge-outline-color) focus-visible:outline-3',
+
+    // Hover states when not activated
+    'data-[state=not-activated]:not-focus-visible:hover:bg-(--badge-hover-bg-color) data-[state=not-activated]:not-focus-visible:hover:text-(--badge-hover-text-color)',
+
+    // Activation states
+    'data-[state=activated]:inset-ring-(--badge-active-border-color) data-[state=activated]:bg-(--badge-active-bg-color) data-[state=activated]:text-(--badge-active-text-color)',
   ],
   {
     variants: {
-      appearance: {
-        fill: [
-          'inset-ring-(--badge-border-color) bg-(--badge-bg-color) text-(--badge-text-color)',
-          'focus-visible:outline-(--badge-outline-color)',
-          'data-[state=not-activated]:not-focus-visible:hover:bg-(--badge-hover-bg-color) data-[state=not-activated]:not-focus-visible:hover:text-(--badge-hover-text-color)',
-          'data-[state=activated]:inset-ring-(--badge-active-border-color) data-[state=activated]:bg-(--badge-active-bg-color) data-[state=activated]:text-(--badge-active-text-color)',
-        ],
-        ghost: '',
-      },
       variant: {
         informative: [
           '[--badge-bg-color:var(--color-surface-2);--badge-border-color:var(--color-border);--badge-text-color:var(--color-fg-1)]',
@@ -60,7 +71,6 @@ const badgeStyles = cva(
       },
     },
     defaultVariants: {
-      appearance: 'fill',
       variant: 'informative',
       size: 'xs',
     },
@@ -68,10 +78,7 @@ const badgeStyles = cva(
 )
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  (
-    { className, appearance, variant, size, activated = false, ...props },
-    ref,
-  ) => {
+  ({ className, variant, size, activated = false, ...props }, ref) => {
     return (
       <ark.span
         {...props}
@@ -79,7 +86,6 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         className={cx(
           badgeStyles({
             className,
-            appearance,
             variant,
             size,
           }),
