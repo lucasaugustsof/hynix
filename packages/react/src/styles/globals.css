@@ -154,7 +154,7 @@
 	}
 
 	body {
-		@apply bg-surface-1 text-fg-1;
+		@apply antialiased bg-surface-1 text-fg-1;
 	}
 
 	input::-webkit-calendar-picker-indicator {

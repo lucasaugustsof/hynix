@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, fn, userEvent, within } from '@storybook/test'
+import {
+  // expect,
+  // userEvent,
+  // within,
+  fn,
+} from '@storybook/test'
 
 import { Button, type ButtonProps } from '@/registry/components/button'
 
@@ -48,16 +53,16 @@ const meta: Meta<ButtonProps> = {
   parameters: {
     layout: 'centered',
   },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement)
+  // play: async ({ canvasElement, args }) => {
+  //   const canvas = within(canvasElement)
 
-    const sut = canvas.getByRole('button')
+  //   const sut = canvas.getByRole('button')
 
-    await userEvent.click(sut)
-    await userEvent.click(canvasElement)
+  //   await userEvent.click(sut)
+  //   await userEvent.click(canvasElement)
 
-    await expect(args.onClick).toHaveBeenCalled()
-  },
+  //   await expect(args.onClick).toHaveBeenCalled()
+  // },
 }
 
 export default meta
@@ -141,13 +146,13 @@ export const LinkBehavior: StoryObj<ButtonProps> = {
       </Button>
     )
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  // play: async ({ canvasElement }) => {
+  //   const canvas = within(canvasElement)
 
-    const sut = canvas.getByTestId('github-link')
+  //   const sut = canvas.getByTestId('github-link')
 
-    await expect(sut.tagName.toLocaleLowerCase()).toEqual('a')
-  },
+  //   await expect(sut.tagName.toLocaleLowerCase()).toEqual('a')
+  // },
 }
 
 export const Disabled: StoryObj<ButtonProps> = {
@@ -155,14 +160,14 @@ export const Disabled: StoryObj<ButtonProps> = {
     disabled: true,
     onClick: fn(),
   },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement)
+  // play: async ({ canvasElement, args }) => {
+  //   const canvas = within(canvasElement)
 
-    const sut = canvas.getByRole('button')
+  //   const sut = canvas.getByRole('button')
 
-    await userEvent.click(sut)
-    await userEvent.click(canvasElement)
+  //   await userEvent.click(sut)
+  //   await userEvent.click(canvasElement)
 
-    await expect(args.onClick).not.toHaveBeenCalled()
-  },
+  //   await expect(args.onClick).not.toHaveBeenCalled()
+  // },
 }

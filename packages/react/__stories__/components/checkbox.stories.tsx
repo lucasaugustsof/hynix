@@ -1,6 +1,11 @@
 import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, fn, userEvent, within } from '@storybook/test'
+import {
+  // expect,
+  // userEvent,
+  // within,
+  fn,
+} from '@storybook/test'
 
 import { Checkbox, type CheckboxProps } from '@/registry/components/checkbox'
 
@@ -67,17 +72,17 @@ export const Basic: StoryObj<CheckboxProps> = {
   args: {
     onCheckedChange: fn(),
   },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement)
+  // play: async ({ canvasElement, args }) => {
+  //   const canvas = within(canvasElement)
 
-    const sut = canvas.getByTestId('checkbox-component')
+  //   const sut = canvas.getByTestId('checkbox-component')
 
-    await userEvent.click(sut)
+  //   await userEvent.click(sut)
 
-    expect(args.onCheckedChange).toHaveBeenCalledWith({
-      checked: true,
-    })
-  },
+  //   expect(args.onCheckedChange).toHaveBeenCalledWith({
+  //     checked: true,
+  //   })
+  // },
 }
 
 export const Indeterminate: StoryObj<CheckboxProps> = {

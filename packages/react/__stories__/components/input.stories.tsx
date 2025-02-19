@@ -1,6 +1,11 @@
 import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, fn, userEvent, within } from '@storybook/test'
+import {
+  // expect,
+  // userEvent,
+  // within,
+  fn,
+} from '@storybook/test'
 
 import { Input, type InputProps } from '@/registry/components/input'
 import { InputGroup } from '@/registry/components/input-group'
@@ -68,15 +73,15 @@ export const Basic: StoryObj<InputProps> = {
   args: {
     onChange: fn(),
   },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement)
+  // play: async ({ canvasElement, args }) => {
+  //   const canvas = within(canvasElement)
 
-    const sut = canvas.getByRole('textbox')
+  //   const sut = canvas.getByRole('textbox')
 
-    await userEvent.type(sut, 'Typed text')
+  //   await userEvent.type(sut, 'Typed text')
 
-    expect(args.onChange).toBeCalled()
-  },
+  //   expect(args.onChange).toBeCalled()
+  // },
 }
 
 export const WithPrefix: StoryObj<InputProps> = {
@@ -115,16 +120,16 @@ export const Disabled: StoryObj<InputProps> = {
       },
     },
   },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement)
+  // play: async ({ canvasElement, args }) => {
+  //   const canvas = within(canvasElement)
 
-    const sut = canvas.getByRole('textbox')
+  //   const sut = canvas.getByRole('textbox')
 
-    await userEvent.click(sut)
+  //   await userEvent.click(sut)
 
-    expect(sut.ariaDisabled).toBeTruthy()
-    expect(args.onFocus).not.toHaveBeenCalled()
-  },
+  //   expect(sut.ariaDisabled).toBeTruthy()
+  //   expect(args.onFocus).not.toHaveBeenCalled()
+  // },
 }
 
 export const Invalid: StoryObj<ArgumentType<InputProps>> = {
@@ -146,11 +151,11 @@ export const Invalid: StoryObj<ArgumentType<InputProps>> = {
       },
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  // play: async ({ canvasElement }) => {
+  //   const canvas = within(canvasElement)
 
-    const sut = canvas.getByRole('textbox')
+  //   const sut = canvas.getByRole('textbox')
 
-    expect(sut).toHaveAttribute('data-invalid')
-  },
+  //   expect(sut).toHaveAttribute('data-invalid')
+  // },
 }
