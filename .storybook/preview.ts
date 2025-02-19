@@ -3,9 +3,6 @@ import '@hynix/react/styles.css'
 import type { Preview, Decorator } from '@storybook/react'
 import { withThemeByClassName } from '@storybook/addon-themes'
 
-import { create } from '@storybook/theming/create'
-import { storybookTheme } from './storybook-theme'
-
 export const decorators: Decorator[] = [
   withThemeByClassName({
     themes: {
@@ -35,17 +32,6 @@ const preview: Preview = {
           orderedList: false,
         },
       },
-      theme: create({
-        base: 'light',
-
-        // Typography
-        fontBase: storybookTheme.fonts.display,
-        fontCode: storybookTheme.fonts.code,
-        textColor: storybookTheme.colors.text.primary,
-
-        // UI
-        colorSecondary: storybookTheme.colors.brand.highlight,
-      }),
     },
     backgrounds: {
       disable: true,
