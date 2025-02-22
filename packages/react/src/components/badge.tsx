@@ -14,7 +14,7 @@ export type BadgeProps = React.ComponentPropsWithRef<'span'> &
 
 const badgeStyles = cva(
   [
-    'inset-ring-1 inline-flex cursor-default select-none items-center justify-center whitespace-nowrap rounded-3xl font-semibold shadow-xs transition-colors ease-out',
+    'inset-ring-1 inline-flex shrink-0 cursor-default select-none items-center justify-center whitespace-nowrap rounded-3xl font-semibold shadow-xs transition-colors ease-out',
     'focus-visible:inset-ring-0 focus-visible:bg-fill-1 focus-visible:text-fg-1',
     focusRing,
   ],
