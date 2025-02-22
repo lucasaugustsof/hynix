@@ -97,8 +97,6 @@
 		--radi-10: 62.5rem;
 
 		--display: "Inter", sans-serif;
-
-		--alpha: color-mix(in oklch, black 12%, transparent);
 	}
 
 	.dark {
@@ -132,8 +130,6 @@
 		--success: oklch(92.46% 0.0811 155.98);
 		--success-hover: oklch(87.12% 0.137 154.59);
 		--success-selected: oklch(72.05% 0.192 149.49);
-
-		--alpha: color-mix(in oklch, white 12%, transparent);
 	}
 }
 

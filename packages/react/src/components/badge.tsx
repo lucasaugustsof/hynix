@@ -1,66 +1,48 @@
 // Hynix: Badge [v0.1.0]
 
-import { forwardRef } from 'react'
-
 import { ark } from '@ark-ui/react'
 
 import { type VariantProps, cva } from 'class-variance-authority'
 
 import { cx } from '@/registry/utils/cx'
+import { focusRing } from '@/registry/utils/focus-ring'
 
-type BadgeProps = React.ComponentProps<'span'> &
+export type BadgeProps = React.ComponentPropsWithRef<'span'> &
   VariantProps<typeof badgeStyles> & {
     activated?: boolean
   }
 
 const badgeStyles = cva(
   [
-    // Layout and structure
-    'inline-flex cursor-default select-none items-center justify-center whitespace-nowrap rounded-3xl',
-
-    // Colors
-    'bg-(--badge-bg-color) text-(--badge-text-color)',
-
-    // Border and accent ring
-    'inset-ring-(--badge-border-color) inset-ring-1',
-
-    // Shadow and visual effects
-    'shadow-xs outline-hidden transition-colors ease-in-out',
-
-    // Typography
-    'font-display font-semibold',
-
-    // Focus (Accessibility)
-    'focus-visible:inset-ring-0 focus-visible:outline-(--badge-outline-color) focus-visible:outline-3',
-
-    // Hover states when not activated
-    'data-[state=not-activated]:not-focus-visible:hover:bg-(--badge-hover-bg-color) data-[state=not-activated]:not-focus-visible:hover:text-(--badge-hover-text-color)',
-
-    // Activation states
-    'data-[state=activated]:inset-ring-(--badge-active-border-color) data-[state=activated]:bg-(--badge-active-bg-color) data-[state=activated]:text-(--badge-active-text-color)',
+    'inset-ring-1 inline-flex cursor-default select-none items-center justify-center whitespace-nowrap rounded-3xl font-semibold shadow-xs transition-colors ease-out',
+    'focus-visible:inset-ring-0 focus-visible:bg-fill-1 focus-visible:text-fg-1',
+    focusRing,
   ],
   {
     variants: {
       variant: {
         informative: [
-          '[--badge-bg-color:var(--color-surface-2);--badge-border-color:var(--color-border);--badge-text-color:var(--color-fg-1)]',
-          '[--badge-outline-color:var(--color-brand-selected);--badge-hover-bg-color:var(--color-fill-1);--badge-hover-text-color:var(--color-fg-1)]',
-          '[--badge-active-border-color:var(--color-brand);--badge-active-bg-color:var(--color-brand);--badge-active-text-color:var(--color-fg-2)]',
+          'inset-ring-border bg-surface-2 text-fg-1',
+          'data-[activated=false]:not-focus-visible:hover:bg-fill-1',
+          'data-[activated=true]:inset-ring-0 data-[activated=true]:bg-brand data-[activated=true]:text-fg-2',
         ],
         warning: [
-          '[--badge-bg-color:var(--color-highlight);--badge-border-color:var(--color-alpha);--badge-text-color:var(--color-fg-2)]',
-          '[--badge-outline-color:var(--color-highlight-selected);--badge-hover-bg-color:var(--color-highlight-hover);--badge-hover-text-color:var(--color-fg-1)]',
-          '[--badge-active-border-color:var(--color-highlight);--badge-active-bg-color:var(--color-highlight);--badge-active-text-color:var(--color-fg-2)]',
+          'inset-ring-black/12 bg-highlight text-fg-2 dark:inset-ring-white/12',
+          'focus-visible:outline-highlight-selected',
+          'data-[activated=false]:not-focus-visible:hover:bg-highlight-hover data-[activated=false]:not-focus-visible:hover:text-fg-1',
+          'data-[activated=true]:inset-ring-0 data-[activated=true]:bg-highlight data-[activated=true]:text-fg-2',
         ],
         success: [
-          '[--badge-bg-color:var(--color-success);--badge-border-color:var(--color-alpha);--badge-text-color:var(--color-fg-2)]',
-          '[--badge-outline-color:var(--color-success-selected);--badge-hover-bg-color:var(--color-success-hover);--badge-hover-text-color:var(--color-fg-1)]',
-          '[--badge-active-border-color:var(--color-success);--badge-active-bg-color:var(--color-success);--badge-active-text-color:var(--color-fg-2)]',
+          'inset-ring-black/12 bg-success text-fg-2 dark:inset-ring-white/12',
+          'focus-visible:outline-success-selected',
+          'data-[activated=false]:not-focus-visible:hover:bg-success-hover data-[activated=false]:not-focus-visible:hover:text-fg-1',
+          'data-[activated=true]:inset-ring-0 data-[activated=true]:bg-success data-[activated=true]:text-fg-2',
         ],
         danger: [
-          '[--badge-bg-color:var(--color-danger);--badge-border-color:var(--color-alpha);--badge-text-color:var(--color-fg-2)]',
-          '[--badge-outline-color:var(--color-danger-selected);--badge-hover-bg-color:var(--color-danger-hover);--badge-hover-text-color:var(--color-fg-1)]',
-          '[--badge-active-border-color:var(--color-danger);--badge-active-bg-color:var(--color-danger);--badge-active-text-color:var(--color-fg-2)]',
+          'inset-ring-black/12 bg-danger text-fg-2 dark:inset-ring-white/12',
+          'focus-visible:outline-danger-selected',
+          'data-[activated=false]:not-focus-visible:hover:bg-danger-hover data-[activated=false]:not-focus-visible:hover:text-fg-1',
+          'data-[activated=true]:inset-ring-0 data-[activated=true]:bg-danger data-[activated=true]:text-fg-2',
         ],
       },
       size: {
@@ -77,26 +59,26 @@ const badgeStyles = cva(
   },
 )
 
-const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ className, variant, size, activated = false, ...props }, ref) => {
-    return (
-      <ark.span
-        {...props}
-        ref={ref}
-        className={cx(
-          badgeStyles({
-            className,
-            variant,
-            size,
-          }),
-        )}
-        data-state={activated ? 'activated' : 'not-activated'}
-      >
-        Label
-      </ark.span>
-    )
-  },
-)
-
-export { Badge }
-export type { BadgeProps }
+export function Badge({
+  ref,
+  className,
+  variant,
+  size,
+  activated,
+  ...props
+}: BadgeProps) {
+  return (
+    <ark.span
+      {...props}
+      ref={ref}
+      className={cx(
+        badgeStyles({
+          className,
+          variant,
+          size,
+        }),
+      )}
+      data-activated={activated}
+    />
+  )
+}

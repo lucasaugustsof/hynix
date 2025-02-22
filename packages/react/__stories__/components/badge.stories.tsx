@@ -6,11 +6,17 @@ const meta: Meta<BadgeProps> = {
   title: 'components/Badge',
   component: Badge,
   args: {
+    children: 'Label',
     variant: 'informative',
     size: 'md',
     activated: false,
   },
   argTypes: {
+    children: {
+      table: {
+        category: 'content',
+      },
+    },
     variant: {
       control: 'inline-radio',
       options: ['informative', 'warning', 'success', 'danger'],
