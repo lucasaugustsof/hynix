@@ -1,136 +1,124 @@
-// Hynix: Checkbox [v0.1.0]
+// Hynix: Checkbox [v1.0.0]
 
-import { forwardRef } from 'react'
+import { useId } from 'react'
 
-import { ark } from '@ark-ui/react'
-import { Checkbox as ArkCheckbox } from '@ark-ui/react/checkbox'
-
+import { Checkbox as BaseCheckbox } from '@base-ui-components/react/checkbox'
 import { RiCheckLine, RiSubtractLine } from '@remixicon/react'
 
+import { motion, useReducedMotion } from 'motion/react'
 import { type VariantProps, cva } from 'class-variance-authority'
 
 import { cx } from '@/registry/utils/cx'
 
-type CheckboxProps = Omit<
-  React.ComponentProps<typeof ArkCheckbox.Root>,
-  'children'
+export type CheckboxProps = React.ComponentPropsWithRef<
+  typeof BaseCheckbox.Root
 > &
   VariantProps<typeof checkboxStyles> & {
     labelText?: string
-    labelDirection?: 'left' | 'right'
+    labelPlacement?: 'ltr' | 'rtl'
   }
-
-const DISPLAY_NAME = 'Checkbox'
 
 const checkboxStyles = cva(
   [
-    'shrink-0 overflow-hidden bg-fill-1 outline-brand-selected/70',
-    'data-focus:outline-3',
+    'inset-ring-2 inset-ring-border inline-flex shrink-0 bg-fill-1 transition-shadow ease-out',
+    'focus-visible:outline-2 focus-visible:outline-brand-selected/70 focus-visible:outline-offset-2',
+    'enabled:data-unchecked:shadow-xs enabled:data-unchecked:hover:inset-ring-brand-selected/70',
+    'data-disabled:inset-ring-0 data-disabled:cursor-not-allowed data-disabled:bg-disabled',
   ],
   {
     variants: {
       size: {
-        sm: 'size-[1.375rem] rounded-xl',
-        md: 'size-6 rounded-2xl',
-        lg: 'size-8 rounded-3xl',
-      },
-      disabled: {
-        true: 'cursor-not-allowed bg-disabled',
-        false: [
-          'inset-ring-2 inset-ring-border cursor-pointer',
-          'data-[state=unchecked]:shadow-xs',
+        sm: [
+          'size-[1.375rem] rounded-xl',
+          '**:data-[scope=indicator]:rounded-xl',
         ],
+        md: ['size-6 rounded-2xl', '**:data-[scope=indicator]:rounded-2xl'],
+        lg: [
+          'inset-ring-3 size-8 rounded-3xl',
+          '**:data-[scope=indicator]:rounded-3xl',
+        ],
+        xl: null,
       },
     },
     defaultVariants: {
-      size: 'md',
-      disabled: false,
+      size: 'lg',
     },
   },
 )
 
-const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(
-  ({ size, labelText = '', labelDirection = 'left', ...props }, ref) => {
-    const { disabled, checked } = props
+export function Checkbox({
+  size,
+  labelText = 'Label',
+  labelPlacement = 'rtl',
+  ...props
+}: CheckboxProps) {
+  const { indeterminate, disabled } = props
 
-    const LABEL_SIZE = {
-      sm: 'text-sm leading-snug',
-      md: 'text-base',
-      lg: 'text-lg leading-7',
-    } as const
+  const reference = useId()
+  const shouldReduceMotion = useReducedMotion()
 
-    const isAccessible =
-      labelText.length === 0 &&
-      (props['aria-label'] || props['aria-labelledby'])
+  const mapLabelSize = {
+    sm: 'text-sm leading-snug',
+    md: 'text-base',
+    lg: 'text-lg leading-7',
+    xl: 'text-xl leading-8',
+  } as const
 
-    if (!isAccessible) {
-      console.warn(
-        `${DISPLAY_NAME}: No label option. Consider adding a description to improve accessibility.`,
-      )
-    }
-
-    return (
-      <ArkCheckbox.Root
+  return (
+    <label
+      htmlFor={reference}
+      className={cx(
+        'inline-flex items-center gap-3 font-medium',
+        disabled ? 'text-disabled' : 'text-fg-1',
+        labelPlacement === 'ltr' && 'flex-row-reverse',
+        mapLabelSize[size!],
+      )}
+    >
+      <BaseCheckbox.Root
         {...props}
-        ref={ref}
+        id={reference}
         className={cx(
-          'flex items-center',
-          labelDirection === 'right' && 'flex-row-reverse',
-          size !== 'lg' ? 'gap-3' : 'gap-4',
+          checkboxStyles({
+            size: size === 'xl' ? 'lg' : size,
+          }),
         )}
-        aria-checked={checked !== 'indeterminate'}
-        aria-disabled={disabled}
       >
-        {!!labelText && (
-          <ArkCheckbox.Label
+        <BaseCheckbox.Indicator>
+          <motion.div
             className={cx(
-              'font-display font-medium',
-              disabled ? 'text-disabled' : 'text-fg-1',
-              LABEL_SIZE[size!],
+              'size-full bg-brand transition-colors ease-out hover:bg-brand-hover',
+              '[&_svg]:size-full [&_svg]:text-fg-2',
             )}
+            initial={
+              shouldReduceMotion
+                ? false
+                : {
+                    scale: 0,
+                    opacity: 0,
+                  }
+            }
+            animate={
+              shouldReduceMotion
+                ? false
+                : {
+                    scale: 1,
+                    opacity: 1,
+                  }
+            }
+            transition={{
+              type: 'spring',
+              stiffness: 500,
+              damping: 30,
+              mass: 1,
+            }}
+            data-scope="indicator"
           >
-            {labelText}
-          </ArkCheckbox.Label>
-        )}
+            {indeterminate ? <RiSubtractLine /> : <RiCheckLine />}
+          </motion.div>
+        </BaseCheckbox.Indicator>
+      </BaseCheckbox.Root>
 
-        <ArkCheckbox.Control
-          className={cx(
-            checkboxStyles({
-              size,
-              disabled,
-            }),
-          )}
-        >
-          <ArkCheckbox.Indicator
-            className={cx(
-              'flex size-full items-center justify-center bg-brand text-surface-1 transition-colors ease-in-out',
-              'data-hover:bg-brand-hover',
-            )}
-            indeterminate={checked === 'indeterminate'}
-            aria-live="polite"
-          >
-            <ark.span
-              className={cx(
-                'zoom-in-75 fade-in size-full animate-in duration-200 ease-in-out',
-              )}
-              asChild
-            >
-              {checked === 'indeterminate' ? (
-                <RiSubtractLine />
-              ) : (
-                <RiCheckLine />
-              )}
-            </ark.span>
-          </ArkCheckbox.Indicator>
-        </ArkCheckbox.Control>
-
-        <ArkCheckbox.HiddenInput />
-      </ArkCheckbox.Root>
-    )
-  },
-)
-
-Checkbox.displayName = DISPLAY_NAME
-
-export { Checkbox }
-export type { CheckboxProps }
+      {!!labelText && labelText}
+    </label>
+  )
+}

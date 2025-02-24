@@ -1,63 +1,57 @@
-import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
-import {
-  // expect,
-  // userEvent,
-  // within,
-  fn,
-} from '@storybook/test'
 
 import { Checkbox, type CheckboxProps } from '@/registry/components/checkbox'
 
 const meta: Meta<CheckboxProps> = {
   title: 'components/Checkbox',
-  component: ({ ...args }) => (
-    <Checkbox {...args} data-testid="checkbox-component" aria-label="Label" />
-  ),
+  component: Checkbox,
+  tags: ['version:1.0.0'],
   args: {
     size: 'md',
+    labelText: 'Label',
+    indeterminate: false,
     disabled: false,
-    labelText: '',
-    labelDirection: 'left',
-    onCheckedChange: action('Call to onCheckedChange'),
   },
   argTypes: {
+    labelText: {
+      control: 'text',
+      description: 'Defines the text displayed next to the checkbox.',
+      table: {
+        category: 'Content',
+      },
+    },
+    labelPlacement: {
+      control: 'inline-radio',
+      options: ['ltr', 'rtl'],
+      description:
+        'Determines the position of the label relative to the checkbox. `ltr` places it on the right, and `rtl` places it on the left.',
+      table: {
+        category: 'Content',
+      },
+    },
     size: {
       control: 'inline-radio',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md', 'lg', 'xl'],
       description:
-        'Sets the size of the checkbox. It can be small (sm), medium (md) or large (lg).',
+        'Specifies the size of the checkbox. Available options: `sm`, `md`, `lg`, and `xl`.',
       table: {
         category: 'Appearance',
       },
     },
-    disabled: {
+    indeterminate: {
       control: 'boolean',
-      description: 'Disables user interaction with the checkbox.',
+      description:
+        'Indicates an indeterminate state, typically used when a checkbox is part of a group with mixed selections.',
       table: {
         category: 'State',
       },
     },
-    labelText: {
-      control: 'text',
-      description: 'Sets the label text associated with the checkbox.',
-      table: {
-        category: 'Content',
-      },
-    },
-    labelDirection: {
-      control: 'inline-radio',
-      options: ['left', 'right'],
+    disabled: {
+      control: 'boolean',
       description:
-        'Defines the position of the label in relation to the checkbox. It can be on the left or right.',
+        'Disables user interaction with the checkbox, making it unclickable.',
       table: {
-        category: 'Content',
-      },
-    },
-    onCheckedChange: {
-      control: false,
-      table: {
-        category: 'Callback',
+        category: 'State',
       },
     },
   },
@@ -68,54 +62,26 @@ const meta: Meta<CheckboxProps> = {
 
 export default meta
 
-export const Basic: StoryObj<CheckboxProps> = {
+// The default Checkbox component with a label on the right side. Users can toggle between checked and unchecked states.
+export const Basic: StoryObj<CheckboxProps> = {}
+
+// A Checkbox without a visible label. Useful in cases where the label is provided via a tooltip or external text context.
+export const WithoutLabel: StoryObj<CheckboxProps> = {
   args: {
-    onCheckedChange: fn(),
-  },
-  // play: async ({ canvasElement, args }) => {
-  //   const canvas = within(canvasElement)
-
-  //   const sut = canvas.getByTestId('checkbox-component')
-
-  //   await userEvent.click(sut)
-
-  //   expect(args.onCheckedChange).toHaveBeenCalledWith({
-  //     checked: true,
-  //   })
-  // },
-}
-
-export const Indeterminate: StoryObj<CheckboxProps> = {
-  args: {
-    checked: 'indeterminate',
+    labelText: '',
+    labelPlacement: 'rtl',
   },
   argTypes: {
-    checked: {
+    labelText: {
       control: false,
       table: {
         disable: true,
       },
     },
-    disabled: {
+    labelPlacement: {
       control: false,
       table: {
         disable: true,
-      },
-    },
-  },
-}
-
-export const Controlled: StoryObj<CheckboxProps> = {
-  args: {
-    checked: false,
-  },
-  argTypes: {
-    checked: {
-      control: 'boolean',
-      description:
-        'Indicates whether the checkbox is checked (true) or unchecked (false).',
-      table: {
-        category: 'State',
       },
     },
   },

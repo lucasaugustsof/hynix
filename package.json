@@ -46,6 +46,7 @@
 		"npkill": "0.12.2",
 		"playwright": "1.49.1",
 		"storybook": "8.6.0-alpha.0",
+		"storybook-addon-tag-badges": "1.4.0",
 		"turbo": "2.3.3",
 		"typescript": "5.7.3",
 		"vite": "6.0.11"
