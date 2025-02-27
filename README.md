@@ -1,7 +1,7 @@
 # Hynix
 
 Hynix is a powerful collection of elegant and accessible components built with
-React, Tailwind CSS, and Ark UI. It is designed to simplify UI development for
+React, Tailwind CSS, and Base UI. It is designed to simplify UI development for
 developers and designers.
 
 <div align="center">
