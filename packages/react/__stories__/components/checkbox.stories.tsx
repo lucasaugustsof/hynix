@@ -5,7 +5,6 @@ import { Checkbox, type CheckboxProps } from '@/registry/components/checkbox'
 const meta: Meta<CheckboxProps> = {
   title: 'components/Checkbox',
   component: Checkbox,
-  tags: ['version:1.0.0'],
   args: {
     size: 'md',
     labelText: 'Label',

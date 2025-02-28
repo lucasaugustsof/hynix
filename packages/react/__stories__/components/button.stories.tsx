@@ -12,7 +12,6 @@ import {
 const meta: Meta<ButtonProps> = {
   title: 'components/Button',
   component: Button,
-  tags: ['version:1.0.0'],
   args: {
     variant: 'primary',
     size: 'md',
