@@ -1,10 +1,10 @@
-// Hynix: Button [v0.1.0]
+// Hynix: Button [v1.0.0]
 
 import { type VariantProps, cva } from 'class-variance-authority'
 
 import { cn } from '@/registry/utils/cn'
 
-type ButtonProps = React.ComponentPropsWithRef<'button'> &
+export type ButtonProps = React.ComponentPropsWithRef<'button'> &
   VariantProps<typeof buttonStyles>
 
 const buttonStyles = cva(
@@ -69,7 +69,7 @@ const buttonStyles = cva(
   },
 )
 
-function Button({
+export function Button({
   className,
   variant,
   size,
@@ -100,6 +100,3 @@ function Button({
     />
   )
 }
-
-export { Button, buttonStyles }
-export type { ButtonProps }
