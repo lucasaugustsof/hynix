@@ -1,3 +1,5 @@
+// Hynix: ModalConfirm [v1.0.0]
+
 import { useCallback } from 'react'
 
 import { RiQuestionFill } from '@remixicon/react'
