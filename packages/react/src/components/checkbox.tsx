@@ -5,8 +5,8 @@ import { useId } from 'react'
 import { Checkbox as BaseCheckbox } from '@base-ui-components/react/checkbox'
 import { RiCheckLine, RiSubtractLine } from '@remixicon/react'
 
-import { motion, useReducedMotion } from 'motion/react'
 import { type VariantProps, cva } from 'class-variance-authority'
+import { motion, useReducedMotion } from 'motion/react'
 
 import { cn } from '@/registry/utils/cn'
 

@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
 import { Input, type InputProps } from '@/registry/components/input'
+import { InputGroup } from '@/registry/components/input-group'
+
+import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
 
 type ArgumentType<T> = T & {
   'data-invalid': boolean
@@ -11,7 +14,6 @@ type ArgumentType<T> = T & {
 const meta: Meta<InputProps> = {
   title: 'components/Input',
   component: Input,
-  tags: ['version:1.0.0'],
   args: {
     size: 'md',
     placeholder: 'Enter text here',
@@ -65,6 +67,41 @@ export default meta
 export const Basic: StoryObj<InputProps> = {
   args: {
     onChange: fn(),
+  },
+}
+
+export const WithPrefix: StoryObj<InputProps> = {
+  render({ size, disabled, ...args }) {
+    return (
+      <InputGroup size={size} disabled={disabled} prefix={<RiArrowLeftLine />}>
+        <Input {...args} />
+      </InputGroup>
+    )
+  },
+}
+
+export const WithSuffix: StoryObj<InputProps> = {
+  render({ size, disabled, ...args }) {
+    return (
+      <InputGroup size={size} disabled={disabled} suffix={<RiArrowRightLine />}>
+        <Input {...args} />
+      </InputGroup>
+    )
+  },
+}
+
+export const WithPrefixAndSuffix: StoryObj<InputProps> = {
+  render({ size, disabled, ...args }) {
+    return (
+      <InputGroup
+        size={size}
+        disabled={disabled}
+        prefix={<RiArrowLeftLine />}
+        suffix={<RiArrowRightLine />}
+      >
+        <Input {...args} />
+      </InputGroup>
+    )
   },
 }
 

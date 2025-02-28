@@ -46,6 +46,9 @@
 			},
 			"a11y": {
 				"useFocusableInteractive": "off"
+			},
+			"performance": {
+				"noAccumulatingSpread": "off"
 			}
 		}
 	},
