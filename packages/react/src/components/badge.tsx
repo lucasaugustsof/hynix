@@ -1,11 +1,8 @@
-// Hynix: Badge [v0.1.0]
-
-import { ark } from '@ark-ui/react'
+// Hynix: Badge [v1.0.0]
 
 import { type VariantProps, cva } from 'class-variance-authority'
 
-import { cx } from '@/registry/utils/cx'
-import { focusRing } from '@/registry/utils/focus-ring'
+import { cn } from '@/registry/utils/cn'
 
 export type BadgeProps = React.ComponentPropsWithRef<'span'> &
   VariantProps<typeof badgeStyles> & {
@@ -15,8 +12,7 @@ export type BadgeProps = React.ComponentPropsWithRef<'span'> &
 const badgeStyles = cva(
   [
     'inset-ring-1 inline-flex shrink-0 cursor-default select-none items-center justify-center whitespace-nowrap rounded-3xl font-semibold shadow-xs transition-colors ease-out',
-    'focus-visible:inset-ring-0 focus-visible:bg-fill-1 focus-visible:text-fg-1',
-    focusRing,
+    'focus-visible:inset-ring-0 focus-visible:bg-fill-1 focus-visible:text-fg-1 focus-visible:outline-2 focus-visible:outline-brand-selected/70 focus-visible:outline-offset-2',
   ],
   {
     variants: {
@@ -68,10 +64,10 @@ export function Badge({
   ...props
 }: BadgeProps) {
   return (
-    <ark.span
+    <span
       {...props}
       ref={ref}
-      className={cx(
+      className={cn(
         badgeStyles({
           className,
           variant,

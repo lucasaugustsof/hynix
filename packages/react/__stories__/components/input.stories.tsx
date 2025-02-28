@@ -1,16 +1,8 @@
 import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
-import {
-  // expect,
-  // userEvent,
-  // within,
-  fn,
-} from '@storybook/test'
+import { fn } from '@storybook/test'
 
 import { Input, type InputProps } from '@/registry/components/input'
-import { InputGroup } from '@/registry/components/input-group'
-
-import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
 
 type ArgumentType<T> = T & {
   'data-invalid': boolean
@@ -19,6 +11,7 @@ type ArgumentType<T> = T & {
 const meta: Meta<InputProps> = {
   title: 'components/Input',
   component: Input,
+  tags: ['version:1.0.0'],
   args: {
     size: 'md',
     placeholder: 'Enter text here',
@@ -73,35 +66,6 @@ export const Basic: StoryObj<InputProps> = {
   args: {
     onChange: fn(),
   },
-  // play: async ({ canvasElement, args }) => {
-  //   const canvas = within(canvasElement)
-
-  //   const sut = canvas.getByRole('textbox')
-
-  //   await userEvent.type(sut, 'Typed text')
-
-  //   expect(args.onChange).toBeCalled()
-  // },
-}
-
-export const WithPrefix: StoryObj<InputProps> = {
-  render({ placeholder, ...args }) {
-    return (
-      <InputGroup {...args} prefixElement={<RiArrowLeftLine />}>
-        <Input placeholder={placeholder} />
-      </InputGroup>
-    )
-  },
-}
-
-export const WithSuffix: StoryObj<InputProps> = {
-  render({ placeholder, ...args }) {
-    return (
-      <InputGroup {...args} suffixElement={<RiArrowRightLine />}>
-        <Input placeholder={placeholder} />
-      </InputGroup>
-    )
-  },
 }
 
 export const Disabled: StoryObj<InputProps> = {
@@ -120,16 +84,6 @@ export const Disabled: StoryObj<InputProps> = {
       },
     },
   },
-  // play: async ({ canvasElement, args }) => {
-  //   const canvas = within(canvasElement)
-
-  //   const sut = canvas.getByRole('textbox')
-
-  //   await userEvent.click(sut)
-
-  //   expect(sut.ariaDisabled).toBeTruthy()
-  //   expect(args.onFocus).not.toHaveBeenCalled()
-  // },
 }
 
 export const Invalid: StoryObj<ArgumentType<InputProps>> = {
@@ -151,11 +105,4 @@ export const Invalid: StoryObj<ArgumentType<InputProps>> = {
       },
     },
   },
-  // play: async ({ canvasElement }) => {
-  //   const canvas = within(canvasElement)
-
-  //   const sut = canvas.getByRole('textbox')
-
-  //   expect(sut).toHaveAttribute('data-invalid')
-  // },
 }

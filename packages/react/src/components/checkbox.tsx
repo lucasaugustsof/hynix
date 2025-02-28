@@ -8,7 +8,7 @@ import { RiCheckLine, RiSubtractLine } from '@remixicon/react'
 import { motion, useReducedMotion } from 'motion/react'
 import { type VariantProps, cva } from 'class-variance-authority'
 
-import { cx } from '@/registry/utils/cx'
+import { cn } from '@/registry/utils/cn'
 
 export type CheckboxProps = React.ComponentPropsWithRef<
   typeof BaseCheckbox.Root
@@ -67,7 +67,7 @@ export function Checkbox({
   return (
     <label
       htmlFor={reference}
-      className={cx(
+      className={cn(
         'inline-flex items-center gap-3 font-medium',
         disabled ? 'text-disabled' : 'text-fg-1',
         labelPlacement === 'ltr' && 'flex-row-reverse',
@@ -77,7 +77,7 @@ export function Checkbox({
       <BaseCheckbox.Root
         {...props}
         id={reference}
-        className={cx(
+        className={cn(
           checkboxStyles({
             size: size === 'xl' ? 'lg' : size,
           }),
@@ -85,7 +85,7 @@ export function Checkbox({
       >
         <BaseCheckbox.Indicator>
           <motion.div
-            className={cx(
+            className={cn(
               'size-full bg-brand transition-colors ease-out hover:bg-brand-hover',
               '[&_svg]:size-full [&_svg]:text-fg-2',
             )}

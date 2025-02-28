@@ -48,7 +48,7 @@
 	--radius-6xl: var(--radi-9);
 	--radius-7xl: var(--radi-10);
 
-	--font-display: var(--display);
+	--font-sans: var(--sans);
 }
 
 @layer base {
@@ -96,7 +96,7 @@
 		--radi-9: 1.75rem;
 		--radi-10: 62.5rem;
 
-		--display: "Inter", sans-serif;
+		--sans: "Inter", sans-serif;
 	}
 
 	.dark {

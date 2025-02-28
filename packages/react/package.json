@@ -2,7 +2,7 @@
 	"name": "@hynix/react",
 	"version": "0.1.0",
 	"type": "module",
-	"description": "Powerful and accessible components made with React, Tailwind and Ark UI.",
+	"description": "Powerful and accessible components made with React, Tailwind and Base UI.",
 	"main": "index.js",
 	"exports": {
 		"./styles.css": "./dist/styles.css"
@@ -14,7 +14,7 @@
 	"keywords": [
 		"React",
 		"Tailwind CSS",
-		"Ark UI",
+		"Base UI",
 		"Design System",
 		"Accessibility",
 		"Speed",
@@ -34,7 +34,6 @@
 	],
 	"license": "MIT",
 	"dependencies": {
-		"@ark-ui/react": "4.9.1",
 		"@base-ui-components/react": "1.0.0-alpha.6",
 		"@remixicon/react": "4.6.0",
 		"class-variance-authority": "0.7.1",

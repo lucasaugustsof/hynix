@@ -5,6 +5,7 @@ import { Badge, type BadgeProps } from '@/registry/components/badge'
 const meta: Meta<BadgeProps> = {
   title: 'components/Badge',
   component: Badge,
+  tags: ['version:1.0.0'],
   args: {
     children: 'Label',
     variant: 'informative',

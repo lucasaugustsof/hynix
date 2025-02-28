@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import {
-  // expect,
-  // userEvent,
-  // within,
-  fn,
-} from '@storybook/test'
+import { fn } from '@storybook/test'
 
 import { Button, type ButtonProps } from '@/registry/components/button'
 
@@ -17,6 +12,7 @@ import {
 const meta: Meta<ButtonProps> = {
   title: 'components/Button',
   component: Button,
+  tags: ['version:1.0.0'],
   args: {
     variant: 'primary',
     size: 'md',
@@ -44,25 +40,10 @@ const meta: Meta<ButtonProps> = {
       description:
         'Whether the button contains only an icon (requires aria-label)',
     },
-    asChild: {
-      control: false,
-      description:
-        'Whether to merge props onto a child element instead of creating a new button element',
-    },
   },
   parameters: {
     layout: 'centered',
   },
-  // play: async ({ canvasElement, args }) => {
-  //   const canvas = within(canvasElement)
-
-  //   const sut = canvas.getByRole('button')
-
-  //   await userEvent.click(sut)
-  //   await userEvent.click(canvasElement)
-
-  //   await expect(args.onClick).toHaveBeenCalled()
-  // },
 }
 
 export default meta
@@ -122,52 +103,9 @@ export const IconOnly: StoryObj<ButtonProps> = {
   },
 }
 
-export const LinkBehavior: StoryObj<ButtonProps> = {
-  tags: ['skip-test'],
-  args: {
-    iconOnly: true,
-    'aria-label': 'Go to GitHub',
-    asChild: true,
-  },
-  argTypes: {
-    children: {
-      control: false,
-    },
-    disabled: {
-      control: false,
-    },
-  },
-  render({ ...args }) {
-    return (
-      <Button {...args} data-testid="github-link">
-        <a href="https://github.com/lucasaugustsof/hynix">
-          <RiGithubFill />
-        </a>
-      </Button>
-    )
-  },
-  // play: async ({ canvasElement }) => {
-  //   const canvas = within(canvasElement)
-
-  //   const sut = canvas.getByTestId('github-link')
-
-  //   await expect(sut.tagName.toLocaleLowerCase()).toEqual('a')
-  // },
-}
-
 export const Disabled: StoryObj<ButtonProps> = {
   args: {
     disabled: true,
     onClick: fn(),
   },
-  // play: async ({ canvasElement, args }) => {
-  //   const canvas = within(canvasElement)
-
-  //   const sut = canvas.getByRole('button')
-
-  //   await userEvent.click(sut)
-  //   await userEvent.click(canvasElement)
-
-  //   await expect(args.onClick).not.toHaveBeenCalled()
-  // },
 }

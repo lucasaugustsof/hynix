@@ -1,14 +1,11 @@
 // Hynix: Button [v0.1.0]
 
-import { ark } from '@ark-ui/react'
 import { type VariantProps, cva } from 'class-variance-authority'
 
-import { cx } from '@/registry/utils/cx'
+import { cn } from '@/registry/utils/cn'
 
 type ButtonProps = React.ComponentPropsWithRef<'button'> &
-  VariantProps<typeof buttonStyles> & {
-    asChild?: boolean
-  }
+  VariantProps<typeof buttonStyles>
 
 const buttonStyles = cva(
   [
@@ -87,9 +84,9 @@ function Button({
   }
 
   return (
-    <ark.button
+    <button
       {...props}
-      className={cx(
+      className={cn(
         buttonStyles({
           className,
           variant,

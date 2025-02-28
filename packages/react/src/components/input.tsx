@@ -1,24 +1,23 @@
-// Hynix: Input [v0.1.0]
+// Hynix: Input [v1.0.0]
 
-import { forwardRef } from 'react'
-
-import { Field as ArkField } from '@ark-ui/react/field'
+import { Input as BaseInput } from '@base-ui-components/react/input'
 
 import { type VariantProps, cva } from 'class-variance-authority'
 
-import { cx } from '@/registry/utils/cx'
+import { cn } from '@/registry/utils/cn'
 
-type InputProps = Omit<
-  React.ComponentPropsWithRef<typeof ArkField.Input>,
+export type InputProps = Omit<
+  React.ComponentPropsWithRef<typeof BaseInput>,
   'size'
 > &
   VariantProps<typeof inputStyles>
 
 const inputStyles = cva(
   [
-    'inset-ring-border inline-flex min-w-60 cursor-text overflow-hidden rounded-3xl bg-surface-1 font-display font-medium caret-brand outline-none transition-colors ease-out',
-    'placeholder:text-fg-1/70 focus-visible:inset-ring-2 focus-visible:inset-ring-brand',
-    'data-[invalid]:inset-ring-2 data-[invalid]:inset-ring-danger data-[invalid]:hover:bg-surface-1',
+    'inline-flex min-w-60 shrink-0 cursor-text overflow-hidden rounded-3xl border border-border bg-surface-1 font-medium font-sans caret-brand outline-none ring-offset-2 ring-offset-surface-1 transition-[colors_shadow] ease-out',
+    'focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand-selected/40',
+    'data-invalid:border-danger data-invalid:ring-2 data-invalid:ring-danger-selected/40 data-invalid:hover:bg-surface-1',
+    'placeholder:text-fg-1/70',
   ],
   {
     variants: {
@@ -28,15 +27,13 @@ const inputStyles = cva(
         lg: ['h-14 pr-5 pl-5 text-lg leading-7'],
       },
       disabled: {
-        true: 'cursor-not-allowed bg-fill-1 text-disabled placeholder:text-disabled',
+        true: 'cursor-not-allowed border-transparent bg-fill-1 text-disabled placeholder:text-disabled',
       },
     },
     compoundVariants: [
       {
         disabled: false,
-        class: [
-          'inset-ring-1 not-focus-visible:hover:inset-ring-2 not-focus-visible:hover:bg-fill-1',
-        ],
+        class: ['not-focus-visible:hover:bg-fill-1'],
       },
     ],
     defaultVariants: {
@@ -46,28 +43,20 @@ const inputStyles = cva(
   },
 )
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, size, disabled, ...props }, ref) => {
-    return (
-      <ArkField.Input
-        {...props}
-        ref={ref}
-        className={cx(
-          inputStyles({
-            className,
-            size,
-            disabled,
-          }),
-        )}
-        disabled={disabled}
-        tabIndex={disabled ? -1 : 0}
-        aria-disabled={disabled}
-      />
-    )
-  },
-)
-
-Input.displayName = 'Input'
-
-export { Input }
-export type { InputProps }
+export function Input({ className, size, disabled, ...props }: InputProps) {
+  return (
+    <BaseInput
+      {...props}
+      className={cn(
+        inputStyles({
+          className,
+          size,
+          disabled,
+        }),
+      )}
+      disabled={disabled}
+      tabIndex={disabled ? -1 : 0}
+      aria-disabled={disabled}
+    />
+  )
+}
