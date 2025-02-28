@@ -1,3 +1,5 @@
+// Hynix: Dialog [v1.0.0]
+
 import { Dialog as BaseDialog } from '@base-ui-components/react/dialog'
 
 import { cn } from '@/registry/utils/cn'
