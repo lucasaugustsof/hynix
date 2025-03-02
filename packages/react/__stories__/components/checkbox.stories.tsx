@@ -14,6 +14,7 @@ const meta: Meta<CheckboxProps> = {
   args: {
     size: 'md',
     labelPlacement: 'rtl',
+    disabled: false,
   },
   argTypes: {
     size: {
@@ -30,6 +31,13 @@ const meta: Meta<CheckboxProps> = {
       description: 'Sets the label position relative to the checkbox.',
       table: {
         category: 'Content',
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Changes the component state to disabled.',
+      table: {
+        category: 'State',
       },
     },
   },
