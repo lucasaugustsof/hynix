@@ -47,7 +47,7 @@ const checkboxVariants = cva(
         size: ['sm', 'md'],
         class: [
           // control
-          '*:data-[part=control]:inset-ring-2',
+          'not-[data-disabled]:*:data-[part=control]:inset-ring-2',
         ],
       },
       {
@@ -55,7 +55,7 @@ const checkboxVariants = cva(
         class: [
           'gap-4',
           // control
-          '*:data-[part=control]:inset-ring-3 *:data-[part=control]:size-8 *:data-[part=control]:rounded-3xl',
+          'not-[data-disabled]:*:data-[part=control]:inset-ring-3 *:data-[part=control]:size-8 *:data-[part=control]:rounded-3xl',
         ],
       },
     ],
@@ -108,9 +108,11 @@ export function Checkbox({
         className={cn(
           'inset-ring-border flex outline-0 outline-brand-selected/70 outline-offset-2',
           // unchecked
-          'data-[state=unchecked]:data-hover:inset-ring-brand-selected data-[state=unchecked]:bg-fill-1',
+          'data-[state=unchecked]:not-[data-disabled]:data-hover:inset-ring-brand-selected data-[state=unchecked]:not-[data-disabled]:bg-fill-1',
           // focus-visible
           'data-focus-visible:outline-2',
+          // disabled
+          'data-[state=unchecked]:data-disabled:inset-ring-0 data-[state=unchecked]:data-disabled:cursor-not-allowed data-[state=unchecked]:data-disabled:bg-disabled',
         )}
       >
         <ArkCheckbox.Indicator indeterminate={isIndeterminate} asChild>
@@ -151,6 +153,8 @@ export function CheckboxLabel({
       {...props}
       className={cn(
         'max-w-full truncate font-medium font-sans text-fg-1',
+        // disabled
+        'data-disabled:text-disabled',
         className,
       )}
     />
