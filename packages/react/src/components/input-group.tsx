@@ -1,3 +1,5 @@
+// Hynix: InputGroup [v1.0.0]
+
 import React, { useCallback } from 'react'
 
 import type { InputProps } from '@/registry/components/input'
