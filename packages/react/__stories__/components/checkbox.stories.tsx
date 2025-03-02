@@ -1,87 +1,90 @@
+import {
+  Checkbox,
+  CheckboxLabel,
+  type CheckboxProps,
+} from '@/registry/components/checkbox'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Checkbox, type CheckboxProps } from '@/registry/components/checkbox'
-
 const meta: Meta<CheckboxProps> = {
-  title: 'components/Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     size: 'md',
-    labelText: 'Label',
-    indeterminate: false,
-    disabled: false,
+    labelPlacement: 'rtl',
   },
   argTypes: {
-    labelText: {
-      control: 'text',
-      description: 'Defines the text displayed next to the checkbox.',
+    size: {
+      control: 'inline-radio',
+      options: ['sm', 'md', 'lg', 'xl'],
+      description: 'Defines the size of the checkbox.',
       table: {
-        category: 'Content',
+        category: 'Appearance',
       },
     },
     labelPlacement: {
       control: 'inline-radio',
       options: ['ltr', 'rtl'],
-      description:
-        'Determines the position of the label relative to the checkbox. `ltr` places it on the right, and `rtl` places it on the left.',
+      description: 'Sets the label position relative to the checkbox.',
       table: {
         category: 'Content',
       },
     },
-    size: {
-      control: 'inline-radio',
-      options: ['sm', 'md', 'lg', 'xl'],
-      description:
-        'Specifies the size of the checkbox. Available options: `sm`, `md`, `lg`, and `xl`.',
-      table: {
-        category: 'Appearance',
-      },
-    },
-    indeterminate: {
-      control: 'boolean',
-      description:
-        'Indicates an indeterminate state, typically used when a checkbox is part of a group with mixed selections.',
-      table: {
-        category: 'State',
-      },
-    },
-    disabled: {
-      control: 'boolean',
-      description:
-        'Disables user interaction with the checkbox, making it unclickable.',
-      table: {
-        category: 'State',
-      },
-    },
-  },
-  parameters: {
-    layout: 'centered',
   },
 }
 
 export default meta
 
-// The default Checkbox component with a label on the right side. Users can toggle between checked and unchecked states.
-export const Basic: StoryObj<CheckboxProps> = {}
+type CheckboxStory = StoryObj<CheckboxProps>
 
-// A Checkbox without a visible label. Useful in cases where the label is provided via a tooltip or external text context.
-export const WithoutLabel: StoryObj<CheckboxProps> = {
+export const Basic: CheckboxStory = {}
+
+export const Checked: CheckboxStory = {
   args: {
-    labelText: '',
-    labelPlacement: 'rtl',
+    checked: true,
   },
+}
+
+export const Indeterminate: CheckboxStory = {
+  args: {
+    checked: 'indeterminate',
+  },
+}
+
+export const WithLabel: CheckboxStory = {
+  render: args => (
+    <Checkbox {...args}>
+      <CheckboxLabel>Checkbox Label</CheckboxLabel>
+    </Checkbox>
+  ),
+}
+
+export const Sizes: CheckboxStory = {
   argTypes: {
-    labelText: {
-      control: false,
+    size: {
       table: {
         disable: true,
       },
     },
-    labelPlacement: {
-      control: false,
-      table: {
-        disable: true,
-      },
-    },
+  },
+  render: args => {
+    const sizeLabels: Record<NonNullable<CheckboxProps['size']>, string> = {
+      sm: 'Small',
+      md: 'Medium',
+      lg: 'Large',
+      xl: 'Extra Large',
+    }
+
+    return (
+      <div className="flex flex-col gap-4">
+        {Object.entries(sizeLabels).map(([size, label]) => (
+          <Checkbox key={size} {...args} size={size as CheckboxProps['size']}>
+            <CheckboxLabel>{label}</CheckboxLabel>
+          </Checkbox>
+        ))}
+      </div>
+    )
   },
 }

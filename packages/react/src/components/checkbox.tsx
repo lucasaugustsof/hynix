@@ -1,124 +1,158 @@
 // Hynix: Checkbox [v1.0.0]
 
-import { useId } from 'react'
-
-import { Checkbox as BaseCheckbox } from '@base-ui-components/react/checkbox'
+import { Checkbox as ArkCheckbox } from '@ark-ui/react/checkbox'
 import { RiCheckLine, RiSubtractLine } from '@remixicon/react'
-
 import { type VariantProps, cva } from 'class-variance-authority'
-import { motion, useReducedMotion } from 'motion/react'
+
+import { type Variants, motion, useReducedMotion } from 'motion/react'
 
 import { cn } from '@/registry/utils/cn'
 
 export type CheckboxProps = React.ComponentPropsWithRef<
-  typeof BaseCheckbox.Root
+  typeof ArkCheckbox.Root
 > &
-  VariantProps<typeof checkboxStyles> & {
-    labelText?: string
+  VariantProps<typeof checkboxVariants> & {
     labelPlacement?: 'ltr' | 'rtl'
   }
 
-const checkboxStyles = cva(
-  [
-    'inset-ring-2 inset-ring-border inline-flex shrink-0 bg-fill-1 transition-shadow ease-out',
-    'focus-visible:outline-2 focus-visible:outline-brand-selected/70 focus-visible:outline-offset-2',
-    'enabled:data-unchecked:shadow-xs enabled:data-unchecked:hover:inset-ring-brand-selected/70',
-    'data-disabled:inset-ring-0 data-disabled:cursor-not-allowed data-disabled:bg-disabled',
-  ],
+const checkboxVariants = cva(
+  'inline-flex shrink-0 items-center gap-3 **:transition-[background-color_box-shadow] **:ease-out',
   {
     variants: {
       size: {
         sm: [
-          'size-[1.375rem] rounded-xl',
-          '**:data-[scope=indicator]:rounded-xl',
+          // control
+          '*:data-[part=control]:size-[1.375rem] *:data-[part=control]:rounded-xl',
+          // label
+          '*:data-[part=label]:text-sm *:data-[part=label]:leading-snug',
         ],
-        md: ['size-6 rounded-2xl', '**:data-[scope=indicator]:rounded-2xl'],
+        md: [
+          // control
+          '*:data-[part=control]:size-6 *:data-[part=control]:rounded-2xl',
+          // label
+          '*:data-[part=label]:text-base',
+        ],
         lg: [
-          'inset-ring-3 size-8 rounded-3xl',
-          '**:data-[scope=indicator]:rounded-3xl',
+          // label
+          '*:data-[part=label]:text-lg *:data-[part=label]:leading-7',
         ],
-        xl: null,
+        xl: [
+          // label
+          '*:data-[part=label]:text-xl *:data-[part=label]:leading-8',
+        ],
       },
     },
+    compoundVariants: [
+      {
+        size: ['sm', 'md'],
+        class: [
+          // control
+          '*:data-[part=control]:inset-ring-2',
+        ],
+      },
+      {
+        size: ['lg', 'xl'],
+        class: [
+          'gap-4',
+          // control
+          '*:data-[part=control]:inset-ring-3 *:data-[part=control]:size-8 *:data-[part=control]:rounded-3xl',
+        ],
+      },
+    ],
     defaultVariants: {
       size: 'lg',
     },
   },
 )
 
+const SPRING_ANIMATION_CONFIG = {
+  type: 'spring',
+  stiffness: 500,
+  damping: 30,
+  mass: 1,
+}
+
+const motionEffects: Variants = {
+  checked: {
+    scale: 1,
+    opacity: 1,
+  },
+  unchecked: {
+    scale: 0,
+    opacity: 0,
+  },
+}
+
 export function Checkbox({
+  className,
+  children,
   size,
-  labelText = 'Label',
   labelPlacement = 'rtl',
   ...props
 }: CheckboxProps) {
-  const { indeterminate, disabled } = props
-
-  const reference = useId()
-  const shouldReduceMotion = useReducedMotion()
-
-  const mapLabelSize = {
-    sm: 'text-sm leading-snug',
-    md: 'text-base',
-    lg: 'text-lg leading-7',
-    xl: 'text-xl leading-8',
-  } as const
+  const prefersReducedMotion = useReducedMotion()
+  const isIndeterminate = props.checked === 'indeterminate'
 
   return (
-    <label
-      htmlFor={reference}
+    <ArkCheckbox.Root
+      {...props}
       className={cn(
-        'inline-flex items-center gap-3 font-medium',
-        disabled ? 'text-disabled' : 'text-fg-1',
+        checkboxVariants({
+          size,
+          className,
+        }),
         labelPlacement === 'ltr' && 'flex-row-reverse',
-        mapLabelSize[size!],
       )}
     >
-      <BaseCheckbox.Root
-        {...props}
-        id={reference}
+      <ArkCheckbox.Control
         className={cn(
-          checkboxStyles({
-            size: size === 'xl' ? 'lg' : size,
-          }),
+          'inset-ring-border flex outline-0 outline-brand-selected/70 outline-offset-2',
+          // unchecked
+          'data-[state=unchecked]:data-hover:inset-ring-brand-selected data-[state=unchecked]:bg-fill-1',
+          // focus-visible
+          'data-focus-visible:outline-2',
         )}
       >
-        <BaseCheckbox.Indicator>
-          <motion.div
-            className={cn(
-              'size-full bg-brand transition-colors ease-out hover:bg-brand-hover',
-              '[&_svg]:size-full [&_svg]:text-fg-2',
-            )}
-            initial={
-              shouldReduceMotion
-                ? false
-                : {
-                    scale: 0,
-                    opacity: 0,
-                  }
+        <ArkCheckbox.Indicator indeterminate={isIndeterminate} asChild>
+          <ArkCheckbox.Context>
+            {({ checkedState }) =>
+              checkedState && (
+                <motion.div
+                  className={cn(
+                    'flex-1 shrink-0 items-center rounded-[inherit] bg-brand',
+                    // checked
+                    'data-[state=checked]:data-hover:bg-brand-hover',
+                    '[&_svg]:pointer-events-none [&_svg]:size-full [&_svg]:text-fg-2',
+                  )}
+                  variants={prefersReducedMotion ? undefined : motionEffects}
+                  initial="unchecked"
+                  animate="checked"
+                  transition={SPRING_ANIMATION_CONFIG}
+                >
+                  {isIndeterminate ? <RiSubtractLine /> : <RiCheckLine />}
+                </motion.div>
+              )
             }
-            animate={
-              shouldReduceMotion
-                ? false
-                : {
-                    scale: 1,
-                    opacity: 1,
-                  }
-            }
-            transition={{
-              type: 'spring',
-              stiffness: 500,
-              damping: 30,
-              mass: 1,
-            }}
-            data-scope="indicator"
-          >
-            {indeterminate ? <RiSubtractLine /> : <RiCheckLine />}
-          </motion.div>
-        </BaseCheckbox.Indicator>
-      </BaseCheckbox.Root>
+          </ArkCheckbox.Context>
+        </ArkCheckbox.Indicator>
+      </ArkCheckbox.Control>
+      {children}
+      <ArkCheckbox.HiddenInput />
+    </ArkCheckbox.Root>
+  )
+}
 
-      {!!labelText && labelText}
-    </label>
+export function CheckboxLabel({
+  className,
+  ...props
+}: React.ComponentPropsWithRef<typeof ArkCheckbox.Label>) {
+  return (
+    <ArkCheckbox.Label
+      {...props}
+      className={cn(
+        'max-w-full truncate font-medium font-sans text-fg-1',
+        className,
+      )}
+    />
   )
 }
