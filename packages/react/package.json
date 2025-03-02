@@ -14,7 +14,7 @@
 	"keywords": [
 		"React",
 		"Tailwind CSS",
-		"Base UI",
+		"Ark UI",
 		"Design System",
 		"Accessibility",
 		"Speed",
@@ -34,6 +34,7 @@
 	],
 	"license": "MIT",
 	"dependencies": {
+		"@ark-ui/react": "4.9.2",
 		"@base-ui-components/react": "1.0.0-alpha.6",
 		"@remixicon/react": "4.6.0",
 		"class-variance-authority": "0.7.1",
