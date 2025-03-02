@@ -1,10 +1,11 @@
 // Hynix: Badge [v1.0.0]
 
+import { ark } from '@ark-ui/react'
 import { type VariantProps, cva } from 'class-variance-authority'
 
 import { cn } from '@/registry/utils/cn'
 
-export type BadgeProps = React.ComponentPropsWithRef<'span'> &
+export type BadgeProps = React.ComponentPropsWithRef<typeof ark.span> &
   VariantProps<typeof badgeStyles> & {
     activated?: boolean
   }
@@ -12,6 +13,7 @@ export type BadgeProps = React.ComponentPropsWithRef<'span'> &
 const badgeStyles = cva(
   [
     'inset-ring-1 inline-flex shrink-0 cursor-default select-none items-center justify-center whitespace-nowrap rounded-3xl font-semibold shadow-xs transition-colors ease-out',
+    // focus-visible
     'focus-visible:inset-ring-0 focus-visible:bg-fill-1 focus-visible:text-fg-1 focus-visible:outline-2 focus-visible:outline-brand-selected/70 focus-visible:outline-offset-2',
   ],
   {
@@ -19,26 +21,37 @@ const badgeStyles = cva(
       variant: {
         informative: [
           'inset-ring-border bg-surface-2 text-fg-1',
-          'data-[activated=false]:not-focus-visible:hover:bg-fill-1',
-          'data-[activated=true]:inset-ring-0 data-[activated=true]:bg-brand data-[activated=true]:text-fg-2',
+          // inactive
+          'data-[state=inactive]:not-focus-visible:hover:bg-fill-1',
+          // active
+          'data-[state=active]:inset-ring-0 data-[state=active]:bg-brand data-[state=active]:text-fg-2',
         ],
         warning: [
           'inset-ring-black/12 bg-highlight text-fg-2 dark:inset-ring-white/12',
+          // focus-visible
           'focus-visible:outline-highlight-selected',
-          'data-[activated=false]:not-focus-visible:hover:bg-highlight-hover data-[activated=false]:not-focus-visible:hover:text-fg-1',
-          'data-[activated=true]:inset-ring-0 data-[activated=true]:bg-highlight data-[activated=true]:text-fg-2',
+          // inactive
+          'data-[state=inactive]:not-focus-visible:hover:bg-highlight-hover data-[state=inactive]:not-focus-visible:hover:text-fg-1',
+          // active
+          'data-[state=active]:inset-ring-0 data-[state=active]:bg-highlight data-[state=active]:text-fg-2',
         ],
         success: [
           'inset-ring-black/12 bg-success text-fg-2 dark:inset-ring-white/12',
+          // focus-visible
           'focus-visible:outline-success-selected',
-          'data-[activated=false]:not-focus-visible:hover:bg-success-hover data-[activated=false]:not-focus-visible:hover:text-fg-1',
-          'data-[activated=true]:inset-ring-0 data-[activated=true]:bg-success data-[activated=true]:text-fg-2',
+          // inactive
+          'data-[state=inactive]:not-focus-visible:hover:bg-success-hover data-[state=inactive]:not-focus-visible:hover:text-fg-1',
+          // active
+          'data-[state=active]:inset-ring-0 data-[state=active]:bg-success data-[state=active]:text-fg-2',
         ],
         danger: [
           'inset-ring-black/12 bg-danger text-fg-2 dark:inset-ring-white/12',
+          // focus-visible
           'focus-visible:outline-danger-selected',
-          'data-[activated=false]:not-focus-visible:hover:bg-danger-hover data-[activated=false]:not-focus-visible:hover:text-fg-1',
-          'data-[activated=true]:inset-ring-0 data-[activated=true]:bg-danger data-[activated=true]:text-fg-2',
+          // inactive
+          'data-[state=inactive]:not-focus-visible:hover:bg-danger-hover data-[state=inactive]:not-focus-visible:hover:text-fg-1',
+          // active
+          'data-[state=active]:inset-ring-0 data-[state=active]:bg-danger data-[state=active]:text-fg-2',
         ],
       },
       size: {
@@ -64,7 +77,7 @@ export function Badge({
   ...props
 }: BadgeProps) {
   return (
-    <span
+    <ark.span
       {...props}
       ref={ref}
       className={cn(
@@ -74,7 +87,7 @@ export function Badge({
           size,
         }),
       )}
-      data-activated={activated}
+      data-state={activated ? 'active' : 'inactive'}
     />
   )
 }
