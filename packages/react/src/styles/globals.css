@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@import "./themes/dark.css";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--color-surface-1: var(--surface-1);
+	--color-surface-2: var(--surface-2);
+
+	--color-fill-1: var(--fill-1);
+	--color-fill-2: var(--fill-2);
+	--color-fill-3: var(--fill-3);
+	--color-fill-4: var(--fill-4);
+	--color-fill-5: var(--fill-5);
+
+	--color-border: var(--border);
+	--color-disabled: var(--disabled);
+
+	--color-fg-1: var(--fg-1);
+	--color-fg-2: var(--fg-2);
+
+	--color-brand: var(--brand);
+	--color-danger: var(--danger);
+	--color-success: var(--success);
+
+	--font-sans: var(--ff-sans);
+	--font-mono: var(--ff-mono);
+}
+
+@layer base {
+	:root {
+		--surface-1: oklch(100% 0 0);
+		--surface-2: oklch(99.11% 0 0);
+
+		--fill-1: oklch(96.74% 0.0013 286.38);
+		--fill-2: oklch(91% 0.0013 286.37);
+		--fill-3: oklch(85.88% 0.0055 286.28);
+		--fill-4: oklch(71.18% 0.0129 286.07);
+		--fill-5: oklch(44.19% 0.0146 285.79);
+
+		--border: oklch(91% 0.0013 286.37);
+		--disabled: oklch(21.78% 0 0 / 18%);
+
+		--fg-1: oklch(21.78% 0 0);
+		--fg-2: oklch(100% 0 0);
+
+		--brand: oklch(21.78% 0 0);
+		--danger: oklch(57.85% 0.2138 27.17);
+		--success: oklch(57.29% 0.1544 149.22);
+
+		--ff-sans: "Geist", sans-serif;
+		--ff-mono: "Geist Mono", monospace;
+	}
+}
+
+@layer base {
+	*,
+	*::after,
+	*::before {
+		@apply antialiased;
+
+		border-color: var(--color-border, currentColor);
+
+		font-synthesis-weight: none;
+		text-rendering: optimizeLegibility;
+	}
+
+	html {
+		@apply scroll-smooth;
+	}
+
+	body {
+		@apply bg-surface-1 text-fg-1;
+	}
+}

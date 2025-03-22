@@ -1,7 +1,6 @@
-import type { Preview } from '@storybook/react'
+import '@hynix/react/styles.css'
 
-import { create } from '@storybook/theming/create'
-import { storybookTheme } from './storybook-theme'
+import type { Preview } from '@storybook/react'
 
 const preview: Preview = {
   parameters: {
@@ -10,29 +9,6 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
-    },
-    docs: {
-      toc: {
-        contentsSelector: '.sbdocs-content',
-        headingSelector: 'h1, h2, h3',
-        ignoreSelector: '#primary',
-        title: 'On This Page',
-        disable: false,
-        unsafeTocbotOptions: {
-          orderedList: false,
-        },
-      },
-      theme: create({
-        base: 'light',
-
-        // Typography
-        fontBase: storybookTheme.fonts.display,
-        fontCode: storybookTheme.fonts.code,
-        textColor: storybookTheme.colors.text.primary,
-
-        // UI
-        colorSecondary: storybookTheme.colors.brand.highlight,
-      }),
     },
   },
 }

@@ -1,0 +1,28 @@
+.dark {
+	--surface-1: oklch(19.3% 0 0);
+	--surface-2: oklch(24.45% 0.0061 17.58);
+
+	--fill-1: oklch(32.11% 0 0);
+	--fill-2: oklch(36.08% 0 0);
+	--fill-3: oklch(48.32% 0 0);
+	--fill-4: oklch(55.47% 0 0);
+	--fill-5: oklch(69.13% 0 0);
+
+	--border: oklch(36.08% 0 0);
+	--disabled: oklch(100% 0 106.37 / 18%);
+
+	--fg-1: oklch(100% 0 0);
+	--fg-2: oklch(21.78% 0 0);
+
+	--brand: oklch(100% 0 106.37);
+	--brand-hover: oklch(78.94% 0 0);
+	--brand-selected: oklch(55.47% 0 0);
+
+	--danger: oklch(81.74% 0.10276611870546051 19.51842471892472);
+	--danger-hover: oklch(69.74% 0.1931 23.55);
+	--danger-selected: oklch(59.65% 0.1955 25.38);
+
+	--success: oklch(92.46% 0.0811 155.98);
+	--success-hover: oklch(87.12% 0.137 154.59);
+	--success-selected: oklch(72.05% 0.192 149.49);
+}
