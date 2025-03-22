@@ -32,7 +32,6 @@ This document presents the official development timeline for Hynix components, i
 Essential base components for all others:
 
 - [ ] Button
-- [ ] Icon
 - [ ] Text
 - [ ] Divider
 - [ ] Loader

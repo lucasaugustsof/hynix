@@ -16,6 +16,7 @@ export default {
       type: 'string',
     },
   },
+  tags: ['new'],
 } satisfies Meta
 
 export const Basic: StoryObj = {}
