@@ -2,7 +2,7 @@
 
 This document presents the official development timeline for Hynix components, including phases organized by priority, estimated dates, dependencies, and strategic steps such as documentation and real project usage.
 
-> 📅 **Estimated start:** March 25, 2025
+> 📅 **Estimated start:** March 25, 2025<br/>
 > ✍️ **Status:** In progress
 
 ---
