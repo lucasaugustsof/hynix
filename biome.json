@@ -27,7 +27,7 @@
 					"level": "warn",
 					"fix": "unsafe",
 					"options": {
-						"functions": ["cn", "cva"],
+						"functions": ["cn", "tv"],
 						"attributes": ["className", "class"]
 					}
 				}
