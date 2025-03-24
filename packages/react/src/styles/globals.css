@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @import "./themes/dark.css";
+@import "./typography.css";
 
 @variant dark (&:where(.dark, .dark *));
 
