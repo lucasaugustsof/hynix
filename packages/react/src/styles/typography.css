@@ -1,0 +1,42 @@
+@layer components {
+	/* Shared sizes */
+	[data-size="sm"] {
+		@apply text-sm leading-5.5;
+	}
+
+	[data-size="md"] {
+		@apply text-base;
+	}
+
+	[data-size="lg"] {
+		@apply text-lg leading-7;
+	}
+
+	/* Title */
+	[data-typography="title"] {
+		@apply font-sans font-bold text-fg-1;
+	}
+
+	[data-typography="title"][data-size="md"] {
+		@apply text-xl leading-8;
+	}
+
+	[data-typography="title"][data-size="lg"] {
+		@apply text-2xl leading-9.5;
+	}
+
+	/* Body */
+	[data-typography="body"] {
+		@apply font-sans font-normal text-fg-1;
+	}
+
+	/* Caption */
+	[data-typography="caption"] {
+		@apply font-sans font-medium text-fg-1/70;
+	}
+
+	/* Tagline */
+	[data-typography="tagline"] {
+		@apply font-sans font-semibold text-fg-1/36 uppercase;
+	}
+}
