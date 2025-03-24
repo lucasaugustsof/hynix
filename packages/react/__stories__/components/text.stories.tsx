@@ -32,11 +32,9 @@ const meta: Meta<TextProps> = {
 export const Title: TextStory = {
   render({ size }) {
     return (
-      <>
-        <h1 data-typography="title" data-size={size}>
-          Title Placeholder
-        </h1>
-      </>
+      <h1 data-typography="title" data-size={size}>
+        Title Placeholder
+      </h1>
     )
   },
 }
@@ -44,11 +42,9 @@ export const Title: TextStory = {
 export const Body: TextStory = {
   render({ size }) {
     return (
-      <>
-        <p data-typography="body" data-size={size}>
-          Placeholder for body text Enter text into this container
-        </p>
-      </>
+      <p data-typography="body" data-size={size}>
+        Placeholder for body text Enter text into this container
+      </p>
     )
   },
 }
@@ -56,11 +52,9 @@ export const Body: TextStory = {
 export const Caption: TextStory = {
   render({ size }) {
     return (
-      <>
-        <span data-typography="caption" data-size={size}>
-          Caption
-        </span>
-      </>
+      <span data-typography="caption" data-size={size}>
+        Caption
+      </span>
     )
   },
 }
@@ -68,11 +62,9 @@ export const Caption: TextStory = {
 export const Tagline: TextStory = {
   render({ size }) {
     return (
-      <>
-        <span data-typography="tagline" data-size={size}>
-          TAGLINE
-        </span>
-      </>
+      <span data-typography="tagline" data-size={size}>
+        TAGLINE
+      </span>
     )
   },
 }
