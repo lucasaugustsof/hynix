@@ -11,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 10
           run_install: false
 
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -32,8 +32,8 @@ jobs:
       - name: Build Storybook
         run: pnpm build-storybook
 
-      - name: Upload to VPS via SSH
-        run: appleboy/scp-action@v0.1.7
+      - name: Upload to VPS via SCP
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: root
