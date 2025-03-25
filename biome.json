@@ -34,6 +34,10 @@
 			},
 			"style": {
 				"noNonNullAssertion": "off"
+			},
+			"a11y": {
+				"useFocusableInteractive": "off",
+				"useSemanticElements": "off"
 			}
 		}
 	},
