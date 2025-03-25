@@ -33,7 +33,7 @@ Essential base components for all others:
 
 - [x] Button
 - [x] Text
-- [ ] Divider
+- [x] Divider
 - [ ] Loader
 - [ ] Tooltip
 - [ ] KBD
