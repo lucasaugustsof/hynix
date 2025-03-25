@@ -9,6 +9,7 @@ type DividerProps = React.ComponentPropsWithRef<'div'> & {
 }
 
 function Divider({
+  className,
   type = 'default',
   labelText,
   direction = 'horizontal',
@@ -26,8 +27,8 @@ function Divider({
     default: <Line />,
     'label-left': (
       <>
-        <Line />
         {labelText}
+        <Line />
       </>
     ),
     'label-center': (
@@ -39,8 +40,8 @@ function Divider({
     ),
     'label-right': (
       <>
-        {labelText}
         <Line />
+        {labelText}
       </>
     ),
   }
@@ -52,6 +53,7 @@ function Divider({
         'flex min-w-80 items-center gap-2',
         'text-nowrap font-medium font-sans text-fg-1/70 leading-5.5 tracking-normal',
         direction === 'vertical' && 'min-h-80 flex-col',
+        className,
       )}
     >
       {renderMap[type]}
