@@ -34,7 +34,7 @@ Essential base components for all others:
 - [x] Button
 - [x] Text
 - [x] Divider
-- [ ] Loader
+- [x] Loader
 - [ ] Tooltip
 - [ ] KBD
 - [ ] Chip & Badge
