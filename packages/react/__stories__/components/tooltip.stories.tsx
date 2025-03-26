@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
 import { Copy } from 'lucide-react'
+import { useWindowSize } from 'usehooks-ts'
 
 import { Button } from 'registry/components/button'
 import {
@@ -18,8 +19,10 @@ type TooltipStory = StoryObj<TooltipProps>
 const meta: Meta<TooltipProps> = {
   title: 'Components/Tooltip',
   component(args) {
+    const { width } = useWindowSize()
+
     return (
-      <TooltipRoot {...args}>
+      <TooltipRoot {...args} open={width <= 768 ? true : undefined}>
         <TooltipTrigger asChild>
           <Button variant="secondary" iconOnly>
             <Copy />
@@ -30,7 +33,7 @@ const meta: Meta<TooltipProps> = {
           <div
             className={cn(
               'rounded border border-blue-400 border-dashed bg-blue-500/10 px-4 py-1 dark:border-blue-500',
-              'font-mono font-semibold text-blue-400 text-sm uppercase dark:text-blue-500',
+              'font-mono font-semibold text-blue-400 text-sm/normal uppercase dark:text-blue-500',
             )}
           >
             slot content
