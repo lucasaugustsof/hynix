@@ -3,6 +3,8 @@
 @import "./themes/dark.css";
 @import "./typography.css";
 
+@import "tw-animate-css";
+
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
