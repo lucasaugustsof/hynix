@@ -45,7 +45,8 @@
 		"storybook-dark-mode": "4.0.2",
 		"turbo": "2.4.4",
 		"typescript": "5.8.2",
-		"vite": "6.2.2"
+		"vite": "6.2.2",
+		"tw-animate-css": "1.2.4"
 	},
 	"license": "MIT",
 	"private": true,

@@ -1,5 +1,5 @@
-import { type VariantProps, tv } from 'registry/utilities/tv'
 import { cn } from 'registry/utilities/cn'
+import { type VariantProps, tv } from 'registry/utilities/tv'
 
 type LoaderProps = VariantProps<typeof loaderVariants>
 
