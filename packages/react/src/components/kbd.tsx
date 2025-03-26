@@ -46,6 +46,7 @@ function Kbd({ variant, size, ...props }: KbdProps) {
           size,
         }),
       )}
+      data-scope="kbd"
     />
   )
 }
