@@ -35,8 +35,8 @@ Essential base components for all others:
 - [x] Text
 - [x] Divider
 - [x] Loader
-- [ ] Tooltip
-- [ ] KBD
+- [x] Tooltip
+- [x] KBD
 - [ ] Chip & Badge
 - [ ] Progress
 - [ ] Skeleton
