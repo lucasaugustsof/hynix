@@ -61,7 +61,10 @@ export function BackgroundPattern() {
       height="1024"
       viewBox="0 0 1440 1024"
       fill="none"
-      className={cn('-z-10 absolute')}
+      className={cn(
+        '-z-10 absolute',
+        '[mask-image:radial-gradient(ellipse,black_0%,transparent_100%)]',
+      )}
     >
       <title>Animated Pattern</title>
 
@@ -70,7 +73,7 @@ export function BackgroundPattern() {
           key={line.key}
           {...line.props}
           stroke="var(--color-border)"
-          strokeWidth="0.8"
+          strokeWidth="1"
           initial={{
             opacity: 0,
             pathLength: 0,
@@ -92,7 +95,7 @@ export function BackgroundPattern() {
           key={path.key}
           d={path.d}
           stroke="var(--color-border)"
-          strokeWidth="0.8"
+          strokeWidth="1.5"
           strokeDasharray="4 4"
           initial={{
             opacity: 0,
