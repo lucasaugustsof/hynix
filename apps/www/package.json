@@ -1,0 +1,19 @@
+{
+	"name": "www",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev --turbopack",
+		"build": "next build",
+		"start": "next start",
+		"lint": "biome check --write ."
+	},
+	"dependencies": {
+		"@remixicon/react": "4.6.0",
+		"next": "15.2.4"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20"
+	}
+}

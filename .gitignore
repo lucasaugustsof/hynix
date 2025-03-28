@@ -1,39 +1,52 @@
-# deps
+# ───────────────────────────────
+# Dependencies
+# ───────────────────────────────
 node_modules/
 package-lock.json
-yarn.lock
 pnpm-lock.yaml
+yarn.lock
 
-# build
-dist/
+# ───────────────────────────────
+# Turborepo
+# ───────────────────────────────
+.turbo
+
+# ───────────────────────────────
+# Build outputs
+# ───────────────────────────────
 build/
+dist/
 out/
 .next/
 .output/
 storybook-static/
 
-# turborepo
-.turbo
-
-# testing
+# ───────────────────────────────
+# Testing
+# ───────────────────────────────
 coverage/
 .nyc_output/
 
-# debug
+# ───────────────────────────────
+# Debug logs
+# ───────────────────────────────
 npm-debug.log*
+pnpm-debug.log*
+storybook.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
-# misc
+# ───────────────────────────────
+# Misc
+# ───────────────────────────────
 .DS_Store
+.cache
+.temp
 *.log
+*.local
 *.pem
 .env
 .env.*
 !.env.example
-.cache
-.temp
-*.local
-
-*storybook.log
+.vercel
+next-env.d.ts

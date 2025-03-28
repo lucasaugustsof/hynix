@@ -1,0 +1,7 @@
+@import "@hynix/react/styles.css";
+
+@layer base {
+	::selection {
+		@apply bg-highlight/20;
+	}
+}
