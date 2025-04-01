@@ -4,17 +4,22 @@ import { AnimatedUnderlinedText } from '@/components/animated-underlined-text'
 import { BackgroundPattern } from '@/components/background-pattern'
 import { Logo } from '@/components/logo'
 import { Button } from '@/components/ui/button'
+import { Footer } from '@/components/footer'
 
 import { cn } from '@/utilities/cn'
+import { getGithubStars } from '@/utilities/get-github-stars'
 
-export default function Home() {
-  const currentYear = new Date().getFullYear()
+export default async function Home() {
+  const githubStars = await getGithubStars()
 
   return (
     <div
-      className={cn('relative flex min-h-screen items-center justify-center')}
+      className={cn(
+        'relative flex h-dvh items-center justify-center',
+        'lg:h-screen',
+      )}
     >
-      <section className={cn('max-w-[32.5rem]')}>
+      <section className={cn('max-w-[32.5rem] px-6')}>
         <Logo />
 
         <main className={cn('mt-6 mb-8 space-y-3')}>
@@ -50,25 +55,13 @@ export default function Home() {
                 'rounded-lg bg-fill-2 px-1.5 py-px font-semibold text-fill-5 text-sm leading-5.5',
               )}
             >
-              18
+              {githubStars}
             </span>
           </Button>
         </div>
       </section>
 
-      <footer className={cn('absolute bottom-12')}>
-        <span className={cn('text-fg-1/40 text-sm leading-5.5')}>
-          &copy; {currentYear} Hynix. Developed by{' '}
-          <a
-            href="https://github.com/lucasaugustsof"
-            className={cn('text-fg-1/70 underline-offset-2', 'hover:underline')}
-          >
-            lucasaugustsof
-          </a>
-          .
-        </span>
-      </footer>
-
+      <Footer />
       <BackgroundPattern />
     </div>
   )
