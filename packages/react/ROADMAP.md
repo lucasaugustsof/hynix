@@ -8,7 +8,7 @@
 - [x] Loader
 - [x] Tooltip
 - [x] KBD
-- [ ] Chip
+- [x] Chip
 - [ ] Badge
 - [ ] Progress
 - [ ] Skeleton
