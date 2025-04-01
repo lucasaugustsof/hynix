@@ -139,7 +139,7 @@ function ChipClose({ ...props }: ChipCloseProps) {
     >
       <RiCloseLine
         className={cn(
-          'fill-fill-4 transition-colors ease-out',
+          'fill-fill-4 transition-colors duration-initial ease-out',
           'group-data-[activated=true]:fill-fg-2 group-data-[activated=false]:group-hover:fill-fill-5',
         )}
         focusable="false"
