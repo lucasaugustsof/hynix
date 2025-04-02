@@ -2,13 +2,13 @@ import React from 'react'
 
 import { type Assign, ark } from '@ark-ui/react'
 
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 
 import { RiCloseLine } from '@remixicon/react'
 
 import { cn } from 'registry/utilities/cn'
-import { type VariantProps, tv } from 'registry/utilities/tv'
 import { focusEffect } from 'registry/utilities/focus-effect'
+import { type VariantProps, tv } from 'registry/utilities/tv'
 
 type ChipProps = Assign<
   React.CustomComponentPropsWithRef<typeof ark.div>,
@@ -117,6 +117,8 @@ function ChipLabel({ className, ...props }: ChipLabelProps) {
 type ChipCloseProps = React.CustomComponentPropsWithRef<typeof motion.button>
 
 function ChipClose({ ...props }: ChipCloseProps) {
+  const shouldReduceMotion = useReducedMotion()
+
   return (
     <motion.button
       {...props}
@@ -125,10 +127,10 @@ function ChipClose({ ...props }: ChipCloseProps) {
       data-scope="chip"
       data-part="close"
       whileHover={{
-        scale: 1.1,
+        scale: shouldReduceMotion ? 1 : 1.1,
       }}
       whileTap={{
-        scale: 0.98,
+        scale: shouldReduceMotion ? 1 : 0.98,
       }}
       transition={{
         type: 'spring',
