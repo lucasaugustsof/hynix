@@ -1,0 +1,69 @@
+import { type Assign, ark } from '@ark-ui/react'
+
+import { cn } from 'registry/utilities/cn'
+import { focusEffect } from 'registry/utilities/focus-effect'
+import { type VariantProps, tv } from 'registry/utilities/tv'
+
+type BadgeProps = Assign<
+  React.CustomComponentPropsWithRef<typeof ark.div>,
+  VariantProps<typeof badgeVariants>
+> & {
+  active?: boolean
+}
+
+const badgeVariants = tv({
+  base: [
+    'isolate inline-flex h-6 items-center gap-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs leading-4.5 shadow-xs transition-colors ease-out',
+    '[&_svg]:size-4 [&_svg]:fill-fill-4',
+    focusEffect,
+  ],
+  variants: {
+    variant: {
+      default: [
+        'border-border bg-surface-2 text-fg-1',
+        'data-[state=active]:border-brand data-[state=active]:bg-brand data-[state=active]:text-fg-2',
+        'data-[state=inactive]:hover:bg-fill-1',
+      ],
+      warning: [
+        'bg-highlight text-fg-2',
+        'data-[state=inactive]:hover:bg-highlight/80',
+      ],
+      success: [
+        'bg-success text-fg-2',
+        'data-[state=inactive]:hover:bg-success/80',
+      ],
+      danger: [
+        'bg-danger text-fg-2',
+        'data-[state=inactive]:hover:bg-danger/80',
+      ],
+    },
+  },
+  compoundVariants: [
+    {
+      variant: ['warning', 'success', 'danger'],
+      class: 'border-black/12 dark:border-white/12',
+    },
+  ],
+  defaultVariants: {
+    variant: 'default',
+  },
+})
+
+function Badge({ className, variant, active = false, ...props }: BadgeProps) {
+  return (
+    <ark.div
+      {...props}
+      className={cn(
+        badgeVariants({
+          className,
+          variant,
+        }),
+      )}
+      data-scope="badge"
+      data-state={active ? 'active' : 'inactive'}
+    />
+  )
+}
+
+export { Badge, badgeVariants }
+export type { BadgeProps }

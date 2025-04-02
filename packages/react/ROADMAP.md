@@ -9,7 +9,7 @@
 - [x] Tooltip
 - [x] KBD
 - [x] Chip
-- [ ] Badge
+- [x] Badge
 - [ ] Progress
 - [ ] Skeleton
 - [ ] Input

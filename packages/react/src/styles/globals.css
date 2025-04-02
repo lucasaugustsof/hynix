@@ -24,6 +24,7 @@
 	--color-fg-2: var(--fg-2);
 
 	--color-brand: var(--brand);
+	--color-highlight: var(--highlight);
 	--color-danger: var(--danger);
 	--color-success: var(--success);
 
@@ -49,6 +50,7 @@
 		--fg-2: oklch(100% 0 0);
 
 		--brand: oklch(21.78% 0 0);
+		--highlight: oklch(0.64 0.1893 41.55);
 		--danger: oklch(57.85% 0.2138 27.17);
 		--success: oklch(57.29% 0.1544 149.22);
 
