@@ -45,6 +45,7 @@ const progressBarVariants = tv({
         track: 'h-2',
       },
       lg: {
+        root: 'gap-2.5',
         valueText: 'text-base',
         track: 'h-3',
       },
