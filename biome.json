@@ -35,6 +35,9 @@
 			"style": {
 				"noNonNullAssertion": "off"
 			},
+			"suspicious": {
+				"noArrayIndexKey": "off"
+			},
 			"a11y": {
 				"useFocusableInteractive": "off",
 				"useSemanticElements": "off"

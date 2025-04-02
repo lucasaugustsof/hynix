@@ -107,6 +107,9 @@ importers:
       '@ark-ui/react':
         specifier: 5.1.0
         version: 5.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@number-flow/react':
+        specifier: 0.5.8
+        version: 0.5.8(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@remixicon/react':
         specifier: 4.6.0
         version: 4.6.0(react@19.0.0)
@@ -712,6 +715,12 @@ packages:
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
+
+  '@number-flow/react@0.5.8':
+    resolution: {integrity: sha512-ZHjih9W/kD5srBn7XjcASOEssRbU3vn8VcqXbngVaUeTJNBSn9358QwIg4/WFT6GJXyFAnNQsZeLSCAi6xrMfg==}
+    peerDependencies:
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -1776,6 +1785,9 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
+  esm-env@1.2.2:
+    resolution: {integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==}
+
   esprima@4.0.1:
     resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
     engines: {node: '>=4'}
@@ -2359,6 +2371,9 @@ packages:
     resolution: {integrity: sha512-IsMvXUxkpk9UpSUDkKxrUdpWRpDYGr1aSEhBmgnYU/beUg+rS9MwWH97SNe/8chiUzfB3ojN7Z1m+DHO0vu67g==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  number-flow@0.5.6:
+    resolution: {integrity: sha512-3K4lWNn+zWYeWEgaJMbFIjqy6WnvIETXTVIybKnaPU0XmhsqQmdXfxXf7tmB4MybzHwrl5GN4oFT34EU/B2yhg==}
 
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
@@ -3469,6 +3484,13 @@ snapshots:
       '@types/mdx': 2.0.13
       '@types/react': 19.0.7
       react: 19.0.0
+
+  '@number-flow/react@0.5.8(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      esm-env: 1.2.2
+      number-flow: 0.5.6
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -4902,6 +4924,8 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
+  esm-env@1.2.2: {}
+
   esprima@4.0.1: {}
 
   estree-walker@2.0.2: {}
@@ -5584,6 +5608,10 @@ snapshots:
       node-emoji: 2.2.0
       open-file-explorer: 1.0.2
       rxjs: 7.8.2
+
+  number-flow@0.5.6:
+    dependencies:
+      esm-env: 1.2.2
 
   object-inspect@1.13.4: {}
 
