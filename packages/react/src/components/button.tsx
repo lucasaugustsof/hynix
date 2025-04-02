@@ -2,6 +2,7 @@ import { type Assign, ark } from '@ark-ui/react'
 import { type Transition, motion, useReducedMotion } from 'motion/react'
 
 import { cn } from 'registry/utilities/cn'
+import { focusEffect } from 'registry/utilities/focus-effect'
 import { type VariantProps, tv } from 'registry/utilities/tv'
 
 type ButtonProps = Assign<
@@ -17,6 +18,7 @@ const buttonVariants = tv({
       'not-disabled:inset-ring-1 inline-flex cursor-pointer select-none items-center justify-center whitespace-nowrap rounded-xl transition-colors ease-out',
       'font-sans font-semibold tracking-normal',
       'disabled:cursor-not-allowed disabled:bg-fill-1 disabled:text-disabled',
+      focusEffect,
     ],
   ],
   variants: {
