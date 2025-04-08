@@ -5,9 +5,9 @@ import { RiFocus3Line } from '@remixicon/react'
 
 import { Button } from 'registry/components/button'
 import {
+  Tooltip,
   TooltipContent,
   type TooltipProps,
-  Tooltip,
   TooltipTrigger,
 } from 'registry/components/tooltip'
 

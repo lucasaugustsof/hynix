@@ -11,7 +11,7 @@ type ButtonProps = Assign<
 const buttonVariants = tv({
   base: [
     [
-      'inline-flex cursor-pointer select-none items-center justify-center whitespace-nowrap rounded-xl font-sans font-semibold tracking-normal',
+      'isolate inline-flex cursor-pointer select-none items-center justify-center whitespace-nowrap rounded-xl font-sans font-semibold tracking-normal',
       'not-disabled:inset-ring-1 disabled:cursor-not-allowed disabled:bg-fill-1 disabled:text-disabled',
       'transition-[background-color,scale] ease-in-out-quad active:scale-95',
     ],
@@ -59,12 +59,13 @@ const buttonVariants = tv({
   },
 })
 
-function Button({ variant, size, iconOnly, ...props }: ButtonProps) {
+function Button({ className, variant, size, iconOnly, ...props }: ButtonProps) {
   return (
     <ark.button
       {...props}
       className={cn(
         buttonVariants({
+          className,
           variant,
           size,
           iconOnly,
