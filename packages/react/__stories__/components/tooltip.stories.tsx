@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
-import { Copy } from 'lucide-react'
-import { useWindowSize } from 'usehooks-ts'
+import { RiFocus3Line } from '@remixicon/react'
 
 import { Button } from 'registry/components/button'
 import {
   TooltipContent,
   type TooltipProps,
-  TooltipRoot,
+  Tooltip,
   TooltipTrigger,
 } from 'registry/components/tooltip'
 
@@ -19,31 +18,29 @@ type TooltipStory = StoryObj<TooltipProps>
 const meta: Meta<TooltipProps> = {
   title: 'Components/Tooltip',
   component(args) {
-    const { width } = useWindowSize()
-
     return (
-      <TooltipRoot {...args} open={width <= 768 ? true : undefined}>
+      <Tooltip {...args}>
         <TooltipTrigger asChild>
           <Button variant="secondary" iconOnly>
-            <Copy />
+            <RiFocus3Line />
           </Button>
         </TooltipTrigger>
 
         <TooltipContent>
           <div
             className={cn(
-              'rounded border border-blue-400 border-dashed bg-blue-500/10 px-4 py-1 dark:border-blue-500',
-              'font-mono font-semibold text-blue-400 text-sm/normal uppercase dark:text-blue-500',
+              'rounded border border-highlight border-dashed bg-highlight/10 px-4 py-1',
+              'font-mono font-semibold text-highlight text-sm/normal uppercase',
             )}
           >
             slot content
           </div>
         </TooltipContent>
-      </TooltipRoot>
+      </Tooltip>
     )
   },
   args: {
-    openDelay: 1,
+    openDelay: 1000,
     closeDelay: 0.8,
     onOpenChange: fn(),
   },
@@ -51,7 +48,9 @@ const meta: Meta<TooltipProps> = {
     openDelay: {
       description:
         'Time in seconds to wait before opening the tooltip after hover.',
-      control: { type: 'number' },
+      control: {
+        type: 'number',
+      },
       table: {
         category: 'Behavior',
       },
@@ -72,7 +71,9 @@ const meta: Meta<TooltipProps> = {
       control: false,
       table: {
         category: 'Events',
-        type: { summary: '(open: boolean) => void' },
+        type: {
+          summary: '(open: boolean) => void',
+        },
       },
     },
   },
