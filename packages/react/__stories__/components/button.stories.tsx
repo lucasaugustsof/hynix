@@ -64,7 +64,7 @@ const meta: Meta<ButtonProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['new'],
+  tags: [],
 }
 
 export const Default: ButtonStory = {}

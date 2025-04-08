@@ -23,7 +23,7 @@ const meta: Meta<LoaderProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['new'],
+  tags: [],
 }
 
 export const Default: LoaderStory = {}

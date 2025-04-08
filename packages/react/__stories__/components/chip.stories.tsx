@@ -59,7 +59,7 @@ const meta: Meta<ChipProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['new'],
+  tags: [],
 }
 
 export default meta

@@ -46,7 +46,7 @@ const meta: Meta<BadgeProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['new'],
+  tags: [],
 }
 
 export default meta

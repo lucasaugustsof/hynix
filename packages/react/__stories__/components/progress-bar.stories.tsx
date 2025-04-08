@@ -47,7 +47,7 @@ const meta: Meta<ProgressBarProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['new'],
+  tags: [],
 }
 
 export default meta

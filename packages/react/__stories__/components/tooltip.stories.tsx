@@ -79,7 +79,7 @@ const meta: Meta<TooltipProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['new'],
+  tags: [],
 }
 
 export const Default: TooltipStory = {}
