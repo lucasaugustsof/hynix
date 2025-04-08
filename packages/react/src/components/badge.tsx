@@ -1,7 +1,6 @@
 import { type Assign, ark } from '@ark-ui/react'
 
 import { cn } from 'registry/utilities/cn'
-import { focusEffect } from 'registry/utilities/focus-effect'
 import { type VariantProps, tv } from 'registry/utilities/tv'
 
 type BadgeProps = Assign<
@@ -13,9 +12,9 @@ type BadgeProps = Assign<
 
 const badgeVariants = tv({
   base: [
-    'isolate inline-flex h-6 items-center gap-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs leading-4.5 shadow-xs transition-colors ease-out',
+    'isolate inline-flex h-6 items-center gap-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-xs',
+    'transition-colors ease-in-out',
     '[&_svg]:size-4 [&_svg]:fill-fill-4',
-    focusEffect,
   ],
   variants: {
     variant: {
@@ -61,6 +60,7 @@ function Badge({ className, variant, active = false, ...props }: BadgeProps) {
       )}
       data-scope="badge"
       data-state={active ? 'active' : 'inactive'}
+      data-focusable
     />
   )
 }
