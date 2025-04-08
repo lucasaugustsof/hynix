@@ -1,18 +1,15 @@
+// @NOTE: In Next.js, add 'use client' to enable client-side features
+
 import { Tooltip as ArkTooltip, useTooltipContext } from '@ark-ui/react/tooltip'
 import { AnimatePresence, type Variants, motion } from 'motion/react'
 
 import { cn } from 'registry/utilities/cn'
 
-// TooltipRoot ↴
+// Tooltip ↴
 
 type TooltipProps = React.CustomComponentPropsWithRef<typeof ArkTooltip.Root>
 
-const TooltipRoot = (props: TooltipProps) => (
-  <ArkTooltip.Root {...props} present />
-)
-
-const TooltipTrigger = ArkTooltip.Trigger
-const TooltipContext = ArkTooltip.Context
+const Tooltip = (props: TooltipProps) => <ArkTooltip.Root {...props} present />
 
 // TooltipContent ↴
 
@@ -56,9 +53,9 @@ function TooltipContent({
               animate="open"
               exit="close"
               transition={{
-                type: 'spring',
-                duration: 0.4,
-                bounce: 0.2,
+                type: 'tween',
+                duration: 0.15,
+                ease: 'easeOut',
               }}
             >
               {children}
@@ -70,5 +67,8 @@ function TooltipContent({
   )
 }
 
-export { TooltipRoot, TooltipTrigger, TooltipContext, TooltipContent }
+const TooltipTrigger = ArkTooltip.Trigger
+const TooltipContext = ArkTooltip.Context
+
+export { Tooltip, TooltipTrigger, TooltipContext, TooltipContent }
 export type { TooltipProps, TooltipContentProps }
