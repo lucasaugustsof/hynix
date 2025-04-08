@@ -6,7 +6,7 @@ type LoaderProps = VariantProps<typeof loaderVariants>
 const loaderVariants = tv({
   base: [
     'block animate-spin rounded-full bg-conic from-transparent to-brand',
-    '[mask-image:radial-gradient(circle_at_center,transparent_60%,black_0%)]',
+    'mask-radial-at-center mask-radial-circle mask-radial-from-60% mask-radial-from-transparent mask-radial-to-0 mask-radial-to-black',
   ],
   variants: {
     size: {
