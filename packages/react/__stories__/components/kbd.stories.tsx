@@ -5,10 +5,10 @@ import { Kbd, type KbdProps } from 'registry/components/kbd'
 type KbdStory = StoryObj<KbdProps>
 
 const meta: Meta<KbdProps> = {
-  title: 'typography/Kbd',
+  title: 'components/Kbd',
   component(args) {
     return (
-      <p data-typography="body">
+      <p>
         To open the developer console, press <Kbd {...args}>Ctrl</Kbd> +{' '}
         <Kbd {...args}>Shift</Kbd> + <Kbd {...args}>I</Kbd>
       </p>
@@ -53,7 +53,7 @@ const meta: Meta<KbdProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['new'],
+  tags: [],
 }
 
 export const Default: KbdStory = {}

@@ -36,7 +36,7 @@ const meta: Meta<DividerProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['new'],
+  tags: [],
 }
 
 export const Default: DividerStory = {}
