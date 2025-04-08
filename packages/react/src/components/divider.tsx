@@ -55,6 +55,7 @@ function Divider({
         direction === 'vertical' && 'min-h-80 flex-col',
         className,
       )}
+      data-scope="divider"
     >
       {renderMap[type]}
     </div>
