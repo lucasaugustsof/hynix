@@ -51,7 +51,7 @@ function Divider({
       role="separator"
       className={cn(
         'flex min-w-80 items-center gap-2',
-        'text-nowrap font-medium font-sans text-fg-1/70 leading-5.5 tracking-normal',
+        'text-nowrap font-medium font-sans text-fg-1/70 text-sm/5.5 tracking-normal',
         direction === 'vertical' && 'min-h-80 flex-col',
         className,
       )}
