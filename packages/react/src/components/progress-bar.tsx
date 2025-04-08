@@ -1,3 +1,5 @@
+// @NOTE: In Next.js, add 'use client' to enable client-side features
+
 import { useId } from 'react'
 
 import type { Assign } from '@ark-ui/react'
@@ -37,11 +39,11 @@ const progressBarVariants = tv({
   variants: {
     size: {
       sm: {
-        valueText: 'text-xs leading-4.5',
+        valueText: 'text-xs/4.5',
         track: 'h-1',
       },
       md: {
-        valueText: 'text-sm leading-5.5',
+        valueText: 'text-sm/5.5',
         track: 'h-2',
       },
       lg: {
@@ -79,17 +81,18 @@ function ProgressBarProvider({
 >) {
   const uniqueId = useId()
 
-  const extendedChildren = recursiveClone<ProgressBarSharedProps>(children, {
-    inject: {
-      size,
-    },
-    match: [
-      ProgressBarAnatomy.label,
-      ProgressBarAnatomy.valueText,
-      ProgressBarAnatomy.track,
-    ],
-    keyPrefix: uniqueId,
-  })
+  const extendedChildrenWithInjectedProps =
+    recursiveClone<ProgressBarSharedProps>(children, {
+      inject: {
+        size,
+      },
+      match: [
+        ProgressBarAnatomy.label,
+        ProgressBarAnatomy.valueText,
+        ProgressBarAnatomy.track,
+      ],
+      keyPrefix: uniqueId,
+    })
 
   return (
     <ArkProgressBar.RootProvider
@@ -100,7 +103,7 @@ function ProgressBarProvider({
         }),
       )}
     >
-      {extendedChildren}
+      {extendedChildrenWithInjectedProps}
     </ArkProgressBar.RootProvider>
   )
 }
@@ -115,13 +118,18 @@ function ProgressBar({
 }: ProgressBarProps) {
   const uniqueId = useId()
 
-  const extendedChildren = recursiveClone<ProgressBarSharedProps>(children, {
-    inject: {
-      size,
-    },
-    match: [ProgressBarAnatomy.valueText, ProgressBarAnatomy.track],
-    keyPrefix: uniqueId,
-  })
+  const extendedChildrenWithInjectedProps =
+    recursiveClone<ProgressBarSharedProps>(children, {
+      inject: {
+        size,
+      },
+      match: [
+        ProgressBarAnatomy.label,
+        ProgressBarAnatomy.valueText,
+        ProgressBarAnatomy.track,
+      ],
+      keyPrefix: uniqueId,
+    })
 
   return (
     <ArkProgressBar.Root
@@ -133,7 +141,7 @@ function ProgressBar({
         }),
       )}
     >
-      {extendedChildren}
+      {extendedChildrenWithInjectedProps}
     </ArkProgressBar.Root>
   )
 }
@@ -191,9 +199,7 @@ function ProgressBarTrack({
       )}
     >
       <ArkProgressBar.Range
-        className={cn(
-          'h-full bg-brand transition-[width] duration-125 ease-linear',
-        )}
+        className={cn('h-full bg-brand transition-[width] ease-in-out-quad')}
       />
     </ArkProgressBar.Track>
   )
