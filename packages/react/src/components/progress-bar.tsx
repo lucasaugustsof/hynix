@@ -23,7 +23,7 @@ type ProgressBarProps = Assign<
   ProgressBarSharedProps
 >
 
-const ProgressBarAnatomy = {
+const progressBarDisplayNames = {
   root: 'ProgressBar',
   label: 'ProgressBarLabel',
   valueText: 'ProgressBarValueText',
@@ -87,9 +87,9 @@ function ProgressBarProvider({
         size,
       },
       match: [
-        ProgressBarAnatomy.label,
-        ProgressBarAnatomy.valueText,
-        ProgressBarAnatomy.track,
+        progressBarDisplayNames.label,
+        progressBarDisplayNames.valueText,
+        progressBarDisplayNames.track,
       ],
       keyPrefix: uniqueId,
     })
@@ -124,9 +124,9 @@ function ProgressBar({
         size,
       },
       match: [
-        ProgressBarAnatomy.label,
-        ProgressBarAnatomy.valueText,
-        ProgressBarAnatomy.track,
+        progressBarDisplayNames.label,
+        progressBarDisplayNames.valueText,
+        progressBarDisplayNames.track,
       ],
       keyPrefix: uniqueId,
     })
@@ -180,7 +180,7 @@ function ProgressBarValueText({
   )
 }
 
-ProgressBarValueText.displayName = ProgressBarAnatomy.valueText
+ProgressBarValueText.displayName = progressBarDisplayNames.valueText
 
 // ProgressBarTrack ↴
 
@@ -205,12 +205,12 @@ function ProgressBarTrack({
   )
 }
 
-ProgressBarTrack.displayName = ProgressBarAnatomy.track
+ProgressBarTrack.displayName = progressBarDisplayNames.track
 
 // ProgressBarLabel ↴
 
 const ProgressBarLabel = ArkProgressBar.Label
-ProgressBarLabel.displayName = ProgressBarAnatomy.label
+ProgressBarLabel.displayName = progressBarDisplayNames.label
 
 export {
   ProgressBarProvider,
