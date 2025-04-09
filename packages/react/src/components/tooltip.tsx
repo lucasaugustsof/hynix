@@ -1,27 +1,27 @@
 // @NOTE: In Next.js, add 'use client' to enable client-side features
 
 import { Tooltip as ArkTooltip, useTooltipContext } from '@ark-ui/react/tooltip'
+import type * as ArkTooltipDefs from '@ark-ui/react/tooltip'
+
 import { AnimatePresence, type Variants, motion } from 'motion/react'
 
 import { cn } from 'registry/utilities/cn'
+import { getCssVariable } from 'registry/utilities/get-css-variable'
+import { parseCubicBezierValues } from 'registry/utilities/parse-cubic-bezier-values'
 
 // Tooltip ↴
 
-type TooltipProps = React.CustomComponentPropsWithRef<typeof ArkTooltip.Root>
+type TooltipProps = ArkTooltipDefs.TooltipRootProps
 
 const Tooltip = (props: TooltipProps) => <ArkTooltip.Root {...props} present />
 
 // TooltipContent ↴
 
-type TooltipContentProps = React.CustomComponentPropsWithRef<
-  typeof ArkTooltip.Content
->
-
 function TooltipContent({
   className,
   children,
   ...props
-}: TooltipContentProps) {
+}: ArkTooltipDefs.TooltipContentProps) {
   const { open } = useTooltipContext()
 
   const tooltipMotionMap: Variants = {
@@ -55,7 +55,9 @@ function TooltipContent({
               transition={{
                 type: 'tween',
                 duration: 0.15,
-                ease: 'easeOut',
+                ease: parseCubicBezierValues(
+                  getCssVariable('--ease-out-cubic').toString(),
+                ),
               }}
             >
               {children}
@@ -71,4 +73,4 @@ const TooltipTrigger = ArkTooltip.Trigger
 const TooltipContext = ArkTooltip.Context
 
 export { Tooltip, TooltipTrigger, TooltipContext, TooltipContent }
-export type { TooltipProps, TooltipContentProps }
+export type { TooltipProps }
