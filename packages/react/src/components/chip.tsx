@@ -1,110 +1,143 @@
-import React from 'react'
+// @NOTE: In Next.js, add 'use client' to enable client-side features
 
-import { type Assign, ark } from '@ark-ui/react'
+import { useId } from 'react'
 
-import { motion, useReducedMotion } from 'motion/react'
+import type { Assign } from '@ark-ui/react'
+import { motion } from 'motion/react'
+
+import { cn } from 'registry/utilities/cn'
+import { getCssVariable } from 'registry/utilities/get-css-variable'
+import { parseCubicBezierValues } from 'registry/utilities/parse-cubic-bezier-values'
+import { recursiveClone } from 'registry/utilities/recursive-clone'
+import { type VariantProps, tv } from 'registry/utilities/tv'
 
 import { RiCloseLine } from '@remixicon/react'
 
-import { cn } from 'registry/utilities/cn'
-import { focusEffect } from 'registry/utilities/focus-effect'
-import { type VariantProps, tv } from 'registry/utilities/tv'
+type ChipSharedProps = VariantProps<typeof chipVariantsWithSlots>
 
-type ChipProps = Assign<
-  React.CustomComponentPropsWithRef<typeof ark.div>,
-  VariantProps<typeof chipVariants>
-> & {
-  children: React.ReactNode
-  activated?: boolean
-}
+type ChipProps = Assign<React.ComponentPropsWithRef<'div'>, ChipSharedProps>
 
-const chipVariants = tv({
-  base: [
-    'group inline-flex items-center rounded-full border border-border bg-surface-2 shadow-xs transition-colors ease-out',
-    'data-[activated=true]:border-brand data-[activated=true]:bg-brand data-[activated=false]:hover:bg-fill-1',
-    focusEffect,
-  ],
+const chipDisplayNames = {
+  root: 'Chip',
+  label: 'ChipLabel',
+  close: 'ChipClose',
+} as const
+
+const chipVariantsWithSlots = tv({
+  slots: {
+    root: [
+      'group isolate inline-flex items-center justify-center whitespace-nowrap rounded-full border border-border bg-surface-2 shadow-black/8 shadow-xs dark:shadow-white/8',
+      'transition-colors ease-in-out-quad **:transition-colors **:ease-in-out-quad',
+    ],
+    label: 'font-medium font-sans text-fg-1',
+    close: 'shrink-0 cursor-pointer [&_svg]:fill-fill-4',
+  },
   variants: {
     size: {
-      xs: [
-        'h-7',
-        'data-[dir=ltr]:ps-2.5 data-[dir=ltr]:pe-2',
-        'data-[dir=rtl]:ps-2 data-[dir=rtl]:pe-2.5',
-        '*:data-[part=label]:text-xs *:data-[part=label]:leading-4.5 *:data-[part=close]:[&_svg]:size-4',
-      ],
-      sm: [
-        'h-8',
-        'data-[dir=ltr]:px-3',
-        'data-[dir=rtl]:ps-2.5 data-[dir=rtl]:pe-3',
-        '*:data-[part=label]:text-sm *:data-[part=label]:leading-5.5 *:data-[part=close]:[&_svg]:size-5',
-      ],
-      md: [
-        'h-11',
-        'data-[dir=ltr]:ps-4 data-[dir=ltr]:pe-2.5',
-        'data-[dir=rtl]:ps-2.5 data-[dir=rtl]:pe-4',
-        '*:data-[part=label]:text-base *:data-[part=close]:[&_svg]:size-6',
-      ],
-      lg: [
-        'h-12',
-        'data-[dir=ltr]:ps-4 data-[dir=ltr]:pe-3',
-        'data-[dir=rtl]:ps-3 data-[dir=rtl]:pe-4',
-        '*:data-[part=label]:text-lg *:data-[part=label]:leading-7 *:data-[part=close]:[&_svg]:size-7',
-      ],
+      xs: {
+        root: 'h-7 gap-1 px-2.5',
+        label: 'text-xs/4.5',
+        close: '[&_svg]:size-4',
+      },
+      sm: {
+        root: 'h-8 gap-1.5 px-3',
+        label: 'text-sm/5.5',
+        close: '[&_svg]:size-5',
+      },
+      md: {
+        root: 'h-11',
+        label: 'text-base',
+        close: '[&_svg]:size-6',
+      },
+      lg: {
+        root: 'h-12',
+        label: 'text-lg/7',
+        close: '[&_svg]:size-7',
+      },
+    },
+    active: {
+      true: {
+        root: 'border-brand bg-brand',
+        label: 'text-fg-2',
+        close: '[&_svg]:fill-fg-2',
+      },
+      false: {
+        root: 'hover:bg-fill-1',
+        close: 'group-hover:[&_svg]:fill-fill-5',
+      },
     },
   },
   compoundVariants: [
     {
-      size: ['xs', 'sm'],
-      class: 'gap-1',
-    },
-    {
       size: ['md', 'lg'],
-      class: 'gap-2',
+      class: {
+        root: 'gap-2 px-4',
+      },
     },
   ],
   defaultVariants: {
     size: 'sm',
+    active: false,
   },
 })
 
-// Chip ↴
+const { root, label, close } = chipVariantsWithSlots()
 
-function Chip({ className, size, activated = false, ...props }: ChipProps) {
-  const childElements = React.Children.toArray(props.children).filter(
-    (child): child is React.ReactElement => React.isValidElement(child),
+function Chip({ children, className, size, active, ...props }: ChipProps) {
+  const uniqueId = useId()
+
+  const extendedChildrenWithInjectedProps = recursiveClone<ChipSharedProps>(
+    children,
+    {
+      keyPrefix: uniqueId,
+      match: [
+        chipDisplayNames.root,
+        chipDisplayNames.label,
+        chipDisplayNames.close,
+      ],
+      inject: {
+        size,
+        active,
+      },
+    },
   )
-  const isLabelFirstChild = childElements[0].type === ChipLabel
 
   return (
-    <ark.div
+    <div
       {...props}
       className={cn(
-        chipVariants({
+        root({
           className,
           size,
+          active,
         }),
       )}
       data-scope="chip"
       data-part="root"
-      data-activated={activated}
-      data-dir={isLabelFirstChild ? 'ltr' : 'rtl'}
-      tabIndex={0}
-    />
+      data-focusable
+    >
+      {extendedChildrenWithInjectedProps}
+    </div>
   )
 }
 
-// ChipLabel ↴
+Chip.displayName = chipDisplayNames.root
 
-type ChipLabelProps = React.ComponentPropsWithRef<'span'>
-
-function ChipLabel({ className, ...props }: ChipLabelProps) {
+function ChipLabel({
+  className,
+  size,
+  active,
+  ...props
+}: Assign<React.ComponentPropsWithRef<'span'>, ChipSharedProps>) {
   return (
     <span
       {...props}
       className={cn(
-        'select-none whitespace-nowrap font-medium font-sans text-fg-1 tracking-normal',
-        'group-data-[activated=true]:text-fg-2',
-        className,
+        label({
+          className,
+          size,
+          active,
+        }),
       )}
       data-scope="chip"
       data-part="label"
@@ -112,44 +145,52 @@ function ChipLabel({ className, ...props }: ChipLabelProps) {
   )
 }
 
-// ChipClose ↴
+ChipLabel.displayName = chipDisplayNames.label
 
-type ChipCloseProps = React.CustomComponentPropsWithRef<typeof motion.button>
-
-function ChipClose({ ...props }: ChipCloseProps) {
-  const shouldReduceMotion = useReducedMotion()
+function ChipClose({
+  className,
+  size,
+  active,
+  ...props
+}: Assign<
+  React.CustomComponentPropsWithRef<typeof motion.button>,
+  ChipSharedProps
+>) {
+  const motionEasingEffect = parseCubicBezierValues(
+    getCssVariable('--ease-in-out-quad').toString(),
+  )
 
   return (
     <motion.button
       {...props}
       type="button"
-      className={cn('size-fit cursor-pointer appearance-none outline-none')}
-      data-scope="chip"
-      data-part="close"
+      className={cn(
+        close({
+          className,
+          size,
+          active,
+        }),
+      )}
       whileHover={{
-        scale: shouldReduceMotion ? 1 : 1.1,
+        scale: 1.1,
       }}
       whileTap={{
-        scale: shouldReduceMotion ? 1 : 0.98,
+        scale: 0.95,
       }}
       transition={{
-        type: 'spring',
-        bounce: 0.1,
-        duration: 0.4,
+        type: 'tween',
+        duration: 0.15,
+        ease: motionEasingEffect,
       }}
-      aria-label={props['aria-label'] ?? 'close-chip'}
+      data-scope="chip"
+      data-part="close"
     >
-      <RiCloseLine
-        className={cn(
-          'fill-fill-4 transition-colors duration-initial ease-out',
-          'group-data-[activated=true]:fill-fg-2 group-data-[activated=false]:group-hover:fill-fill-5',
-        )}
-        focusable="false"
-        aria-hidden
-      />
+      <RiCloseLine />
     </motion.button>
   )
 }
+
+ChipClose.displayName = chipDisplayNames.close
 
 export { Chip, ChipLabel, ChipClose }
 export type { ChipProps }

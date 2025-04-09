@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
 
 import {
   Chip,
@@ -16,17 +15,16 @@ const meta: Meta<ChipProps> = {
     return (
       <Chip {...args}>
         <ChipLabel>{args.children}</ChipLabel>
-        <ChipClose onClick={() => fn()} />
+        <ChipClose />
       </Chip>
     )
   },
   args: {
     children: 'Label',
-    activated: false,
+    active: false,
     size: 'md',
   },
   argTypes: {
-    // Content
     children: {
       name: 'Label',
       control: 'text',
@@ -36,7 +34,6 @@ const meta: Meta<ChipProps> = {
         category: 'Content',
       },
     },
-
     size: {
       name: 'Size',
       description: 'Defines the size of the chip.',
@@ -46,9 +43,8 @@ const meta: Meta<ChipProps> = {
         category: 'Appearance',
       },
     },
-
-    activated: {
-      name: 'Activated',
+    active: {
+      name: 'Active',
       description: 'Controls whether the chip is in activated state.',
       control: 'boolean',
       table: {
@@ -70,7 +66,7 @@ export const WithCloseLeft: ChipStory = {
   render(args) {
     return (
       <Chip {...args}>
-        <ChipClose onClick={() => fn()} />
+        <ChipClose />
         <ChipLabel>{args.children}</ChipLabel>
       </Chip>
     )
