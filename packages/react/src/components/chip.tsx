@@ -83,6 +83,8 @@ const chipVariantsWithSlots = tv({
 
 const { root, label, close } = chipVariantsWithSlots()
 
+// Chip ↴
+
 function Chip({ children, className, size, active, ...props }: ChipProps) {
   const uniqueId = useId()
 
@@ -123,6 +125,8 @@ function Chip({ children, className, size, active, ...props }: ChipProps) {
 
 Chip.displayName = chipDisplayNames.root
 
+// ChipLabel ↴
+
 function ChipLabel({
   className,
   size,
@@ -146,6 +150,8 @@ function ChipLabel({
 }
 
 ChipLabel.displayName = chipDisplayNames.label
+
+// ChipClose ↴
 
 function ChipClose({
   className,
