@@ -1,6 +1,10 @@
 // @NOTE: In Next.js, add 'use client' to enable client-side features
 
-import { Tooltip as ArkTooltip, useTooltipContext } from '@ark-ui/react/tooltip'
+import {
+  Tooltip as ArkTooltip,
+  useTooltip,
+  useTooltipContext,
+} from '@ark-ui/react/tooltip'
 import type * as ArkTooltipDefs from '@ark-ui/react/tooltip'
 
 import { AnimatePresence, type Variants, motion } from 'motion/react'
@@ -72,5 +76,5 @@ function TooltipContent({
 const TooltipTrigger = ArkTooltip.Trigger
 const TooltipContext = ArkTooltip.Context
 
-export { Tooltip, TooltipTrigger, TooltipContext, TooltipContent }
+export { Tooltip, TooltipTrigger, TooltipContext, TooltipContent, useTooltip }
 export type { TooltipProps }
