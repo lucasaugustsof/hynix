@@ -1,13 +1,8 @@
-// @NOTE: In Next.js, add 'use client' to enable client-side features
-
 import { useId } from 'react'
 
 import type { Assign } from '@ark-ui/react'
-import { motion } from 'motion/react'
 
 import { cn } from 'registry/utilities/cn'
-import { getCssVariable } from 'registry/utilities/get-css-variable'
-import { parseCubicBezierValues } from 'registry/utilities/parse-cubic-bezier-values'
 import { recursiveClone } from 'registry/utilities/recursive-clone'
 import { type VariantProps, tv } from 'registry/utilities/tv'
 
@@ -27,10 +22,13 @@ const chipVariantsWithSlots = tv({
   slots: {
     root: [
       'group isolate inline-flex items-center justify-center whitespace-nowrap rounded-full border border-border bg-surface-2 shadow-black/8 shadow-xs dark:shadow-white/8',
-      'transition-colors ease-in-out-quad **:transition-colors **:ease-in-out-quad',
+      'transition-colors ease-in-out-quad',
     ],
     label: 'font-medium font-sans text-fg-1',
-    close: 'shrink-0 cursor-pointer [&_svg]:fill-fill-4',
+    close: [
+      'shrink-0 cursor-pointer transition-transform ease-in-out-quad [&_svg]:fill-fill-4',
+      'hover:scale-110 active:scale-95',
+    ],
   },
   variants: {
     size: {
@@ -158,16 +156,9 @@ function ChipClose({
   size,
   active,
   ...props
-}: Assign<
-  React.CustomComponentPropsWithRef<typeof motion.button>,
-  ChipSharedProps
->) {
-  const motionEasingEffect = parseCubicBezierValues(
-    getCssVariable('--ease-in-out-quad').toString(),
-  )
-
+}: Assign<React.ComponentPropsWithRef<'button'>, ChipSharedProps>) {
   return (
-    <motion.button
+    <button
       {...props}
       type="button"
       className={cn(
@@ -177,22 +168,11 @@ function ChipClose({
           active,
         }),
       )}
-      whileHover={{
-        scale: 1.1,
-      }}
-      whileTap={{
-        scale: 0.95,
-      }}
-      transition={{
-        type: 'tween',
-        duration: 0.15,
-        ease: motionEasingEffect,
-      }}
       data-scope="chip"
       data-part="close"
     >
-      <RiCloseLine />
-    </motion.button>
+      <RiCloseLine className={cn('transition-colors ease-in-out-quad')} />
+    </button>
   )
 }
 
