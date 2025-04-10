@@ -41,7 +41,7 @@ const meta: Meta<TooltipProps> = {
   },
   args: {
     openDelay: 1000,
-    closeDelay: 0.8,
+    closeDelay: 200,
     onOpenChange: fn(),
   },
   argTypes: {
