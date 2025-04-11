@@ -49,6 +49,8 @@
 	--ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
 	--ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
 	--ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+	--animate-skeleton: skeletonAnimation 1s linear infinite;
 }
 
 @layer base {
@@ -100,5 +102,15 @@
 
 	[data-focusable] {
 		@apply outline-brand/40 outline-offset-2 focus-visible:outline-2;
+	}
+
+	@keyframes skeletonAnimation {
+		from {
+			transform: translateX(-100%);
+		}
+
+		to {
+			transform: translateX(120%);
+		}
 	}
 }

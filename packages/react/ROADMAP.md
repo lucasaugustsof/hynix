@@ -3,15 +3,14 @@
 ## Components to develop:
 
 - [x] Button
-- [x] Text
 - [x] Divider
 - [x] Loader
 - [x] Tooltip
 - [x] KBD
 - [x] Chip
 - [x] Badge
-- [ ] Progress
-- [ ] Skeleton
+- [x] Progress
+- [x] Skeleton
 - [ ] Input
 - [ ] Input OTP
 - [ ] Checkbox
