@@ -5,7 +5,7 @@ export function Footer() {
 
   return (
     <footer className={cn('absolute bottom-12')}>
-      <span className={cn('text-fg-1/40 text-sm leading-5.5')}>
+      <span className={cn('text-fg-1/40 text-sm/5.5')}>
         &copy; {currentYear} Hynix. Developed by{' '}
         <a
           href="https://github.com/lucasaugustsof"

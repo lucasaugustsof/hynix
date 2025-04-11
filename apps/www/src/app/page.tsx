@@ -7,10 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Footer } from '@/components/footer'
 
 import { cn } from '@/utilities/cn'
-import { getGithubStars } from '@/utilities/get-github-stars'
+import { fetchGithubStars } from '@/utilities/fetch-github-stars'
 
 export default async function Home() {
-  const githubStars = await getGithubStars()
+  const githubStars = await fetchGithubStars()
 
   return (
     <div
@@ -23,17 +23,15 @@ export default async function Home() {
         <Logo />
 
         <main className={cn('mt-6 mb-8 space-y-3')}>
-          <h1 data-typography="title" data-size="lg">
+          <h1 className={cn('font-semibold text-2xl/9.5 text-fg-1')}>
             Speed for purposeful{' '}
             <AnimatedUnderlinedText>developers</AnimatedUnderlinedText>
           </h1>
 
           <p
             className={cn(
-              'text-fg-1/70 [&>strong]:font-medium [&>strong]:text-fg-1',
+              'text-base text-fg-1/70 [&>strong]:font-medium [&>strong]:text-fg-1',
             )}
-            data-typography="body"
-            data-size="md"
           >
             A minimalist <strong>React</strong> component library powered by{' '}
             <strong>TailwindCSS</strong> and <strong>Ark UI</strong> —
@@ -52,7 +50,7 @@ export default async function Home() {
             Star on
             <span
               className={cn(
-                'rounded-lg bg-fill-2 px-1.5 py-px font-semibold text-fill-5 text-sm leading-5.5',
+                'rounded-lg bg-fill-2 px-1.5 py-px font-semibold text-fill-5 text-sm/5.5',
               )}
             >
               {githubStars}
