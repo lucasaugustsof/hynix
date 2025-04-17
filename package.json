@@ -44,12 +44,14 @@
 		"storybook-dark-mode": "4.0.2",
 		"turbo": "2.5.0",
 		"tw-animate-css": "1.2.5",
-		"typescript": "5.8.3",
-		"vite": "6.2.6"
+		"typescript": "^5",
+		"vite": "6.2.6",
+		"@types/react": "^19"
 	},
 	"license": "MIT",
 	"private": true,
 	"dependencies": {
+		"react": "^19.0.0",
 		"@tailwindcss/vite": "4.1.3",
 		"tailwindcss": "4.1.3"
 	}
