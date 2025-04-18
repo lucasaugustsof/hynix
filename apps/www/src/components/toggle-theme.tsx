@@ -67,7 +67,7 @@ export function ToggleTheme() {
             <ArkToggleGroup.Item
               className={cn(
                 'z-10 p-1.5',
-                '[&_svg]:size-4 [&_svg]:fill-fill-4 [&_svg]:transition-colors [&_svg]:duration-200 [&_svg]:ease-out-quad',
+                '[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:fill-fill-4 [&_svg]:transition-colors [&_svg]:duration-200 [&_svg]:ease-out-quad',
                 isSelected && '[&_svg]:fill-fill-5',
               )}
               value={theme}

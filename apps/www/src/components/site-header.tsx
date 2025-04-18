@@ -1,9 +1,10 @@
-import { Logo } from './logo'
+import LogoSvg from '@/assets/logo.svg'
+
 import { ToggleTheme } from './toggle-theme'
 
 import { cn } from '@/utilities/cn'
 
-export function Header() {
+export function SiteHeader() {
   return (
     <header
       className={cn(
@@ -11,7 +12,7 @@ export function Header() {
       )}
     >
       <div className={cn('flex items-center justify-between px-2 py-0.5')}>
-        <Logo />
+        <LogoSvg className={cn('size-6 shrink-0')} />
 
         <ToggleTheme />
       </div>

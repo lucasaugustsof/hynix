@@ -1,45 +1,50 @@
 import { RiArrowRightUpLine, RiGithubFill } from '@remixicon/react'
 
-import { Header } from '@/components/header'
-import { ComponentPreviewCard } from '@/components/component-preview-card'
-import { Footer } from '@/components/footer'
+import { SiteHeader } from '@/components/site-header'
+import { CardComponent } from '@/components/card-component'
+import { SiteFooter } from '@/components/site-footer'
 
 import { Button } from '@/components/ui/button'
+
+import ButtonSvg from '@/assets/thumbnails/button.svg'
+import AccordionSvg from '@/assets/thumbnails/accordion.svg'
+import InputSvg from '@/assets/thumbnails/input.svg'
+import CheckboxSvg from '@/assets/thumbnails/checkbox.svg'
+import RadioSvg from '@/assets/thumbnails/radio.svg'
 
 import { cn } from '@/utilities/cn'
 
 export default function Home() {
-  // @TODO: Remove this later
-  const components = [
+  const demoComponents = [
     {
       title: 'Button',
       description:
         'A highly customizable button component with multiple appearances, sizes, and states.',
+      thumbnail: ButtonSvg,
     },
     {
       title: 'Accordion',
       description:
         'An accessible accordion component to toggle content visibility in a structured way.',
+      thumbnail: AccordionSvg,
     },
     {
       title: 'Input',
       description:
         'Input field with clear visual states, accessibility support, and optional icons or messages.',
+      thumbnail: InputSvg,
     },
     {
       title: 'Checkbox',
       description:
         'Multi-select component with support for checked, indeterminate, and disabled states.',
+      thumbnail: CheckboxSvg,
     },
     {
       title: 'Radio',
       description:
         'Single-select component with accessible design and consistent visual feedback.',
-    },
-    {
-      title: 'Alert',
-      description:
-        'Feedback component with support for success, error, and informational messages.',
+      thumbnail: RadioSvg,
     },
   ]
 
@@ -49,7 +54,7 @@ export default function Home() {
         'mx-auto flex min-h-screen max-w-[58rem] flex-col border-black/12 border-x-[0.5px] dark:border-white/12',
       )}
     >
-      <Header />
+      <SiteHeader />
 
       <section className={cn('mt-20 flex-1 space-y-17 px-17')}>
         <main className={cn('max-w-lg space-y-8')}>
@@ -93,17 +98,20 @@ export default function Home() {
         </main>
 
         <div className={cn('grid grid-cols-3 gap-6')}>
-          {components.map(({ title, description }) => (
-            <ComponentPreviewCard
+          {demoComponents.map(({ title, description, thumbnail }) => (
+            <CardComponent
               key={title}
-              title={title}
-              description={description}
+              data={{
+                thumbnail,
+                title,
+                description,
+              }}
             />
           ))}
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   )
 }

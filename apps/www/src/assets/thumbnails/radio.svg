@@ -1,0 +1,54 @@
+<svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Radio</title>
+
+  <!-- First radio - checked -->
+  <mask id="path-1-inside-1_562_92" fill="white">
+    <path d="M45 86C45 79.9249 49.9249 75 56 75C62.0751 75 67 79.9249 67 86C67 92.0751 62.0751 97 56 97C49.9249 97 45 92.0751 45 86Z" />
+  </mask>
+  <path d="M45 86C45 79.9249 49.9249 75 56 75C62.0751 75 67 79.9249 67 86C67 92.0751 62.0751 97 56 97C49.9249 97 45 92.0751 45 86Z" fill="var(--color-brand)" />
+  <path d="M56 96C50.4772 96 46 91.5228 46 86H44C44 92.6274 49.3726 98 56 98V96ZM66 86C66 91.5228 61.5228 96 56 96V98C62.6274 98 68 92.6274 68 86H66ZM56 76C61.5228 76 66 80.4772 66 86H68C68 79.3726 62.6274 74 56 74V76ZM56 74C49.3726 74 44 79.3726 44 86H46C46 80.4772 50.4772 76 56 76V74Z" fill="var(--color-brand)" fill-opacity="0.18" mask="url(#path-1-inside-1_562_92)" />
+  <path d="M50 86C50 82.6863 52.6863 80 56 80C59.3137 80 62 82.6863 62 86C62 89.3137 59.3137 92 56 92C52.6863 92 50 89.3137 50 86Z" fill="var(--color-fill-1)" />
+  <path d="M79 86C79 83.7909 80.7909 82 83 82H191C193.209 82 195 83.7909 195 86C195 88.2091 193.209 90 191 90H83C80.7909 90 79 88.2091 79 86Z" fill="var(--color-fg-1)" fill-opacity="0.4" />
+
+  <!-- Second radio - unchecked -->
+  <mask id="path-5-inside-2_562_92" fill="white">
+    <path d="M45 120C45 113.925 49.9249 109 56 109C62.0751 109 67 113.925 67 120C67 126.075 62.0751 131 56 131C49.9249 131 45 126.075 45 120Z" />
+  </mask>
+  <path d="M45 120C45 113.925 49.9249 109 56 109C62.0751 109 67 113.925 67 120C67 126.075 62.0751 131 56 131C49.9249 131 45 126.075 45 120Z" fill="var(--color-fill-1)" />
+  <path d="M56 129C51.0294 129 47 124.971 47 120H43C43 127.18 48.8203 133 56 133V129ZM65 120C65 124.971 60.9706 129 56 129V133C63.1797 133 69 127.18 69 120H65ZM56 111C60.9706 111 65 115.029 65 120H69C69 112.82 63.1797 107 56 107V111ZM56 107C48.8203 107 43 112.82 43 120H47C47 115.029 51.0294 111 56 111V107Z" fill="var(--color-border)" mask="url(#path-5-inside-2_562_92)" />
+  <path d="M79 120C79 117.791 80.7909 116 83 116H191C193.209 116 195 117.791 195 120C195 122.209 193.209 124 191 124H83C80.7909 124 79 122.209 79 120Z" fill="var(--color-fg-1)" fill-opacity="0.4" />
+
+  <!-- Third radio - unchecked -->
+  <mask id="path-8-inside-3_562_92" fill="white">
+    <path d="M45 154C45 147.925 49.9249 143 56 143C62.0751 143 67 147.925 67 154C67 160.075 62.0751 165 56 165C49.9249 165 45 160.075 45 154Z" />
+  </mask>
+  <path d="M45 154C45 147.925 49.9249 143 56 143C62.0751 143 67 147.925 67 154C67 160.075 62.0751 165 56 165C49.9249 165 45 160.075 45 154Z" fill="var(--color-fill-1)" />
+  <path d="M56 163C51.0294 163 47 158.971 47 154H43C43 161.18 48.8203 167 56 167V163ZM65 154C65 158.971 60.9706 163 56 163V167C63.1797 167 69 161.18 69 154H65ZM56 145C60.9706 145 65 149.029 65 154H69C69 146.82 63.1797 141 56 141V145ZM56 141C48.8203 141 43 146.82 43 154H47C47 149.029 51.0294 145 56 145V141Z" fill="var(--color-border)" mask="url(#path-8-inside-3_562_92)" />
+  <path d="M79 154C79 151.791 80.7909 150 83 150H191C193.209 150 195 151.791 195 154C195 156.209 193.209 158 191 158H83C80.7909 158 79 156.209 79 154Z" fill="var(--color-fg-1)" fill-opacity="0.4" />
+
+  <!-- Guide lines -->
+  <line x1="43.25" y1="10" x2="43.25" y2="230" stroke="url(#paint0_radial_562_92)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <line x1="197.25" y1="10" x2="197.25" y2="230" stroke="url(#paint1_radial_562_92)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <line x1="10" y1="72.75" x2="230" y2="72.75" stroke="url(#paint2_radial_562_92)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <line x1="10" y1="166.75" x2="230" y2="166.75" stroke="url(#paint3_radial_562_92)" stroke-width="0.5" stroke-dasharray="2 2" />
+
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="paint0_radial_562_92" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(43 122.895) rotate(90.2675) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint1_radial_562_92" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(197 122.895) rotate(90.2675) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint2_radial_562_92" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(122.895 73) rotate(0.267477) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint3_radial_562_92" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(122.895 167) rotate(0.267477) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+</svg>

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { cn } from '@/utilities/cn'
 
-export function Footer() {
+export function SiteFooter() {
   return (
     <footer
       className={cn(

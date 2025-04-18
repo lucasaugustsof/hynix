@@ -1,0 +1,48 @@
+<svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Accordion</title>
+
+  <!-- Cards -->
+  <path d="M46.5 62C46.5 55.3726 51.8726 50 58.5 50H181.5C188.127 50 193.5 55.3726 193.5 62V74C193.5 80.6274 188.127 86 181.5 86H58.5C51.8726 86 46.5 80.6274 46.5 74V62Z" fill="var(--color-brand)" />
+  <path d="M46.5 106C46.5 99.3726 51.8726 94 58.5 94H181.5C188.127 94 193.5 99.3726 193.5 106V134C193.5 140.627 188.127 146 181.5 146H58.5C51.8726 146 46.5 140.627 46.5 134V106Z" fill="var(--color-brand)" />
+  <path d="M46.5 166C46.5 159.373 51.8726 154 58.5 154H181.5C188.127 154 193.5 159.373 193.5 166V178C193.5 184.627 188.127 190 181.5 190H58.5C51.8726 190 46.5 184.627 46.5 178V166Z" fill="var(--color-brand)" />
+
+  <!-- Text bars -->
+  <path d="M58.5 68C58.5 65.7909 60.2909 64 62.5 64H102.5C104.709 64 106.5 65.7909 106.5 68C106.5 70.2091 104.709 72 102.5 72H62.5C60.2909 72 58.5 70.2091 58.5 68Z" fill="var(--color-fg-2)" />
+  <path d="M58.5 110C58.5 107.791 60.2909 106 62.5 106H102.5C104.709 106 106.5 107.791 106.5 110C106.5 112.209 104.709 114 102.5 114H62.5C60.2909 114 58.5 112.209 58.5 110Z" fill="var(--color-fg-2)" />
+  <path d="M58.5 172C58.5 169.791 60.2909 168 62.5 168H102.5C104.709 168 106.5 169.791 106.5 172C106.5 174.209 104.709 176 102.5 176H62.5C60.2909 176 58.5 174.209 58.5 172Z" fill="var(--color-fg-2)" />
+
+  <!-- Secondary text -->
+  <path d="M58.5 126.5C58.5 125.119 59.6193 124 61 124H179C180.381 124 181.5 125.119 181.5 126.5C181.5 127.881 180.381 129 179 129H61C59.6193 129 58.5 127.881 58.5 126.5Z" fill="var(--color-fg-2)" fill-opacity="0.7" />
+  <path d="M58.5 135.5C58.5 134.119 59.6193 133 61 133H117C118.381 133 119.5 134.119 119.5 135.5C119.5 136.881 118.381 138 117 138H61C59.6193 138 58.5 136.881 58.5 135.5Z" fill="var(--color-fg-2)" fill-opacity="0.7" />
+
+  <!-- Arrows -->
+  <path d="M173.5 68.7813L176.8 65.4813L177.743 66.424L173.5 70.6667L169.257 66.424L170.2 65.4813L173.5 68.7813Z" fill="var(--color-fill-5)" />
+  <path d="M177.5 109.219L174.2 112.519L173.257 111.576L177.5 107.333L181.743 111.576L180.8 112.519L177.5 109.219Z" fill="var(--color-fill-5)" />
+  <path d="M173.5 172.781L176.8 169.481L177.743 170.424L173.5 174.667L169.257 170.424L170.2 169.481L173.5 172.781Z" fill="var(--color-fill-5)" />
+
+  <!-- Grid lines -->
+  <line x1="196.25" y1="10" x2="196.25" y2="230" stroke="url(#paint0_radial_551_107)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <line x1="10" y1="47.75" x2="230" y2="47.75" stroke="url(#paint1_radial_551_107)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <line x1="10" y1="191.75" x2="230" y2="191.75" stroke="url(#paint2_radial_551_107)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <path d="M45 10L45 230" stroke="url(#paint3_radial_551_107)" stroke-width="0.5" stroke-dasharray="2 2" />
+
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="paint0_radial_551_107" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 122.895) rotate(90.2675) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint1_radial_551_107" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(122.895 48) rotate(0.267477) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint2_radial_551_107" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(122.895 192) rotate(0.267477) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint3_radial_551_107" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(44.75 122.895) rotate(90.2675) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+</svg>

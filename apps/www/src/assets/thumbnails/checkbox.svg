@@ -1,0 +1,47 @@
+<svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Checkbox</title>
+
+  <!-- First checkbox - checked -->
+  <path d="M45 83C45 78.5817 48.5817 75 53 75H59C63.4183 75 67 78.5817 67 83V89C67 93.4183 63.4183 97 59 97H53C48.5817 97 45 93.4183 45 89V83Z" fill="var(--color-brand)" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M53.6 88.1373L61.2686 80.4686C61.8935 79.8438 62.9065 79.8438 63.5314 80.4686C64.1562 81.0935 64.1562 82.1065 63.5314 82.7314L54.7314 91.5314C54.1065 92.1562 53.0935 92.1562 52.4686 91.5314L48.4686 87.5314C47.8438 86.9065 47.8438 85.8935 48.4686 85.2686C49.0935 84.6438 50.1065 84.6438 50.7314 85.2686L53.6 88.1373Z" fill="var(--color-fg-2)" />
+  <path d="M79 86C79 83.7909 80.7909 82 83 82H191C193.209 82 195 83.7909 195 86C195 88.2091 193.209 90 191 90H83C80.7909 90 79 88.2091 79 86Z" fill="var(--color-fg-1)" fill-opacity="0.4" />
+
+  <!-- Second checkbox - checked -->
+  <path d="M45 117C45 112.582 48.5817 109 53 109H59C63.4183 109 67 112.582 67 117V123C67 127.418 63.4183 131 59 131H53C48.5817 131 45 127.418 45 123V117Z" fill="var(--color-brand)" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M53.6 122.137L61.2686 114.469C61.8935 113.844 62.9065 113.844 63.5314 114.469C64.1562 115.093 64.1562 116.107 63.5314 116.731L54.7314 125.531C54.1065 126.156 53.0935 126.156 52.4686 125.531L48.4686 121.531C47.8438 120.907 47.8438 119.893 48.4686 119.269C49.0935 118.644 50.1065 118.644 50.7314 119.269L53.6 122.137Z" fill="var(--color-fg-2)" />
+  <path d="M79 120C79 117.791 80.7909 116 83 116H191C193.209 116 195 117.791 195 120C195 122.209 193.209 124 191 124H83C80.7909 124 79 122.209 79 120Z" fill="var(--color-fg-1)" fill-opacity="0.4" />
+
+  <!-- Third checkbox - outline only -->
+  <mask id="path-7-inside-1_552_123" fill="white">
+    <path d="M45 151C45 146.582 48.5817 143 53 143H59C63.4183 143 67 146.582 67 151V157C67 161.418 63.4183 165 59 165H53C48.5817 165 45 161.418 45 157V151Z" />
+  </mask>
+  <path d="M45 151C45 146.582 48.5817 143 53 143H59C63.4183 143 67 146.582 67 151V157C67 161.418 63.4183 165 59 165H53C48.5817 165 45 161.418 45 157V151Z" fill="var(--color-fill-1)" />
+  <path d="M53 145H59V141H53V145ZM65 151V157H69V151H65ZM59 163H53V167H59V163ZM47 157V151H43V157H47ZM53 163C49.6863 163 47 160.314 47 157H43C43 162.523 47.4772 167 53 167V163ZM65 157C65 160.314 62.3137 163 59 163V167C64.5228 167 69 162.523 69 157H65ZM59 145C62.3137 145 65 147.686 65 151H69C69 145.477 64.5228 141 59 141V145ZM53 141C47.4772 141 43 145.477 43 151H47C47 147.686 49.6863 145 53 145V141Z" fill="var(--color-border)" mask="url(#path-7-inside-1_552_123)" />
+  <path d="M79 154C79 151.791 80.7909 150 83 150H191C193.209 150 195 151.791 195 154C195 156.209 193.209 158 191 158H83C80.7909 158 79 156.209 79 154Z" fill="var(--color-fg-1)" fill-opacity="0.4" />
+
+  <!-- Guide lines -->
+  <line x1="43.25" y1="10" x2="43.25" y2="230" stroke="url(#paint0_radial_552_123)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <line x1="197.25" y1="10" x2="197.25" y2="230" stroke="url(#paint1_radial_552_123)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <line x1="10" y1="72.75" x2="230" y2="72.75" stroke="url(#paint2_radial_552_123)" stroke-width="0.5" stroke-dasharray="2 2" />
+  <line x1="10" y1="166.75" x2="230" y2="166.75" stroke="url(#paint3_radial_552_123)" stroke-width="0.5" stroke-dasharray="2 2" />
+
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="paint0_radial_552_123" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(43 122.895) rotate(90.2675) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint1_radial_552_123" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(197 122.895) rotate(90.2675) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint2_radial_552_123" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(122.895 73) rotate(0.267477) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint3_radial_552_123" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(122.895 167) rotate(0.267477) scale(107.106 92.5017)">
+      <stop offset="0.7" stop-color="var(--color-border)" />
+      <stop offset="1" stop-color="var(--color-border)" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+</svg>
