@@ -6,7 +6,7 @@ import {
 } from '@ark-ui/react/toggle-group'
 
 import { RiComputerLine, RiSunFill, RiMoonFill } from '@remixicon/react'
-import { motion } from 'motion/react'
+import { motion } from '@/lib/motion'
 
 import { useTheme } from 'next-themes'
 
