@@ -1,6 +1,15 @@
 @import "@hynix/react/styles.css";
 
 @layer base {
+	:root {
+		--layout-content-max: 64rem;
+		--hairline-width: calc(1px / 2);
+	}
+
+	body {
+		@apply antialiased;
+	}
+
 	::selection {
 		@apply bg-highlight/20;
 	}

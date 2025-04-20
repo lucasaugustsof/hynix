@@ -11,7 +11,7 @@ export function SiteFooter() {
   return (
     <footer
       className={cn(
-        'mt-50 flex h-12 items-center justify-between border-t-[0.5px] px-10',
+        'flex h-12 items-center justify-between px-10',
         '*:text-fg-1/40 *:text-sm/5.5',
       )}
     >
