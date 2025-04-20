@@ -42,7 +42,7 @@ export function ToggleTheme() {
     <ArkToggleGroup.RootProvider
       value={toggleGroup}
       className={cn(
-        'inset-ring-[0.5px] inset-ring-border flex items-center gap-x-0.5 overflow-hidden rounded-full bg-surface-2 shadow-black/8 shadow-xs dark:shadow-white/8',
+        'inset-ring-(length:--hairline-width) inset-ring-border flex items-center gap-x-0.5 overflow-hidden rounded-full bg-surface-2 shadow-black/8 shadow-xs dark:shadow-white/8',
       )}
     >
       {availableThemes.map(({ theme, component }) => {
@@ -54,7 +54,7 @@ export function ToggleTheme() {
               <motion.span
                 layoutId="selected-theme"
                 className={cn(
-                  'inset-ring-[0.5px] inset-ring-border block aspect-square h-full rounded-full bg-surface-1',
+                  'inset-ring-(length:--hairline-width) inset-ring-border block aspect-square h-full rounded-full bg-surface-1',
                 )}
                 transition={{
                   type: 'tween',
