@@ -7,9 +7,8 @@ import AccordionSvg from '@/assets/thumbnails/accordion.svg'
 import InputSvg from '@/assets/thumbnails/input.svg'
 import CheckboxSvg from '@/assets/thumbnails/checkbox.svg'
 import RadioSvg from '@/assets/thumbnails/radio.svg'
-import CircleDashedTopLeftCutSvg from '@/assets/circle-dashed-top-left-cut.svg'
 
-export function GridComponents() {
+export function ComponentsSection() {
   const demoComponents = [
     {
       title: 'Button',
@@ -44,12 +43,17 @@ export function GridComponents() {
   ]
 
   return (
-    <div className={cn('grid grid-cols-[1fr_var(--layout-content-max)_1fr]')}>
+    <section className={cn('grid-layout')}>
       <div
         className={cn('border-r-(length:--hairline-width) border-r-border')}
       />
 
-      <div className={cn('relative grid grid-cols-3 gap-6 px-17 pt-2 pb-20')}>
+      <div
+        className={cn(
+          'no-scrollbar relative flex snap-x snap-mandatory items-center gap-6 overflow-x-scroll px-8 pt-2 pb-24',
+          'lg:grid lg:grid-cols-3 lg:px-17',
+        )}
+      >
         {demoComponents.map(({ thumbnail, title, description }) => {
           return (
             <CardComponent
@@ -60,20 +64,15 @@ export function GridComponents() {
                 description,
                 to: '/',
               }}
+              className={cn('snap-center')}
             />
           )
         })}
-
-        <CircleDashedTopLeftCutSvg
-          className={cn(
-            'absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2',
-          )}
-        />
       </div>
 
       <div
         className={cn('border-l-(length:--hairline-width) border-l-border')}
       />
-    </div>
+    </section>
   )
 }

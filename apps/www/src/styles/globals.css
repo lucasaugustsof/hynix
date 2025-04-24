@@ -3,7 +3,7 @@
 @layer base {
 	:root {
 		--layout-content-max: 64rem;
-		--hairline-width: calc(1px / 2);
+		--hairline-width: 0.5px;
 	}
 
 	body {
@@ -12,5 +12,20 @@
 
 	::selection {
 		@apply bg-highlight/20;
+	}
+}
+
+@layer utilities {
+	.grid-layout {
+		@apply grid grid-cols-[1fr_minmax(auto,var(--layout-content-max))_1fr];
+	}
+
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.no-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 }

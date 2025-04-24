@@ -1,24 +1,23 @@
 import { cn } from '@/utilities/cn'
 
-import { GridHeader } from './parts/grid-header'
-import { GridContent } from './parts/grid-content'
-import { GridComponents } from './parts/grid-components'
-import { GridFooter } from './parts/grid-footer'
+import { Header } from './parts/header'
+import { ContentSection } from './parts/content.section'
+import { ComponentsSection } from './parts/components.section'
+import { Footer } from './parts/footer'
 
 import { Separator } from '@/components/separator'
 
 export default function Home() {
   return (
-    <div className={cn('min-h-dvh w-[inherit]')}>
-      <GridHeader />
+    <div className={cn('flex min-h-dvh w-[inherit] flex-col')}>
+      <Header />
 
-      <section className={cn('flex flex-col')}>
-        <GridContent />
-        <Separator />
-        <GridComponents />
-      </section>
+      <ContentSection />
+      <Separator />
 
-      <GridFooter />
+      <ComponentsSection />
+
+      <Footer />
     </div>
   )
 }

@@ -4,21 +4,16 @@ import { cn } from '@/utilities/cn'
 
 import { Button } from '@/components/ui/button'
 
-import CircleDashedTopRightCutSvg from '@/assets/circle-dashed-top-right-cut.svg'
-
-export function GridContent() {
+export function ContentSection() {
   return (
-    <div
-      className={cn(
-        'grid grid-cols-[1fr_var(--layout-content-max)_1fr]',
-        'border-y-(length:--hairline-width)',
-      )}
-    >
+    <section className={cn('grid-layout border-y-(length:--hairline-width)')}>
       <div
-        className={cn('border-r-(length:--hairline-width) border-r-border')}
+        className={cn(
+          'lg:border-r-(length:--hairline-width) lg:border-r-border',
+        )}
       />
 
-      <div className={cn('relative py-2 pl-17')}>
+      <div className={cn('relative py-2 pl-4', 'lg:pl-17')}>
         <main className={cn('max-w-lg space-y-8')}>
           <div>
             <h1 className={cn('mb-3 font-semibold text-3xl/10.5 text-fg-1')}>
@@ -58,17 +53,13 @@ export function GridContent() {
             </Button>
           </div>
         </main>
-
-        <CircleDashedTopRightCutSvg
-          className={cn(
-            '-translate-y-1/2 -translate-x-1/2 absolute top-0 left-0',
-          )}
-        />
       </div>
 
       <div
-        className={cn('border-l-(length:--hairline-width) border-l-border')}
+        className={cn(
+          'lg:border-l-(length:--hairline-width) lg:border-l-border',
+        )}
       />
-    </div>
+    </section>
   )
 }

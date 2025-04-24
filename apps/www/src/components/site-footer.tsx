@@ -11,8 +11,8 @@ export function SiteFooter() {
   return (
     <footer
       className={cn(
-        'flex h-12 items-center justify-between px-10',
-        '*:text-fg-1/40 *:text-sm/5.5',
+        'flex flex-col justify-between px-4 py-3 *:text-fg-1/40 *:text-sm/5.5',
+        'sm:flex-row sm:items-center sm:px-10',
       )}
     >
       <span>&copy; {currentYear} Hynix</span>

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { cn } from '@/utilities/cn'
 
-type CardComponentProps = {
+type CardComponentProps = React.ComponentPropsWithRef<'article'> & {
   data: {
     thumbnail: React.FC<React.ComponentProps<'svg'>>
     title: string
@@ -11,14 +11,21 @@ type CardComponentProps = {
   }
 }
 
-export function CardComponent({ data }: CardComponentProps) {
+export function CardComponent({
+  className,
+  data,
+  ...props
+}: CardComponentProps) {
   const { thumbnail: Thumbnail, title, description, to = '/' } = data
 
   return (
     <article
+      {...props}
       className={cn(
         'group relative rounded-[calc(var(--radius)_+_(var(--spacing)_*_1.5))] [--radius:0.875rem]',
         'inset-ring-[0.5px] inset-ring-border space-y-2.5 bg-surface-1 p-1.5 shadow-black/8 shadow-xs dark:shadow-white/8',
+        'min-w-[15.5rem]',
+        className,
       )}
     >
       <figure

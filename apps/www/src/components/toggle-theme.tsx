@@ -11,6 +11,7 @@ import { motion } from '@/lib/motion'
 import { useTheme } from 'next-themes'
 
 import { cn } from '@/utilities/cn'
+import { isMobileDevice } from '@/utilities/is-mobile-device'
 
 export function ToggleTheme() {
   const availableThemes = [
@@ -33,8 +34,12 @@ export function ToggleTheme() {
   })
   const { theme: currentTheme, setTheme } = useTheme()
 
-  function handleChangeTheme(theme: string) {
-    new Audio('./sound/flashlight-click-sound.mp3').play()
+  async function handleChangeTheme(theme: string) {
+    if (!isMobileDevice()) {
+      const sound = new Audio('./sound/flashlight-click-sound.mp3')
+      await sound.play()
+    }
+
     setTheme(theme)
   }
 
@@ -42,7 +47,7 @@ export function ToggleTheme() {
     <ArkToggleGroup.RootProvider
       value={toggleGroup}
       className={cn(
-        'inset-ring-(length:--hairline-width) inset-ring-border flex items-center gap-x-0.5 overflow-hidden rounded-full bg-surface-2 shadow-black/8 shadow-xs dark:shadow-white/8',
+        'inset-ring-(length:--hairline-width) inset-ring-border flex items-center gap-x-0.5 overflow-hidden rounded-full bg-surface-2',
       )}
     >
       {availableThemes.map(({ theme, component }) => {
