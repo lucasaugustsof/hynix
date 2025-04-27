@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Loader, type LoaderProps } from 'registry/components/loader'
+import { Loader, type LoaderProps } from '@r/components/loader'
 
 type LoaderStory = StoryObj<LoaderProps>
 

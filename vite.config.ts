@@ -10,7 +10,7 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: 'registry',
+        find: '@r',
         replacement: path.resolve(__dirname, 'packages/react/src'),
       },
     ],

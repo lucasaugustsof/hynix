@@ -3,15 +3,15 @@ import { fn } from '@storybook/test'
 
 import { RiFocus3Line } from '@remixicon/react'
 
-import { Button } from 'registry/components/button'
+import { Button } from '@r/components/button'
 import {
   Tooltip,
   TooltipContent,
   type TooltipProps,
   TooltipTrigger,
-} from 'registry/components/tooltip'
+} from '@r/components/tooltip'
 
-import { cn } from 'registry/utilities/cn'
+import { cn } from '@r/utilities/cn'
 
 type TooltipStory = StoryObj<TooltipProps>
 

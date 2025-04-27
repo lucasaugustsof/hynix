@@ -1,4 +1,4 @@
-import { cn } from 'registry/utilities/cn'
+import { cn } from '@r/utilities/cn'
 
 type SkeletonProps = Omit<React.ComponentPropsWithRef<'div'>, 'children'> & {
   shape?: 'square' | 'circle'

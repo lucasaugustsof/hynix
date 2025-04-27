@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button, type ButtonProps } from 'registry/components/button'
+import { Button, type ButtonProps } from '@r/components/button'
 
 import { ArrowLeft, ArrowRight, Link } from 'lucide-react'
 

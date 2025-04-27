@@ -1,7 +1,7 @@
 import { type Assign, ark } from '@ark-ui/react'
 
-import { cn } from 'registry/utilities/cn'
-import { type VariantProps, tv } from 'registry/utilities/tv'
+import { cn } from '@r/utilities/cn'
+import { type VariantProps, tv } from '@r/utilities/tv'
 
 type BadgeProps = Assign<
   React.CustomComponentPropsWithRef<typeof ark.div>,

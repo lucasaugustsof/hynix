@@ -1,4 +1,4 @@
-import { cn } from 'registry/utilities/cn'
+import { cn } from '@r/utilities/cn'
 
 type DividerTypes = 'default' | 'label-left' | 'label-center' | 'label-right'
 

@@ -27,7 +27,6 @@
 		"@storybook/addon-a11y": "^8.6.12",
 		"@storybook/addon-essentials": "^8.6.12",
 		"@storybook/addon-interactions": "^8.6.12",
-		"@storybook/addon-onboarding": "^8.6.12",
 		"@storybook/addon-themes": "^8.6.12",
 		"@storybook/addons": "7.6.17",
 		"@storybook/blocks": "^8.6.12",
@@ -36,21 +35,21 @@
 		"@storybook/react-vite": "^8.6.12",
 		"@storybook/test": "^8.6.12",
 		"@storybook/theming": "^8.6.12",
-		"@vitejs/plugin-react": "4.3.4",
+		"@vitejs/plugin-react": "4.4.1",
 		"husky": "9.1.7",
 		"npkill": "0.12.2",
 		"storybook": "^8.6.12",
 		"storybook-addon-tag-badges": "^1.4.0",
 		"storybook-dark-mode": "4.0.2",
-		"turbo": "2.5.0",
-		"tw-animate-css": "1.2.5",
+		"turbo": "2.5.2",
+		"tw-animate-css": "1.2.8",
 		"typescript": "5.8.3",
-		"vite": "6.2.6"
+		"vite": "6.3.3"
 	},
 	"license": "MIT",
 	"private": true,
 	"dependencies": {
-		"@tailwindcss/vite": "4.1.3",
-		"tailwindcss": "4.1.3"
+		"@tailwindcss/vite": "4.1.4",
+		"tailwindcss": "4.1.4"
 	}
 }

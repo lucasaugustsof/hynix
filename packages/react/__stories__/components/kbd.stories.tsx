@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Kbd, type KbdProps } from 'registry/components/kbd'
+import { Kbd, type KbdProps } from '@r/components/kbd'
 
 type KbdStory = StoryObj<KbdProps>
 

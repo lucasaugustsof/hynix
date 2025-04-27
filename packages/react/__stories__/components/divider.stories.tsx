@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Divider, type DividerProps } from 'registry/components/divider'
+import { Divider, type DividerProps } from '@r/components/divider'
 
 type DividerStory = StoryObj<DividerProps>
 

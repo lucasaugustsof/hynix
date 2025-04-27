@@ -2,9 +2,9 @@ import { useId } from 'react'
 
 import type { Assign } from '@ark-ui/react'
 
-import { cn } from 'registry/utilities/cn'
-import { recursiveClone } from 'registry/utilities/recursive-clone'
-import { type VariantProps, tv } from 'registry/utilities/tv'
+import { cn } from '@r/utilities/cn'
+import { recursiveClone } from '@r/utilities/recursive-clone'
+import { type VariantProps, tv } from '@r/utilities/tv'
 
 import { RiCloseLine } from '@remixicon/react'
 

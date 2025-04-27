@@ -1,7 +1,7 @@
 import { Tooltip as ArkTooltip, useTooltip } from '@ark-ui/react/tooltip'
 import type * as ArkTooltipDefs from '@ark-ui/react/tooltip'
 
-import { cn } from 'registry/utilities/cn'
+import { cn } from '@r/utilities/cn'
 
 // Tooltip ↴
 

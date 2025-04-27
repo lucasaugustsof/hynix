@@ -12,9 +12,9 @@ import type * as ArkProgressBarDefs from '@ark-ui/react/progress'
 
 import NumberFlow from '@number-flow/react'
 
-import { cn } from 'registry/utilities/cn'
-import { recursiveClone } from 'registry/utilities/recursive-clone'
-import { type VariantProps, tv } from 'registry/utilities/tv'
+import { cn } from '@r/utilities/cn'
+import { recursiveClone } from '@r/utilities/recursive-clone'
+import { type VariantProps, tv } from '@r/utilities/tv'
 
 type ProgressBarSharedProps = VariantProps<typeof progressBarVariants>
 

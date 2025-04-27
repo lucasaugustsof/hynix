@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import {
-  Chip,
-  ChipClose,
-  ChipLabel,
-  type ChipProps,
-} from 'registry/components/chip'
+import { Chip, ChipClose, ChipLabel, type ChipProps } from '@r/components/chip'
 
 type ChipStory = StoryObj<ChipProps>
 

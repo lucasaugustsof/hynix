@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button } from 'registry/components/button'
+import { Button } from '@r/components/button'
 import {
   ProgressBar,
   type ProgressBarProps,
@@ -8,7 +8,7 @@ import {
   ProgressBarTrack,
   ProgressBarValueText,
   useProgress,
-} from 'registry/components/progress-bar'
+} from '@r/components/progress-bar'
 
 import { RiAddLine, RiSubtractLine } from '@remixicon/react'
 
