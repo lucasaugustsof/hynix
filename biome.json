@@ -40,7 +40,8 @@
 			},
 			"a11y": {
 				"useFocusableInteractive": "off",
-				"useSemanticElements": "off"
+				"useSemanticElements": "off",
+				"noLabelWithoutControl": "off"
 			}
 		}
 	},

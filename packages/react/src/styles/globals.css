@@ -120,17 +120,21 @@
 		@apply bg-surface-1 text-fg-1;
 	}
 
+	::placeholder {
+		@apply text-fg-1/70;
+	}
+
 	[data-focusable] {
 		@apply outline-brand/40 outline-offset-2 focus-visible:outline-2;
 	}
+}
 
-	@keyframes skeletonAnimation {
-		from {
-			transform: translateX(-100%);
-		}
+@keyframes skeletonAnimation {
+	from {
+		transform: translateX(-100%);
+	}
 
-		to {
-			transform: translateX(120%);
-		}
+	to {
+		transform: translateX(120%);
 	}
 }
