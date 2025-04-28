@@ -23,7 +23,7 @@ const inputVariantsSlots = tv({
       'group inline-flex min-w-[15rem] overflow-hidden rounded-xl bg-surface-1 ring-1 ring-border',
       'transition-[background-color,box-shadow] duration-150 ease-in-out',
       // hover
-      'not-focus-within:has-enabled:hover:bg-fill-1 not-focus-within:has-enabled:hover:ring-2',
+      'not-focus-within:has-enabled:hover:ring-2',
       // focus
       'focus-within:bg-surface-2 focus-within:ring-2 focus-within:ring-brand',
       // disabled
@@ -54,7 +54,11 @@ const inputVariantsSlots = tv({
         addon: ['text-base [&_svg]:size-6'],
       },
       lg: {
-        root: 'h-14',
+        root: [
+          'h-14',
+          // focus
+          'focus-within:ring-3',
+        ],
         input: 'pr-4 pl-5 text-lg/7',
         addon: [
           'text-lg/7 [&_svg]:size-7',

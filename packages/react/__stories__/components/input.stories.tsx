@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { fn } from '@storybook/test'
 
 import { Input, type InputProps } from '@r/components/input'
 
@@ -14,6 +15,7 @@ const meta: Meta<InputProps> = {
     suffix: '',
     suffixStyling: false,
     invalid: false,
+    onChange: fn(),
   },
   argTypes: {
     size: {
@@ -72,6 +74,12 @@ const meta: Meta<InputProps> = {
       description: 'Applies visual styling to the suffix addon.',
       table: {
         category: 'Addons',
+      },
+    },
+    onChange: {
+      control: false,
+      table: {
+        disable: true,
       },
     },
   },

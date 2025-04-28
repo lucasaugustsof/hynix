@@ -14,7 +14,7 @@ const textareaVariants = tv({
   base: [
     'peer inline-flex resize rounded-xl bg-surface-1 outline-none ring-1 ring-border',
     'transition-[background-color,box-shadow] duration-150 ease-in-out',
-    'font-medium font-sans text-fg-1 tracking-normal caret-brand',
+    'font-medium font-sans text-fg-1 tracking-normal caret-brand placeholder:select-none',
     // hover
     'not-focus-visible:enabled:hover:ring-2',
     // focus
