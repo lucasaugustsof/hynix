@@ -48,6 +48,10 @@
 	--ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
 	--ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
+	--breakpoint-sm: 22.5rem;
+	--breakpoint-md: 60rem;
+	--breakpoint-lg: 90rem;
+
 	--animate-skeleton: skeletonAnimation 1s linear infinite;
 }
 
