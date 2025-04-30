@@ -3,14 +3,15 @@ import type { Meta, StoryObj } from '@storybook/react'
 import {
   TabsToggle,
   TabsToggleList,
+  type TabsToggleProps,
   TabsToggleTrigger,
 } from '@r/components/tabs-toggle'
 
-const meta: Meta = {
+const meta: Meta<TabsToggleProps> = {
   title: 'components/TabsToggle',
-  component() {
+  component(args) {
     return (
-      <TabsToggle defaultValue="overview">
+      <TabsToggle {...args} defaultValue="overview">
         <TabsToggleList>
           <TabsToggleTrigger value="overview">Overview</TabsToggleTrigger>
           <TabsToggleTrigger value="analytics">Analytics</TabsToggleTrigger>
@@ -21,6 +22,19 @@ const meta: Meta = {
       </TabsToggle>
     )
   },
+  args: {
+    size: 'md',
+  },
+  argTypes: {
+    size: {
+      control: 'inline-radio',
+      options: ['sm', 'md', 'lg'],
+      description: 'Controls the size of the toggle buttons',
+      table: {
+        category: 'Visual',
+      },
+    },
+  },
   parameters: {
     layout: 'centered',
   },
@@ -28,6 +42,6 @@ const meta: Meta = {
 
 export default meta
 
-type TabsToggleStory = StoryObj
+type TabsToggleStory = StoryObj<TabsToggleProps>
 
 export const Default: TabsToggleStory = {}
