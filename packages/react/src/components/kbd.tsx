@@ -3,7 +3,7 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 const kbdVariants = tv({
   base: [
-    'inline-flex items-center justify-center whitespace-nowrap align-middle font-medium font-mono',
+    'inline-flex items-center justify-center whitespace-nowrap align-middle font-medium font-mono tracking-widest',
   ],
   variants: {
     variant: {

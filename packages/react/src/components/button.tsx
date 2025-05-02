@@ -13,7 +13,7 @@ const buttonVariants = tv({
     [
       'isolate inline-flex cursor-pointer select-none items-center justify-center whitespace-nowrap rounded-xl font-sans font-semibold tracking-normal',
       'not-disabled:inset-ring-1 disabled:cursor-not-allowed disabled:bg-fill-1 disabled:text-disabled',
-      'transition-[background-color,scale] ease-out-quad not-disabled:active:scale-98',
+      'transition-colors ease-out-quad',
     ],
   ],
   variants: {
