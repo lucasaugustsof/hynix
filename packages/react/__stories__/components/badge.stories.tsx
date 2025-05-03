@@ -26,17 +26,16 @@ const meta: Meta<BadgeProps> = {
     },
     variant: {
       name: 'Variant',
-      description: 'Defines the color scheme of the badge.',
+      description: 'Defines the visual style of the badge.',
       control: 'inline-radio',
       options: ['default', 'warning', 'success', 'danger'],
       table: {
-        category: 'Appearance',
+        category: 'Visual',
       },
     },
     active: {
       name: 'Active',
-      description:
-        'Sets the badge to an active state, which changes its appearance.',
+      description: 'Indicates whether the badge is in an active state.',
       control: 'boolean',
       table: {
         category: 'State',
@@ -46,26 +45,29 @@ const meta: Meta<BadgeProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: [],
 }
 
 export default meta
 
-export const Default: BadgeStory = {}
+export const Basic: BadgeStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic usage of the `Badge` component with default props.',
+      },
+    },
+  },
+}
 
-export const Interactive: BadgeStory = {
+export const Clickable: BadgeStory = {
   argTypes: {
     active: {
-      name: 'Active',
       control: false,
     },
   },
   render(args) {
     const [active, setActive] = useState(false)
-
-    function toggleActive() {
-      setActive(!active)
-    }
+    const toggleActive = () => setActive(!active)
 
     return (
       <Badge {...args} active={active} onClick={toggleActive} asChild>
@@ -75,10 +77,10 @@ export const Interactive: BadgeStory = {
   },
 }
 
-export const WithIconOnly: BadgeStory = {
-  render() {
+export const WithIcon: BadgeStory = {
+  render(args) {
     return (
-      <Badge>
+      <Badge {...args}>
         Read More
         <RiArrowRightUpLine />
       </Badge>

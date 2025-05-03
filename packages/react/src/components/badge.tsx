@@ -3,23 +3,19 @@ import { type Assign, ark } from '@ark-ui/react'
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-type BadgeProps = Assign<
-  React.CustomComponentPropsWithRef<typeof ark.div>,
-  VariantProps<typeof badgeVariants>
-> & {
-  active?: boolean
-}
+//---------------------------------
+// Variants
+//---------------------------------
 
 const badgeVariants = tv({
   base: [
     'isolate inline-flex h-6 items-center gap-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-xs',
-    'transition-colors ease-in-out',
-    '[&_svg]:size-4 [&_svg]:fill-fill-4',
+    'transition-colors ease-in-out [&_svg]:size-4',
   ],
   variants: {
     variant: {
       default: [
-        'border-border bg-surface-2 text-fg-1',
+        'border-border bg-surface-2 text-fg-1 [&_svg]:fill-fill-4',
         'data-[state=active]:border-brand data-[state=active]:bg-brand data-[state=active]:text-fg-2',
         'data-[state=inactive]:hover:bg-fill-1',
       ],
@@ -48,6 +44,21 @@ const badgeVariants = tv({
   },
 })
 
+//---------------------------------
+// Types
+//---------------------------------
+
+type BadgeProps = Assign<
+  React.CustomComponentPropsWithRef<typeof ark.div>,
+  VariantProps<typeof badgeVariants>
+> & {
+  active?: boolean
+}
+
+//---------------------------------
+// Badge
+//---------------------------------
+
 function Badge({ className, variant, active = false, ...props }: BadgeProps) {
   return (
     <ark.div
@@ -64,6 +75,10 @@ function Badge({ className, variant, active = false, ...props }: BadgeProps) {
     />
   )
 }
+
+//---------------------------------
+// Exports
+//---------------------------------
 
 export { Badge, badgeVariants }
 export type { BadgeProps }

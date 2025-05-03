@@ -55,4 +55,15 @@ export default meta
 
 type AvatarStory = StoryObj<AvatarProps>
 
-export const Default: AvatarStory = {}
+export const Basic: AvatarStory = {}
+
+export const Fallback: AvatarStory = {
+  args: {
+    src: '',
+  },
+  argTypes: {
+    src: {
+      control: false,
+    },
+  },
+}
