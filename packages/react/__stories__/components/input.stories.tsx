@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
+import { RiEyeLine, RiSearchLine } from '@remixicon/react'
+
 import { Input, type InputProps } from '@r/components/input'
 
 const meta: Meta<InputProps> = {
@@ -11,8 +13,8 @@ const meta: Meta<InputProps> = {
     placeholder: 'Type something...',
     disabled: false,
     prefix: '',
-    prefixStyling: false,
     suffix: '',
+    prefixStyling: false,
     suffixStyling: false,
     invalid: false,
     onChange: fn(),
@@ -21,59 +23,49 @@ const meta: Meta<InputProps> = {
     size: {
       control: 'inline-radio',
       options: ['sm', 'md', 'lg'],
-      description: 'Controls the size of the input field.',
+      description: 'Adjusts the input size.',
       table: {
         category: 'Visual',
       },
     },
     placeholder: {
       control: 'text',
-      description: 'Placeholder text displayed when the input is empty.',
       table: {
         category: 'Content',
       },
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the input field, preventing user interaction.',
       table: {
         category: 'State',
       },
     },
     invalid: {
       control: 'boolean',
-      description:
-        'Marks the input as invalid, applying visual and semantic error styles.',
       table: {
         category: 'State',
       },
     },
     prefix: {
-      control: 'text',
-      description: 'Optional content displayed before the input field.',
+      control: false,
       table: {
-        category: 'Addons',
-      },
-    },
-    prefixStyling: {
-      control: 'boolean',
-      description: 'Applies visual styling to the prefix addon.',
-      table: {
-        category: 'Addons',
+        category: 'Complement',
       },
     },
     suffix: {
-      control: 'text',
-      description: 'Optional content displayed after the input field.',
+      control: false,
       table: {
-        category: 'Addons',
+        category: 'Complement',
+      },
+    },
+    prefixStyling: {
+      table: {
+        category: 'Complement',
       },
     },
     suffixStyling: {
-      control: 'boolean',
-      description: 'Applies visual styling to the suffix addon.',
       table: {
-        category: 'Addons',
+        category: 'Complement',
       },
     },
     onChange: {
@@ -90,6 +82,20 @@ const meta: Meta<InputProps> = {
 
 export default meta
 
-export const Default: StoryObj<InputProps> = {
-  name: 'Default',
+type InputStory = StoryObj<InputProps>
+
+export const Basic: InputStory = {}
+
+export const WithPrefix: InputStory = {
+  name: 'With Prefix Icon',
+  render: args => (
+    <Input {...args} prefix={<RiSearchLine />} placeholder="Search..." />
+  ),
+}
+
+export const WithSuffix: InputStory = {
+  name: 'With Suffix Icon',
+  render: args => (
+    <Input {...args} suffix={<RiEyeLine />} placeholder="Enter password" />
+  ),
 }
