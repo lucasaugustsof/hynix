@@ -9,7 +9,7 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 const badgeVariants = tv({
   base: [
-    'isolate inline-flex h-6 items-center gap-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-xs',
+    'isolate inline-flex h-6 w-fit items-center gap-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-xs',
     'transition-colors ease-in-out [&_svg]:size-4',
   ],
   variants: {

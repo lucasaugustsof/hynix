@@ -108,9 +108,7 @@
 	*,
 	*::after,
 	*::before {
-		@apply antialiased;
-
-		border-color: var(--color-border, currentColor);
+		@apply border-border/60 antialiased;
 
 		font-synthesis-weight: none;
 		text-rendering: optimizeLegibility;

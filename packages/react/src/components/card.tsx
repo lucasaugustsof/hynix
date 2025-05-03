@@ -1,10 +1,23 @@
 import * as React from 'react'
 
-import type { Assign } from '@ark-ui/react'
+import { type Assign, ark } from '@ark-ui/react'
 
 import { cn } from '@r/utilities/cn'
 import { recursiveClone } from '@r/utilities/recursive-clone'
 import { type VariantProps, tv } from '@r/utilities/tv'
+
+//---------------------------------
+// Constants
+//---------------------------------
+
+const CARD_PARTS = {
+  Root: 'Card.Root',
+  Header: 'Card.Header',
+  Title: 'Card.Title',
+  Body: 'Card.Body',
+  Description: 'Card.Description',
+  Footer: 'Card.Footer',
+}
 
 //---------------------------------
 // Variants
@@ -12,7 +25,7 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 const cardVariantsSlots = tv({
   slots: {
-    root: 'inset-ring-1 inset-ring-surface-1 h-fit rounded-xl border bg-surface-2',
+    root: 'h-fit rounded-xl border bg-surface-2 shadow-black/8 shadow-xs dark:shadow-white/8',
     header: 'flex flex-col gap-2.5',
     title: 'mb-2 line-clamp-2 text-pretty font-bold font-sans text-fg-1',
     description: 'text-pretty font-normal font-sans text-fg-1',
@@ -61,22 +74,21 @@ const { root, header, body, title, description, footer } = cardVariantsSlots()
 //---------------------------------
 
 type CardSharedProps = VariantProps<typeof cardVariantsSlots>
-type CardSlots = `Card${Capitalize<keyof (typeof cardVariantsSlots)['slots']>}`
 
 type CardProps = Assign<React.ComponentPropsWithRef<'div'>, CardSharedProps>
 
 //---------------------------------
-// Card
+// Root
 //---------------------------------
 
-function Card({ className, children, size, ...props }: CardProps) {
+function Root({ className, children, size, ...props }: CardProps) {
   const keyPrefix = React.useId()
 
   const extendedChildrenWithInjectedProps = recursiveClone(children, {
     inject: {
       size,
     },
-    match: ['CardTitle', 'CardDescription'] as CardSlots[],
+    match: [CARD_PARTS.Title, CARD_PARTS.Description],
     keyPrefix,
   })
 
@@ -97,13 +109,13 @@ function Card({ className, children, size, ...props }: CardProps) {
   )
 }
 
-Card.displayName = 'Card'
+Root.displayName = CARD_PARTS.Root
 
 //---------------------------------
-// CardHeader
+// Header
 //---------------------------------
 
-function CardHeader({
+function Header({
   className,
   ...props
 }: React.ComponentPropsWithRef<'header'>) {
@@ -121,16 +133,13 @@ function CardHeader({
   )
 }
 
-CardHeader.displayName = 'CardHeader'
+Header.displayName = CARD_PARTS.Header
 
 //---------------------------------
-// CardBody
+// Body
 //---------------------------------
 
-function CardBody({
-  className,
-  ...props
-}: React.ComponentPropsWithRef<'main'>) {
+function Body({ className, ...props }: React.ComponentPropsWithRef<'main'>) {
   return (
     <main
       {...props}
@@ -145,20 +154,20 @@ function CardBody({
   )
 }
 
-CardBody.displayName = 'CardBody'
+Body.displayName = CARD_PARTS.Body
 
 //---------------------------------
-// CardTitle
+// Title
 //---------------------------------
 
-function CardTitle({
+function Title({
   className,
   size,
   id,
   ...props
-}: Assign<React.ComponentPropsWithRef<'h3'>, CardSharedProps>) {
+}: Assign<React.CustomComponentPropsWithRef<typeof ark.h3>, CardSharedProps>) {
   return (
-    <h3
+    <ark.h3
       {...props}
       className={cn(
         title({
@@ -172,20 +181,20 @@ function CardTitle({
   )
 }
 
-CardTitle.displayName = 'CardTitle'
+Title.displayName = CARD_PARTS.Title
 
 //---------------------------------
-// CardDescription
+// Description
 //---------------------------------
 
-function CardDescription({
+function Description({
   className,
   size,
   id,
   ...props
-}: Assign<React.ComponentPropsWithRef<'p'>, CardSharedProps>) {
+}: Assign<React.CustomComponentPropsWithRef<typeof ark.p>, CardSharedProps>) {
   return (
-    <p
+    <ark.p
       {...props}
       className={cn(
         description({
@@ -199,13 +208,13 @@ function CardDescription({
   )
 }
 
-CardDescription.displayName = 'CardDescription'
+Description.displayName = CARD_PARTS.Description
 
 //---------------------------------
-// CardFooter
+// Footer
 //---------------------------------
 
-function CardFooter({
+function Footer({
   className,
   size,
   ...props
@@ -213,21 +222,30 @@ function CardFooter({
   return (
     <footer
       {...props}
-      className={footer({
-        className,
-        size,
-      })}
+      className={cn(
+        footer({
+          className,
+          size,
+        }),
+      )}
       data-scope="card"
       data-part="footer"
     />
   )
 }
 
-CardFooter.displayName = 'CardFooter'
+Footer.displayName = CARD_PARTS.Footer
 
 //---------------------------------
 // Exports
 //---------------------------------
 
-export { Card, CardHeader, CardBody, CardTitle, CardDescription, CardFooter }
+export const Card = {
+  Root,
+  Header,
+  Title,
+  Body,
+  Description,
+  Footer,
+}
 export type { CardProps }

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
+import { Button } from '@r/components/button'
 import {
   DropdownMenu,
   type DropdownMenuProps,
 } from '@r/components/dropdown-menu'
-import { Button } from '@r/components/button'
 import { Kbd } from '@r/components/kbd'
 
 import { RiEditLine } from '@remixicon/react'
