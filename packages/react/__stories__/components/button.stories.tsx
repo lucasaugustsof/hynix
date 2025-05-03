@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button, type ButtonProps } from '@r/components/button'
-
 import { ArrowLeft, ArrowRight, Link } from 'lucide-react'
 
 type ButtonStory = StoryObj<ButtonProps>
@@ -32,7 +31,7 @@ const meta: Meta<ButtonProps> = {
         'Visual style of the button, used to represent different action intents.',
       options: ['primary', 'secondary', 'ghost', 'destructive'],
       table: {
-        category: 'Appearance',
+        category: 'Visual',
       },
     },
     size: {
@@ -42,7 +41,7 @@ const meta: Meta<ButtonProps> = {
         'Controls the button’s dimensions and typography based on the selected size.',
       options: ['sm', 'md', 'lg', 'xl'],
       table: {
-        category: 'Appearance',
+        category: 'Visual',
       },
     },
     disabled: {
@@ -64,12 +63,13 @@ const meta: Meta<ButtonProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: [],
 }
 
-export const Default: ButtonStory = {}
+export default meta
 
-export const WithLeftIcon: ButtonStory = {
+export const Basic: ButtonStory = {}
+
+export const LeftIcon: ButtonStory = {
   argTypes: {
     children: {
       control: false,
@@ -88,7 +88,7 @@ export const WithLeftIcon: ButtonStory = {
   },
 }
 
-export const WithRightIcon: ButtonStory = {
+export const RightIcon: ButtonStory = {
   argTypes: {
     children: {
       control: false,
@@ -107,7 +107,7 @@ export const WithRightIcon: ButtonStory = {
   },
 }
 
-export const WithBothIcon: ButtonStory = {
+export const IconBothSides: ButtonStory = {
   argTypes: {
     children: {
       control: false,
@@ -127,7 +127,7 @@ export const WithBothIcon: ButtonStory = {
   },
 }
 
-export const WithIconOnly: ButtonStory = {
+export const IconOnly: ButtonStory = {
   args: {
     iconOnly: true,
     'aria-label': 'Link',
@@ -148,5 +148,3 @@ export const WithIconOnly: ButtonStory = {
     )
   },
 }
-
-export default meta
