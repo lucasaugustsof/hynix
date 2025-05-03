@@ -12,7 +12,7 @@ const labelVariants = tv({
   base: [
     'text-nowrap font-medium font-sans text-fg-1 tracking-normal',
     // disabled
-    'data-disabled:text-disabled',
+    'data-disabled:cursor-not-allowed data-disabled:text-disabled',
   ],
   variants: {
     size: {

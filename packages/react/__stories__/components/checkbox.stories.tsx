@@ -1,24 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import {
-  Checkbox,
-  CheckboxControl,
-  CheckboxLabel,
-  type CheckboxProps,
-} from '@r/components/checkbox'
-import { Label } from '@r/components/label'
+import { Checkbox, type CheckboxProps } from '@r/components/checkbox'
+
+type CheckboxStory = StoryObj<CheckboxProps>
 
 const meta: Meta<CheckboxProps> = {
-  title: 'Components/Checkbox',
+  title: 'components/Checkbox',
   component(args) {
     return (
-      <Checkbox {...args}>
-        <CheckboxControl />
-
-        <CheckboxLabel asChild>
-          <Label>Label</Label>
-        </CheckboxLabel>
-      </Checkbox>
+      <Checkbox.Root {...args}>
+        <Checkbox.Control />
+      </Checkbox.Root>
     )
   },
   args: {
@@ -36,7 +28,8 @@ const meta: Meta<CheckboxProps> = {
       },
     },
     disabled: {
-      description: 'Disables the checkbox and makes it non-interactive.',
+      name: 'Disabled',
+      description: 'Disables the checkbox, making it non-interactive.',
       control: 'boolean',
       table: {
         category: 'State',
@@ -50,9 +43,7 @@ const meta: Meta<CheckboxProps> = {
 
 export default meta
 
-type CheckboxStory = StoryObj<CheckboxProps>
-
-export const Default: CheckboxStory = {}
+export const Basic: CheckboxStory = {}
 
 export const Indeterminate: CheckboxStory = {
   args: {
@@ -65,5 +56,27 @@ export const Indeterminate: CheckboxStory = {
         disable: true,
       },
     },
+  },
+}
+
+export const WithLabelRight: CheckboxStory = {
+  render(args) {
+    return (
+      <Checkbox.Root {...args}>
+        <Checkbox.Control />
+        <Checkbox.Label>Label</Checkbox.Label>
+      </Checkbox.Root>
+    )
+  },
+}
+
+export const WithLabelLeft: CheckboxStory = {
+  render(args) {
+    return (
+      <Checkbox.Root {...args}>
+        <Checkbox.Label>Label</Checkbox.Label>
+        <Checkbox.Control />
+      </Checkbox.Root>
+    )
   },
 }

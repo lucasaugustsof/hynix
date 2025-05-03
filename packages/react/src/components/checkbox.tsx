@@ -13,16 +13,18 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 import { motion } from 'motion/react'
 
+import { Label as LabelComp, type LabelProps } from '@r/components/label'
+
 //---------------------------------
 // Constants
 //---------------------------------
 
 const CHECKBOX_PARTS = {
-  Root: 'Checkbox',
-  Control: 'CheckboxControl',
-  Provider: 'CheckboxProvider',
-  Group: 'CheckboxGroup',
-  Label: 'CheckboxLabel',
+  Root: 'Checkbox.Root',
+  Control: 'Checkbox.Control',
+  Provider: 'Checkbox.Provider',
+  Group: 'Checkbox.Group',
+  Label: 'Checkbox.Label',
 }
 
 //---------------------------------
@@ -31,10 +33,10 @@ const CHECKBOX_PARTS = {
 
 const checkboxVariantsSlots = tv({
   slots: {
-    root: ['group inline-flex items-center gap-3'],
+    root: 'group inline-flex items-center gap-3 outline-hidden',
     control: [
-      'relative inset-ring-1 inset-ring-border inline-block cursor-pointer overflow-hidden bg-fill-1 shadow-black/4 shadow-xs dark:shadow-white/4',
-      'group-has-disabled:inset-ring-0 group-has-disabled:bg-disabled group-has-disabled:shadow-none',
+      'relative inset-ring-[1.5px] inset-ring-border inline-block cursor-pointer overflow-hidden bg-fill-1 shadow-black/4 shadow-xs dark:shadow-white/4',
+      'group-has-disabled:inset-ring-0 group-has-disabled:cursor-not-allowed group-has-disabled:bg-disabled group-has-disabled:shadow-none',
     ],
     indicator: [
       'flex size-full items-center justify-center bg-brand transition-colors duration-200 ease-out',
@@ -78,10 +80,10 @@ type CheckboxProps = Assign<
 >
 
 //---------------------------------
-// Checkbox
+// Root
 //---------------------------------
 
-function Checkbox({ className, children, size, ...props }: CheckboxProps) {
+function Root({ className, children, size, ...props }: CheckboxProps) {
   const keyPrefix = React.useId()
 
   const extendedChildrenWithInjectedProps = recursiveClone(children, {
@@ -105,13 +107,14 @@ function Checkbox({ className, children, size, ...props }: CheckboxProps) {
     </ArkCheckbox.Root>
   )
 }
-Checkbox.displayName = CHECKBOX_PARTS.Root
+
+Root.displayName = CHECKBOX_PARTS.Root
 
 //---------------------------------
-// CheckboxControl
+// Control
 //---------------------------------
 
-function CheckboxIcon({
+function CheckIcon({
   type,
 }: {
   type: 'check' | 'indeterminate'
@@ -146,7 +149,7 @@ function CheckboxIcon({
   )
 }
 
-function CheckboxControl({
+function Control({
   size,
   ...props
 }: Assign<
@@ -177,48 +180,57 @@ function CheckboxControl({
           )}
         >
           {isIndeterminate ? (
-            <CheckboxIcon type="indeterminate" />
+            <CheckIcon type="indeterminate" />
           ) : (
-            checkedState && <CheckboxIcon type="check" />
+            checkedState && <CheckIcon type="check" />
           )}
         </div>
       </ArkCheckbox.Indicator>
     </ArkCheckbox.Control>
   )
 }
-CheckboxControl.displayName = CHECKBOX_PARTS.Control
+
+Control.displayName = CHECKBOX_PARTS.Control
 
 //---------------------------------
 // CheckboxProvider
 //---------------------------------
 
-const CheckboxProvider = ArkCheckbox.RootProvider
-CheckboxProvider.displayName = CHECKBOX_PARTS.Provider
+const Provider = ArkCheckbox.RootProvider
+Provider.displayName = CHECKBOX_PARTS.Provider
 
 //---------------------------------
 // CheckboxGroup
 //---------------------------------
 
-const CheckboxGroup = ArkCheckbox.Group
-CheckboxGroup.displayName = CHECKBOX_PARTS.Group
+const Group = ArkCheckbox.Group
+Group.displayName = CHECKBOX_PARTS.Group
 
 //---------------------------------
 // CheckboxLabel
 //---------------------------------
 
-const CheckboxLabel = ArkCheckbox.Label
-CheckboxLabel.displayName = CHECKBOX_PARTS.Label
+function Label(props: LabelProps) {
+  return (
+    <ArkCheckbox.Label asChild>
+      <LabelComp {...props} />
+    </ArkCheckbox.Label>
+  )
+}
+
+Label.displayName = CHECKBOX_PARTS.Label
 
 //---------------------------------
 // Exports
 //---------------------------------
 
-export {
-  Checkbox,
-  CheckboxControl,
-  CheckboxProvider,
-  CheckboxGroup,
-  CheckboxLabel,
-  useCheckbox,
+const Checkbox = {
+  Root,
+  Control,
+  Provider,
+  Group,
+  Label,
 }
+
+export { Checkbox, useCheckbox }
 export type { CheckboxProps }

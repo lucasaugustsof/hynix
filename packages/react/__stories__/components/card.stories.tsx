@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Badge } from '@r/components/badge'
 import { Button } from '@r/components/button'
 import { Card, type CardProps } from '@r/components/card'
-import { Badge } from '@r/components/badge'
 
-import { RiShoppingBag4Line, RiDiscountPercentLine } from '@remixicon/react'
+import { RiDiscountPercentLine, RiShoppingBag4Line } from '@remixicon/react'
 
 const meta: Meta<CardProps> = {
   title: 'Components/Card',
