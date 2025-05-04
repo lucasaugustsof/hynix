@@ -1,19 +1,27 @@
 import { cn } from '@r/utilities/cn'
 
-type DividerTypes = 'default' | 'label-left' | 'label-center' | 'label-right'
+//---------------------------------
+// Types
+//---------------------------------
 
-type DividerProps = React.ComponentPropsWithRef<'div'> & {
-  type?: DividerTypes
+type SeparatorTypes = 'default' | 'label-left' | 'label-center' | 'label-right'
+
+type SeparatorProps = React.ComponentPropsWithRef<'div'> & {
+  type?: SeparatorTypes
   labelText?: string
   direction?: 'vertical' | 'horizontal'
 }
 
-function Divider({
+//---------------------------------
+// Separator
+//---------------------------------
+
+function Separator({
   className,
   type = 'default',
   labelText,
   direction = 'horizontal',
-}: DividerProps) {
+}: SeparatorProps) {
   const Line = () => (
     <div
       className={cn(
@@ -23,7 +31,7 @@ function Divider({
     />
   )
 
-  const renderMap: Record<DividerTypes, React.ReactElement> = {
+  const renderMap: Record<SeparatorTypes, React.ReactElement> = {
     default: <Line />,
     'label-left': (
       <>
@@ -62,5 +70,9 @@ function Divider({
   )
 }
 
-export { Divider }
-export type { DividerProps }
+//---------------------------------
+// Exports
+//---------------------------------
+
+export { Separator }
+export type { SeparatorProps }
