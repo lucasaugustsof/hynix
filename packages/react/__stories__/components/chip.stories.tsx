@@ -1,17 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Chip, ChipClose, ChipLabel, type ChipProps } from '@r/components/chip'
-
-type ChipStory = StoryObj<ChipProps>
+import { Avatar, getInitialLetters } from '@r/components/avatar'
+import { Chip, type ChipProps } from '@r/components/chip'
 
 const meta: Meta<ChipProps> = {
   title: 'components/Chip',
   component(args) {
     return (
-      <Chip {...args}>
-        <ChipLabel>{args.children}</ChipLabel>
-        <ChipClose />
-      </Chip>
+      <Chip.Root {...args}>
+        <Chip.Label>{args.children}</Chip.Label>
+        <Chip.Close />
+      </Chip.Root>
     )
   },
   args: {
@@ -23,25 +22,24 @@ const meta: Meta<ChipProps> = {
     children: {
       name: 'Label',
       control: 'text',
-      description:
-        'Content of the chip including ChipLabel and ChipClose components.',
+      description: 'Content inside the chip.',
       table: {
         category: 'Content',
       },
     },
     size: {
       name: 'Size',
-      description: 'Defines the size of the chip.',
       control: 'inline-radio',
       options: ['xs', 'sm', 'md', 'lg'],
+      description: 'Controls the chip padding and font size.',
       table: {
-        category: 'Appearance',
+        category: 'Visual',
       },
     },
     active: {
       name: 'Active',
-      description: 'Controls whether the chip is in activated state.',
       control: 'boolean',
+      description: 'Toggles the active/selected state of the chip.',
       table: {
         category: 'State',
       },
@@ -50,20 +48,73 @@ const meta: Meta<ChipProps> = {
   parameters: {
     layout: 'centered',
   },
-  tags: [],
 }
 
 export default meta
 
-export const Default: ChipStory = {}
+type ChipStory = StoryObj<ChipProps>
+
+export const Basic: ChipStory = {}
 
 export const WithCloseLeft: ChipStory = {
+  name: 'Close on Left',
   render(args) {
     return (
-      <Chip {...args}>
-        <ChipClose />
-        <ChipLabel>{args.children}</ChipLabel>
-      </Chip>
+      <Chip.Root {...args}>
+        <Chip.Close />
+        <Chip.Label>{args.children}</Chip.Label>
+      </Chip.Root>
+    )
+  },
+}
+
+export const Active: ChipStory = {
+  name: 'Active State',
+  args: {
+    active: true,
+  },
+  argTypes: {
+    active: {
+      control: false,
+    },
+  },
+}
+
+export const WithoutClose: ChipStory = {
+  render(args) {
+    return (
+      <Chip.Root {...args}>
+        <Chip.Label>{args.children}</Chip.Label>
+      </Chip.Root>
+    )
+  },
+}
+
+export const WithAvatar: ChipStory = {
+  args: {
+    size: 'md',
+    children: 'John Doe',
+  },
+  argTypes: {
+    size: {
+      control: false,
+    },
+    active: {
+      control: false,
+    },
+  },
+  render(args) {
+    return (
+      <Chip.Root {...args} className="pr-3 pl-0.5">
+        <Avatar
+          size="md"
+          src="https://i.pravatar.cc/300"
+          altText={getInitialLetters('John Doe')}
+        />
+
+        <Chip.Label>{args.children}</Chip.Label>
+        <Chip.Close />
+      </Chip.Root>
     )
   },
 }

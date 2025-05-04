@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import * as React from 'react'
 
 import type { Assign } from '@ark-ui/react'
 
@@ -8,15 +8,19 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 import { RiCloseLine } from '@remixicon/react'
 
-type ChipSharedProps = VariantProps<typeof chipVariantsWithSlots>
+//---------------------------------
+// Constants
+//---------------------------------
 
-type ChipProps = Assign<React.ComponentPropsWithRef<'div'>, ChipSharedProps>
+const CHIP_PARTS = {
+  Root: 'Chip.Root',
+  Label: 'Chip.Label',
+  Close: 'Chip.Close',
+}
 
-const chipDisplayNames = {
-  root: 'Chip',
-  label: 'ChipLabel',
-  close: 'ChipClose',
-} as const
+//---------------------------------
+// Variants
+//---------------------------------
 
 const chipVariantsWithSlots = tv({
   slots: {
@@ -81,24 +85,30 @@ const chipVariantsWithSlots = tv({
 
 const { root, label, close } = chipVariantsWithSlots()
 
-// Chip ↴
+//---------------------------------
+// Types
+//---------------------------------
 
-function Chip({ children, className, size, active, ...props }: ChipProps) {
-  const uniqueId = useId()
+type ChipSharedProps = VariantProps<typeof chipVariantsWithSlots>
+
+type ChipProps = Assign<React.ComponentPropsWithRef<'div'>, ChipSharedProps>
+
+//---------------------------------
+// Root
+//---------------------------------
+
+function Root({ children, className, size, active, ...props }: ChipProps) {
+  const keyPrefix = React.useId()
 
   const extendedChildrenWithInjectedProps = recursiveClone<ChipSharedProps>(
     children,
     {
-      keyPrefix: uniqueId,
-      match: [
-        chipDisplayNames.root,
-        chipDisplayNames.label,
-        chipDisplayNames.close,
-      ],
+      match: [CHIP_PARTS.Root, CHIP_PARTS.Label, CHIP_PARTS.Close],
       inject: {
         size,
         active,
       },
+      keyPrefix,
     },
   )
 
@@ -121,11 +131,13 @@ function Chip({ children, className, size, active, ...props }: ChipProps) {
   )
 }
 
-Chip.displayName = chipDisplayNames.root
+Root.displayName = CHIP_PARTS.Root
 
-// ChipLabel ↴
+//---------------------------------
+// Label
+//---------------------------------
 
-function ChipLabel({
+function Label({
   className,
   size,
   active,
@@ -147,11 +159,13 @@ function ChipLabel({
   )
 }
 
-ChipLabel.displayName = chipDisplayNames.label
+Label.displayName = CHIP_PARTS.Label
 
-// ChipClose ↴
+//---------------------------------
+// Close
+//---------------------------------
 
-function ChipClose({
+function Close({
   className,
   size,
   active,
@@ -176,7 +190,15 @@ function ChipClose({
   )
 }
 
-ChipClose.displayName = chipDisplayNames.close
+Close.displayName = CHIP_PARTS.Close
 
-export { Chip, ChipLabel, ChipClose }
+//---------------------------------
+// Exports
+//---------------------------------
+
+export const Chip = {
+  Root,
+  Label,
+  Close,
+}
 export type { ChipProps }
