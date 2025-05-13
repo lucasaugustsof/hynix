@@ -15,10 +15,6 @@ import { motion } from 'motion/react'
 
 import { Label as LabelComp, type LabelProps } from '@r/components/label'
 
-//---------------------------------
-// Constants
-//---------------------------------
-
 const CHECKBOX_PARTS = {
   Root: 'Checkbox.Root',
   Control: 'Checkbox.Control',
@@ -26,10 +22,6 @@ const CHECKBOX_PARTS = {
   Group: 'Checkbox.Group',
   Label: 'Checkbox.Label',
 }
-
-//---------------------------------
-// Variants
-//---------------------------------
 
 const checkboxVariantsSlots = tv({
   slots: {
@@ -68,10 +60,6 @@ const checkboxVariantsSlots = tv({
 
 const { root, control, indicator } = checkboxVariantsSlots()
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type CheckboxSharedProps = VariantProps<typeof checkboxVariantsSlots>
 
 type CheckboxProps = Assign<
@@ -79,11 +67,7 @@ type CheckboxProps = Assign<
   CheckboxSharedProps
 >
 
-//---------------------------------
-// Root
-//---------------------------------
-
-function Root({ className, children, size, ...props }: CheckboxProps) {
+function CheckboxRoot({ className, children, size, ...props }: CheckboxProps) {
   const keyPrefix = React.useId()
 
   const extendedChildrenWithInjectedProps = recursiveClone(children, {
@@ -108,11 +92,7 @@ function Root({ className, children, size, ...props }: CheckboxProps) {
   )
 }
 
-Root.displayName = CHECKBOX_PARTS.Root
-
-//---------------------------------
-// Control
-//---------------------------------
+CheckboxRoot.displayName = CHECKBOX_PARTS.Root
 
 function CheckIcon({
   type,
@@ -149,7 +129,7 @@ function CheckIcon({
   )
 }
 
-function Control({
+function CheckboxControl({
   size,
   ...props
 }: Assign<
@@ -190,27 +170,15 @@ function Control({
   )
 }
 
-Control.displayName = CHECKBOX_PARTS.Control
+CheckboxControl.displayName = CHECKBOX_PARTS.Control
 
-//---------------------------------
-// CheckboxProvider
-//---------------------------------
+const CheckboxProvider = ArkCheckbox.RootProvider
+CheckboxProvider.displayName = CHECKBOX_PARTS.Provider
 
-const Provider = ArkCheckbox.RootProvider
-Provider.displayName = CHECKBOX_PARTS.Provider
+const CheckboxGroup = ArkCheckbox.Group
+CheckboxGroup.displayName = CHECKBOX_PARTS.Group
 
-//---------------------------------
-// CheckboxGroup
-//---------------------------------
-
-const Group = ArkCheckbox.Group
-Group.displayName = CHECKBOX_PARTS.Group
-
-//---------------------------------
-// CheckboxLabel
-//---------------------------------
-
-function Label(props: LabelProps) {
+function CheckboxLabel(props: LabelProps) {
   return (
     <ArkCheckbox.Label asChild>
       <LabelComp {...props} />
@@ -218,18 +186,14 @@ function Label(props: LabelProps) {
   )
 }
 
-Label.displayName = CHECKBOX_PARTS.Label
-
-//---------------------------------
-// Exports
-//---------------------------------
+CheckboxLabel.displayName = CHECKBOX_PARTS.Label
 
 const Checkbox = {
-  Root,
-  Control,
-  Provider,
-  Group,
-  Label,
+  Root: CheckboxRoot,
+  Control: CheckboxControl,
+  Provider: CheckboxProvider,
+  Group: CheckboxGroup,
+  Label: CheckboxLabel,
 }
 
 export { Checkbox, useCheckbox }
