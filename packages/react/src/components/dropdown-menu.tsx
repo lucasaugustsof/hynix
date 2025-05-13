@@ -1,24 +1,12 @@
 import { Menu as ArkMenu } from '@ark-ui/react/menu'
 import { cn } from '@r/utilities/cn'
 
-//---------------------------------
-// Root
-//---------------------------------
 type DropdownMenuProps = React.CustomComponentPropsWithRef<typeof ArkMenu.Root>
 
-const Root = ArkMenu.Root
+const DropdownMenuRoot = ArkMenu.Root
+const DropdownMenuTrigger = ArkMenu.Trigger
 
-//---------------------------------
-// Trigger
-//---------------------------------
-
-const Trigger = ArkMenu.Trigger
-
-//---------------------------------
-// Content
-//---------------------------------
-
-function Content({
+function DropdownMenuContent({
   className,
   ...props
 }: React.ComponentPropsWithRef<typeof ArkMenu.Content>) {
@@ -37,11 +25,7 @@ function Content({
   )
 }
 
-//---------------------------------
-// ItemGroup
-//---------------------------------
-
-function ItemGroup({
+function DropdownMenuItemGroup({
   className,
   ...props
 }: React.ComponentPropsWithRef<typeof ArkMenu.ItemGroup>) {
@@ -53,17 +37,9 @@ function ItemGroup({
   )
 }
 
-//---------------------------------
-// ItemGroupLabel
-//---------------------------------
+const DropdownMenuItemGroupLabel = ArkMenu.ItemGroupLabel
 
-const ItemGroupLabel = ArkMenu.ItemGroupLabel
-
-//---------------------------------
-// Item
-//---------------------------------
-
-type ItemProps = Omit<
+type DropdownMenuItemProps = Omit<
   React.ComponentPropsWithRef<typeof ArkMenu.Item>,
   'prefix'
 > & {
@@ -71,7 +47,12 @@ type ItemProps = Omit<
   suffix?: React.ReactNode
 }
 
-function Item({ children, prefix, suffix, ...props }: ItemProps) {
+function DropdownMenuItem({
+  children,
+  prefix,
+  suffix,
+  ...props
+}: DropdownMenuItemProps) {
   return (
     <ArkMenu.Item
       {...props}
@@ -82,50 +63,43 @@ function Item({ children, prefix, suffix, ...props }: ItemProps) {
     >
       <span
         className={cn(
-          'not-empty:mr-2 inline-flex not-empty:pl-0.5 [&_svg]:size-4.5 [&_svg]:fill-fill-5',
+          'not-empty:mr-2 inline-flex not-empty:pl-0.5',
+          '[&_svg]:size-6 [&_svg]:fill-fill-4',
         )}
       >
         {prefix}
       </span>
 
-      <div
-        className={cn(
-          'col-start-2 flex items-center justify-between [&_svg]:size-4.5',
-        )}
-      >
+      <div className={cn('col-start-2 flex items-center justify-between')}>
         <span
           className={cn(
-            'pointer-events-none whitespace-nowrap font-normal font-sans text-fg-1/70 text-sm/5.5 group-hover:text-fg-1',
+            'pointer-events-none whitespace-nowrap font-medium font-sans text-base text-fg-1/70 group-hover:text-fg-1',
           )}
         >
           {children}
         </span>
 
-        <span className={cn('ml-2 shrink-0')}>{suffix}</span>
+        <span
+          className={cn('ml-2 shrink-0', '[&_svg]:size-6 [&_svg]:fill-fill-4')}
+        >
+          {suffix}
+        </span>
       </div>
     </ArkMenu.Item>
   )
 }
 
-//---------------------------------
-// Separator
-//---------------------------------
-
-function Separator() {
+function DropdownMenuSeparator() {
   return <ArkMenu.Separator className="col-span-2 border-border" />
 }
 
-//---------------------------------
-// Export
-//---------------------------------
-
 export const DropdownMenu = {
-  Root,
-  Trigger,
-  Content,
-  ItemGroup,
-  ItemGroupLabel,
-  Item,
-  Separator,
+  Root: DropdownMenuRoot,
+  Trigger: DropdownMenuTrigger,
+  Content: DropdownMenuContent,
+  ItemGroup: DropdownMenuItemGroup,
+  ItemGroupLabel: DropdownMenuItemGroupLabel,
+  Item: DropdownMenuItem,
+  Separator: DropdownMenuSeparator,
 }
 export type { DropdownMenuProps }
