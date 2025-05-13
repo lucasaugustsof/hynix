@@ -1,0 +1,9 @@
+{
+  "name": "skeleton",
+  "dependencies": [],
+  "registryDependencies": [],
+  "file": {
+    "name": "skeleton.tsx",
+    "content": "import { cn } from '<%= aliases.utilities %>/cn'\n\ntype SkeletonProps = Omit<React.ComponentPropsWithRef<'div'>, 'children'> & {\n  shape?: 'square' | 'circle'\n}\n\nfunction Skeleton({\n  className,\n  shape = 'square',\n  'aria-label': ariaLabel = 'Loading content',\n  ...props\n}: SkeletonProps) {\n  return (\n    <div\n      {...props}\n      role=\"status\"\n      className={cn(\n        'block size-32 overflow-hidden bg-black/8 dark:bg-white/8',\n        shape === 'square' ? 'rounded-xl' : 'rounded-full',\n        className,\n      )}\n      aria-label={ariaLabel}\n      aria-busy\n    >\n      <div\n        className={cn(\n          'mask-l-from-48% mask-r-from-48% size-full rounded-inherit bg-black/8 dark:bg-white/8',\n          'animate-skeleton',\n        )}\n        aria-hidden\n      />\n    </div>\n  )\n}\n\nexport { Skeleton }\nexport type { SkeletonProps }\n"
+  }
+}

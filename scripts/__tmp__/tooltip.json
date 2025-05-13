@@ -1,0 +1,9 @@
+{
+  "name": "tooltip",
+  "dependencies": [],
+  "registryDependencies": [],
+  "file": {
+    "name": "tooltip.tsx",
+    "content": "import { Tooltip as ArkTooltip, useTooltip } from '@ark-ui/react/tooltip'\nimport type * as ArkTooltipDefs from '@ark-ui/react/tooltip'\n\n\n\nimport { cn } from '<%= aliases.utilities %>/cn'\n\n// Tooltip ↴\n\ntype TooltipProps = ArkTooltipDefs.TooltipRootProps\n\nconst Tooltip = (props: TooltipProps) => <ArkTooltip.Root {...props} />\n\n// TooltipContent ↴\n\nfunction TooltipContent({\n  className,\n  ...props\n}: ArkTooltipDefs.TooltipContentProps) {\n  return (\n    <ArkTooltip.Positioner>\n      <ArkTooltip.Content\n        {...props}\n        className={cn(\n          'block rounded-xl border border-border bg-surface-1 px-4 py-2 shadow-xs duration-200 ease-out-quart dark:shadow-white/8',\n          'data-[state=open]:fade-in-50 data-[state=open]:zoom-in-95 data-[state=open]:animate-in',\n          'data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out',\n          className,\n        )}\n      />\n    </ArkTooltip.Positioner>\n  )\n}\n\nconst TooltipTrigger = ArkTooltip.Trigger\nconst TooltipContext = ArkTooltip.Context\n\nexport { Tooltip, TooltipTrigger, TooltipContext, TooltipContent, useTooltip }\nexport type { TooltipProps }\n"
+  }
+}

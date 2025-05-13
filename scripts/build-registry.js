@@ -1,7 +1,9 @@
-import { promises as fs } from 'node:fs'
+import { promises as fs, existsSync } from 'node:fs'
 import path from 'node:path'
 
 import { Project, ImportDeclaration } from 'ts-morph'
+import chalk from 'chalk'
+import ora from 'ora'
 
 const PREFIX_REGISTRY = '@r'
 const COMPONENTS_PATH = 'packages/react/src/components'
@@ -63,57 +65,91 @@ function replaceImportWithAliasTemplate(registryImport) {
   registryImport.replaceWithText(fullImportText)
 }
 
+/**
+ *
+ * @param {string} registryName
+ * @param {string} content
+ */
+async function writeRegistryFile(registryName, content) {
+  const outputPath = path.join(import.meta.dirname, '__tmp__')
+
+  const loading = ora(
+    `Generating ${chalk.blue(registryName)} registry file...`,
+  ).start()
+
+  try {
+    if (!existsSync(outputPath)) {
+      await fs.mkdir(outputPath)
+    }
+
+    await fs.writeFile(
+      path.join(outputPath, `${registryName}.json`),
+      JSON.stringify(content, null, 2),
+    )
+
+    loading.succeed(
+      `Successfully generated ${chalk.green(registryName)} registry.`,
+    )
+  } catch {
+    loading.fail(`Failed to generate ${chalk.red(registryName)} registry file.`)
+  }
+}
+
 async function buildRegistry() {
   const astMechanism = astSetupMechanism()
   const componentFiles = await fs.readdir(path.resolve(COMPONENTS_PATH))
 
-  const componentFilePath = path.resolve(COMPONENTS_PATH, 'checkbox.tsx')
-  const sourceFile = astMechanism.getSourceFile(componentFilePath)
+  for (const componentFile of componentFiles) {
+    const componentFilePath = path.resolve(COMPONENTS_PATH, componentFile)
+    const sourceFile = astMechanism.getSourceFile(componentFilePath)
 
-  const importDeclarations = sourceFile.getImportDeclarations()
+    const importDeclarations = sourceFile.getImportDeclarations()
 
-  const registryImports = importDeclarations.filter(node => {
-    const modulePath = node
-      .getModuleSpecifier()
-      .getText()
-      .replace(/\'/g, '')
-      .trim()
+    const registryImports = importDeclarations.filter(node => {
+      const modulePath = node
+        .getModuleSpecifier()
+        .getText()
+        .replace(/\'/g, '')
+        .trim()
 
-    return modulePath.startsWith(PREFIX_REGISTRY)
-  })
+      return modulePath.startsWith(PREFIX_REGISTRY)
+    })
 
-  const externalDependencies = getExternalDependencies(importDeclarations)
-  const registryDependencies = []
+    const externalDependencies = getExternalDependencies(importDeclarations)
+    const registryDependencies = []
 
-  for (const registryImport of registryImports) {
-    const regexTypeRegistryComponent = /@r\/(components)\/(\w+)/
-    const modulePath = registryImport.getModuleSpecifierValue()
+    for (const registryImport of registryImports) {
+      const regexTypeRegistryComponent = /@r\/(components)\/(\w+)/
+      const modulePath = registryImport.getModuleSpecifierValue()
 
-    if (regexTypeRegistryComponent.test(modulePath)) {
-      const [, , componentRegistry] = modulePath.match(
-        regexTypeRegistryComponent,
-      )
+      if (regexTypeRegistryComponent.test(modulePath)) {
+        const [, , componentRegistry] = modulePath.match(
+          regexTypeRegistryComponent,
+        )
 
-      registryDependencies.push(componentRegistry)
+        registryDependencies.push(componentRegistry)
+      }
+
+      replaceImportWithAliasTemplate(registryImport)
     }
 
-    replaceImportWithAliasTemplate(registryImport)
+    const { name: componentName, base: fileName } =
+      path.parse(componentFilePath)
+
+    const code = sourceFile.getSourceFile().getText()
+
+    const registryData = {
+      name: componentName,
+      dependencies: externalDependencies,
+      registryDependencies,
+      file: {
+        name: fileName,
+        content: code,
+      },
+    }
+
+    await writeRegistryFile(componentName, registryData)
   }
-
-  const { name: componentName, base: fileName } = path.parse(componentFilePath)
-  const code = sourceFile.getSourceFile().getText()
-
-  const registryData = {
-    name: componentName,
-    dependencies: externalDependencies,
-    registryDependencies,
-    file: {
-      name: fileName,
-      content: code,
-    },
-  }
-
-  console.log(JSON.stringify(registryData, null, 2))
 }
 
 buildRegistry()
