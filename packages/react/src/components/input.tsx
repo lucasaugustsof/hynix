@@ -6,10 +6,6 @@ import { Field as ArkField } from '@ark-ui/react/field'
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-//---------------------------------
-// Variants
-//---------------------------------
-
 const inputVariantsSlots = tv({
   slots: {
     root: [
@@ -83,10 +79,6 @@ const inputVariantsSlots = tv({
   },
 })
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type InputSharedProps = VariantProps<typeof inputVariantsSlots>
 
 type InputProps = Assign<
@@ -108,10 +100,6 @@ type AddonProps = Pick<
   styling?: boolean
 }
 
-//---------------------------------
-// InputAddon
-//---------------------------------
-
 function InputAddon({ size, type, styling = false, ...props }: AddonProps) {
   const { addon } = inputVariantsSlots()
 
@@ -130,10 +118,6 @@ function InputAddon({ size, type, styling = false, ...props }: AddonProps) {
     />
   )
 }
-
-//---------------------------------
-// Input
-//---------------------------------
 
 function Input({
   className,
@@ -195,10 +179,6 @@ function Input({
     </div>
   )
 }
-
-//---------------------------------
-// Exports
-//---------------------------------
 
 export { Input }
 export type { InputProps }
