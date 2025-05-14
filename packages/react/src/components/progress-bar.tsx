@@ -1,40 +1,28 @@
-// @NOTE: In Next.js, add 'use client' to enable client-side features
-
 import { useId } from 'react'
 
 import type { Assign } from '@ark-ui/react'
-import {
-  Progress as ArkProgressBar,
-  useProgress,
-  useProgressContext,
-} from '@ark-ui/react/progress'
-import type * as ArkProgressBarDefs from '@ark-ui/react/progress'
+import { Progress as ArkProgressBar, useProgress } from '@ark-ui/react/progress'
 
-import NumberFlow from '@number-flow/react'
+import type * as ArkProgressBarDefs from '@ark-ui/react/progress'
 
 import { cn } from '@r/utilities/cn'
 import { recursiveClone } from '@r/utilities/recursive-clone'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-type ProgressBarSharedProps = VariantProps<typeof progressBarVariants>
+import { Label, type LabelProps } from '@r/components/label'
 
-type ProgressBarProps = Assign<
-  ArkProgressBarDefs.ProgressRootProps,
-  ProgressBarSharedProps
->
-
-const progressBarDisplayNames = {
-  root: 'ProgressBar',
-  label: 'ProgressBarLabel',
-  valueText: 'ProgressBarValueText',
-  track: 'ProgressBarTrack',
-} as const
+const PROGRESS_BAR_PARTS = {
+  Root: 'ProgressBar.Root',
+  Label: 'ProgressBar.Label',
+  ValueText: 'ProgressBar.ValueText',
+  Track: 'ProgressBar.Track',
+}
 
 const progressBarVariants = tv({
   slots: {
-    root: 'isolate flex min-w-96 items-center',
+    root: 'isolate inline-flex min-w-96 flex-col',
     valueText: 'font-medium font-sans text-fg-1 tabular-nums',
-    track: 'grow overflow-hidden rounded-xs bg-fill-2',
+    track: 'w-full overflow-hidden rounded-xs bg-fill-2',
   },
   variants: {
     size: {
@@ -68,68 +56,32 @@ const progressBarVariants = tv({
 
 const { root, valueText, track } = progressBarVariants()
 
-// ProgressBarProvider ↴
+type ProgressBarSharedProps = VariantProps<typeof progressBarVariants>
 
-function ProgressBarProvider({
-  children,
-  className,
-  size,
-  ...props
-}: Assign<
-  ArkProgressBarDefs.ProgressRootProviderProps,
+type ProgressBarProps = Assign<
+  ArkProgressBarDefs.ProgressRootProps,
   ProgressBarSharedProps
->) {
-  const uniqueId = useId()
+>
 
-  const extendedChildrenWithInjectedProps =
-    recursiveClone<ProgressBarSharedProps>(children, {
-      inject: {
-        size,
-      },
-      match: [
-        progressBarDisplayNames.label,
-        progressBarDisplayNames.valueText,
-        progressBarDisplayNames.track,
-      ],
-      keyPrefix: uniqueId,
-    })
-
-  return (
-    <ArkProgressBar.RootProvider
-      {...props}
-      className={cn(
-        root({
-          className,
-        }),
-      )}
-    >
-      {extendedChildrenWithInjectedProps}
-    </ArkProgressBar.RootProvider>
-  )
-}
-
-// ProgressBar ↴
-
-function ProgressBar({
+function ProgressBarRoot({
   children,
   className,
   size,
   ...props
 }: ProgressBarProps) {
-  const uniqueId = useId()
+  const keyPrefix = useId()
 
-  const extendedChildrenWithInjectedProps =
-    recursiveClone<ProgressBarSharedProps>(children, {
-      inject: {
-        size,
-      },
-      match: [
-        progressBarDisplayNames.label,
-        progressBarDisplayNames.valueText,
-        progressBarDisplayNames.track,
-      ],
-      keyPrefix: uniqueId,
-    })
+  const extendedChildrenWithInjectedProps = recursiveClone(children, {
+    inject: {
+      size,
+    },
+    match: [
+      PROGRESS_BAR_PARTS.ValueText,
+      PROGRESS_BAR_PARTS.Track,
+      PROGRESS_BAR_PARTS.Label,
+    ],
+    keyPrefix,
+  })
 
   return (
     <ArkProgressBar.Root
@@ -146,16 +98,13 @@ function ProgressBar({
   )
 }
 
-// ProgressBarValueText ↴
+ProgressBarRoot.displayName = PROGRESS_BAR_PARTS.Root
 
 function ProgressBarValueText({
   className,
   size,
   ...props
 }: Assign<ArkProgressBarDefs.ProgressValueTextProps, ProgressBarSharedProps>) {
-  const progress = useProgressContext()
-  const percentage = progress.value! / 100
-
   return (
     <ArkProgressBar.ValueText
       {...props}
@@ -165,24 +114,11 @@ function ProgressBarValueText({
           size,
         }),
       )}
-      asChild
-    >
-      <NumberFlow
-        value={percentage}
-        format={{
-          style: 'percent',
-          notation: 'standard',
-          maximumFractionDigits: 2,
-        }}
-        isolate
-      />
-    </ArkProgressBar.ValueText>
+    />
   )
 }
 
-ProgressBarValueText.displayName = progressBarDisplayNames.valueText
-
-// ProgressBarTrack ↴
+ProgressBarValueText.displayName = PROGRESS_BAR_PARTS.ValueText
 
 function ProgressBarTrack({
   className,
@@ -199,24 +135,30 @@ function ProgressBarTrack({
       )}
     >
       <ArkProgressBar.Range
-        className={cn('h-full bg-brand transition-[width] ease-in-out-quad')}
+        className={cn('h-full bg-brand transition-[width] ease-linear')}
       />
     </ArkProgressBar.Track>
   )
 }
 
-ProgressBarTrack.displayName = progressBarDisplayNames.track
+ProgressBarTrack.displayName = PROGRESS_BAR_PARTS.Track
 
-// ProgressBarLabel ↴
-
-const ProgressBarLabel = ArkProgressBar.Label
-ProgressBarLabel.displayName = progressBarDisplayNames.label
-
-export {
-  ProgressBarProvider,
-  ProgressBar,
-  ProgressBarValueText,
-  ProgressBarTrack,
-  useProgress,
+function ProgressBarLabel(props: LabelProps) {
+  return (
+    <ArkProgressBar.Label asChild>
+      <Label {...props} />
+    </ArkProgressBar.Label>
+  )
 }
+
+ProgressBarLabel.displayName = PROGRESS_BAR_PARTS.Label
+
+const ProgressBar = {
+  Root: ProgressBarRoot,
+  ValueText: ProgressBarValueText,
+  Track: ProgressBarTrack,
+  Label: ProgressBarLabel,
+}
+
+export { ProgressBar, useProgress }
 export type { ProgressBarProps }

@@ -13,7 +13,7 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 import { motion } from 'motion/react'
 
-import { Label as LabelComp, type LabelProps } from '@r/components/label'
+import { Label, type LabelProps } from '@r/components/label'
 
 const CHECKBOX_PARTS = {
   Root: 'Checkbox.Root',
@@ -181,7 +181,7 @@ CheckboxGroup.displayName = CHECKBOX_PARTS.Group
 function CheckboxLabel(props: LabelProps) {
   return (
     <ArkCheckbox.Label asChild>
-      <LabelComp {...props} />
+      <Label {...props} />
     </ArkCheckbox.Label>
   )
 }
