@@ -9,20 +9,12 @@ import { cn } from '@r/utilities/cn'
 import { recursiveClone } from '@r/utilities/recursive-clone'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-//---------------------------------
-// Constants
-//---------------------------------
-
 const TABS_TOGGLE_PARTS = {
   Root: 'TabsToggle',
   List: 'TabsToggleList',
   Trigger: 'TabsToggleTrigger',
   Content: 'TabsToggleContent',
 }
-
-//---------------------------------
-// Variants
-//---------------------------------
 
 const tabsVariantsSlots = tv({
   slots: {
@@ -53,20 +45,12 @@ const tabsVariantsSlots = tv({
 
 const { root, list, trigger } = tabsVariantsSlots()
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type TabsToggleSharedProps = VariantProps<typeof tabsVariantsSlots>
 
 type TabsToggleProps = Assign<
   React.CustomComponentPropsWithRef<typeof ArkTabs.Root>,
   TabsToggleSharedProps
 >
-
-//---------------------------------
-// TabsToggle
-//---------------------------------
 
 function TabsToggle({ children, className, size, ...props }: TabsToggleProps) {
   const keyPrefix = React.useId()
@@ -96,10 +80,6 @@ function TabsToggle({ children, className, size, ...props }: TabsToggleProps) {
 
 TabsToggle.displayName = TABS_TOGGLE_PARTS.Root
 
-//---------------------------------
-// TabsToggleList
-//---------------------------------
-
 function TabsToggleList({
   className,
   size,
@@ -122,10 +102,6 @@ function TabsToggleList({
 }
 
 TabsToggleList.displayName = TABS_TOGGLE_PARTS.List
-
-//---------------------------------
-// TabsToggleTrigger
-//---------------------------------
 
 function TabsToggleTrigger({
   children,
@@ -183,16 +159,8 @@ function TabsToggleTrigger({
 
 TabsToggleTrigger.displayName = TABS_TOGGLE_PARTS.Trigger
 
-//---------------------------------
-// TabsToggleContent
-//---------------------------------
-
 const TabsToggleContent = ArkTabs.Content
 TabsToggleContent.displayName = TABS_TOGGLE_PARTS.Content
-
-//---------------------------------
-// Exports
-//---------------------------------
 
 export {
   TabsToggle,
