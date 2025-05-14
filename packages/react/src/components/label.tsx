@@ -3,10 +3,6 @@ import { type Assign, ark } from '@ark-ui/react'
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-//---------------------------------
-// Variants
-//---------------------------------
-
 const labelVariants = tv({
   base: [
     'text-nowrap font-medium font-sans text-fg-1 tracking-normal',
@@ -26,18 +22,10 @@ const labelVariants = tv({
   },
 })
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type LabelProps = Assign<
   React.CustomComponentPropsWithRef<typeof ark.span>,
   VariantProps<typeof labelVariants>
 >
-
-//---------------------------------
-// Label
-//---------------------------------
 
 function Label({ className, size, ...props }: LabelProps) {
   return (
@@ -52,10 +40,6 @@ function Label({ className, size, ...props }: LabelProps) {
     />
   )
 }
-
-//---------------------------------
-// Exports
-//---------------------------------
 
 export { Label }
 export type { LabelProps }
