@@ -1,9 +1,5 @@
 import { cn } from '@r/utilities/cn'
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type SeparatorTypes = 'default' | 'label-left' | 'label-center' | 'label-right'
 
 type SeparatorProps = React.ComponentPropsWithRef<'div'> & {
@@ -11,10 +7,6 @@ type SeparatorProps = React.ComponentPropsWithRef<'div'> & {
   labelText?: string
   direction?: 'vertical' | 'horizontal'
 }
-
-//---------------------------------
-// Separator
-//---------------------------------
 
 function Separator({
   className,
@@ -69,10 +61,6 @@ function Separator({
     </div>
   )
 }
-
-//---------------------------------
-// Exports
-//---------------------------------
 
 export { Separator }
 export type { SeparatorProps }

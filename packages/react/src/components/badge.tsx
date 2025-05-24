@@ -3,10 +3,6 @@ import { type Assign, ark } from '@ark-ui/react'
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-//---------------------------------
-// Variants
-//---------------------------------
-
 const badgeVariants = tv({
   base: [
     'isolate inline-flex h-6 w-fit items-center gap-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-xs',
@@ -44,20 +40,12 @@ const badgeVariants = tv({
   },
 })
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type BadgeProps = Assign<
   React.CustomComponentPropsWithRef<typeof ark.div>,
   VariantProps<typeof badgeVariants>
 > & {
   active?: boolean
 }
-
-//---------------------------------
-// Badge
-//---------------------------------
 
 function Badge({ className, variant, active = false, ...props }: BadgeProps) {
   return (
@@ -75,10 +63,6 @@ function Badge({ className, variant, active = false, ...props }: BadgeProps) {
     />
   )
 }
-
-//---------------------------------
-// Exports
-//---------------------------------
 
 export { Badge, badgeVariants }
 export type { BadgeProps }

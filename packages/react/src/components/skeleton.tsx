@@ -15,21 +15,13 @@ function Skeleton({
       {...props}
       role="status"
       className={cn(
-        'block size-32 overflow-hidden bg-black/8 dark:bg-white/8',
+        'block size-32 animate-pulse overflow-hidden bg-black/6 dark:bg-white/6',
         shape === 'square' ? 'rounded-xl' : 'rounded-full',
         className,
       )}
       aria-label={ariaLabel}
       aria-busy
-    >
-      <div
-        className={cn(
-          'mask-l-from-48% mask-r-from-48% size-full rounded-inherit bg-black/8 dark:bg-white/8',
-          'animate-skeleton',
-        )}
-        aria-hidden
-      />
-    </div>
+    />
   )
 }
 

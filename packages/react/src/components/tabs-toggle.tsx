@@ -10,10 +10,10 @@ import { recursiveClone } from '@r/utilities/recursive-clone'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
 const TABS_TOGGLE_PARTS = {
-  Root: 'TabsToggle',
-  List: 'TabsToggleList',
-  Trigger: 'TabsToggleTrigger',
-  Content: 'TabsToggleContent',
+  Root: 'Tabs.Toggle',
+  List: 'Tabs.ToggleList',
+  Trigger: 'Tabs.ToggleTrigger',
+  Content: 'Tabs.ToggleContent',
 }
 
 const tabsVariantsSlots = tv({
@@ -52,7 +52,12 @@ type TabsToggleProps = Assign<
   TabsToggleSharedProps
 >
 
-function TabsToggle({ children, className, size, ...props }: TabsToggleProps) {
+function TabsToggleRoot({
+  children,
+  className,
+  size,
+  ...props
+}: TabsToggleProps) {
   const keyPrefix = React.useId()
 
   const extendedChildrenWithInjectedProps = recursiveClone(children, {
@@ -78,7 +83,7 @@ function TabsToggle({ children, className, size, ...props }: TabsToggleProps) {
   )
 }
 
-TabsToggle.displayName = TABS_TOGGLE_PARTS.Root
+TabsToggleRoot.displayName = TABS_TOGGLE_PARTS.Root
 
 function TabsToggleList({
   className,
@@ -162,11 +167,12 @@ TabsToggleTrigger.displayName = TABS_TOGGLE_PARTS.Trigger
 const TabsToggleContent = ArkTabs.Content
 TabsToggleContent.displayName = TABS_TOGGLE_PARTS.Content
 
-export {
-  TabsToggle,
-  TabsToggleContent,
-  TabsToggleList,
-  TabsToggleTrigger,
-  useTabs,
+const TabsToggle = {
+  Root: TabsToggleRoot,
+  List: TabsToggleList,
+  Trigger: TabsToggleTrigger,
+  Content: TabsToggleContent,
 }
+
+export { TabsToggle, useTabs }
 export type { TabsToggleProps }

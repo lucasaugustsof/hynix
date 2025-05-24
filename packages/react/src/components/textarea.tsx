@@ -15,11 +15,8 @@ const textareaVariants = tv({
     'peer inline-flex resize rounded-xl bg-surface-1 outline-none ring-1 ring-border',
     'transition-[background-color,box-shadow] duration-150 ease-in-out',
     'font-medium font-sans text-fg-1 tracking-normal caret-brand placeholder:select-none',
-    // hover
     'not-focus-visible:enabled:hover:ring-2',
-    // focus
     'focus-visible:bg-surface-2 focus-visible:ring-2 focus-visible:ring-brand',
-    // disabled
     'disabled:cursor-not-allowed disabled:resize-none disabled:bg-fill-1 disabled:text-disabled disabled:ring-0 disabled:placeholder:text-disabled',
   ],
   variants: {
@@ -28,7 +25,6 @@ const textareaVariants = tv({
       md: 'min-h-18 min-w-66 pt-2.5 pr-3 pl-4 text-base',
       lg: [
         'min-h-20 min-w-80 pt-3 pr-4 pl-5 text-lg/7',
-        // focus
         'focus-visible:ring-3',
       ],
     },

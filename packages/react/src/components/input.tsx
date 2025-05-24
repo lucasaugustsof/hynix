@@ -10,23 +10,16 @@ const inputVariantsSlots = tv({
   slots: {
     root: [
       'group inline-flex min-w-[15rem] overflow-hidden rounded-xl bg-surface-1 ring-1 ring-border',
-      'transition-[background-color,box-shadow] duration-150 ease-in-out',
-      // hover
-      'not-focus-within:has-enabled:hover:ring-2',
-      // focus
       'focus-within:bg-surface-2 focus-within:ring-2 focus-within:ring-brand',
-      // disabled
       'has-disabled:bg-fill-1 has-disabled:ring-0 has-disabled:*:cursor-not-allowed',
     ],
     input: [
       'grow font-medium font-sans text-fg-1 tracking-normal caret-brand outline-none placeholder:select-none',
-      // disabled
       'disabled:text-disabled disabled:placeholder:text-disabled',
     ],
     addon: [
       'grid h-full shrink-0 place-items-center font-medium font-sans text-fill-5',
       'data-[styling=true]:bg-fill-1 data-[styling=true]:text-fg-1/40',
-      // disabled
       'group-has-disabled:text-disabled',
     ],
   },
@@ -43,11 +36,7 @@ const inputVariantsSlots = tv({
         addon: ['text-base [&_svg]:size-6'],
       },
       lg: {
-        root: [
-          'h-14',
-          // focus
-          'focus-within:ring-3',
-        ],
+        root: ['h-14', 'focus-within:ring-3'],
         input: 'pr-4 pl-5 text-lg/7',
         addon: [
           'text-lg/7 [&_svg]:size-7',

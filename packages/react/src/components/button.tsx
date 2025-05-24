@@ -3,10 +3,6 @@ import { type Assign, ark } from '@ark-ui/react'
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-//---------------------------------
-// Variants
-//---------------------------------
-
 const buttonVariants = tv({
   base: [
     [
@@ -58,18 +54,10 @@ const buttonVariants = tv({
   },
 })
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type ButtonProps = Assign<
   React.CustomComponentPropsWithRef<typeof ark.button>,
   VariantProps<typeof buttonVariants>
 >
-
-//---------------------------------
-// Button
-//---------------------------------
 
 function Button({ className, variant, size, iconOnly, ...props }: ButtonProps) {
   return (
@@ -88,10 +76,6 @@ function Button({ className, variant, size, iconOnly, ...props }: ButtonProps) {
     />
   )
 }
-
-//---------------------------------
-// Exports
-//---------------------------------
 
 export { Button, buttonVariants }
 export type { ButtonProps }

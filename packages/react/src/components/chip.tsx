@@ -8,19 +8,11 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 import { RiCloseLine } from '@remixicon/react'
 
-//---------------------------------
-// Constants
-//---------------------------------
-
 const CHIP_PARTS = {
   Root: 'Chip.Root',
   Label: 'Chip.Label',
   Close: 'Chip.Close',
 }
-
-//---------------------------------
-// Variants
-//---------------------------------
 
 const chipVariantsWithSlots = tv({
   slots: {
@@ -85,17 +77,9 @@ const chipVariantsWithSlots = tv({
 
 const { root, label, close } = chipVariantsWithSlots()
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type ChipSharedProps = VariantProps<typeof chipVariantsWithSlots>
 
 type ChipProps = Assign<React.ComponentPropsWithRef<'div'>, ChipSharedProps>
-
-//---------------------------------
-// Root
-//---------------------------------
 
 function Root({ children, className, size, active, ...props }: ChipProps) {
   const keyPrefix = React.useId()
@@ -133,10 +117,6 @@ function Root({ children, className, size, active, ...props }: ChipProps) {
 
 Root.displayName = CHIP_PARTS.Root
 
-//---------------------------------
-// Label
-//---------------------------------
-
 function Label({
   className,
   size,
@@ -160,10 +140,6 @@ function Label({
 }
 
 Label.displayName = CHIP_PARTS.Label
-
-//---------------------------------
-// Close
-//---------------------------------
 
 function Close({
   className,
@@ -191,10 +167,6 @@ function Close({
 }
 
 Close.displayName = CHIP_PARTS.Close
-
-//---------------------------------
-// Exports
-//---------------------------------
 
 export const Chip = {
   Root,

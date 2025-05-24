@@ -4,12 +4,7 @@ import { fn } from '@storybook/test'
 import { RiFocus3Line } from '@remixicon/react'
 
 import { Button } from '@r/components/button'
-import {
-  Tooltip,
-  TooltipContent,
-  type TooltipProps,
-  TooltipTrigger,
-} from '@r/components/tooltip'
+import { Tooltip, type TooltipProps } from '@r/components/tooltip'
 
 import { cn } from '@r/utilities/cn'
 
@@ -19,14 +14,14 @@ const meta: Meta<TooltipProps> = {
   title: 'Components/Tooltip',
   component(args) {
     return (
-      <Tooltip {...args}>
-        <TooltipTrigger asChild>
+      <Tooltip.Root {...args}>
+        <Tooltip.Trigger asChild>
           <Button variant="secondary" iconOnly>
             <RiFocus3Line />
           </Button>
-        </TooltipTrigger>
+        </Tooltip.Trigger>
 
-        <TooltipContent>
+        <Tooltip.Content>
           <div
             className={cn(
               'rounded border border-highlight border-dashed bg-highlight/10 px-4 py-1',
@@ -35,8 +30,8 @@ const meta: Meta<TooltipProps> = {
           >
             slot content
           </div>
-        </TooltipContent>
-      </Tooltip>
+        </Tooltip.Content>
+      </Tooltip.Root>
     )
   },
   args: {

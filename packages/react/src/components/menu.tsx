@@ -1,12 +1,12 @@
 import { Menu as ArkMenu } from '@ark-ui/react/menu'
 import { cn } from '@r/utilities/cn'
 
-type DropdownMenuProps = React.CustomComponentPropsWithRef<typeof ArkMenu.Root>
+type MenuProps = React.CustomComponentPropsWithRef<typeof ArkMenu.Root>
 
-const DropdownMenuRoot = ArkMenu.Root
-const DropdownMenuTrigger = ArkMenu.Trigger
+const MenuRoot = ArkMenu.Root
+const MenuTrigger = ArkMenu.Trigger
 
-function DropdownMenuContent({
+function MenuContent({
   className,
   ...props
 }: React.ComponentPropsWithRef<typeof ArkMenu.Content>) {
@@ -15,7 +15,7 @@ function DropdownMenuContent({
       <ArkMenu.Content
         {...props}
         className={cn(
-          'grid max-w-60 grid-cols-[auto_1fr] gap-y-0.5 overflow-hidden rounded-xl border bg-surface-1 p-2 shadow-black/8 shadow-xs outline-hidden dark:shadow-white/8',
+          'grid max-w-64 grid-cols-[auto_1fr] gap-y-0.5 overflow-hidden rounded-xl border bg-surface-1 p-2 shadow-black/8 shadow-xs outline-hidden dark:shadow-white/8',
           'data-[state=open]:fade-in data-[state=open]:zoom-in-95 data-[state=open]:animate-in data-[state=open]:ease-out-quart',
           'data-[state=closed]:fade-out data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out data-[state=closed]:ease-out-quart',
           className,
@@ -25,7 +25,7 @@ function DropdownMenuContent({
   )
 }
 
-function DropdownMenuItemGroup({
+function MenuItemGroup({
   className,
   ...props
 }: React.ComponentPropsWithRef<typeof ArkMenu.ItemGroup>) {
@@ -37,9 +37,9 @@ function DropdownMenuItemGroup({
   )
 }
 
-const DropdownMenuItemGroupLabel = ArkMenu.ItemGroupLabel
+const MenuItemGroupLabel = ArkMenu.ItemGroupLabel
 
-type DropdownMenuItemProps = Omit<
+type MenuItemProps = Omit<
   React.ComponentPropsWithRef<typeof ArkMenu.Item>,
   'prefix'
 > & {
@@ -47,12 +47,7 @@ type DropdownMenuItemProps = Omit<
   suffix?: React.ReactNode
 }
 
-function DropdownMenuItem({
-  children,
-  prefix,
-  suffix,
-  ...props
-}: DropdownMenuItemProps) {
+function MenuItem({ children, prefix, suffix, ...props }: MenuItemProps) {
   return (
     <ArkMenu.Item
       {...props}
@@ -89,17 +84,18 @@ function DropdownMenuItem({
   )
 }
 
-function DropdownMenuSeparator() {
+function MenuSeparator() {
   return <ArkMenu.Separator className="col-span-2 border-border" />
 }
 
-export const DropdownMenu = {
-  Root: DropdownMenuRoot,
-  Trigger: DropdownMenuTrigger,
-  Content: DropdownMenuContent,
-  ItemGroup: DropdownMenuItemGroup,
-  ItemGroupLabel: DropdownMenuItemGroupLabel,
-  Item: DropdownMenuItem,
-  Separator: DropdownMenuSeparator,
+export const Menu = {
+  Root: MenuRoot,
+  Trigger: MenuTrigger,
+  Content: MenuContent,
+  ItemGroup: MenuItemGroup,
+  ItemGroupLabel: MenuItemGroupLabel,
+  Item: MenuItem,
+  Separator: MenuSeparator,
 }
-export type { DropdownMenuProps }
+
+export type { MenuProps }

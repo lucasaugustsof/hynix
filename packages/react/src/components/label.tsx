@@ -6,7 +6,6 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 const labelVariants = tv({
   base: [
     'text-nowrap font-medium font-sans text-fg-1 tracking-normal',
-    // disabled
     'data-disabled:cursor-not-allowed data-disabled:text-disabled',
   ],
   variants: {

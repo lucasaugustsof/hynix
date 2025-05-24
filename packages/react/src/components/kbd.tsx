@@ -3,7 +3,7 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 const kbdVariants = tv({
   base: [
-    'inline-flex items-center justify-center whitespace-nowrap align-middle font-medium font-mono tracking-widest',
+    'inline-flex aspect-square items-center justify-center whitespace-nowrap rounded-sm align-middle font-medium tracking-widest',
   ],
   variants: {
     variant: {
@@ -11,10 +11,10 @@ const kbdVariants = tv({
       secondary: 'bg-fill-5 text-fg-2',
     },
     size: {
-      xs: 'h-5 rounded-md px-1.5 text-[calc(var(--spacing)*2.5)]',
-      sm: 'h-6 rounded-lg px-1.5 text-xs',
-      md: 'h-7 rounded-[calc(var(--spacing)*2.5)] px-2',
-      lg: 'h-8 rounded-xl px-2.5',
+      xs: 'h-5 px-1.5 text-[calc(var(--spacing)*2.5)]',
+      sm: 'h-6 px-1.5 text-xs',
+      md: 'h-7 px-2',
+      lg: 'h-8 px-2.5',
     },
   },
   compoundVariants: [

@@ -1,25 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import {
-  TabsToggle,
-  TabsToggleList,
-  type TabsToggleProps,
-  TabsToggleTrigger,
-} from '@r/components/tabs-toggle'
+import { TabsToggle, type TabsToggleProps } from '@r/components/tabs-toggle'
 
 const meta: Meta<TabsToggleProps> = {
   title: 'components/TabsToggle',
   component(args) {
     return (
-      <TabsToggle {...args} defaultValue="overview">
-        <TabsToggleList>
-          <TabsToggleTrigger value="overview">Overview</TabsToggleTrigger>
-          <TabsToggleTrigger value="analytics">Analytics</TabsToggleTrigger>
-          <TabsToggleTrigger value="team">Team</TabsToggleTrigger>
-          <TabsToggleTrigger value="billing">Billing</TabsToggleTrigger>
-          <TabsToggleTrigger value="settings">Settings</TabsToggleTrigger>
-        </TabsToggleList>
-      </TabsToggle>
+      <TabsToggle.Root {...args} defaultValue="overview">
+        <TabsToggle.List>
+          <TabsToggle.Trigger value="overview">Overview</TabsToggle.Trigger>
+          <TabsToggle.Trigger value="analytics">Analytics</TabsToggle.Trigger>
+          <TabsToggle.Trigger value="team">Team</TabsToggle.Trigger>
+          <TabsToggle.Trigger value="billing">Billing</TabsToggle.Trigger>
+          <TabsToggle.Trigger value="settings">Settings</TabsToggle.Trigger>
+        </TabsToggle.List>
+      </TabsToggle.Root>
     )
   },
   args: {

@@ -32,7 +32,6 @@ const checkboxVariantsSlots = tv({
     ],
     indicator: [
       'flex size-full items-center justify-center bg-brand transition-colors duration-200 ease-out',
-      // hover
       'hover:bg-brand/90',
     ],
   },

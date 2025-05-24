@@ -3,13 +3,11 @@ import type * as ArkTooltipDefs from '@ark-ui/react/tooltip'
 
 import { cn } from '@r/utilities/cn'
 
-// Tooltip ↴
-
 type TooltipProps = ArkTooltipDefs.TooltipRootProps
 
-const Tooltip = (props: TooltipProps) => <ArkTooltip.Root {...props} />
-
-// TooltipContent ↴
+const TooltipRoot = ArkTooltip.Root
+const TooltipTrigger = ArkTooltip.Trigger
+const TooltipContext = ArkTooltip.Context
 
 function TooltipContent({
   className,
@@ -30,8 +28,12 @@ function TooltipContent({
   )
 }
 
-const TooltipTrigger = ArkTooltip.Trigger
-const TooltipContext = ArkTooltip.Context
+const Tooltip = {
+  Root: TooltipRoot,
+  Content: TooltipContent,
+  Trigger: TooltipTrigger,
+  Context: TooltipContext,
+}
 
-export { Tooltip, TooltipTrigger, TooltipContext, TooltipContent, useTooltip }
+export { Tooltip, useTooltip }
 export type { TooltipProps }

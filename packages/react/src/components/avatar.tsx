@@ -4,10 +4,6 @@ import { Avatar as ArkAvatar, useAvatar } from '@ark-ui/react/avatar'
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-//---------------------------------
-// Variants
-//---------------------------------
-
 const avatarVariantsSlots = tv({
   slots: {
     root: 'relative inline-flex aspect-square shrink-0 select-none overflow-hidden rounded-full border border-border',
@@ -54,10 +50,6 @@ const avatarVariantsSlots = tv({
   },
 })
 
-//---------------------------------
-// Types
-//---------------------------------
-
 type AvatarProps = Assign<
   React.CustomComponentPropsWithRef<typeof ArkAvatar.Root>,
   VariantProps<typeof avatarVariantsSlots>
@@ -66,10 +58,6 @@ type AvatarProps = Assign<
   altText: string
   fallback?: React.ReactNode
 }
-
-//---------------------------------
-// Avatar
-//---------------------------------
 
 function Avatar({
   className,
@@ -105,20 +93,12 @@ function Avatar({
 
 Avatar.displayName = 'Avatar'
 
-//---------------------------------
-// Utilities
-//---------------------------------
-
 function getInitialLetters(altText: string) {
   return altText
     .split(' ')
     .map(word => word.charAt(0).toUpperCase())
     .join('')
 }
-
-//---------------------------------
-// Exports
-//---------------------------------
 
 export { Avatar, useAvatar, getInitialLetters }
 export type { AvatarProps }
