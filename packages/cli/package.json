@@ -1,16 +1,43 @@
 {
-	"name": "cli",
-	"version": "1.0.0",
-	"description": "",
-	"bin": "./bin/index.js",
+	"name": "hynix",
+	"version": "0.1.0-alpha.1",
+	"description": "A minimal CLI to quickly set up and manage components from the Hynix Design System.",
+	"bin": {
+		"hynix": "./bin/index.js"
+	},
 	"scripts": {
 		"dev": "tsup && NODE_ENV=development node bin/index.js",
 		"build": "tsup",
 		"lint": "biome check --write ."
 	},
-	"keywords": [],
+	"keywords": [
+		"cli",
+		"design-system",
+		"hynix",
+		"ui",
+		"components",
+		"automation",
+		"developer-tools",
+		"typescript"
+	],
 	"author": "Lucas Augusto <lucasaugustscode@gmail.com>",
 	"license": "MIT",
+	"type": "module",
+	"files": ["bin"],
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"exports": {
+		".": "./bin/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lucasaugustsof/hynix.git"
+	},
+	"bugs": {
+		"url": "https://github.com/lucasaugustsof/hynix/issues"
+	},
+	"homepage": "https://github.com/lucasaugustsof/hynix#readme",
 	"devDependencies": {
 		"@types/fs-extra": "11.0.4",
 		"@types/node": "22.15.21",
