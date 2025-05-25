@@ -1,0 +1,13 @@
+{
+	"extends": ["@hynix/ts-config/base.json"],
+	"compilerOptions": {
+		"lib": ["DOM", "ESNext"],
+		"moduleResolution": "node",
+		"tsBuildInfoFile": ".tsbuildinfo",
+		"emitDecoratorMetadata": false,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	}
+}
