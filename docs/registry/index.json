@@ -1,0 +1,20 @@
+{
+  "registry": [
+    "avatar",
+    "badge",
+    "button",
+    "card",
+    "checkbox",
+    "chip",
+    "dropdown-menu",
+    "input",
+    "kbd",
+    "label",
+    "progress-bar",
+    "separator",
+    "skeleton",
+    "tabs-toggle",
+    "textarea",
+    "tooltip"
+  ]
+}

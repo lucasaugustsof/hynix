@@ -71,7 +71,7 @@ function replaceImportWithAliasTemplate(registryImport) {
  * @param {string} content
  */
 async function writeRegistryFile(registryName, content) {
-  const outputPath = path.join(import.meta.dirname, '__tmp__')
+  const outputPath = path.join(import.meta.dirname, '../docs/registry')
 
   const loading = ora(
     `Generating ${chalk.blue(registryName)} registry file...`,
@@ -79,7 +79,9 @@ async function writeRegistryFile(registryName, content) {
 
   try {
     if (!existsSync(outputPath)) {
-      await fs.mkdir(outputPath)
+      await fs.mkdir(outputPath, {
+        recursive: true,
+      })
     }
 
     await fs.writeFile(
@@ -150,6 +152,14 @@ async function buildRegistry() {
 
     await writeRegistryFile(componentName, registryData)
   }
+
+  const registryIndexContent = {
+    registry: componentFiles.map(
+      componentFile => path.parse(componentFile).name,
+    ),
+  }
+
+  await writeRegistryFile('index', registryIndexContent)
 }
 
 buildRegistry()
