@@ -1,6 +1,6 @@
 {
 	"name": "hynix",
-	"version": "0.1.0-alpha.1",
+	"version": "0.1.0-alpha.2",
 	"description": "A minimal CLI to quickly set up and manage components from the Hynix Design System.",
 	"bin": {
 		"hynix": "./bin/index.js"

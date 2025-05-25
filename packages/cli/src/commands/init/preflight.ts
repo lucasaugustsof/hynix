@@ -31,7 +31,8 @@ export async function preFlight() {
   }
 
   const tailwindDependency = 'tailwindcss'
-  const regexValidateTailwindVersion = /^4\.\d+\.\d+$/ // 4.x.x
+  const regexValidateTailwindVersion =
+    /^\s*(?:\^|~|>=|<=|>|<|=)?\s*4\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?\s*$/ // 4.x.x
 
   if (!(tailwindDependency in dependencies)) {
     errorsFound[InitCommandErrors.TAILWIND_NOT_INSTALLED] = true
