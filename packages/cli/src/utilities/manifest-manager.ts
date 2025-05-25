@@ -24,8 +24,6 @@ class ManifestManager {
         structuredFileContent,
         'utf8',
       )
-
-      throw new Error()
     } catch (err) {
       if (err.code === FS_ERROR_CODES.PERMISSION_DENIED) {
         throw new CLIError(
