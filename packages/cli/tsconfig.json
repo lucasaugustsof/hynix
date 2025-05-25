@@ -5,6 +5,7 @@
 		"moduleResolution": "node",
 		"tsBuildInfoFile": ".tsbuildinfo",
 		"emitDecoratorMetadata": false,
+		"useUnknownInCatchVariables": false,
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"]

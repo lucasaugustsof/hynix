@@ -1,7 +1,7 @@
 import type { Command, ResolvedCommand } from 'package-manager-detector'
 
-import { detect } from 'package-manager-detector/detect'
 import { resolveCommand } from 'package-manager-detector/commands'
+import { detect } from 'package-manager-detector/detect'
 
 export async function resolvePackageManagerCommand(
   command: Command,

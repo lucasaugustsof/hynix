@@ -27,4 +27,9 @@ export const logger = {
     log.message(chalk[color ?? 'grey'](message))
   },
   step: log.step,
+
+  // Used only in dev environment
+  debug(message: string) {
+    log.message(chalk.magenta(`[DEV] ${message}`))
+  },
 }

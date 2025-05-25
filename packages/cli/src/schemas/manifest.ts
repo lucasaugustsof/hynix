@@ -9,3 +9,5 @@ export const ManifestSchema = z.object({
     utilities: z.string(),
   }),
 })
+
+export type Manifest = z.infer<typeof ManifestSchema>
