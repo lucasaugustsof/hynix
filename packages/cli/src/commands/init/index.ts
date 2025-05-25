@@ -34,6 +34,7 @@ export const init = new Command()
           message: 'Do you still want to proceed?',
           active: 'Yes, I want to proceed.',
           inactive: 'No, I want to abort.',
+          initialValue: false,
         })
 
         if (!shouldProceedWithoutTailwind) {
