@@ -9,7 +9,7 @@ const avatarVariantsSlots = tv({
     root: 'relative inline-flex aspect-square shrink-0 select-none overflow-hidden rounded-full border border-border',
     fallback:
       'absolute grid size-full place-items-center whitespace-nowrap bg-brand font-sans font-semibold text-fg-2',
-    image: 'pointer-events-none object-cover',
+    image: 'pointer-events-none flex-1 object-cover',
   },
   variants: {
     size: {

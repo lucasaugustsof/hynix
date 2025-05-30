@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
 import { Button } from '@r/components/button'
-import { Menu, type MenuProps } from '@r/components/menu'
 import { Kbd } from '@r/components/kbd'
+import { Menu, type MenuProps } from '@r/components/menu'
 
 import { RiEditLine } from '@remixicon/react'
 
@@ -62,6 +62,6 @@ const meta: Meta<MenuProps> = {
 
 export default meta
 
-type DropdownMenuStory = StoryObj<DropdownMenuProps>
+type DropdownMenuStory = StoryObj<MenuProps>
 
 export const Default: DropdownMenuStory = {}
