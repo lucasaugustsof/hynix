@@ -125,8 +125,4 @@
 	textarea::-webkit-resizer {
 		@apply hidden;
 	}
-
-	[data-focusable] {
-		@apply outline-brand/40 outline-offset-2 focus-visible:outline-2;
-	}
 }
