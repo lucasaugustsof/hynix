@@ -1,10 +1,10 @@
 {
-  "name": "@hynix/ts-config",
-  "version": "0.1.0",
-  "description": "A collection of predefined configurations tailored for TypeScript projects.",
-  "exports": {
-    "./*.json": "./*.json"
-  },
-  "license": "MIT",
-  "private": true
+	"name": "@repo/ts-config",
+	"version": "0.0.0",
+	"description": "A collection of predefined configurations tailored for TypeScript projects.",
+	"exports": {
+		"./*.json": "./*.json"
+	},
+	"license": "MIT",
+	"private": true
 }

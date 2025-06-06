@@ -1,7 +1,6 @@
-import '@hynix/react/styles.css'
+import '@repo/react/styles.css'
 
 import type { Preview } from '@storybook/react'
-
 import { withThemeByClassName } from '@storybook/addon-themes'
 
 const preview: Preview = {

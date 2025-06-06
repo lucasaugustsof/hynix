@@ -1,0 +1,22 @@
+{
+	"name": "@repo/sb-shared",
+	"description": "Shared components and utilities for Storybook across the monorepo.",
+	"version": "0.0.0",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"main": "./src/index.ts",
+	"types": "./src/index.ts",
+	"exports": {
+		"./components": "./src/components/index.ts",
+		"./utilities": "./src/utilities/index.ts"
+	},
+	"files": ["src"],
+	"sideEffects": false,
+	"devDependencies": {
+		"@types/react": "19.0.7",
+		"@types/react-dom": "19.0.3",
+		"react": "19.0.0",
+		"react-dom": "19.0.0"
+	}
+}
