@@ -9,7 +9,7 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 const inputVariantsSlots = tv({
   slots: {
     root: [
-      'group inline-flex min-w-[15rem] overflow-hidden rounded-xl bg-surface-1 ring-1 ring-border',
+      'group inline-flex overflow-hidden rounded-xl bg-surface-1 ring-1 ring-border',
       'focus-within:bg-surface-2 focus-within:ring-2 focus-within:ring-brand',
       'has-disabled:bg-fill-1 has-disabled:ring-0 has-disabled:*:cursor-not-allowed',
     ],
@@ -81,7 +81,7 @@ type InputProps = Assign<
 }
 
 type AddonProps = Pick<
-  React.ComponentPropsWithRef<'label'>,
+  React.ComponentProps<typeof ArkField.Label>,
   'children' | 'htmlFor'
 > & {
   size: InputSharedProps['size']
@@ -93,7 +93,7 @@ function InputAddon({ size, type, styling = false, ...props }: AddonProps) {
   const { addon } = inputVariantsSlots()
 
   return (
-    <label
+    <ArkField.Label
       {...props}
       role="presentation"
       className={cn(
@@ -101,7 +101,6 @@ function InputAddon({ size, type, styling = false, ...props }: AddonProps) {
           size,
         }),
       )}
-      data-scope="input"
       data-part={type}
       data-styling={styling}
     />
@@ -150,8 +149,6 @@ function Input({
         {...props}
         id={uniqueId}
         className={cn(input())}
-        data-scope="input"
-        data-part="input"
         aria-invalid={invalid}
       />
 
