@@ -59,7 +59,6 @@ function Badge({ className, variant, active = false, ...props }: BadgeProps) {
       )}
       data-scope="badge"
       data-state={active ? 'active' : 'inactive'}
-      data-focusable
     />
   )
 }

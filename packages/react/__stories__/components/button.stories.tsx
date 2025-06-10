@@ -16,7 +16,7 @@ import { replaceAliasWithRawImport } from '@repo/sb-shared/utilities'
 import { Button, type ButtonProps } from '@r/components/button'
 import ButtonRaw from '@r/components/button?raw'
 
-const meta: Meta = {
+const meta: Meta<ButtonProps> = {
   title: 'components/Button',
   component: Button,
   parameters: {
