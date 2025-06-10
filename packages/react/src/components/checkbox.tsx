@@ -15,7 +15,7 @@ import { motion } from 'motion/react'
 
 import { Label, type LabelProps } from '@r/components/label'
 
-const CHECKBOX_PARTS = {
+const CHECKBOX_SLOT_KEYS = {
   Root: 'Checkbox.Root',
   Control: 'Checkbox.Control',
   Provider: 'Checkbox.Provider',
@@ -66,14 +66,17 @@ type CheckboxProps = Assign<
   CheckboxSharedProps
 >
 
-function CheckboxRoot({ className, children, size, ...props }: CheckboxProps) {
+const CheckboxRoot: React.FC<CheckboxProps> = ({
+  className,
+  children,
+  size,
+  ...props
+}) => {
   const keyPrefix = React.useId()
 
-  const extendedChildrenWithInjectedProps = recursiveClone(children, {
-    inject: {
-      size,
-    },
-    match: [CHECKBOX_PARTS.Control, CHECKBOX_PARTS.Label],
+  const extendedChildren = recursiveClone(children, {
+    inject: { size },
+    match: [CHECKBOX_SLOT_KEYS.Control, CHECKBOX_SLOT_KEYS.Label],
     keyPrefix,
   })
 
@@ -85,34 +88,32 @@ function CheckboxRoot({ className, children, size, ...props }: CheckboxProps) {
         size,
       })}
     >
-      {extendedChildrenWithInjectedProps}
+      {extendedChildren}
       <ArkCheckbox.HiddenInput />
     </ArkCheckbox.Root>
   )
 }
+CheckboxRoot.displayName = CHECKBOX_SLOT_KEYS.Root
 
-CheckboxRoot.displayName = CHECKBOX_PARTS.Root
-
-function CheckIcon({
-  type,
-}: {
+const CheckIcon: React.FC<{
   type: 'check' | 'indeterminate'
-}) {
-  const CHECK_PATH = 'M5 13 L10 18 L20 6'
-  const INDETERMINATE_PATH = 'M6 12 H18'
+}> = ({ type }) => {
+  const PATH = {
+    check: 'M5 13 L10 18 L20 6',
+    indeterminate: 'M6 12 H18',
+  }
 
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={cn('shrink-0 stroke-4 stroke-fg-2')}
     >
       <title>Check</title>
-
       <motion.path
-        d={type === 'check' ? CHECK_PATH : INDETERMINATE_PATH}
+        d={PATH[type]}
         initial={{
           pathLength: 0,
         }}
@@ -128,13 +129,12 @@ function CheckIcon({
   )
 }
 
-function CheckboxControl({
-  size,
-  ...props
-}: Assign<
-  React.CustomComponentPropsWithRef<typeof ArkCheckbox.Control>,
-  CheckboxSharedProps
->) {
+const CheckboxControl: React.FC<
+  Assign<
+    React.CustomComponentPropsWithRef<typeof ArkCheckbox.Control>,
+    CheckboxSharedProps
+  >
+> = ({ size, ...props }) => {
   const { checkedState, indeterminate: isIndeterminate } = useCheckboxContext()
 
   return (
@@ -168,24 +168,20 @@ function CheckboxControl({
     </ArkCheckbox.Control>
   )
 }
+CheckboxControl.displayName = CHECKBOX_SLOT_KEYS.Control
 
-CheckboxControl.displayName = CHECKBOX_PARTS.Control
+const CheckboxLabel: React.FC<LabelProps> = props => (
+  <ArkCheckbox.Label asChild>
+    <Label {...props} />
+  </ArkCheckbox.Label>
+)
+CheckboxLabel.displayName = CHECKBOX_SLOT_KEYS.Label
 
 const CheckboxProvider = ArkCheckbox.RootProvider
-CheckboxProvider.displayName = CHECKBOX_PARTS.Provider
+CheckboxProvider.displayName = CHECKBOX_SLOT_KEYS.Provider
 
 const CheckboxGroup = ArkCheckbox.Group
-CheckboxGroup.displayName = CHECKBOX_PARTS.Group
-
-function CheckboxLabel(props: LabelProps) {
-  return (
-    <ArkCheckbox.Label asChild>
-      <Label {...props} />
-    </ArkCheckbox.Label>
-  )
-}
-
-CheckboxLabel.displayName = CHECKBOX_PARTS.Label
+CheckboxGroup.displayName = CHECKBOX_SLOT_KEYS.Group
 
 const Checkbox = {
   Root: CheckboxRoot,
