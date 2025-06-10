@@ -36,7 +36,6 @@ export const Basic: CheckboxStory = {
   render: () => (
     <Checkbox.Root>
       <Checkbox.Control />
-      <Checkbox.Label>Accept terms</Checkbox.Label>
     </Checkbox.Root>
   ),
 }

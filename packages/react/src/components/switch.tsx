@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Switch as ArkSwitch } from '@ark-ui/react/switch'
+import { Switch as ArkSwitch, useSwitch } from '@ark-ui/react/switch'
 import type { Assign } from '@ark-ui/react'
 
 import { Label, type LabelProps } from '@r/components/label'
@@ -13,6 +13,7 @@ const SWITCH_SLOT_KEYS = {
   Root: 'Switch.Root',
   Control: 'Switch.Control',
   Label: 'Switch.Label',
+  Provider: 'Switch.Provider',
 }
 
 const switchStyles = tv({
@@ -144,10 +145,15 @@ const SwitchLabel = ({ children, ...props }: LabelProps) => (
 
 SwitchLabel.displayName = SWITCH_SLOT_KEYS.Label
 
-export const Switch = {
+const SwitchProvider = ArkSwitch.RootProvider
+SwitchProvider.displayName = SWITCH_SLOT_KEYS.Provider
+
+const Switch = {
   Root: SwitchRoot,
   Control: SwitchControl,
   Label: SwitchLabel,
+  Provider: SwitchProvider,
 }
 
+export { Switch, useSwitch }
 export type { SwitchProps }
