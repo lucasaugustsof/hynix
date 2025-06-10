@@ -14,7 +14,7 @@ const inputVariantsSlots = tv({
       'has-disabled:bg-fill-1 has-disabled:ring-0 has-disabled:*:cursor-not-allowed',
     ],
     input: [
-      'grow font-medium font-sans text-fg-1 tracking-normal caret-brand outline-none placeholder:select-none',
+      'flex-1 font-medium font-sans text-fg-1 tracking-normal caret-brand outline-none placeholder:select-none',
       'disabled:text-disabled disabled:placeholder:text-disabled',
     ],
     addon: [
@@ -89,36 +89,37 @@ type AddonProps = Pick<
   styling?: boolean
 }
 
-function InputAddon({ size, type, styling = false, ...props }: AddonProps) {
+const InputAddon: React.FC<AddonProps> = ({
+  size,
+  type,
+  styling = false,
+  ...props
+}) => {
   const { addon } = inputVariantsSlots()
-
   return (
     <ArkField.Label
       {...props}
       role="presentation"
-      className={cn(
-        addon({
-          size,
-        }),
-      )}
+      className={cn(addon({ size }))}
       data-part={type}
       data-styling={styling}
     />
   )
 }
 
-function Input({
+InputAddon.displayName = 'InputAddon'
+
+const Input: React.FC<InputProps> = ({
   className,
-  size,
+  size = 'md',
   invalid,
   prefix,
   suffix,
   prefixStyling = false,
   suffixStyling = false,
   ...props
-}: InputProps) {
+}) => {
   const uniqueId = React.useId()
-
   const { root, input } = inputVariantsSlots({
     size,
   })
@@ -165,6 +166,8 @@ function Input({
     </div>
   )
 }
+
+Input.displayName = 'Input'
 
 export { Input }
 export type { InputProps }
