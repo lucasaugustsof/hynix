@@ -25,7 +25,6 @@
 	--color-success: var(--success);
 
 	--font-sans: var(--ff-sans);
-	--font-mono: var(--ff-mono);
 
 	--ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
 	--ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -74,8 +73,7 @@
 	--danger: oklch(57.85% 0.2138 27.17);
 	--success: oklch(57.29% 0.1544 149.22);
 
-	--ff-sans: "Geist", sans-serif;
-	--ff-mono: "Geist Mono", monospace;
+	--ff-sans: "Inter", sans-serif;
 }
 
 .dark {

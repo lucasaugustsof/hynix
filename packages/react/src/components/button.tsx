@@ -16,7 +16,7 @@ const buttonVariants = tv({
       primary: ['bg-brand text-fg-2', 'not-disabled:hover:bg-brand/90'],
       secondary: [
         'inset-ring-border bg-surface-2 text-fg-1',
-        'not-disabled:hover:bg-fill-2',
+        'not-disabled:hover:bg-fill-2 [&_svg]:fill-fill-5',
       ],
       ghost: [
         'bg-transparent text-brand transition-[color_box-shadow]',
@@ -72,7 +72,6 @@ function Button({ className, variant, size, iconOnly, ...props }: ButtonProps) {
         }),
       )}
       data-scope="button"
-      data-focusable
     />
   )
 }
