@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { PreviewComponent } from '@repo/sb-shared/components'
 import { replaceAliasWithRawImport } from '@repo/sb-shared/utilities'
 
 import {
@@ -36,13 +35,6 @@ export const Basic: AvatarStory = {
       altText="John Doe"
     />
   ),
-  decorators: [
-    Story => (
-      <PreviewComponent title="Basic Avatar">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
 }
 
 export const Fallback: AvatarStory = {
@@ -53,13 +45,6 @@ export const Fallback: AvatarStory = {
       altText="John Doe"
     />
   ),
-  decorators: [
-    Story => (
-      <PreviewComponent title="Avatar with Fallback">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
 }
 
 export const Sizes: AvatarStory = {
@@ -98,13 +83,6 @@ export const Sizes: AvatarStory = {
       />
     </div>
   ),
-  decorators: [
-    Story => (
-      <PreviewComponent title="Sizes">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
 }
 
 export const Persona: AvatarStory = {
@@ -149,11 +127,4 @@ export const Persona: AvatarStory = {
       </div>
     )
   },
-  decorators: [
-    Story => (
-      <PreviewComponent title="Persona">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
 }

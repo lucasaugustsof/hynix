@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { PreviewComponent } from '@repo/sb-shared/components'
 import { replaceAliasWithRawImport } from '@repo/sb-shared/utilities'
 
 import { Switch, type SwitchProps } from '@r/components/switch'
@@ -26,13 +25,6 @@ type SwitchStory = StoryObj<SwitchProps>
 
 export const Basic: SwitchStory = {
   name: 'Basic',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Basic Switch">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Switch.Root>
       <Switch.Control />
@@ -42,13 +34,6 @@ export const Basic: SwitchStory = {
 
 export const Checked: SwitchStory = {
   name: 'Checked',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Checked">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Switch.Root defaultChecked>
       <Switch.Control />
@@ -59,13 +44,6 @@ export const Checked: SwitchStory = {
 
 export const Disabled: SwitchStory = {
   name: 'Disabled',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Disabled">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Switch.Root disabled>
       <Switch.Control />
@@ -76,13 +54,6 @@ export const Disabled: SwitchStory = {
 
 export const CheckedDisabled: SwitchStory = {
   name: 'Checked and Disabled',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Checked and Disabled">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Switch.Root defaultChecked disabled>
       <Switch.Control />
@@ -93,13 +64,6 @@ export const CheckedDisabled: SwitchStory = {
 
 export const Sizes: SwitchStory = {
   name: 'Sizes',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Sizes">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <div className="flex items-center gap-4">
       <Switch.Root size="sm">
@@ -127,13 +91,6 @@ export const Sizes: SwitchStory = {
 
 export const AccountSettingsExample: SwitchStory = {
   name: 'Account Settings Example',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Account Settings Example">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <div className="flex flex-col gap-4">
       <Switch.Root defaultChecked>

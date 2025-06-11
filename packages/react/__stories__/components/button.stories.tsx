@@ -10,7 +10,6 @@ import {
   RiMicrosoftFill,
 } from '@remixicon/react'
 
-import { PreviewComponent } from '@repo/sb-shared/components'
 import { replaceAliasWithRawImport } from '@repo/sb-shared/utilities'
 
 import { Button, type ButtonProps } from '@r/components/button'
@@ -36,25 +35,11 @@ type ButtonStory = StoryObj<ButtonProps>
 
 export const Basic: ButtonStory = {
   name: 'Basic',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Basic Button">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => <Button>Button</Button>,
 }
 
 export const WithLeftIcon: ButtonStory = {
   name: 'With Left Icon',
-  decorators: [
-    Story => (
-      <PreviewComponent title="With Left Icon">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Button>
       <RiArrowLeftLine />
@@ -65,13 +50,6 @@ export const WithLeftIcon: ButtonStory = {
 
 export const WithRightIcon: ButtonStory = {
   name: 'With Right Icon',
-  decorators: [
-    Story => (
-      <PreviewComponent title="With Right Icon">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Button>
       Button
@@ -82,13 +60,6 @@ export const WithRightIcon: ButtonStory = {
 
 export const IconOnly: ButtonStory = {
   name: 'Icon Only',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Icon Only">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <div className="flex items-center gap-x-4">
       <Button aria-label="Left" iconOnly>
@@ -103,13 +74,6 @@ export const IconOnly: ButtonStory = {
 
 export const Variants: ButtonStory = {
   name: 'Variants',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Variants">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <div className="flex items-center gap-x-4">
       {(['primary', 'secondary', 'ghost', 'destructive'] as const).map(
@@ -125,13 +89,6 @@ export const Variants: ButtonStory = {
 
 export const Sizes: ButtonStory = {
   name: 'Sizes',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Sizes">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <div className="flex items-center gap-x-4">
       {(['sm', 'md', 'lg', 'xl'] as const).map(size => (
@@ -145,37 +102,16 @@ export const Sizes: ButtonStory = {
 
 export const Disabled: ButtonStory = {
   name: 'Disabled',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Disabled">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => <Button disabled>Button</Button>,
 }
 
 export const FullWidth: ButtonStory = {
   name: 'Full Width',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Full Width">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => <Button className="w-full">Button</Button>,
 }
 
 export const SocialLogins: ButtonStory = {
   name: 'Social Logins',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Social Logins">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <div className="grid grid-cols-4 gap-4">
       <Button variant="secondary">

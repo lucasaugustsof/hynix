@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { PreviewComponent } from '@repo/sb-shared/components'
 import { replaceAliasWithRawImport } from '@repo/sb-shared/utilities'
 
 import { Checkbox, type CheckboxProps } from '@r/components/checkbox'
@@ -26,13 +25,6 @@ type CheckboxStory = StoryObj<CheckboxProps>
 
 export const Basic: CheckboxStory = {
   name: 'Basic',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Basic Checkbox">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Checkbox.Root>
       <Checkbox.Control />
@@ -42,13 +34,6 @@ export const Basic: CheckboxStory = {
 
 export const Checked: CheckboxStory = {
   name: 'Checked',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Checked">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Checkbox.Root defaultChecked>
       <Checkbox.Control />
@@ -59,13 +44,6 @@ export const Checked: CheckboxStory = {
 
 export const Indeterminate: CheckboxStory = {
   name: 'Indeterminate',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Indeterminate">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Checkbox.Root checked="indeterminate" defaultChecked>
       <Checkbox.Control />
@@ -76,13 +54,6 @@ export const Indeterminate: CheckboxStory = {
 
 export const Sizes: CheckboxStory = {
   name: 'Sizes',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Sizes">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <div className="flex items-center gap-4">
       <Checkbox.Root size="sm">
@@ -105,13 +76,6 @@ export const Sizes: CheckboxStory = {
 
 export const Disabled: CheckboxStory = {
   name: 'Disabled',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Disabled">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Checkbox.Root disabled>
       <Checkbox.Control />
@@ -122,13 +86,6 @@ export const Disabled: CheckboxStory = {
 
 export const CheckedDisabled: CheckboxStory = {
   name: 'Checked and Disabled',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Checked and Disabled">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <Checkbox.Root defaultChecked disabled>
       <Checkbox.Control />
@@ -139,13 +96,6 @@ export const CheckedDisabled: CheckboxStory = {
 
 export const NotificationPreferences: CheckboxStory = {
   name: 'Notification Preferences',
-  decorators: [
-    Story => (
-      <PreviewComponent title="Notification Preferences">
-        <Story />
-      </PreviewComponent>
-    ),
-  ],
   render: () => (
     <div className="flex flex-col gap-4">
       <Checkbox.Root defaultChecked>
