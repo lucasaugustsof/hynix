@@ -11,7 +11,7 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 import { Label, type LabelProps } from '@r/components/label'
 
-const PROGRESS_BAR_PARTS = {
+const PROGRESS_SLOT_KEYS = {
   Root: 'ProgressBar.Root',
   Label: 'ProgressBar.Label',
   ValueText: 'ProgressBar.ValueText',
@@ -76,9 +76,9 @@ function ProgressBarRoot({
       size,
     },
     match: [
-      PROGRESS_BAR_PARTS.ValueText,
-      PROGRESS_BAR_PARTS.Track,
-      PROGRESS_BAR_PARTS.Label,
+      PROGRESS_SLOT_KEYS.ValueText,
+      PROGRESS_SLOT_KEYS.Track,
+      PROGRESS_SLOT_KEYS.Label,
     ],
     keyPrefix,
   })
@@ -98,7 +98,7 @@ function ProgressBarRoot({
   )
 }
 
-ProgressBarRoot.displayName = PROGRESS_BAR_PARTS.Root
+ProgressBarRoot.displayName = PROGRESS_SLOT_KEYS.Root
 
 function ProgressBarValueText({
   className,
@@ -118,7 +118,7 @@ function ProgressBarValueText({
   )
 }
 
-ProgressBarValueText.displayName = PROGRESS_BAR_PARTS.ValueText
+ProgressBarValueText.displayName = PROGRESS_SLOT_KEYS.ValueText
 
 function ProgressBarTrack({
   className,
@@ -141,7 +141,7 @@ function ProgressBarTrack({
   )
 }
 
-ProgressBarTrack.displayName = PROGRESS_BAR_PARTS.Track
+ProgressBarTrack.displayName = PROGRESS_SLOT_KEYS.Track
 
 function ProgressBarLabel(props: LabelProps) {
   return (
@@ -151,7 +151,7 @@ function ProgressBarLabel(props: LabelProps) {
   )
 }
 
-ProgressBarLabel.displayName = PROGRESS_BAR_PARTS.Label
+ProgressBarLabel.displayName = PROGRESS_SLOT_KEYS.Label
 
 const ProgressBar = {
   Root: ProgressBarRoot,
