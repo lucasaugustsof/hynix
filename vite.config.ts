@@ -11,7 +11,7 @@ export default defineConfig({
     alias: [
       {
         find: '@r',
-        replacement: path.resolve(__dirname, 'packages/react/src'),
+        replacement: path.resolve(__dirname, 'packages/ui/src'),
       },
     ],
   },

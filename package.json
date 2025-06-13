@@ -22,7 +22,7 @@
 		"@biomejs/biome": "1.9.4",
 		"@commitlint/cli": "19.8.1",
 		"@commitlint/config-conventional": "19.8.1",
-		"@repo/react": "workspace:*",
+		"@repo/ui": "workspace:*",
 		"@repo/ts-config": "workspace:*",
 		"@storybook/addon-a11y": "9.0.9",
 		"@storybook/addon-docs": "9.0.9",

@@ -1,5 +1,5 @@
 {
-	"name": "@repo/react",
+	"name": "@repo/ui",
 	"version": "0.0.0",
 	"type": "module",
 	"description": "Powerful and accessible components made with React, Tailwind and Ark UI.",

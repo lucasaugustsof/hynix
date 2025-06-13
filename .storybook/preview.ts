@@ -1,4 +1,4 @@
-import '@repo/react/styles.css'
+import '@repo/ui/styles.css'
 
 import type { Preview } from '@storybook/react-vite'
 import { withThemeByClassName } from '@storybook/addon-themes'

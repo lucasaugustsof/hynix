@@ -24,12 +24,12 @@ importers:
       '@commitlint/config-conventional':
         specifier: 19.8.1
         version: 19.8.1
-      '@repo/react':
-        specifier: workspace:*
-        version: link:packages/react
       '@repo/ts-config':
         specifier: workspace:*
         version: link:config/ts-config
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:packages/ui
       '@storybook/addon-a11y':
         specifier: 9.0.9
         version: 9.0.9(storybook@9.0.9(@testing-library/dom@10.4.0))
@@ -41,13 +41,13 @@ importers:
         version: 9.0.9(storybook@9.0.9(@testing-library/dom@10.4.0))
       '@storybook/addons':
         specifier: 7.6.17
-        version: 7.6.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 7.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@storybook/react':
         specifier: 9.0.9
-        version: 9.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)
+        version: 9.0.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)
       '@storybook/react-vite':
         specifier: 9.0.9
-        version: 9.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.43.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.19.2))
+        version: 9.0.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(rollup@4.43.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.19.2))
       '@types/react':
         specifier: 19.1.8
         version: 19.1.8
@@ -65,10 +65,10 @@ importers:
         version: 9.0.9(@testing-library/dom@10.4.0)
       storybook-addon-tag-badges:
         specifier: 2.0.1
-        version: 2.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0))
+        version: 2.0.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0))
       storybook-dark-mode:
         specifier: 4.0.2
-        version: 4.0.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0))
+        version: 4.0.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0))
       turbo:
         specifier: 2.5.4
         version: 2.5.4
@@ -84,7 +84,7 @@ importers:
 
   config/ts-config: {}
 
-  packages/react:
+  packages/ui:
     dependencies:
       '@ark-ui/react':
         specifier: 5.9.1
@@ -2188,11 +2188,6 @@ packages:
     peerDependencies:
       react: ^19.0.0
 
-  react-dom@19.1.0:
-    resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
-    peerDependencies:
-      react: ^19.1.0
-
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
@@ -2202,10 +2197,6 @@ packages:
 
   react@19.0.0:
     resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
-    engines: {node: '>=0.10.0'}
-
-  react@19.1.0:
-    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
 
   recast@0.23.11:
@@ -2250,9 +2241,6 @@ packages:
 
   scheduler@0.25.0:
     resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
-
-  scheduler@0.26.0:
-    resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -2943,9 +2931,9 @@ snapshots:
       '@types/conventional-commits-parser': 5.0.1
       chalk: 5.4.1
 
-  '@emotion/use-insertion-effect-with-fallbacks@1.2.0(react@19.1.0)':
+  '@emotion/use-insertion-effect-with-fallbacks@1.2.0(react@19.0.0)':
     dependencies:
-      react: 19.1.0
+      react: 19.0.0
 
   '@esbuild/aix-ppc64@0.23.1':
     optional: true
@@ -3152,11 +3140,11 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@mdx-js/react@3.1.0(@types/react@19.1.8)(react@19.1.0)':
+  '@mdx-js/react@3.1.0(@types/react@19.1.8)(react@19.0.0)':
     dependencies:
       '@types/mdx': 2.0.13
       '@types/react': 19.1.8
-      react: 19.1.0
+      react: 19.0.0
 
   '@number-flow/react@0.5.8(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
@@ -3252,12 +3240,12 @@ snapshots:
 
   '@storybook/addon-docs@9.0.9(@types/react@19.1.8)(storybook@9.0.9(@testing-library/dom@10.4.0))':
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@19.1.8)(react@19.1.0)
+      '@mdx-js/react': 3.1.0(@types/react@19.1.8)(react@19.0.0)
       '@storybook/csf-plugin': 9.0.9(storybook@9.0.9(@testing-library/dom@10.4.0))
-      '@storybook/icons': 1.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@storybook/react-dom-shim': 9.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0))
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      '@storybook/icons': 1.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@storybook/react-dom-shim': 9.0.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0))
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
       storybook: 9.0.9(@testing-library/dom@10.4.0)
       ts-dedent: 2.2.0
     transitivePeerDependencies:
@@ -3268,9 +3256,9 @@ snapshots:
       storybook: 9.0.9(@testing-library/dom@10.4.0)
       ts-dedent: 2.2.0
 
-  '@storybook/addons@7.6.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@storybook/addons@7.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@storybook/manager-api': 7.6.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@storybook/manager-api': 7.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@storybook/preview-api': 7.6.17
       '@storybook/types': 7.6.17
     transitivePeerDependencies:
@@ -3320,12 +3308,12 @@ snapshots:
 
   '@storybook/global@5.0.0': {}
 
-  '@storybook/icons@1.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@storybook/icons@1.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
-  '@storybook/manager-api@7.6.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@storybook/manager-api@7.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@storybook/channels': 7.6.17
       '@storybook/client-logger': 7.6.17
@@ -3333,7 +3321,7 @@ snapshots:
       '@storybook/csf': 0.1.13
       '@storybook/global': 5.0.0
       '@storybook/router': 7.6.17
-      '@storybook/theming': 7.6.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@storybook/theming': 7.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@storybook/types': 7.6.17
       dequal: 2.0.3
       lodash: 4.17.21
@@ -3366,23 +3354,23 @@ snapshots:
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
 
-  '@storybook/react-dom-shim@9.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0))':
+  '@storybook/react-dom-shim@9.0.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0))':
     dependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
       storybook: 9.0.9(@testing-library/dom@10.4.0)
 
-  '@storybook/react-vite@9.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.43.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.19.2))':
+  '@storybook/react-vite@9.0.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(rollup@4.43.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.19.2))':
     dependencies:
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.6.0(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.19.2))
       '@rollup/pluginutils': 5.1.4(rollup@4.43.0)
       '@storybook/builder-vite': 9.0.9(storybook@9.0.9(@testing-library/dom@10.4.0))(vite@6.3.5(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.19.2))
-      '@storybook/react': 9.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)
+      '@storybook/react': 9.0.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)
       find-up: 5.0.0
       magic-string: 0.30.17
-      react: 19.1.0
+      react: 19.0.0
       react-docgen: 8.0.0
-      react-dom: 19.1.0(react@19.1.0)
+      react-dom: 19.0.0(react@19.0.0)
       resolve: 1.22.10
       storybook: 9.0.9(@testing-library/dom@10.4.0)
       tsconfig-paths: 4.2.0
@@ -3392,12 +3380,12 @@ snapshots:
       - supports-color
       - typescript
 
-  '@storybook/react@9.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)':
+  '@storybook/react@9.0.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0))(typescript@5.8.3)':
     dependencies:
       '@storybook/global': 5.0.0
-      '@storybook/react-dom-shim': 9.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0))
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      '@storybook/react-dom-shim': 9.0.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0))
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
       storybook: 9.0.9(@testing-library/dom@10.4.0)
     optionalDependencies:
       typescript: 5.8.3
@@ -3408,14 +3396,14 @@ snapshots:
       memoizerific: 1.11.3
       qs: 6.14.0
 
-  '@storybook/theming@7.6.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@storybook/theming@7.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@19.1.0)
+      '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@19.0.0)
       '@storybook/client-logger': 7.6.17
       '@storybook/global': 5.0.0
       memoizerific: 1.11.3
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   '@storybook/theming@8.6.14(storybook@9.0.9(@testing-library/dom@10.4.0))':
     dependencies:
@@ -4897,18 +4885,11 @@ snapshots:
       react: 19.0.0
       scheduler: 0.25.0
 
-  react-dom@19.1.0(react@19.1.0):
-    dependencies:
-      react: 19.1.0
-      scheduler: 0.26.0
-
   react-is@17.0.2: {}
 
   react-refresh@0.17.0: {}
 
   react@19.0.0: {}
-
-  react@19.1.0: {}
 
   recast@0.23.11:
     dependencies:
@@ -4972,8 +4953,6 @@ snapshots:
 
   scheduler@0.25.0: {}
 
-  scheduler@0.26.0: {}
-
   semver@6.3.1: {}
 
   semver@7.7.2: {}
@@ -5031,20 +5010,20 @@ snapshots:
 
   store2@2.14.4: {}
 
-  storybook-addon-tag-badges@2.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0)):
+  storybook-addon-tag-badges@2.0.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0)):
     dependencies:
-      '@storybook/icons': 1.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@storybook/icons': 1.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       storybook: 9.0.9(@testing-library/dom@10.4.0)
     transitivePeerDependencies:
       - react
       - react-dom
 
-  storybook-dark-mode@4.0.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.9(@testing-library/dom@10.4.0)):
+  storybook-dark-mode@4.0.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@9.0.9(@testing-library/dom@10.4.0)):
     dependencies:
       '@storybook/components': 8.6.14(storybook@9.0.9(@testing-library/dom@10.4.0))
       '@storybook/core-events': 8.6.14(storybook@9.0.9(@testing-library/dom@10.4.0))
       '@storybook/global': 5.0.0
-      '@storybook/icons': 1.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@storybook/icons': 1.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@storybook/manager-api': 8.6.14(storybook@9.0.9(@testing-library/dom@10.4.0))
       '@storybook/theming': 8.6.14(storybook@9.0.9(@testing-library/dom@10.4.0))
       fast-deep-equal: 3.1.3
