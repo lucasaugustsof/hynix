@@ -1,6 +1,6 @@
 import '@repo/react/styles.css'
 
-import type { Preview } from '@storybook/react'
+import type { Preview } from '@storybook/react-vite'
 import { withThemeByClassName } from '@storybook/addon-themes'
 
 const preview: Preview = {
