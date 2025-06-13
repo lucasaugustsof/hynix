@@ -8,7 +8,7 @@ type LabelStoryArgs = LabelProps & {
 const meta: Meta<LabelStoryArgs> = {
   title: 'components/Label',
   component: Label,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-only'],
   args: {
     children: 'Label text',
     size: 'md',
