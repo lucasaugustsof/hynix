@@ -120,7 +120,8 @@ export function Input({
   suffixStyling = false,
   ...props
 }: InputProps) {
-  const id = React.useId()
+  const { id: propsId, ...rest } = props
+  const inputId = propsId ?? React.useId()
   const { root, input } = inputStyles({ size })
 
   return (
@@ -139,15 +140,15 @@ export function Input({
           placement="prefix"
           size={size}
           styling={prefixStyling}
-          htmlFor={id}
+          htmlFor={inputId}
         >
           {prefix}
         </InputAdornment>
       )}
 
       <ArkField.Input
-        {...props}
-        id={id}
+        {...rest}
+        id={inputId}
         className={cn(input())}
         aria-invalid={isInvalid}
       />
@@ -157,7 +158,7 @@ export function Input({
           placement="suffix"
           size={size}
           styling={suffixStyling}
-          htmlFor={id}
+          htmlFor={inputId}
         >
           {suffix}
         </InputAdornment>
