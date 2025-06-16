@@ -3,7 +3,7 @@ import '@repo/ui/styles.css'
 import type { Preview } from '@storybook/react-vite'
 import { withThemeByClassName } from '@storybook/addon-themes'
 
-import { Analytics } from '@vercel/analytics/react'
+import { withVercelAnalytics } from './decorators/with-vercel-analytics'
 
 const preview: Preview = {
   parameters: {
@@ -15,6 +15,7 @@ const preview: Preview = {
     },
   },
   decorators: [
+    withVercelAnalytics,
     withThemeByClassName({
       themes: {
         light: 'light',
@@ -22,14 +23,6 @@ const preview: Preview = {
       },
       defaultTheme: 'light',
     }),
-    Story => {
-      return (
-        <>
-          <Story />
-          <Analytics />
-        </>
-      )
-    },
   ],
 }
 
