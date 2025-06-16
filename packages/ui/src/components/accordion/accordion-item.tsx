@@ -6,8 +6,17 @@ import { itemStyles } from './accordion.styles'
 
 type AccordionItemProps = React.ComponentProps<typeof ArkAccordion.Item>
 
-export function AccordionItem(props: AccordionItemProps) {
-  return <ArkAccordion.Item {...props} className={cn(itemStyles())} />
+export function AccordionItem({ className, ...props }: AccordionItemProps) {
+  return (
+    <ArkAccordion.Item
+      {...props}
+      className={cn(
+        itemStyles({
+          className,
+        }),
+      )}
+    />
+  )
 }
 
 AccordionItem.displayName = 'AccordionItem'

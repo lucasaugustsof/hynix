@@ -18,6 +18,7 @@ const accordionStyles = tv({
         trigger: [
           'flex w-full cursor-pointer items-center justify-between outline-hidden',
           'text-start font-medium text-fg-1',
+          'disabled:cursor-not-allowed',
         ],
         content: ['font-normal text-base text-fg-1/70'],
       },

@@ -14,6 +14,7 @@ type AccordionTriggerProps = React.ComponentProps<
 
 export function AccordionTrigger({
   children,
+  className,
   size,
   ...props
 }: AccordionTriggerProps) {
@@ -22,6 +23,7 @@ export function AccordionTrigger({
       {...props}
       className={cn(
         triggerStyles({
+          className,
           size,
         }),
       )}
