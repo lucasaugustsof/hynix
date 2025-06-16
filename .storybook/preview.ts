@@ -3,6 +3,8 @@ import '@repo/ui/styles.css'
 import type { Preview } from '@storybook/react-vite'
 import { withThemeByClassName } from '@storybook/addon-themes'
 
+import { withVercelAnalytics } from './decorators/with-vercel-analytics'
+
 const preview: Preview = {
   parameters: {
     controls: {
@@ -20,6 +22,7 @@ const preview: Preview = {
       },
       defaultTheme: 'light',
     }),
+    withVercelAnalytics,
   ],
 }
 
