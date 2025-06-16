@@ -10,10 +10,18 @@ type AccordionContentProps = React.ComponentProps<
 
 export function AccordionContent({
   children,
+  className,
   ...props
 }: AccordionContentProps) {
   return (
-    <ArkAccordion.ItemContent {...props} className={cn(contentStyles())}>
+    <ArkAccordion.ItemContent
+      {...props}
+      className={cn(
+        contentStyles({
+          className,
+        }),
+      )}
+    >
       <div className={cn('px-4 pb-4')}>{children}</div>
     </ArkAccordion.ItemContent>
   )

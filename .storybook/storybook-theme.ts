@@ -4,7 +4,7 @@ import { create } from 'storybook/theming/create'
 import brandImage from './storybook-logo.svg'
 
 export default create({
-  base: 'dark',
+  base: 'light',
 
   brandImage,
   brandTitle: 'Hynix',

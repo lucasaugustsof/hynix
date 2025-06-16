@@ -22,6 +22,7 @@ const accordionTargets = ['AccordionTrigger']
 
 export function AccordionRoot({
   children,
+  className,
   size,
   ...props
 }: AccordionRootProps) {
@@ -38,6 +39,7 @@ export function AccordionRoot({
       {...props}
       className={cn(
         rootStyles({
+          className,
           size,
         }),
       )}
@@ -46,3 +48,5 @@ export function AccordionRoot({
     </ArkAccordion.Root>
   )
 }
+
+AccordionRoot.displayName = 'AccordionRoot'
