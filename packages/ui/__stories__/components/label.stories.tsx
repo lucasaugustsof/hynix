@@ -11,7 +11,6 @@ const meta: Meta<LabelStoryArgs> = {
   tags: ['autodocs', 'code-only'],
   args: {
     children: 'Label text',
-    size: 'md',
   },
   argTypes: {
     children: {
@@ -22,16 +21,6 @@ const meta: Meta<LabelStoryArgs> = {
       control: {
         type: 'text',
       },
-    },
-    size: {
-      description: 'Controls the font size of the label.',
-      table: {
-        category: 'Style',
-      },
-      control: {
-        type: 'inline-radio',
-      },
-      options: ['sm', 'md', 'lg', 'xl'],
     },
   },
 }
@@ -51,43 +40,10 @@ export const Basic: LabelStory = {
   },
 }
 
-export const FormFieldLabel: LabelStory = {
-  name: 'Form field label',
-  args: {
-    children: 'Email address',
-    size: 'sm',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Use a small label to annotate form input fields like text or email.',
-      },
-    },
-  },
-}
-
-export const SectionTitle: LabelStory = {
-  name: 'Section title',
-  args: {
-    children: 'Billing information',
-    size: 'xl',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Use a large label to denote section headings in a layout or form.',
-      },
-    },
-  },
-}
-
 export const DisabledLabel: LabelStory = {
   name: 'Disabled label',
   args: {
     children: 'Username (disabled)',
-    size: 'md',
     'data-disabled': true,
   },
   parameters: {
