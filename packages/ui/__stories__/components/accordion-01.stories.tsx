@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from 'storybook/test'
 
-import { Accordion, type AccordionProps } from '@r/components/accordion'
+import * as Accordion from '@r/components/accordion-01'
+import type { AccordionProps } from '@r/components/accordion-01'
 
 const meta: Meta<AccordionProps> = {
-  title: 'components/Accordion',
+  title: 'components/Accordion 01',
   component: Accordion.Root,
   tags: ['autodocs', 'beta'],
   decorators: [
@@ -18,7 +19,6 @@ const meta: Meta<AccordionProps> = {
     collapsible: true,
     multiple: false,
     disabled: false,
-    size: 'md',
     onValueChange: fn(),
   },
   argTypes: {
@@ -49,16 +49,6 @@ const meta: Meta<AccordionProps> = {
       control: {
         type: 'boolean',
       },
-    },
-    size: {
-      description: 'Visual size of the accordion elements.',
-      table: {
-        category: 'Style',
-      },
-      control: {
-        type: 'inline-radio',
-      },
-      options: ['sm', 'md'],
     },
     value: {
       description: 'Controls which item(s) are expanded (controlled mode).',
@@ -136,7 +126,9 @@ export const Basic: AccordionStory = {
       </Accordion.Item>
 
       <Accordion.Item value="versioning">
-        <Accordion.Trigger>Versioning & Governance</Accordion.Trigger>
+        <Accordion.Trigger>
+          Versioning & Governance Versioning
+        </Accordion.Trigger>
         <Accordion.Content>
           A reliable design system adopts semantic versioning (semver) and a
           governance model that defines how changes are proposed, reviewed, and

@@ -107,30 +107,22 @@
 @keyframes accordion-expand {
 	from {
 		height: 0;
-
 		opacity: 0.1;
-		scale: 0.95;
 	}
 	to {
 		height: var(--height);
-
 		opacity: 1;
-		scale: 1;
 	}
 }
 
 @keyframes accordion-collapse {
 	from {
 		height: var(--height);
-
 		opacity: 1;
-		scale: 1;
 	}
 	to {
 		height: 0;
-
 		opacity: 0.1;
-		scale: 0.95;
 	}
 }
 
