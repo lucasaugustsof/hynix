@@ -8,7 +8,6 @@ const meta: Meta<KbdProps> = {
   tags: ['autodocs'],
   args: {
     variant: 'primary',
-    size: 'md',
     children: '⌘',
   },
   argTypes: {
@@ -21,16 +20,6 @@ const meta: Meta<KbdProps> = {
         type: 'inline-radio',
       },
       options: ['primary', 'secondary'],
-    },
-    size: {
-      description: 'Sets the visual size of the key.',
-      table: {
-        category: 'Size',
-      },
-      control: {
-        type: 'inline-radio',
-      },
-      options: ['xs', 'sm', 'md', 'lg'],
     },
     children: {
       description: 'Key label or character to be displayed inside the kbd tag.',
@@ -83,28 +72,6 @@ export const Shortcut: KbdStory = {
       description: {
         story:
           'Use multiple `<Kbd />` components inline to represent keyboard shortcuts like Cmd + K.',
-      },
-    },
-  },
-}
-
-export const Sizes: KbdStory = {
-  name: 'Size variants',
-  render: () => (
-    <div className="flex items-center gap-3">
-      <Kbd size="xs">A</Kbd>
-      <Kbd size="sm">B</Kbd>
-      <Kbd size="md">C</Kbd>
-      <Kbd size="lg">D</Kbd>
-    </div>
-  ),
-  parameters: {
-    controls: {
-      exclude: ['children', 'size'],
-    },
-    docs: {
-      description: {
-        story: 'Different size options for the Kbd component.',
       },
     },
   },
