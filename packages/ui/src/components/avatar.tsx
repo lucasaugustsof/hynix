@@ -4,7 +4,7 @@ import { Avatar as ArkAvatar } from '@ark-ui/react/avatar'
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-export const avatarStyles = tv({
+const avatarStyles = tv({
   slots: {
     root: 'relative inline-flex aspect-square shrink-0 select-none overflow-hidden rounded-full border border-border',
     fallback:
@@ -50,8 +50,8 @@ export const avatarStyles = tv({
   },
 })
 
-export type AvatarProps = Assign<
-  React.CustomComponentPropsWithRef<typeof ArkAvatar.Root>,
+type AvatarProps = Assign<
+  React.ComponentProps<typeof ArkAvatar.Root>,
   VariantProps<typeof avatarStyles>
 > & {
   src: string
@@ -59,14 +59,14 @@ export type AvatarProps = Assign<
   fallback?: React.ReactNode
 }
 
-export function Avatar({
+const Avatar = ({
   className,
   size,
   src,
   altText,
   fallback: fallbackContent,
   ...props
-}: AvatarProps) {
+}: AvatarProps) => {
   const {
     root: rootClass,
     fallback: fallbackClass,
@@ -87,3 +87,5 @@ export function Avatar({
 }
 
 Avatar.displayName = 'Avatar'
+
+export { Avatar, type AvatarProps }
