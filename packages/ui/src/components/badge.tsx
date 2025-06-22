@@ -3,9 +3,9 @@ import { type Assign, ark } from '@ark-ui/react'
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
 
-export const badgeStyles = tv({
+const badgeStyles = tv({
   base: [
-    'isolate inline-flex h-6 w-fit items-center gap-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-xs',
+    'isolate inline-flex h-6 w-fit items-center gap-x-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-black/8 shadow-xs outline-hidden dark:shadow-white/8',
     'transition-colors ease-in-out [&_svg]:size-4',
   ],
   variants: {
@@ -40,19 +40,19 @@ export const badgeStyles = tv({
   },
 })
 
-export type BadgeProps = Assign<
+type BadgeProps = Assign<
   React.ComponentPropsWithRef<typeof ark.div>,
   VariantProps<typeof badgeStyles>
 > & {
   isActive?: boolean
 }
 
-export function Badge({
+const Badge = ({
   className,
   appearance,
   isActive = false,
   ...props
-}: BadgeProps) {
+}: BadgeProps) => {
   return (
     <ark.div
       {...props}
@@ -69,3 +69,5 @@ export function Badge({
 }
 
 Badge.displayName = 'Badge'
+
+export { Badge, badgeStyles, type BadgeProps }
