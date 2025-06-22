@@ -1,18 +1,15 @@
 import { cn } from '@r/utilities/cn'
 
-export type SkeletonProps = Omit<
-  React.ComponentPropsWithRef<'div'>,
-  'children'
-> & {
+type SkeletonProps = Omit<React.ComponentPropsWithRef<'div'>, 'children'> & {
   shape?: 'square' | 'circle'
 }
 
-export function Skeleton({
+const Skeleton = ({
   className,
   shape = 'square',
   'aria-label': ariaLabel = 'Loading content',
   ...props
-}: SkeletonProps) {
+}: SkeletonProps) => {
   return (
     <div
       {...props}
@@ -29,3 +26,5 @@ export function Skeleton({
 }
 
 Skeleton.displayName = 'Skeleton'
+
+export { Skeleton, type SkeletonProps }
