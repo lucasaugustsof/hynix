@@ -1,9 +1,12 @@
 import * as React from 'react'
+
 import type { Assign } from '@ark-ui/react'
 import { Field as ArkField } from '@ark-ui/react/field'
 
 import { cn } from '@r/utilities/cn'
 import { type VariantProps, tv } from '@r/utilities/tv'
+
+////////////////////////////////////////////////////////////////////////////////////
 
 const inputStyles = tv({
   slots: {
@@ -69,15 +72,7 @@ const inputStyles = tv({
 
 type InputVariants = VariantProps<typeof inputStyles>
 
-export type InputProps = Assign<
-  Omit<React.CustomComponentPropsWithRef<typeof ArkField.Input>, 'prefix'>,
-  InputVariants
-> & {
-  prefix?: React.ReactNode
-  suffix?: React.ReactNode
-  prefixStyling?: boolean
-  suffixStyling?: boolean
-}
+////////////////////////////////////////////////////////////////////////////////////
 
 type AdornmentProps = {
   placement: 'prefix' | 'suffix'
@@ -87,13 +82,13 @@ type AdornmentProps = {
   htmlFor?: string
 }
 
-function InputAdornment({
+const InputAdornment = ({
   placement,
   size,
   styling = false,
   children,
   htmlFor,
-}: AdornmentProps) {
+}: AdornmentProps) => {
   const { addon } = inputStyles()
   return (
     <ArkField.Label
@@ -110,7 +105,19 @@ function InputAdornment({
 
 InputAdornment.displayName = 'InputAdornment'
 
-export function Input({
+////////////////////////////////////////////////////////////////////////////////////
+
+type InputProps = Assign<
+  Omit<React.CustomComponentPropsWithRef<typeof ArkField.Input>, 'prefix'>,
+  InputVariants
+> & {
+  prefix?: React.ReactNode
+  suffix?: React.ReactNode
+  prefixStyling?: boolean
+  suffixStyling?: boolean
+}
+
+const Input = ({
   className,
   size = 'md',
   isInvalid,
@@ -118,10 +125,14 @@ export function Input({
   suffix,
   prefixStyling = false,
   suffixStyling = false,
+  id,
   ...props
-}: InputProps) {
-  const id = React.useId()
-  const { root, input } = inputStyles({ size })
+}: InputProps) => {
+  const fieldId = id ?? React.useId()
+
+  const { root, input } = inputStyles({
+    size,
+  })
 
   return (
     <div
@@ -139,7 +150,7 @@ export function Input({
           placement="prefix"
           size={size}
           styling={prefixStyling}
-          htmlFor={id}
+          htmlFor={fieldId}
         >
           {prefix}
         </InputAdornment>
@@ -157,7 +168,7 @@ export function Input({
           placement="suffix"
           size={size}
           styling={suffixStyling}
-          htmlFor={id}
+          htmlFor={fieldId}
         >
           {suffix}
         </InputAdornment>
@@ -167,3 +178,5 @@ export function Input({
 }
 
 Input.displayName = 'Input'
+
+export { Input, type InputProps }

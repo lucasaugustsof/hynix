@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { RiUserLine, RiMailLine } from '@remixicon/react'
+import { User, Mail } from 'lucide-react'
 
 import { Input, type InputProps } from '@r/components/input'
 
@@ -104,7 +104,7 @@ export const WithPrefixIcon: InputStory = {
   name: 'With prefix icon',
   args: {
     placeholder: 'Username',
-    prefix: <RiUserLine aria-hidden="true" />,
+    prefix: <User aria-hidden="true" />,
     prefixStyling: true,
   },
   parameters: {
@@ -124,7 +124,7 @@ export const WithSuffixIcon: InputStory = {
   name: 'With suffix icon',
   args: {
     placeholder: 'Enter your email',
-    suffix: <RiMailLine aria-hidden="true" />,
+    suffix: <Mail aria-hidden="true" />,
     suffixStyling: true,
   },
   parameters: {
@@ -144,7 +144,7 @@ export const WithPlainPrefixIcon: InputStory = {
   name: 'With plain prefix icon',
   args: {
     placeholder: 'Search',
-    prefix: <RiUserLine aria-hidden="true" />,
+    prefix: <User aria-hidden="true" />,
     prefixStyling: false,
   },
   parameters: {
@@ -164,7 +164,7 @@ export const WithPlainSuffixIcon: InputStory = {
   name: 'With plain suffix icon',
   args: {
     placeholder: 'Email',
-    suffix: <RiMailLine aria-hidden="true" />,
+    suffix: <Mail aria-hidden="true" />,
     suffixStyling: false,
   },
   parameters: {
