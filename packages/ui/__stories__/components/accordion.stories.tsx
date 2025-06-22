@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 
-import * as Accordion from '@r/components/accordion-01'
-import type { AccordionProps } from '@r/components/accordion-01'
+import * as Accordion from '@r/components/accordion'
+import type { AccordionProps } from '@r/components/accordion'
 
 const meta: Meta<AccordionProps> = {
-  title: 'components/Accordion 01',
+  title: 'components/Accordion',
   component: Accordion.Root,
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   decorators: [
     Story => (
       <div className="w-90">

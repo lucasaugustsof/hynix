@@ -9,7 +9,7 @@ import { Badge } from '@r/components/badge'
 const meta: Meta<TableProps> = {
   title: 'components/Table',
   component: Table.Root,
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
 }
 
 export default meta

@@ -52,7 +52,7 @@ const AccordionTrigger = ({
     <ArkAccordion.ItemTrigger
       {...props}
       className={cn(
-        'flex w-full items-center justify-between gap-x-3 py-2.5 pr-3 pl-4 outline-hidden',
+        'flex w-full cursor-pointer items-center justify-between gap-x-3 py-2.5 pr-3 pl-4 outline-hidden',
         'disabled:cursor-not-allowed',
         className,
       )}
