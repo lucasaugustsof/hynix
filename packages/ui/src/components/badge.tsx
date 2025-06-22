@@ -5,7 +5,7 @@ import { type VariantProps, tv } from '@r/utilities/tv'
 
 const badgeStyles = tv({
   base: [
-    'isolate inline-flex h-6 w-fit items-center gap-x-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-black/8 shadow-xs outline-hidden dark:shadow-white/8',
+    'isolate inline-flex h-6 w-fit items-center gap-x-1 whitespace-nowrap rounded-full border px-2.5 font-medium font-sans text-xs/4.5 shadow-black/8 shadow-xs outline-hidden',
     'transition-colors ease-in-out [&_svg]:size-4',
   ],
   variants: {
