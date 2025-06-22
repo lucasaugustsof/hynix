@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RiAddLine, RiDeleteBinLine } from '@remixicon/react'
 
 import { Button, type ButtonProps } from '@r/components/button'

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Label, type LabelProps } from '@r/components/label'
 
 type LabelStoryArgs = LabelProps & {

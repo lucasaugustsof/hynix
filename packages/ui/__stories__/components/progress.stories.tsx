@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import * as Progress from '@r/components/progress'
 import type { ProgressProps } from '@r/components/progress'
