@@ -1,7 +1,7 @@
 'use client'
 
 import { Accordion as ArkAccordion } from '@ark-ui/react/accordion'
-import { ChevronDown } from 'lucide-react'
+import { RiArrowDownSLine } from '@remixicon/react'
 
 import { cn } from '@r/utilities/cn'
 
@@ -71,7 +71,7 @@ const AccordionTrigger = ({
           'data-[state=open]:rotate-180',
         )}
       >
-        <ChevronDown />
+        <RiArrowDownSLine />
       </ArkAccordion.ItemIndicator>
     </ArkAccordion.ItemTrigger>
   )
@@ -105,9 +105,11 @@ AccordionContent.displayName = 'AccordionContent'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export { AccordionRoot as Root }
-export { AccordionItem as Item }
-export { AccordionTrigger as Trigger }
-export { AccordionContent as Content }
+export {
+  AccordionRoot as Root,
+  AccordionItem as Item,
+  AccordionTrigger as Trigger,
+  AccordionContent as Content,
+}
 
 export type { AccordionRootProps as AccordionProps }

@@ -93,10 +93,12 @@ ProgressLabel.displayName = 'ProgressLabel'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export { ProgressRoot as Root }
-export { ProgressTrack as Track }
-export { ProgressRange as Range }
-export { ProgressValueText as ValueText }
-export { ProgressLabel as Label }
+export {
+  ProgressRoot as Root,
+  ProgressTrack as Track,
+  ProgressRange as Range,
+  ProgressValueText as ValueText,
+  ProgressLabel as Label,
+}
 
 export type { ProgressRootProps as ProgressProps }
