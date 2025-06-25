@@ -199,6 +199,9 @@ export const WithAnimation: ChipStory = {
           'Demonstrates the Chip component in a multi-option selection scenario with animated transitions using Motion. When a chip is selected, it visually highlights with animated layout changes and an icon, simulating a dynamic and interactive filter or category selection behavior.',
       },
     },
+    controls: {
+      disable: true,
+    },
   },
   render: () => {
     const fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry']
