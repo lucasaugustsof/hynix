@@ -39,6 +39,7 @@
 		"motion": "12.5.0",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
+		"react-use-measure": "2.1.7",
 		"tailwind-merge": "3.0.2",
 		"tailwind-variants": "1.0.0",
 		"usehooks-ts": "3.1.1"

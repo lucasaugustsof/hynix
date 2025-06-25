@@ -8,7 +8,7 @@ const avatarStyles = tv({
   slots: {
     root: 'relative inline-flex aspect-square shrink-0 select-none overflow-hidden rounded-full border border-border',
     fallback:
-      'absolute grid size-full place-items-center whitespace-nowrap bg-brand font-sans font-semibold text-fg-2',
+      'absolute inset-0 flex items-center justify-center whitespace-nowrap bg-brand font-sans font-semibold text-fg-2',
     image: 'pointer-events-none flex-1 object-cover',
   },
   variants: {
@@ -68,20 +68,20 @@ const Avatar = ({
   ...props
 }: AvatarProps) => {
   const {
-    root: rootClass,
-    fallback: fallbackClass,
-    image: imageClass,
+    root: rootStyles,
+    fallback: fallbackStyles,
+    image: imageStyles,
   } = avatarStyles({ size })
 
   return (
-    <ArkAvatar.Root {...props} className={cn(rootClass({ className }))}>
+    <ArkAvatar.Root {...props} className={cn(rootStyles({ className }))}>
       {fallbackContent && (
-        <ArkAvatar.Fallback className={cn(fallbackClass())}>
+        <ArkAvatar.Fallback className={cn(fallbackStyles())}>
           {fallbackContent}
         </ArkAvatar.Fallback>
       )}
 
-      <ArkAvatar.Image className={cn(imageClass())} src={src} alt={altText} />
+      <ArkAvatar.Image className={cn(imageStyles())} src={src} alt={altText} />
     </ArkAvatar.Root>
   )
 }
