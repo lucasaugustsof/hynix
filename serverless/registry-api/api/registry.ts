@@ -23,6 +23,7 @@ async function fetchAvailableComponentBlobs(): Promise<ComponentData[]> {
       .map(blob => {
         const { pathname, uploadedAt, url } = blob
         const match = pathname.match(HASHED_FILENAME_REGEX)
+
         if (!match) return null
 
         const { base: componentName } = path.parse(match[1])
