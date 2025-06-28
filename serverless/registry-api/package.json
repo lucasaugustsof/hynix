@@ -1,17 +1,12 @@
 {
-	"name": "@repo/registries",
-	"version": "0.0.0",
 	"type": "module",
-	"main": "index.js",
-	"scripts": {},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
+	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "22.15.21",
 		"@vercel/node": "5.3.0"
 	},
 	"dependencies": {
 		"@vercel/blob": "1.1.1"
-	}
+	},
+	"private": true
 }
