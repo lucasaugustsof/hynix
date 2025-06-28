@@ -27,7 +27,12 @@ async function fetchAvailableComponentBlobs(): Promise<ComponentData[]> {
         if (!match) return null
 
         const { base: componentName } = path.parse(match[1])
-        return { name: componentName, url, uploadedAt }
+
+        return {
+          name: componentName,
+          url,
+          uploadedAt,
+        }
       })
       .filter((c): c is ComponentData => Boolean(c))
   } catch (err) {
@@ -62,8 +67,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     console.error('[UnexpectedError] an unexpected error occurred:', err)
 
-    return res
-      .status(500)
-      .json({ error: 'Internal server error. Please try again later.' })
+    return res.status(500).json({
+      error: 'Internal server error. Please try again later.',
+    })
   }
 }
