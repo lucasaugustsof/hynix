@@ -1,9 +1,0 @@
-{
-  "name": "kbd",
-  "dependencies": [],
-  "registryDependencies": [],
-  "file": {
-    "name": "kbd.tsx",
-    "content": "import { cn } from '<%= aliases.utilities %>/cn'\n\nimport { type VariantProps, tv } from '<%= aliases.utilities %>/tv'\n\nconst kbdVariants = tv({\n  base: [\n    'inline-flex items-center justify-center whitespace-nowrap align-middle font-medium font-mono tracking-widest',\n  ],\n  variants: {\n    variant: {\n      primary: 'bg-fill-1 text-fg-1',\n      secondary: 'bg-fill-5 text-fg-2',\n    },\n    size: {\n      xs: 'h-5 rounded-md px-1.5 text-[calc(var(--spacing)*2.5)]',\n      sm: 'h-6 rounded-lg px-1.5 text-xs',\n      md: 'h-7 rounded-[calc(var(--spacing)*2.5)] px-2',\n      lg: 'h-8 rounded-xl px-2.5',\n    },\n  },\n  compoundVariants: [\n    {\n      size: ['xs', 'sm'],\n      class: 'leading-4.5',\n    },\n    {\n      size: ['md', 'lg'],\n      class: 'text-sm leading-5.5',\n    },\n  ],\n  defaultVariants: {\n    variant: 'primary',\n    size: 'md',\n  },\n})\n\ntype KbdProps = React.ComponentPropsWithRef<'kbd'> &\n  VariantProps<typeof kbdVariants>\n\nfunction Kbd({ variant, size, ...props }: KbdProps) {\n  return (\n    <kbd\n      {...props}\n      className={cn(\n        kbdVariants({\n          variant,\n          size,\n        }),\n      )}\n      data-scope=\"kbd\"\n    />\n  )\n}\n\nexport { Kbd }\nexport type { KbdProps }\n"
-  }
-}

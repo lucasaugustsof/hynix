@@ -1,9 +1,0 @@
-{
-  "name": "label",
-  "dependencies": [],
-  "registryDependencies": [],
-  "file": {
-    "name": "label.tsx",
-    "content": "import { type Assign, ark } from '@ark-ui/react'\n\n\n\nimport { cn } from '<%= aliases.utilities %>/cn'\n\nimport { type VariantProps, tv } from '<%= aliases.utilities %>/tv'\n\n//---------------------------------\n// Variants\n//---------------------------------\n\nconst labelVariants = tv({\n  base: [\n    'text-nowrap font-medium font-sans text-fg-1 tracking-normal',\n    // disabled\n    'data-disabled:cursor-not-allowed data-disabled:text-disabled',\n  ],\n  variants: {\n    size: {\n      sm: 'text-sm/5.5',\n      md: 'text-base',\n      lg: 'text-lg/7',\n      xl: 'text-xl/8',\n    },\n  },\n  defaultVariants: {\n    size: 'md',\n  },\n})\n\n//---------------------------------\n// Types\n//---------------------------------\n\ntype LabelProps = Assign<\n  React.CustomComponentPropsWithRef<typeof ark.span>,\n  VariantProps<typeof labelVariants>\n>\n\n//---------------------------------\n// Label\n//---------------------------------\n\nfunction Label({ className, size, ...props }: LabelProps) {\n  return (\n    <ark.span\n      {...props}\n      className={cn(\n        labelVariants({\n          className,\n          size,\n        }),\n      )}\n    />\n  )\n}\n\n//---------------------------------\n// Exports\n//---------------------------------\n\nexport { Label }\nexport type { LabelProps }\n"
-  }
-}
