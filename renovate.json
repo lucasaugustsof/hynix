@@ -7,5 +7,11 @@
 	"schedule": ["after 6am every weekday"],
 	"labels": ["renovate"],
 	"prHourlyLimit": 2,
-	"prConcurrentLimit": 5
+	"prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "matchManagers": ["pnpm"],
+      "enabled": true
+    }
+  ]
 }
