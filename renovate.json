@@ -1,7 +1,0 @@
-{
-  "timezone": "America/Sao_Paulo",
-  "schedule": ["after 6am every weekday"],
-  "labels": ["renovate"],
-  "prHourlyLimit": 2,
-  "prConcurrentLimit": 5
-}
