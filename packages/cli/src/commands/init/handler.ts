@@ -1,5 +1,5 @@
+import { existsSync } from 'node:fs'
 import path from 'node:path'
-import fse from 'fs-extra'
 
 import * as p from '@clack/prompts'
 import chalk from 'chalk'
@@ -12,14 +12,17 @@ import {
   IS_DEV,
   MANIFEST_FILE,
   PROCESS_CWD,
+  REQUIRED_DEPENDENCIES,
 } from '@/utilities/const'
 import { logger } from '@/utilities/logger'
 import { manifestManager } from '@/utilities/manifest-manager'
+import { resolvePackageManagerCommand } from '@/utilities/resolve-package-manager-command'
+import { runShellCommand } from '@/utilities/run-shell-command'
 
 export async function handler() {
   try {
     const manifestFilePath = path.resolve(PROCESS_CWD, MANIFEST_FILE)
-    const isManifestFileExists = fse.existsSync(manifestFilePath)
+    const isManifestFileExists = existsSync(manifestFilePath)
 
     if (isManifestFileExists) {
       logger.warning(
@@ -34,7 +37,7 @@ export async function handler() {
         initialValue: false,
       })
 
-      if (!shouldProceedOverwrite) {
+      if (p.isCancel(shouldProceedOverwrite) || !shouldProceedOverwrite) {
         logger.info('Process aborted. `ui.json` was not overwritten.')
         process.exit(0)
       }
@@ -44,15 +47,41 @@ export async function handler() {
     const componentsAlias = await askComponentsAlias()
     const utilitiesAlias = await askUtilitiesAlias()
 
-    await manifestManager.saveManifest({
-      tailwind: {
-        css: cssPath,
+    await p.tasks([
+      {
+        title: `Install required dependencies: ${REQUIRED_DEPENDENCIES.join(', ')}`,
+        task: async () => {
+          const { command, args } = await resolvePackageManagerCommand(
+            'add',
+            REQUIRED_DEPENDENCIES,
+          )
+          const fullCommand = `${command} ${args.join(' ')}`
+          logger.info(`Executing: ${fullCommand}`)
+
+          await runShellCommand(fullCommand)
+
+          return `Successfully installed: ${REQUIRED_DEPENDENCIES.join(', ')}.`
+        },
       },
-      aliases: {
-        components: componentsAlias,
-        utilities: utilitiesAlias,
+      {
+        title: `Write manifest file to ${MANIFEST_FILE}`,
+        task: async () => {
+          const manifestData = {
+            tailwind: {
+              css: cssPath,
+            },
+            aliases: {
+              components: componentsAlias,
+              utilities: utilitiesAlias,
+            },
+          }
+
+          await manifestManager.saveManifest(manifestData)
+
+          return `Manifest saved to ${MANIFEST_FILE}.`
+        },
       },
-    })
+    ])
 
     showInitSummary({
       cssPath,
@@ -125,7 +154,7 @@ async function askUtilitiesAlias() {
   return result.toString()
 }
 
-export function showInitSummary({
+function showInitSummary({
   cssPath,
   componentsAlias,
   utilitiesAlias,
@@ -134,17 +163,15 @@ export function showInitSummary({
   componentsAlias: string
   utilitiesAlias: string
 }) {
-  logger.success('Hynix CLI has been successfully initialized!')
+  logger.success('Hynix CLI initialized.')
 
-  p.outro(`${chalk.bold('Summary of the configuration:')}
+  p.outro(`
+CSS Path:            ${chalk.green(cssPath)}
+Components Alias:    ${chalk.green(componentsAlias)}
+Utilities Alias:     ${chalk.green(utilitiesAlias)}
 
-${chalk.blue('CSS Path:')} ${cssPath}
-${chalk.blue('Components Alias:')} ${componentsAlias}
-${chalk.blue('Utilities Alias:')} ${utilitiesAlias}
+Manifest file saved to ${chalk.green(MANIFEST_FILE)}.
 
-Configuration saved to ${chalk.green(MANIFEST_FILE)}.
-
-${chalk.bold('Next step:')}
-Run ${chalk.yellow('npx hynix@latest add <component>')} to add your first component.
+To add your first component, run: ${chalk.yellow('npx hynix@latest add <components...>')}
 `)
 }

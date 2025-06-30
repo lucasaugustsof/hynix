@@ -1,7 +1,7 @@
 import { log } from '@clack/prompts'
 import chalk from 'chalk'
 
-import type { ForegroundColor } from 'chalk'
+import type { ForegroundColorName } from 'chalk'
 
 export const logger = {
   info(message: string) {
@@ -20,7 +20,7 @@ export const logger = {
   custom(
     message: string,
     options: {
-      color?: ForegroundColor
+      color?: ForegroundColorName
     },
   ) {
     const { color } = options

@@ -1,7 +1,5 @@
-import path from 'node:path'
-import fse from 'fs-extra'
-
-import { PROCESS_CWD } from '@/utilities/const'
+import { NAME_TAILWIND_DEPENDENCY, TAILWIND_V4_REGEX } from '@/utilities/const'
+import { getPackageJson } from '@/utilities/get-package-json'
 
 export enum InitCommandErrors {
   UNIDENTIFIED_NODE_PROJECT = '1',
@@ -12,35 +10,39 @@ export enum InitCommandErrors {
 export async function preFlight() {
   const errorsFound = {} as Record<string, boolean>
 
-  const packageJsonFilePath = path.resolve(PROCESS_CWD, 'package.json')
-
   // Node.js Project Detection
 
-  const isPackageJsonFileExists = await fse.exists(packageJsonFilePath)
-
-  if (!isPackageJsonFileExists) {
+  const packageJsonFileContent = await getPackageJson(() => {
     errorsFound[InitCommandErrors.UNIDENTIFIED_NODE_PROJECT] = true
-  }
+  })
+
+  const { dependencies, devDependencies } = packageJsonFileContent!
 
   // Tailwind CSS Detection
 
-  const packageJsonFileContent = await fse.readFile(packageJsonFilePath, 'utf8')
+  const tailwindVersionInDeps = dependencies?.[NAME_TAILWIND_DEPENDENCY]
+  const tailwindVersionInDevDeps = devDependencies?.[NAME_TAILWIND_DEPENDENCY]
 
-  const { dependencies } = JSON.parse(packageJsonFileContent) as {
-    dependencies: Record<string, string>
-  }
+  const isTailwindMissing = !tailwindVersionInDeps && !tailwindVersionInDevDeps
 
-  const tailwindDependency = 'tailwindcss'
-  const regexValidateTailwindVersion =
-    /^\s*(?:\^|~|>=|<=|>|<|=)?\s*4\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?\s*$/ // 4.x.x
+  const tailwindVersions = [
+    tailwindVersionInDeps,
+    tailwindVersionInDevDeps,
+  ].filter((v): v is string => typeof v === 'string')
 
-  if (!(tailwindDependency in dependencies)) {
+  const isTailwindInvalidVersion = tailwindVersions.some(
+    version => !TAILWIND_V4_REGEX.test(version),
+  )
+
+  if (isTailwindMissing) {
     errorsFound[InitCommandErrors.TAILWIND_NOT_INSTALLED] = true
   }
 
-  if (!regexValidateTailwindVersion.test(dependencies[tailwindDependency])) {
+  if (isTailwindInvalidVersion) {
     errorsFound[InitCommandErrors.INCOMPATIBLE_VERSION_TAILWIND] = true
   }
 
-  return { errorsFound }
+  return {
+    errorsFound,
+  }
 }
