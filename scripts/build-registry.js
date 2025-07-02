@@ -55,7 +55,7 @@ function replaceImportWithAliasTemplate(registryImport) {
   let fullImportText = registryImport.getFullText()
 
   const registryType = fullImportText.split('/')[1]
-  const aliasTemplate = `<%= aliases.${registryType} %>`
+  const aliasTemplate = `<%= it.aliases.${registryType} %>`
 
   fullImportText = fullImportText.replace(
     path.join(PREFIX_REGISTRY, registryType),

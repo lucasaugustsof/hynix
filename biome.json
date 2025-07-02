@@ -48,6 +48,9 @@
 				"useFocusableInteractive": "off",
 				"useSemanticElements": "off",
 				"noLabelWithoutControl": "off"
+			},
+			"complexity": {
+				"noForEach": "off"
 			}
 		}
 	},
