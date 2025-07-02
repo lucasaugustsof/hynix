@@ -8,6 +8,8 @@ import prettier from 'prettier'
 import { logger } from '@/utilities/logger'
 import { resolveAliasToAbsolutePath } from '@/utilities/resolve-alias-to-absolute-path'
 
+import { fetchRegistryMetadata } from '@/registry/api'
+
 export async function resolveComponentUrls(
   componentNames: string[],
   availableComponents: {
@@ -88,5 +90,48 @@ export async function writeComponentFile(
   } catch (err) {
     logger.debug(`Failed to write file: ${file.name}`)
     throw new Error(err)
+  }
+}
+
+export async function writeRegistryDependenciesRecursively(
+  dependencyNames: string[],
+  componentRegistry: {
+    name: string
+    url: string
+  }[],
+  etaEngine: Eta,
+  pathAliases: Record<string, string>,
+  processedComponents: Set<string>,
+) {
+  const pendingDependencies = dependencyNames.filter(
+    name => !processedComponents.has(name),
+  )
+  if (pendingDependencies.length === 0) return
+
+  for (const dependencyName of pendingDependencies) {
+    processedComponents.add(dependencyName)
+
+    const registryEntry = componentRegistry.find(
+      entry => entry.name === dependencyName,
+    )
+
+    if (!registryEntry) {
+      logger.warning(`Component not found in registry: ${dependencyName}`)
+      continue
+    }
+
+    const componentMetadata = await fetchRegistryMetadata(registryEntry.url)
+
+    if (componentMetadata.registryDependencies.length > 0) {
+      await writeRegistryDependenciesRecursively(
+        componentMetadata.registryDependencies,
+        componentRegistry,
+        etaEngine,
+        pathAliases,
+        processedComponents,
+      )
+    }
+
+    await writeComponentFile(etaEngine, pathAliases, componentMetadata.file)
   }
 }
