@@ -1,8 +1,25 @@
 import { Command } from 'commander'
+import chalk from 'chalk'
 
+import { logger } from '@/utilities/logger'
+
+import { preFlight, AddCommandErrors } from './preflight'
 import { handler } from './handler'
 
 export const add = new Command()
   .name('add')
-  .description('add Hynix components to your project.')
-  .action(handler)
+  .description('quickly add Hynix components and start building faster.')
+  .argument('[components...]')
+  .action(async args => {
+    const { errorsFound } = preFlight()
+
+    if (errorsFound[AddCommandErrors.MANIFEST_FILE_NOT_FOUND]) {
+      logger.error(
+        `Project not initialized. Please run ${chalk.cyan('npx hynix@latest init')} to set it up.`,
+      )
+    }
+
+    const componentNames = args
+
+    await handler(componentNames)
+  })

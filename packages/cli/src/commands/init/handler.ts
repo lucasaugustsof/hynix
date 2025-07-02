@@ -26,7 +26,7 @@ export async function handler() {
 
     if (isManifestFileExists) {
       logger.warning(
-        'Overwriting `ui.json` will reset all Hynix CLI configurations. Your existing\ncustom settings will be lost.',
+        `Overwriting '${MANIFEST_FILE}' will reset all Hynix CLI configurations. Your existing\ncustom settings will be lost.`,
       )
 
       const shouldProceedOverwrite = await p.confirm({

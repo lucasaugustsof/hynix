@@ -10,7 +10,7 @@ import { InitCommandErrors, preFlight } from './preflight'
 
 export const init = new Command()
   .name('init')
-  .description('prepares the setup for Hynix CLI.')
+  .description('prepares your project for using the Hynix CLI.')
   .action(async () => {
     try {
       logger.custom(BANNER_INTRO, {
