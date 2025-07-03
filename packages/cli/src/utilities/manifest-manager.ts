@@ -1,7 +1,7 @@
 import { promises as fs, readFileSync } from 'node:fs'
 import path from 'node:path'
 
-import { ZodError } from 'zod/v4'
+import { ZodError } from 'zod'
 
 import { type Manifest, ManifestSchema } from '@/schemas/manifest'
 

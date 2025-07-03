@@ -1,4 +1,4 @@
-import { z } from 'zod/v4'
+import { z } from 'zod'
 
 export const ManifestSchema = z.object({
   tailwind: z.object({
@@ -7,6 +7,7 @@ export const ManifestSchema = z.object({
   aliases: z.object({
     components: z.string(),
     utilities: z.string(),
+    hooks: z.string(),
   }),
 })
 
