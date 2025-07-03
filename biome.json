@@ -8,7 +8,13 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["node_modules/", "dist/", "storybook-static/", "coverage/"]
+		"ignore": [
+			"node_modules/",
+			"dist/",
+			"storybook-static/",
+			"coverage/",
+			"bin/"
+		]
 	},
 	"formatter": {
 		"enabled": true,
@@ -42,6 +48,9 @@
 				"useFocusableInteractive": "off",
 				"useSemanticElements": "off",
 				"noLabelWithoutControl": "off"
+			},
+			"complexity": {
+				"noForEach": "off"
 			}
 		}
 	},

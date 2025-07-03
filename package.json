@@ -12,7 +12,8 @@
 		"husky:prepare": "husky",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
-		"clean": "npkill -d ./"
+		"clean": "npkill -d ./",
+		"build:registry": "node scripts/build-registry.js"
 	},
 	"packageManager": "pnpm@10.0.0",
 	"engines": {

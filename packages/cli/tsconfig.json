@@ -1,0 +1,14 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["DOM", "ESNext"],
+		"moduleResolution": "node",
+		"tsBuildInfoFile": ".tsbuildinfo",
+		"emitDecoratorMetadata": false,
+		"useUnknownInCatchVariables": false,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	}
+}

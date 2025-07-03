@@ -11,6 +11,7 @@ out/
 .next/
 .output/
 storybook-static/
+bin/
 
 # turborepo
 .turbo
