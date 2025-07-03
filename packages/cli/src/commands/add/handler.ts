@@ -1,10 +1,10 @@
-import { Eta } from 'eta'
 import * as p from '@clack/prompts'
+import { Eta } from 'eta'
 
+import { addExternalDependencies } from '@/utilities/add-external-dependencies'
+import { CLIError } from '@/utilities/cli-error'
 import { logger } from '@/utilities/logger'
 import { manifestManager } from '@/utilities/manifest-manager'
-import { CLIError } from '@/utilities/cli-error'
-import { addExternalDependencies } from '@/utilities/add-external-dependencies'
 
 import { fetchRegistry, fetchRegistryMetadata } from '@/registry/api'
 
@@ -99,6 +99,8 @@ export async function handler(componentNames: string[]) {
         },
       },
     ])
+
+    // Add a summary here
   } catch (err) {
     if (err instanceof CLIError) {
       logger.error(err.message)

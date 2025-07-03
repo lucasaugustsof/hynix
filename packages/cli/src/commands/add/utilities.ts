@@ -79,6 +79,7 @@ export async function writeComponentFile(
 
     const formattedCode = await prettier.format(resolvedCode, {
       parser: 'typescript',
+      singleQuote: true,
     })
 
     const outputPath = path.join(

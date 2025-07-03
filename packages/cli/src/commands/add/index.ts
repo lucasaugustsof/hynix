@@ -1,10 +1,10 @@
-import { Command } from 'commander'
 import chalk from 'chalk'
+import { Command } from 'commander'
 
 import { logger } from '@/utilities/logger'
 
-import { preFlight, AddCommandErrors } from './preflight'
 import { handler } from './handler'
+import { AddCommandErrors, preFlight } from './preflight'
 
 export const add = new Command()
   .name('add')
@@ -19,7 +19,7 @@ export const add = new Command()
       )
     }
 
-    logger.success('Preflight checks')
+    logger.step('Preflight check completed successfully')
 
     await handler(componentNames)
   })
