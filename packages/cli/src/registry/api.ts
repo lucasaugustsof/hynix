@@ -17,7 +17,7 @@ interface RegistryMetadata {
   }
 }
 
-const REGISTRY_URL = 'http://localhost:3000/api/registry'
+const REGISTRY_URL = 'https://hynix.cc/api/registry'
 
 export async function fetchRegistry(): Promise<RegistryComponent[]> {
   try {
