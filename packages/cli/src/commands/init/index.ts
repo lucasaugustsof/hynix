@@ -1,7 +1,6 @@
 import * as p from '@clack/prompts'
 import { Command } from 'commander'
 
-import { BANNER_INTRO } from '@/utilities/const'
 import { logger } from '@/utilities/logger'
 
 import { CLIError } from '@/utilities/cli-error'
@@ -13,9 +12,19 @@ export const init = new Command()
   .description('prepares your project for using the Hynix CLI.')
   .action(async () => {
     try {
-      logger.custom(BANNER_INTRO, {
-        color: 'yellowBright',
-      })
+      logger.custom(
+        `
+        ██╗  ██╗██╗   ██╗███╗   ██╗██╗██╗  ██╗
+        ██║  ██║╚██╗ ██╔╝████╗  ██║██║╚██╗██╔╝
+        ███████║ ╚████╔╝ ██╔██╗ ██║██║ ╚███╔╝
+        ██╔══██║  ╚██╔╝  ██║╚██╗██║██║ ██╔██╗
+        ██║  ██║   ██║   ██║ ╚████║██║██╔╝ ██╗
+        ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
+      `,
+        {
+          color: 'blue',
+        },
+      )
 
       const { errorsFound } = await preFlight()
 
@@ -37,8 +46,11 @@ export const init = new Command()
           initialValue: false,
         })
 
-        if (!shouldProceedWithoutTailwind) {
-          logger.info(
+        if (
+          p.isCancel(shouldProceedWithoutTailwind) ||
+          !shouldProceedWithoutTailwind
+        ) {
+          logger.warning(
             'Initialization has been safely aborted. Please set up TailwindCSS\nby following the official guide: https://tailwindcss.com/docs/installation',
           )
           process.exit(0)
@@ -51,9 +63,7 @@ export const init = new Command()
         )
       }
 
-      logger.step(
-        'Preflight check completed successfully. Your environment is ready for initialization.',
-      )
+      logger.step('Preflight check completed successfully.')
 
       await handler()
     } catch (err) {
