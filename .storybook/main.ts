@@ -12,16 +12,15 @@ function getAbsolutePath(value: string) {
 
 const config: StorybookConfig = {
   stories: [
-    '../packages/react/__stories__/**/*.mdx',
-    '../packages/react/__stories__/**/*.stories.@(ts|tsx)',
+    '../packages/ui/__stories__/**/*.mdx',
+    '../packages/ui/__stories__/**/*.stories.@(ts|tsx)',
   ],
 
   addons: [
-    getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@storybook/addon-interactions'),
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-themes'),
     getAbsolutePath('storybook-addon-tag-badges'),
+    getAbsolutePath('@storybook/addon-docs'),
   ],
 
   framework: {
@@ -30,8 +29,8 @@ const config: StorybookConfig = {
   },
 
   typescript: {
-    reactDocgen: 'react-docgen-typescript'
-  }
+    reactDocgen: 'react-docgen-typescript',
+  },
 }
 
 export default config

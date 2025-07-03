@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "timezone": "America/Sao_Paulo",
+	"schedule": ["after 6am every weekday"],
+	"labels": ["renovate"],
+	"prHourlyLimit": 2,
+	"prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "matchManagers": ["pnpm"],
+      "enabled": true
+    }
+  ]
+}

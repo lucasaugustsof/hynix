@@ -1,0 +1,12 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@r/*": ["src/*"]
+		},
+		"jsx": "preserve",
+		"jsxImportSource": "react"
+	},
+	"include": ["src", "__stories__"]
+}

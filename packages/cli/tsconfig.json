@@ -1,5 +1,5 @@
 {
-	"extends": ["@hynix/ts-config/base.json"],
+	"extends": "../tsconfig.json",
 	"compilerOptions": {
 		"lib": ["DOM", "ESNext"],
 		"moduleResolution": "node",
