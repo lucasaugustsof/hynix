@@ -1,8 +1,10 @@
 import { Eta } from 'eta'
+import * as p from '@clack/prompts'
 
 import { logger } from '@/utilities/logger'
 import { manifestManager } from '@/utilities/manifest-manager'
 import { CLIError } from '@/utilities/cli-error'
+import { addExternalDependencies } from '@/utilities/add-external-dependencies'
 
 import { fetchRegistry, fetchRegistryMetadata } from '@/registry/api'
 
@@ -43,10 +45,6 @@ export async function handler(componentNames: string[]) {
       logger.warning(
         `The following components could not be found: ${unknownComponents.join(', ')}`,
       )
-    }
-
-    if (selectedUrls.length === 0) {
-      logger.info('No components selected. Exiting.')
       return
     }
 
@@ -54,35 +52,58 @@ export async function handler(componentNames: string[]) {
       selectedUrls.map(fetchRegistryMetadata),
     )
 
-    const processedComponents = new Set<string>()
+    const processedRegistryDependenciesMap = new Map<
+      string,
+      {
+        npmDeps: string[]
+      }
+    >()
 
     for (const {
       file: componentFile,
-      registryDependencies: directDeps,
+      registryDependencies: registryDeps,
+      dependencies: npmDeps,
     } of initialMetadata) {
-      if (directDeps.length > 0) {
+      if (registryDeps.length > 0) {
         await writeRegistryDependenciesRecursively(
-          directDeps,
+          registryDeps,
+          npmDeps,
           componentRegistry,
           etaEngine,
           aliases,
-          processedComponents,
+          processedRegistryDependenciesMap,
         )
       }
 
       const componentBaseName = componentFile.name.replace(/\.[^/.]+$/, '')
 
-      if (!processedComponents.has(componentBaseName)) {
-        processedComponents.add(componentBaseName)
+      if (!processedRegistryDependenciesMap.has(componentBaseName)) {
+        processedRegistryDependenciesMap.set(componentBaseName, {
+          npmDeps,
+        })
+
         await writeComponentFile(etaEngine, aliases, componentFile)
       }
     }
 
-    console.log(processedComponents)
+    const npmDepsToInstall = Array.from(
+      processedRegistryDependenciesMap.values(),
+    ).flatMap(a => a.npmDeps)
+
+    await p.tasks([
+      {
+        title: 'Installing dependencies',
+        task: async () => {
+          await addExternalDependencies(npmDepsToInstall)
+          return 'Installed dependencies'
+        },
+      },
+    ])
   } catch (err) {
     if (err instanceof CLIError) {
       logger.error(err.message)
     }
+
     logger.error('An unexpected error occurred while handling components.')
   }
 }

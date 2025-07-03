@@ -94,29 +94,33 @@ export async function writeComponentFile(
 }
 
 export async function writeRegistryDependenciesRecursively(
-  dependencyNames: string[],
-  componentRegistry: {
-    name: string
-    url: string
-  }[],
+  registryDeps: string[],
+  npmDeps: string[],
+  componentRegistry: { name: string; url: string }[],
   etaEngine: Eta,
   pathAliases: Record<string, string>,
-  processedComponents: Set<string>,
+  processedRegistryDependenciesMap: Map<
+    string,
+    {
+      npmDeps: string[]
+    }
+  >,
 ) {
-  const pendingDependencies = dependencyNames.filter(
-    name => !processedComponents.has(name),
+  const pendingRegistryDeps = registryDeps.filter(
+    registryName => !processedRegistryDependenciesMap.has(registryName),
   )
-  if (pendingDependencies.length === 0) return
 
-  for (const dependencyName of pendingDependencies) {
-    processedComponents.add(dependencyName)
+  for (const registryName of pendingRegistryDeps) {
+    processedRegistryDependenciesMap.set(registryName, {
+      npmDeps,
+    })
 
     const registryEntry = componentRegistry.find(
-      entry => entry.name === dependencyName,
+      entry => entry.name === registryName,
     )
 
     if (!registryEntry) {
-      logger.warning(`Component not found in registry: ${dependencyName}`)
+      logger.warning(`Component not found in registry: ${registryName}`)
       continue
     }
 
@@ -125,10 +129,11 @@ export async function writeRegistryDependenciesRecursively(
     if (componentMetadata.registryDependencies.length > 0) {
       await writeRegistryDependenciesRecursively(
         componentMetadata.registryDependencies,
+        componentMetadata.dependencies,
         componentRegistry,
         etaEngine,
         pathAliases,
-        processedComponents,
+        processedRegistryDependenciesMap,
       )
     }
 

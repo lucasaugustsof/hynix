@@ -10,7 +10,7 @@ export const add = new Command()
   .name('add')
   .description('quickly add Hynix components and start building faster.')
   .argument('[components...]')
-  .action(async args => {
+  .action(async componentNames => {
     const { errorsFound } = preFlight()
 
     if (errorsFound[AddCommandErrors.MANIFEST_FILE_NOT_FOUND]) {
@@ -19,7 +19,7 @@ export const add = new Command()
       )
     }
 
-    const componentNames = args
+    logger.success('Preflight checks')
 
     await handler(componentNames)
   })

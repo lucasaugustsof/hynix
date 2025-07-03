@@ -16,8 +16,7 @@ import {
 } from '@/utilities/const'
 import { logger } from '@/utilities/logger'
 import { manifestManager } from '@/utilities/manifest-manager'
-import { resolvePackageManagerCommand } from '@/utilities/resolve-package-manager-command'
-import { runShellCommand } from '@/utilities/run-shell-command'
+import { addExternalDependencies } from '@/utilities/add-external-dependencies'
 
 export async function handler() {
   try {
@@ -51,15 +50,7 @@ export async function handler() {
       {
         title: `Install required dependencies: ${REQUIRED_DEPENDENCIES.join(', ')}`,
         task: async () => {
-          const { command, args } = await resolvePackageManagerCommand(
-            'add',
-            REQUIRED_DEPENDENCIES,
-          )
-          const fullCommand = `${command} ${args.join(' ')}`
-          logger.info(`Executing: ${fullCommand}`)
-
-          await runShellCommand(fullCommand)
-
+          addExternalDependencies(REQUIRED_DEPENDENCIES)
           return `Successfully installed: ${REQUIRED_DEPENDENCIES.join(', ')}.`
         },
       },
