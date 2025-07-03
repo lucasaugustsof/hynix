@@ -24,7 +24,6 @@ export async function handler(componentNames: string[]) {
     const etaEngine = new Eta()
 
     const componentsAlreadyAdded = await listAddedComponents(aliases.components)
-    console.log(componentsAlreadyAdded)
 
     let selectedUrls: string[] = []
     let unknownComponents: string[] = []
