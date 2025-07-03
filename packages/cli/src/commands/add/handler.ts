@@ -9,6 +9,7 @@ import { manifestManager } from '@/utilities/manifest-manager'
 import { fetchRegistry, fetchRegistryMetadata } from '@/registry/api'
 
 import {
+  listAddedComponents,
   promptComponentSelection,
   resolveComponentUrls,
   writeComponentFile,
@@ -21,6 +22,9 @@ export async function handler(componentNames: string[]) {
 
     const componentRegistry = await fetchRegistry()
     const etaEngine = new Eta()
+
+    const componentsAlreadyAdded = await listAddedComponents(aliases.components)
+    console.log(componentsAlreadyAdded)
 
     let selectedUrls: string[] = []
     let unknownComponents: string[] = []
@@ -60,10 +64,18 @@ export async function handler(componentNames: string[]) {
     >()
 
     for (const {
+      name: componentName,
       file: componentFile,
       registryDependencies: registryDeps,
       dependencies: npmDeps,
     } of initialMetadata) {
+      // @TODO: Prompt the user to confirm whether they want to overwrite the existing component code.
+      if (componentsAlreadyAdded.includes(componentName)) {
+        logger.warning(
+          `Component "${componentName}" already exists and will be overwritten.\nWe plan to enhance this behavior in a future release to avoid unintentional overwrites.`,
+        )
+      }
+
       if (registryDeps.length > 0) {
         await writeRegistryDependenciesRecursively(
           registryDeps,
@@ -90,6 +102,8 @@ export async function handler(componentNames: string[]) {
       processedRegistryDependenciesMap.values(),
     ).flatMap(a => a.npmDeps)
 
+    const isNPMDepsToInstall = npmDepsToInstall.length > 0
+
     await p.tasks([
       {
         title: 'Installing dependencies',
@@ -97,10 +111,21 @@ export async function handler(componentNames: string[]) {
           await addExternalDependencies(npmDepsToInstall)
           return 'Installed dependencies'
         },
+        enabled: isNPMDepsToInstall,
       },
     ])
 
-    // Add a summary here
+    const addedComponentsSummary = Array.from(
+      processedRegistryDependenciesMap.keys(),
+    )
+      .map(name => `- ${name}`)
+      .join('\n')
+
+    logger.step(
+      `Successfully added the following components:\n${addedComponentsSummary}`,
+    )
+
+    p.outro('You can now import it and start building.')
   } catch (err) {
     if (err instanceof CLIError) {
       logger.error(err.message)

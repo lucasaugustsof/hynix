@@ -18,146 +18,161 @@ import { logger } from '@/utilities/logger'
 import { resolveAliasToAbsolutePath } from '@/utilities/resolve-alias-to-absolute-path'
 
 async function generateTemplateFiles(
-  alias: string,
-  templates: Record<string, string>,
-  filesCreatedAfterExecution: Set<string>,
+  importAlias: string,
+  templateMap: Record<string, string>,
+  createdFiles: Set<string>,
 ) {
-  const dirPath = resolveAliasToAbsolutePath(alias)
+  const outputDir = resolveAliasToAbsolutePath(importAlias)
 
-  if (!existsSync(dirPath)) {
-    await fs.mkdir(dirPath, {
-      recursive: true,
-    })
+  if (!existsSync(outputDir)) {
+    await fs.mkdir(outputDir, { recursive: true })
   }
 
   await Promise.all(
-    Object.entries(templates).map(async ([file, code]) => {
-      const fileName = `${kebabCase(file)}.ts`
-      const filePath = path.join(dirPath, fileName)
+    Object.entries(templateMap).map(async ([templateName, templateContent]) => {
+      const outputFileName = `${kebabCase(templateName)}.ts`
 
-      const summaryPath = filePath.split(path.sep).slice(-3).join(path.sep)
+      const targetFilePath = path.join(outputDir, outputFileName)
+
+      const fileSummary = targetFilePath
+        .split(path.sep)
+        .slice(-3)
+        .join(path.sep)
 
       try {
-        const formattedCode = await prettier.format(code, {
+        const formattedTemplate = await prettier.format(templateContent, {
           parser: 'typescript',
           singleQuote: true,
         })
-        await fs.writeFile(filePath, formattedCode, 'utf8')
-        filesCreatedAfterExecution.add(summaryPath)
-      } catch (err) {
-        const cause = err instanceof Error ? err.message : String(err)
-        throw new Error(`Failed to create "${fileName}": ${cause}`)
+        await fs.writeFile(targetFilePath, formattedTemplate, 'utf8')
+
+        createdFiles.add(fileSummary)
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : String(error)
+
+        throw new Error(
+          `Failed to generate "${outputFileName}": ${errorMessage}`,
+        )
       }
     }),
   )
 }
 
 export async function askCssPath(): Promise<string> {
-  const cssPath = await p.text({
+  const enteredPath = await p.text({
     message: 'Enter the path for your main Tailwind CSS file:',
     placeholder: DEFAULT_CSS_PATH,
     initialValue: DEFAULT_CSS_PATH,
-    validate(v) {
-      return v.trim() ? undefined : 'This field is required.'
+    validate(value) {
+      return value.trim() ? undefined : 'This field is required.'
     },
   })
 
-  if (p.isCancel(cssPath)) {
+  if (p.isCancel(enteredPath)) {
     logger.warning('CSS configuration canceled. No changes were applied.')
     process.exit(0)
   }
 
-  const cssFilePath = cssPath.toString()
-  const { dir: cssDir, base: fileName } = path.parse(cssFilePath)
+  const cssFilePath = enteredPath.toString()
+  const { dir: cssDirectory, base: cssFileName } = path.parse(cssFilePath)
 
-  if (!existsSync(cssDir)) {
-    await fs.mkdir(cssDir, {
+  if (!existsSync(cssDirectory)) {
+    await fs.mkdir(cssDirectory, {
       recursive: true,
     })
   }
 
   try {
-    const formattedCode = await prettier.format(CSS_FILE, {
-      parser: 'css',
-    })
-
-    await fs.writeFile(cssFilePath, formattedCode, 'utf8')
-  } catch (err) {
-    const cause = err instanceof Error ? err.message : String(err)
-    throw new Error(`Failed to create "${fileName}": ${cause}`)
+    const cssContent = await prettier.format(CSS_FILE, { parser: 'css' })
+    await fs.writeFile(cssFilePath, cssContent, 'utf8')
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    throw new Error(`Failed to generate "${cssFileName}": ${errorMessage}`)
   }
 
   return cssFilePath
 }
 
 export async function askComponentsAlias(): Promise<string> {
-  const alias = await p.text({
-    message:
-      'Which alias would you like to configure for importing your components?',
-    placeholder: DEFAULT_COMPONENTS_ALIAS,
-    initialValue: DEFAULT_COMPONENTS_ALIAS,
-    validate(v) {
-      return v.trim()
-        ? undefined
-        : 'This field is required. Please provide a value.'
-    },
-  })
+  const componentsAlias = (
+    await p.text({
+      message:
+        'Which alias would you like to configure for importing your components?',
+      placeholder: DEFAULT_COMPONENTS_ALIAS,
+      initialValue: DEFAULT_COMPONENTS_ALIAS,
+      validate(value) {
+        return value.trim()
+          ? undefined
+          : 'This field is required. Please provide a value.'
+      },
+    })
+  ).toString()
 
-  if (p.isCancel(alias)) {
+  if (p.isCancel(componentsAlias)) {
     logger.warning('Component alias setup canceled. No alias configured.')
     process.exit(0)
   }
 
-  return alias.toString()
+  const componentsDir = resolveAliasToAbsolutePath(componentsAlias)
+
+  if (!existsSync(componentsDir)) {
+    await fs.mkdir(componentsDir, {
+      recursive: true,
+    })
+  }
+
+  return componentsAlias
 }
 
 export async function askHooksAlias(
-  filesCreatedAfterExecution: Set<string>,
+  createdFiles: Set<string>,
 ): Promise<string> {
-  const alias = await p.text({
+  const hooksAliasInput = await p.text({
     message:
       'Which alias would you like to configure for importing your hooks?',
     placeholder: DEFAULT_HOOKS_ALIAS,
     initialValue: DEFAULT_HOOKS_ALIAS,
-    validate(v) {
-      return v.trim()
+    validate(value) {
+      return value.trim()
         ? undefined
         : 'This field is required. Please provide a value.'
     },
   })
 
-  if (p.isCancel(alias)) {
+  if (p.isCancel(hooksAliasInput)) {
     logger.warning('Hooks alias setup canceled. No alias configured.')
     process.exit(0)
   }
 
-  const aliasStr = alias.toString()
-  await generateTemplateFiles(aliasStr, HOOKS, filesCreatedAfterExecution)
-  return aliasStr
+  const hooksAlias = hooksAliasInput.toString()
+  await generateTemplateFiles(hooksAlias, HOOKS, createdFiles)
+
+  return hooksAlias
 }
 
 export async function askUtilitiesAlias(
-  filesCreatedAfterExecution: Set<string>,
+  createdFiles: Set<string>,
 ): Promise<string> {
-  const alias = await p.text({
+  const utilitiesAliasInput = await p.text({
     message:
       'Which alias would you like to configure for importing your utilities?',
     placeholder: DEFAULT_UTILITIES_ALIAS,
     initialValue: DEFAULT_UTILITIES_ALIAS,
-    validate(v) {
-      return v.trim()
+    validate(value) {
+      return value.trim()
         ? undefined
         : 'This field is required. Please provide a value.'
     },
   })
 
-  if (p.isCancel(alias)) {
+  if (p.isCancel(utilitiesAliasInput)) {
     logger.warning('Utilities alias setup canceled. No alias configured.')
     process.exit(0)
   }
 
-  const aliasStr = alias.toString()
-  await generateTemplateFiles(aliasStr, UTILITIES, filesCreatedAfterExecution)
+  const utilitiesAlias = utilitiesAliasInput.toString()
+  await generateTemplateFiles(utilitiesAlias, UTILITIES, createdFiles)
 
-  return aliasStr
+  return utilitiesAlias
 }

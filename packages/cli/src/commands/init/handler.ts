@@ -92,8 +92,8 @@ export async function handler() {
     )
 
     logger.success('Setup completed successfully.')
-    logger.info(
-      `All configurations have been applied and files generated. Now you can add components.\nTo add a component, run: ${chalk.blue('npx hynix@alpha add <component>')}.`,
+    p.outro(
+      `All configurations have been applied and files generated. Now you can add components.\n   To add a component, run: ${chalk.blue('npx hynix@alpha add <component>')}.`,
     )
   } catch (error) {
     if (error instanceof CLIError) {

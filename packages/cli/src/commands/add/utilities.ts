@@ -1,4 +1,4 @@
-import { promises as fs } from 'node:fs'
+import { promises as fs, existsSync } from 'node:fs'
 import path from 'node:path'
 
 import * as p from '@clack/prompts'
@@ -59,6 +59,7 @@ export async function promptComponentSelection(
 
   if (p.isCancel(selection)) {
     logger.warning('Component selection cancelled.')
+    process.exit(0)
   }
 
   return selection
@@ -139,5 +140,28 @@ export async function writeRegistryDependenciesRecursively(
     }
 
     await writeComponentFile(etaEngine, pathAliases, componentMetadata.file)
+  }
+}
+
+export async function listAddedComponents(
+  componentsAlias: string,
+): Promise<string[]> {
+  const componentsDir = resolveAliasToAbsolutePath(componentsAlias)
+
+  if (!existsSync(componentsDir)) {
+    return []
+  }
+
+  try {
+    let fileNames = await fs.readdir(componentsDir)
+    fileNames = fileNames.map(file => path.parse(file).name)
+
+    return fileNames
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : String(err)
+
+    throw new Error(
+      `Failed to read components from "${componentsAlias}": ${errorMessage}`,
+    )
   }
 }
