@@ -6,7 +6,7 @@ import chalk from 'chalk'
 import ora from 'ora'
 
 const PREFIX_REGISTRY = '@r'
-const COMPONENTS_PATH = 'packages/react/src/components'
+const COMPONENTS_PATH = 'packages/ui/src/components'
 const IGNORED_EXTERNAL_DEPENDENCIES = ['react', '@ark-ui/react', 'motion']
 
 function astSetupMechanism() {
@@ -71,7 +71,7 @@ function replaceImportWithAliasTemplate(registryImport) {
  * @param {string} content
  */
 async function writeRegistryFile(registryName, content) {
-  const outputPath = path.join(import.meta.dirname, '../docs/registry')
+  const outputPath = path.join(import.meta.dirname, '../blob/registry')
 
   const loading = ora(
     `Generating ${chalk.blue(registryName)} registry file...`,
@@ -152,14 +152,6 @@ async function buildRegistry() {
 
     await writeRegistryFile(componentName, registryData)
   }
-
-  const registryIndexContent = {
-    registry: componentFiles.map(
-      componentFile => path.parse(componentFile).name,
-    ),
-  }
-
-  await writeRegistryFile('index', registryIndexContent)
 }
 
 buildRegistry()
