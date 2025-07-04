@@ -26,6 +26,7 @@ export const REQUIRED_DEPENDENCIES = [
   'tailwind-merge',
   'tailwind-variants',
   'tw-animate-css',
+  '@remixicon/react',
 ]
 
 // @TODO: Take this Github API code.
