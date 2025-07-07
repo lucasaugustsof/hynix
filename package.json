@@ -48,8 +48,8 @@
 	"license": "MIT",
 	"private": true,
 	"dependencies": {
-		"@tailwindcss/vite": "4.1.10",
+		"@tailwindcss/vite": "4.1.11",
 		"@vercel/analytics": "1.5.0",
-		"tailwindcss": "4.1.10"
+		"tailwindcss": "4.1.11"
 	}
 }
