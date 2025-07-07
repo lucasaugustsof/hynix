@@ -3,7 +3,7 @@ import { ark } from '@ark-ui/react/factory'
 import { RiCloseLine } from '@remixicon/react'
 
 import { cn } from '@r/utilities/cn'
-import { tv, type VariantProps } from '@r/utilities/tv'
+import { type VariantProps, tv } from '@r/utilities/tv'
 
 import { useInjectPropsToChildren } from '@r/hooks/use-inject-props-to-children'
 

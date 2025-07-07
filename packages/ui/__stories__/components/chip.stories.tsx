@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { motion, MotionConfig, AnimatePresence } from 'motion/react'
 import { RiCheckboxCircleFill } from '@remixicon/react'
+import { AnimatePresence, MotionConfig, motion } from 'motion/react'
 
 import * as Chip from '@r/components/chip'
 import type { ChipProps } from '@r/components/chip'

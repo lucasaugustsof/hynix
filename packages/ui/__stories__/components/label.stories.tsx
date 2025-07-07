@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Label, type LabelProps } from '@r/components/label'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 type LabelStoryArgs = LabelProps & {
   'data-disabled': boolean

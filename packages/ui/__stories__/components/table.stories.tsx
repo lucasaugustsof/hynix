@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Format } from '@ark-ui/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import * as Table from '@r/components/table'
 import type { TableProps } from '@r/components/table'

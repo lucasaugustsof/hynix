@@ -1,5 +1,5 @@
+import { RiAlertLine, RiCheckLine } from '@remixicon/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { RiCheckLine, RiAlertLine } from '@remixicon/react'
 
 import { Badge, type BadgeProps } from '@r/components/badge'
 

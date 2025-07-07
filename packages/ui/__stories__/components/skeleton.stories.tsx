@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Skeleton, type SkeletonProps } from '@r/components/skeleton'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta: Meta<SkeletonProps> = {
   title: 'Components/Skeleton',
