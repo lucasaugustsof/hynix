@@ -10,7 +10,7 @@
 	"prConcurrentLimit": 5,
   "packageRules": [
     {
-      "matchManagers": ["pnpm"],
+      "matchManagers": ["npm"],
       "enabled": true
     }
   ]
