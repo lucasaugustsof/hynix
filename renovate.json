@@ -1,17 +1,31 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "timezone": "America/Sao_Paulo",
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:recommended",
+		":semanticCommitTypeAll(chore)",
+		"schedule:earlyMondays"
+	],
+	"timezone": "UTC",
 	"schedule": ["after 6am every weekday"],
-	"labels": ["renovate"],
-	"prHourlyLimit": 2,
-	"prConcurrentLimit": 5,
-  "packageRules": [
-    {
-      "matchManagers": ["npm"],
-      "enabled": true
-    }
-  ]
+	"labels": ["dependencies"],
+	"prHourlyLimit": 0,
+	"packageRules": [
+		{
+			"matchManagers": ["npm"],
+			"enabled": true
+		},
+		{
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": true,
+			"groupName": "all non-major dependencies",
+			"groupSlug": "all-minor-patch"
+		},
+		{
+			"matchPackageNames": ["storybook"],
+			"enabled": false
+		}
+	],
+	"lockFileMaintenance": {
+		"enabled": true
+	}
 }
