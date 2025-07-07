@@ -27,5 +27,7 @@
 	],
 	"lockFileMaintenance": {
 		"enabled": true
-	}
+	},
+	"rebaseWhen": "conflicted",
+	"dependencyDashboard": false
 }
