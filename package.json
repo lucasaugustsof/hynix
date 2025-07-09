@@ -15,7 +15,7 @@
 		"clean": "npkill -d ./",
 		"build:registry": "node scripts/build-registry.js"
 	},
-	"packageManager": "pnpm@10.12.4",
+	"packageManager": "pnpm@10.13.1",
 	"engines": {
 		"node": "22.x"
 	},
