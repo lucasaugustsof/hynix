@@ -1,7 +1,7 @@
 {
 	"license": "MIT",
 	"devDependencies": {
-		"@types/node": "22.16.0",
+		"@types/node": "22.16.2",
 		"@vercel/node": "5.3.4"
 	},
 	"dependencies": {
