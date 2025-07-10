@@ -39,7 +39,7 @@
 	},
 	"homepage": "https://github.com/lucasaugustsof/hynix#readme",
 	"devDependencies": {
-		"@types/node": "22.16.2",
+		"@types/node": "22.16.3",
 		"tsup": "8.5.0"
 	},
 	"dependencies": {
