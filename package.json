@@ -40,10 +40,10 @@
 		"storybook-addon-tag-badges": "2.0.1",
 		"storybook-dark-mode": "4.0.2",
 		"ts-morph": "26.0.0",
-		"turbo": "2.5.4",
+		"turbo": "2.5.5",
 		"tw-animate-css": "1.3.5",
 		"typescript": "5.8.3",
-		"vite": "7.0.4"
+		"vite": "7.0.5"
 	},
 	"license": "MIT",
 	"private": true,
