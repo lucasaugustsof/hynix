@@ -32,11 +32,11 @@
 	],
 	"license": "MIT",
 	"dependencies": {
-		"@ark-ui/react": "5.18.0",
+		"@ark-ui/react": "5.18.1",
 		"@remixicon/react": "4.6.0",
 		"clsx": "2.1.1",
 		"lucide-react": "0.525.0",
-		"motion": "12.23.6",
+		"motion": "12.23.7",
 		"react": "19.1.0",
 		"react-dom": "19.1.0",
 		"react-use-measure": "2.1.7",
