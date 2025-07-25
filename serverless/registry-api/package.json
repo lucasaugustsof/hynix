@@ -2,7 +2,7 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "22.16.5",
-		"@vercel/node": "5.3.6"
+		"@vercel/node": "5.3.7"
 	},
 	"dependencies": {
 		"@vercel/blob": "1.1.1"
