@@ -41,7 +41,7 @@
 		"react-dom": "19.1.1",
 		"react-use-measure": "2.1.7",
 		"tailwind-merge": "3.3.1",
-		"tailwind-variants": "1.0.0",
+		"tailwind-variants": "2.1.0",
 		"usehooks-ts": "3.1.1"
 	},
 	"devDependencies": {
