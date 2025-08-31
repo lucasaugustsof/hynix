@@ -30,7 +30,7 @@
 		"@storybook/addons": "7.6.17",
 		"@storybook/react-vite": "9.0.18",
 		"@types/react": "19.1.9",
-		"@vitejs/plugin-react": "4.7.0",
+		"@vitejs/plugin-react": "5.0.2",
 		"chalk": "5.4.1",
 		"husky": "9.1.7",
 		"npkill": "0.12.2",
