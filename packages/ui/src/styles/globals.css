@@ -1,1 +1,111 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.theme-dark, .theme-dark *));
+
+@theme inline {
+  --color-bg-default: var(--bg-default);
+  --color-bg-subtle: var(--bg-subtle);
+
+  --color-layer-1: var(--layer-1);
+  --color-layer-2: var(--layer-2);
+  --color-layer-3: var(--layer-3);
+  --color-layer-4: var(--layer-4);
+  --color-layer-5: var(--layer-5);
+
+  --color-border-default: var(--border-default);
+  --color-disabled: var(--state-disabled);
+
+  --color-fg-primary: var(--fg-primary);
+  --color-fg-on-primary: var(--fg-on-primary);
+
+  --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+
+  --font-sans: var(--font-sans);
+}
+
+:root {
+  --bg-default: oklch(100% 0 0);
+  --bg-subtle: oklch(99.11% 0 0);
+
+  --layer-1: oklch(96.74% 0.0013 286.38);
+  --layer-2: oklch(91% 0.0013 286.37);
+  --layer-3: oklch(85.88% 0.0055 286.28);
+  --layer-4: oklch(71.18% 0.0129 286.07);
+  --layer-5: oklch(44.19% 0.0146 285.79);
+
+  --border-default: oklch(91% 0.0013 286.37);
+  --state-disabled: oklch(21.78% 0 0 / 18%);
+
+  --fg-primary: oklch(21.78% 0 0);
+  --fg-on-primary: oklch(100% 0 0);
+
+  --brand: oklch(21.78% 0 0);
+  --accent: oklch(0.64 0.1893 41.55);
+  --danger: oklch(57.85% 0.2138 27.17);
+  --success: oklch(57.29% 0.1544 149.22);
+
+  --font-sans: "Inter", sans-serif;
+}
+
+/*@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-default: oklch(19.3% 0 0);
+    --bg-subtle: oklch(24.45% 0.0061 17.58);
+
+    --layer-1: oklch(32.11% 0 0);
+    --layer-2: oklch(36.08% 0 0);
+    --layer-3: oklch(48.32% 0 0);
+    --layer-4: oklch(55.47% 0 0);
+    --layer-5: oklch(69.13% 0 0);
+
+    --border-default: oklch(36.08% 0 0);
+    --state-disabled: oklch(100% 0 106.37 / 18%);
+
+    --fg-primary: oklch(100% 0 0);
+    --fg-on-primary: oklch(21.78% 0 0);
+
+    --brand: oklch(100% 0 106.37);
+    --accent: oklch(0.84 0.1181 67);
+    --danger: oklch(0.73 0.1689 22.18);
+    --success: oklch(92.46% 0.0811 155.98);
+  }
+}*/
+
+.theme-dark {
+  --bg-default: oklch(19.3% 0 0);
+  --bg-subtle: oklch(24.45% 0.0061 17.58);
+
+  --layer-1: oklch(32.11% 0 0);
+  --layer-2: oklch(36.08% 0 0);
+  --layer-3: oklch(48.32% 0 0);
+  --layer-4: oklch(55.47% 0 0);
+  --layer-5: oklch(69.13% 0 0);
+
+  --border-default: oklch(36.08% 0 0);
+  --state-disabled: oklch(100% 0 106.37 / 18%);
+
+  --fg-primary: oklch(100% 0 0);
+  --fg-on-primary: oklch(21.78% 0 0);
+
+  --brand: oklch(100% 0 106.37);
+  --accent: oklch(0.84 0.1181 67);
+  --danger: oklch(0.73 0.1689 22.18);
+  --success: oklch(92.46% 0.0811 155.98);
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply antialiased;
+
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+}
