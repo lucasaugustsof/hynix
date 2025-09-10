@@ -1,1 +1,1 @@
-# Hynix Project
+# Hynix

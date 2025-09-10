@@ -1,0 +1,15 @@
+{
+	"name": "@hynix/ui",
+	"version": "1.0.0",
+	"description": "A personal UI toolkit with React, Tailwind CSS, and Ark UI.",
+	"main": "index.js",
+	"scripts": {
+		"format": "biome format --write",
+		"lint": "biome lint --write",
+		"check": "biome check --write"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.15.1"
+}
