@@ -47,7 +47,22 @@
     "enabled": true,
     "actions": {
       "source": {
-        "organizeImports": "on",
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ":NODE:",
+              "react",
+              "@storybook/*",
+              "storybook/*",
+              ":BLANK_LINE:",
+              "@ark-ui/react",
+              "@ark-ui/react/*",
+              ":BLANK_LINE:",
+              ":ALIAS:"
+            ]
+          }
+        },
         "useSortedAttributes": "on",
         "useSortedProperties": "on"
       }
