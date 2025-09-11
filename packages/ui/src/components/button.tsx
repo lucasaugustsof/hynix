@@ -1,6 +1,6 @@
 export function Button() {
   return (
-    <button className="bg-brand text-fg-on-primary" type="button">
+    <button className="" type="button">
       Button
     </button>
   )
