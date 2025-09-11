@@ -1,0 +1,11 @@
+{
+  "name": "@hynix/token-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "license": "MIT",
+  "packageManager": "pnpm@10.15.1",
+  "devDependencies": {
+    "style-dictionary": "^5.0.4"
+  }
+}
