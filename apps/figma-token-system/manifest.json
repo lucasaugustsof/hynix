@@ -8,6 +8,7 @@
   "documentAccess": "dynamic-page",
   "editorType": ["figma"],
   "networkAccess": {
+    "devAllowedDomains": ["http://localhost:5678"],
     "allowedDomains": ["none"]
   }
 }

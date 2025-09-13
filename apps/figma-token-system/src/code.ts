@@ -1,3 +1,4 @@
+import { WEBHOOK_URL } from './utilities/const'
 import { isVariableAlias } from './utilities/is-variable-alias'
 import { normalizeVariableName } from './utilities/normalize-variable-name'
 import { toRGB } from './utilities/to-rgb'
@@ -32,8 +33,13 @@ async function main() {
   }
 
   for (const [collectionName, groupedVariables] of collectionToVariablesMap) {
-    if (!exportedData[collectionName]) {
-      exportedData[collectionName] = {}
+    const normalizedCollectionName = collectionName
+      .toLowerCase()
+      .replace(/^\d+-/, ' ')
+      .trim()
+
+    if (!exportedData[normalizedCollectionName]) {
+      exportedData[normalizedCollectionName] = {}
     }
 
     for (const variable of groupedVariables) {
@@ -60,11 +66,33 @@ async function main() {
       }
 
       // @ts-expect-error: Variable 'resolvedValue' is used before being assigned.
-      exportedData[collectionName][normalizedName] = resolvedValue
+      exportedData[normalizedCollectionName][normalizedName] = resolvedValue
     }
   }
 
-  console.log(exportedData)
+  try {
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(exportedData),
+    })
+
+    if (!response.ok) {
+      throw new Error('Webhook connection failed. Please try again.')
+    }
+
+    const data = await response.json()
+
+    figma.notify(data.message)
+  } catch (err) {
+    if (err instanceof Error) {
+      figma.notify(`Error exporting variables: ${err.message}`, {
+        error: true,
+      })
+    }
+  }
 
   figma.closePlugin()
 }
