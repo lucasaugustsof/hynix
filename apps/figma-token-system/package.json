@@ -1,0 +1,16 @@
+{
+  "name": "@hynix/figma-token-system",
+  "version": "1.0.0",
+  "description": "Figma plugin to extract variables and styles",
+  "main": "dist/code.js",
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "lint": "biome lint --write",
+    "format": "biome format --write"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "*",
+    "tsup": "^8.5.0"
+  }
+}

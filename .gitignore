@@ -1,4 +1,9 @@
-node_modules/
+# Node
+*.log
+*.log.*
+node_modules
 
-*storybook.log
+
 storybook-static
+dist
+code.js
