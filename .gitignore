@@ -7,3 +7,6 @@ node_modules
 storybook-static
 dist
 code.js
+
+# MacOS
+.DS_Store
