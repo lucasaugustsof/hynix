@@ -1,6 +1,4 @@
-import { getLocalVariables } from './functions/get-local-variables'
+// import { fetchLocalVariables } from './functions/fetch-local-variables'
+// import { fetchLocalTextStyles } from './functions/fetch-local-text-styles'
 
-;(async () => {
-  const variables = await getLocalVariables()
-  console.log(variables)
-})()
+;(async () => {})()

@@ -16,7 +16,7 @@ type FloatByMode = Record<
     data: {
       type: 'float'
       value: number
-      unit: 'px'
+      unit: 'PX'
     }
   }
 >
@@ -40,7 +40,7 @@ type VariablePayload = {
   value: ColorVariableValue | FloatVariableValue
 }
 
-export async function getLocalVariables(): Promise<VariablePayload[]> {
+export async function fetchLocalVariables(): Promise<VariablePayload[]> {
   const collections = await figma.variables.getLocalVariableCollectionsAsync()
   const variables = await figma.variables.getLocalVariablesAsync()
 
@@ -141,7 +141,7 @@ function createVariableValue(
           ...(isColorType
             ? {}
             : {
-                unit: 'px',
+                unit: 'PX',
               }),
         },
       },
