@@ -1,51 +1,13 @@
+import type { Item } from '../tokens-schema'
+import { BASE_MODE } from '../utilities/const'
 import { toRGB } from '../utilities/to-rgb'
 
-type ColorByMode = Record<
-  string,
-  {
-    data: {
-      type: 'color'
-      value: string
-    }
-  }
->
-
-type FloatByMode = Record<
-  string,
-  {
-    data: {
-      type: 'float'
-      value: number
-      unit: 'PX'
-    }
-  }
->
-
-type ColorVariableValue = {
-  kind: 'COLOR'
-  byMode: ColorByMode
-}
-
-type FloatVariableValue = {
-  kind: 'FLOAT'
-  byMode: FloatByMode
-}
-
-type VariablePayload = {
-  id: string
-  name: string
-  type: 'VARIABLE'
-  description: string
-  collectionName: string
-  value: ColorVariableValue | FloatVariableValue
-}
-
-export async function fetchLocalVariables(): Promise<VariablePayload[]> {
+export async function fetchLocalVariables(): Promise<Item[]> {
   const collections = await figma.variables.getLocalVariableCollectionsAsync()
   const variables = await figma.variables.getLocalVariablesAsync()
 
   const variableNameMap = new Map<string, string>()
-  const payloadByVarId = new Map<string, VariablePayload>()
+  const payloadByVarId = new Map<string, Item>()
 
   variables.forEach(variable => {
     variableNameMap.set(variable.id, variable.name)
@@ -54,13 +16,15 @@ export async function fetchLocalVariables(): Promise<VariablePayload[]> {
   for (const collection of collections) {
     const collectionName = collection.name
       .toLowerCase()
-      .replace(/^\d+-/, ' ')
+      .replace(/^\d+-/, '')
       .trim()
 
-    for (const { modeId, name: modeLabel } of collection.modes) {
-      for (const variable of variables) {
-        if (variable.variableCollectionId !== collection.id) continue
+    for (const variable of variables) {
+      if (variable.variableCollectionId !== collection.id) continue
 
+      const modes: Record<string, string | number> = {}
+
+      for (const { modeId, name: modeLabel } of collection.modes) {
         try {
           const processedValue = processVariableValue(
             variable,
@@ -68,21 +32,42 @@ export async function fetchLocalVariables(): Promise<VariablePayload[]> {
             variableNameMap,
           )
 
-          payloadByVarId.set(variable.id, {
-            id: variable.id,
-            type: 'VARIABLE',
-            name: variable.name.replace(/-/g, '/'),
-            description: variable.description,
-            collectionName,
-            value: createVariableValue(
-              variable.resolvedType,
-              modeLabel,
-              processedValue,
-            ),
-          })
+          // When a collection has only one mode, Figma automatically names it "Mode 1".
+          // We rename this case to maintain consistent naming across all modes.
+          const modeName =
+            modeLabel === 'Mode 1' ? BASE_MODE : modeLabel.toLowerCase()
+          modes[modeName] = processedValue
         } catch (err) {
           console.error(err.message)
         }
+      }
+
+      const isColorType = variable.resolvedType === 'COLOR'
+
+      const processedName = variable.name.replace(/-/g, '/')
+
+      if (isColorType) {
+        payloadByVarId.set(variable.id, {
+          id: variable.id,
+          name: processedName,
+          path: processedName.split('/'),
+          description: variable.description,
+          kind: 'VARIABLE',
+          collection: collectionName || 'foundations',
+          type: 'color',
+          modes: modes as Record<string, string>,
+        })
+      } else {
+        payloadByVarId.set(variable.id, {
+          id: variable.id,
+          name: processedName,
+          path: processedName.split('/'),
+          description: variable.description,
+          kind: 'VARIABLE',
+          collection: collectionName || 'foundations',
+          type: 'dimension',
+          modes: modes as Record<string, number | string>,
+        })
       }
     }
   }
@@ -115,38 +100,6 @@ function processVariableValue(
     `Error: Unable to process the variable of type ${variableResolvedType}.
     \nSuggestion: consider implementing support for this variable type before continuing.`,
   )
-}
-
-function createVariableValue(
-  resolvedType: string,
-  modeLabel: string,
-  processedValue: string | number,
-): ColorVariableValue | FloatVariableValue {
-  const DEFAULT_MODE = 'default'
-  const isColorType = resolvedType === 'COLOR'
-
-  // When a collection has only one mode, Figma automatically names it "Mode 1".
-  // We rename this case to maintain consistent naming across all modes.
-  if (modeLabel === 'Mode 1') {
-    modeLabel = modeLabel.replace(modeLabel, DEFAULT_MODE)
-  }
-
-  return {
-    kind: isColorType ? 'COLOR' : 'FLOAT',
-    byMode: {
-      [modeLabel.toLowerCase()]: {
-        data: {
-          type: isColorType ? 'color' : 'float',
-          value: processedValue,
-          ...(isColorType
-            ? {}
-            : {
-                unit: 'PX',
-              }),
-        },
-      },
-    },
-  } as ColorVariableValue | FloatVariableValue
 }
 
 function isVariableAlias(value: unknown): value is VariableAlias {

@@ -10,5 +10,6 @@
   "networkAccess": {
     "devAllowedDomains": ["http://localhost:5678"],
     "allowedDomains": ["none"]
-  }
+  },
+  "permissions": ["currentuser"]
 }

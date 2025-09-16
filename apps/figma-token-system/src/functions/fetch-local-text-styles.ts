@@ -1,32 +1,10 @@
-type TextStyleByMode = Record<
-  string,
-  {
-    data: {
-      type: 'text'
-      fontName: FontName
-      fontSize: number
-      lineHeight: LineHeight
-      letterSpacing: LetterSpacing
-    }
-  }
->
+import type { Item } from '../tokens-schema'
+import { BASE_MODE } from '../utilities/const'
 
-type TextStylePayload = {
-  id: string
-  name: string
-  description: string
-  type: 'STYLE'
-  collection: 'typography'
-  value: {
-    kind: 'TEXT_STYLE'
-    byMode: TextStyleByMode
-  }
-}
-
-export async function fetchLocalTextStyles(): Promise<TextStylePayload[]> {
+export async function fetchLocalTextStyles(): Promise<Item[]> {
   const localTextStyles = await figma.getLocalTextStylesAsync()
 
-  const textStylesMap = new Map<string, TextStylePayload>()
+  const textStylesMap = new Map<string, Item>()
 
   for (const style of localTextStyles) {
     const {
@@ -41,22 +19,18 @@ export async function fetchLocalTextStyles(): Promise<TextStylePayload[]> {
 
     textStylesMap.set(id, {
       id,
-      name: name.toLowerCase(),
+      name,
+      path: name.split('/'),
       description,
-      type: 'STYLE',
-      collection: 'typography',
-      value: {
-        kind: 'TEXT_STYLE',
-        byMode: {
-          default: {
-            data: {
-              type: 'text',
-              fontName,
-              fontSize,
-              lineHeight,
-              letterSpacing,
-            },
-          },
+      type: 'textStyle',
+      kind: 'STYLE',
+      collection: 'typographies',
+      modes: {
+        [BASE_MODE]: {
+          fontName,
+          fontSize,
+          lineHeight,
+          letterSpacing,
         },
       },
     })
