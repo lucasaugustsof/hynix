@@ -59,7 +59,9 @@
               "@ark-ui/react",
               "@ark-ui/react/*",
               ":BLANK_LINE:",
-              ":ALIAS:"
+              ":ALIAS:",
+              ":BLANK_LINE:",
+              ":PATH:"
             ]
           }
         },
