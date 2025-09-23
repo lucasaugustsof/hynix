@@ -1,13 +1,14 @@
-import type { Item } from '../tokens-schema'
+import type { TokenBaseItem } from '../tokens-schema'
+import { buildTokenTree } from '../utilities/build-token-tree'
 import { BASE_MODE } from '../utilities/const'
 import { toRGB } from '../utilities/to-rgb'
 
-export async function fetchLocalVariables(): Promise<Item[]> {
+export async function fetchLocalVariables(): Promise<TokenBaseItem[]> {
   const collections = await figma.variables.getLocalVariableCollectionsAsync()
   const variables = await figma.variables.getLocalVariablesAsync()
 
   const variableNameMap = new Map<string, string>()
-  const payloadByVarId = new Map<string, Item>()
+  const payloadByVarId = new Map<string, TokenBaseItem>()
 
   variables.forEach(variable => {
     variableNameMap.set(variable.id, variable.name)
@@ -43,30 +44,29 @@ export async function fetchLocalVariables(): Promise<Item[]> {
       }
 
       const isColorType = variable.resolvedType === 'COLOR'
-
       const processedName = variable.name.replace(/-/g, '/')
 
       if (isColorType) {
         payloadByVarId.set(variable.id, {
-          id: variable.id,
           name: processedName,
           path: processedName.split('/'),
           description: variable.description,
-          kind: 'VARIABLE',
+          kind: 'color',
           collection: collectionName || 'foundations',
-          type: 'color',
-          modes: modes as Record<string, string>,
+          value: {
+            ...modes,
+          },
         })
       } else {
         payloadByVarId.set(variable.id, {
-          id: variable.id,
           name: processedName,
           path: processedName.split('/'),
           description: variable.description,
-          kind: 'VARIABLE',
+          kind: 'dimension',
           collection: collectionName || 'foundations',
-          type: 'dimension',
-          modes: modes as Record<string, number | string>,
+          value: {
+            ...modes,
+          },
         })
       }
     }

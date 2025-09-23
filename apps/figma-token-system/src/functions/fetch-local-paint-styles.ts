@@ -1,52 +1,53 @@
-import type { Item } from '../tokens-schema'
+import type { TokenBaseItem } from '../tokens-schema'
 import { BASE_MODE } from '../utilities/const'
 import { toRGB } from '../utilities/to-rgb'
 
-export async function fetchLocalPaintStyles(): Promise<Item[]> {
+export async function fetchLocalPaintStyles(): Promise<TokenBaseItem[]> {
   const localPaintStyles = await figma.getLocalPaintStylesAsync()
 
-  const paintStylesMap = new Map<string, Item>()
+  const paintStylesMap = new Map<string, TokenBaseItem>()
 
   for (const { id, name, description, paints } of localPaintStyles) {
-    const processedPaints = paints
-      .filter(
-        paint => paint.type === 'SOLID' || paint.type === 'GRADIENT_LINEAR',
+    const primaryPaint = paints.find(
+      paint => paint.type === 'SOLID' || paint.type === 'GRADIENT_LINEAR',
+    )
+
+    if (!primaryPaint) continue
+
+    let value: {
+      [key: string]: string | number
+    } = {}
+
+    if (primaryPaint.type === 'SOLID') {
+      const rgb = toRGB(primaryPaint.color as RGBA)
+      value = {
+        [BASE_MODE]: rgb,
+      }
+    }
+
+    if (primaryPaint.type === 'GRADIENT_LINEAR') {
+      const stops = primaryPaint.gradientStops
+        .map(stop => `${toRGB(stop.color)} ${Math.round(stop.position * 100)}%`)
+        .join(', ')
+
+      const transform = primaryPaint.gradientTransform
+
+      const angle = Math.round(
+        (Math.atan2(transform[1][0], transform[0][0]) * 180) / Math.PI,
       )
-      .map(paint => {
-        if (paint.type === 'SOLID') {
-          return {
-            kind: 'solid' as const,
-            color: toRGB(paint.color as RGBA),
-          }
-        }
 
-        if (paint.type === 'GRADIENT_LINEAR') {
-          return {
-            kind: 'gradientLinear' as const,
-            stops: paint.gradientStops.map(stop => ({
-              position: stop.position,
-              color: toRGB(stop.color),
-            })),
-            gradientTransform: paint.gradientTransform,
-          }
-        }
-
-        throw new Error(`Unsupported paint type: ${paint.type}`)
-      })
+      value = {
+        [BASE_MODE]: `linear-gradient(${angle}deg, ${stops})`,
+      }
+    }
 
     paintStylesMap.set(id, {
-      id,
       name,
       path: name.split('/'),
-      description,
-      type: 'paintStyle',
-      kind: 'STYLE',
+      description: description || '',
+      kind: 'gradient',
       collection: 'paints',
-      modes: {
-        [BASE_MODE]: {
-          paints: processedPaints,
-        },
-      },
+      value,
     })
   }
 

@@ -1,10 +1,23 @@
-import type { Item } from '../tokens-schema'
-import { BASE_MODE } from '../utilities/const'
+import type { TokenBaseItem } from '../tokens-schema'
 
-export async function fetchLocalTextStyles(): Promise<Item[]> {
+export async function fetchLocalTextStyles(): Promise<TokenBaseItem[]> {
   const localTextStyles = await figma.getLocalTextStylesAsync()
 
-  const textStylesMap = new Map<string, Item>()
+  const textStylesMap = new Map<string, TokenBaseItem>()
+
+  function formatMeasurementValue(
+    measurement: LineHeight | LetterSpacing,
+  ): string | number {
+    if (measurement.unit === 'PERCENT') {
+      return `${measurement.value}%`
+    }
+
+    if (measurement.unit === 'PIXELS') {
+      return measurement.value
+    }
+
+    return 'auto'
+  }
 
   for (const style of localTextStyles) {
     const {
@@ -17,21 +30,20 @@ export async function fetchLocalTextStyles(): Promise<Item[]> {
       letterSpacing,
     } = style
 
+    const textName = name.toLowerCase()
+
     textStylesMap.set(id, {
-      id,
-      name,
-      path: name.split('/'),
+      name: textName,
+      path: textName.split('/'),
       description,
-      type: 'textStyle',
-      kind: 'STYLE',
+      kind: 'text',
       collection: 'typographies',
-      modes: {
-        [BASE_MODE]: {
-          fontName,
-          fontSize,
-          lineHeight,
-          letterSpacing,
-        },
+      value: {
+        fontSize,
+        fontFamily: fontName.family,
+        fontWeight: fontName.style,
+        lineHeight: formatMeasurementValue(lineHeight),
+        letterSpacing: formatMeasurementValue(letterSpacing),
       },
     })
   }
