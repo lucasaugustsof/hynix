@@ -1,0 +1,114 @@
+{
+  "fancy": {
+    "neutral": {
+      "default": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(23, 23, 23)"
+        }
+      },
+      "hover": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(23, 23, 23)"
+        }
+      },
+      "focus": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(23, 23, 23)"
+        }
+      }
+    },
+    "primary": {
+      "default": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(51, 92, 255)"
+        }
+      },
+      "hover": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(51, 92, 255)"
+        }
+      },
+      "focus": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(51, 92, 255)"
+        }
+      }
+    },
+    "error": {
+      "default": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(251, 55, 72)"
+        }
+      },
+      "hover": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(251, 55, 72)"
+        }
+      },
+      "focus": {
+        "$type": "gradient",
+        "$value": {
+          "_": "rgb(251, 55, 72)"
+        }
+      }
+    }
+  },
+  "linear": {
+    "12": {
+      "$type": "gradient",
+      "$value": {
+        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.00) 100%)"
+      }
+    },
+    "24": {
+      "$type": "gradient",
+      "$value": {
+        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.00) 100%)"
+      }
+    },
+    "36": {
+      "$type": "gradient",
+      "$value": {
+        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.00) 100%)"
+      }
+    },
+    "48": {
+      "$type": "gradient",
+      "$value": {
+        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.00) 100%)"
+      }
+    },
+    "60": {
+      "$type": "gradient",
+      "$value": {
+        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.60) 0%, rgba(255, 255, 255, 0.00) 100%)"
+      }
+    },
+    "72": {
+      "$type": "gradient",
+      "$value": {
+        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.00) 100%)"
+      }
+    },
+    "84": {
+      "$type": "gradient",
+      "$value": {
+        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.00) 100%)"
+      }
+    },
+    "96": {
+      "$type": "gradient",
+      "$value": {
+        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.00) 100%)"
+      }
+    }
+  }
+}
