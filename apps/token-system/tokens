@@ -1,113 +1,231 @@
 {
-  "fancy": {
-    "neutral": {
-      "default": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(23, 23, 23)"
-        }
-      },
-      "hover": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(23, 23, 23)"
-        }
-      },
-      "focus": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(23, 23, 23)"
-        }
+  "title": {
+    "h1 title": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 56,
+        "fontFamily": "Inter Display",
+        "fontWeight": "Medium",
+        "lineHeight": 64,
+        "letterSpacing": "-1%"
       }
     },
-    "primary": {
-      "default": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(51, 92, 255)"
-        }
-      },
-      "hover": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(51, 92, 255)"
-        }
-      },
-      "focus": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(51, 92, 255)"
-        }
+    "h2 title": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 48,
+        "fontFamily": "Inter Display",
+        "fontWeight": "Medium",
+        "lineHeight": 56,
+        "letterSpacing": "-1%"
       }
     },
-    "error": {
-      "default": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(251, 55, 72)"
-        }
-      },
-      "hover": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(251, 55, 72)"
-        }
-      },
-      "focus": {
-        "$type": "gradient",
-        "$value": {
-          "_": "rgb(251, 55, 72)"
-        }
+    "h3 title": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 40,
+        "fontFamily": "Inter Display",
+        "fontWeight": "Medium",
+        "lineHeight": 48,
+        "letterSpacing": "-1%"
+      }
+    },
+    "h4 title": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 32,
+        "fontFamily": "Inter Display",
+        "fontWeight": "Medium",
+        "lineHeight": 40,
+        "letterSpacing": "-0.5%"
+      }
+    },
+    "h5 title": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 24,
+        "fontFamily": "Inter Display",
+        "fontWeight": "Medium",
+        "lineHeight": 32,
+        "letterSpacing": "0%"
+      }
+    },
+    "h6 title": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 20,
+        "fontFamily": "Inter Display",
+        "fontWeight": "Medium",
+        "lineHeight": 28,
+        "letterSpacing": "0%"
       }
     }
   },
-  "linear": {
-    "12": {
-      "$type": "gradient",
+  "label": {
+    "x large": {
+      "$type": "text",
       "$value": {
-        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.00) 100%)"
+        "fontSize": 24,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 32,
+        "letterSpacing": "-1.5%"
       }
     },
-    "24": {
-      "$type": "gradient",
+    "large": {
+      "$type": "text",
       "$value": {
-        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.00) 100%)"
+        "fontSize": 18,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 24,
+        "letterSpacing": "-1.5%"
       }
     },
-    "36": {
-      "$type": "gradient",
+    "medium": {
+      "$type": "text",
       "$value": {
-        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.00) 100%)"
+        "fontSize": 16,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 24,
+        "letterSpacing": "-1.100000023841858%"
       }
     },
-    "48": {
-      "$type": "gradient",
+    "small": {
+      "$type": "text",
       "$value": {
-        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.00) 100%)"
+        "fontSize": 14,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 20,
+        "letterSpacing": "-0.6000000238418579%"
       }
     },
-    "60": {
-      "$type": "gradient",
+    "x small": {
+      "$type": "text",
       "$value": {
-        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.60) 0%, rgba(255, 255, 255, 0.00) 100%)"
+        "fontSize": 12,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 16,
+        "letterSpacing": "0%"
+      }
+    }
+  },
+  "paragraph": {
+    "x large": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 24,
+        "fontFamily": "Inter",
+        "fontWeight": "Regular",
+        "lineHeight": 32,
+        "letterSpacing": "-1.5%"
       }
     },
-    "72": {
-      "$type": "gradient",
+    "large": {
+      "$type": "text",
       "$value": {
-        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.00) 100%)"
+        "fontSize": 18,
+        "fontFamily": "Inter",
+        "fontWeight": "Regular",
+        "lineHeight": 24,
+        "letterSpacing": "-1.5%"
       }
     },
-    "84": {
-      "$type": "gradient",
+    "medium": {
+      "$type": "text",
       "$value": {
-        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.00) 100%)"
+        "fontSize": 16,
+        "fontFamily": "Inter",
+        "fontWeight": "Regular",
+        "lineHeight": 24,
+        "letterSpacing": "-1.100000023841858%"
       }
     },
-    "96": {
-      "$type": "gradient",
+    "small": {
+      "$type": "text",
       "$value": {
-        "_": "linear-gradient(-90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.00) 100%)"
+        "fontSize": 14,
+        "fontFamily": "Inter",
+        "fontWeight": "Regular",
+        "lineHeight": 20,
+        "letterSpacing": "-0.6000000238418579%"
+      }
+    },
+    "x small": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 12,
+        "fontFamily": "Inter",
+        "fontWeight": "Regular",
+        "lineHeight": 16,
+        "letterSpacing": "0%"
+      }
+    }
+  },
+  "subheading": {
+    "medium": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 16,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 24,
+        "letterSpacing": "6%"
+      }
+    },
+    "small": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 14,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 20,
+        "letterSpacing": "6%"
+      }
+    },
+    "x small": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 12,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 16,
+        "letterSpacing": "4%"
+      }
+    },
+    "2x small": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 11,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 12,
+        "letterSpacing": "2%"
+      }
+    }
+  },
+  "docs": {
+    "label": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 18,
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "lineHeight": 32,
+        "letterSpacing": "-1.5%"
+      }
+    },
+    "paragraph": {
+      "$type": "text",
+      "$value": {
+        "fontSize": 18,
+        "fontFamily": "Inter",
+        "fontWeight": "Regular",
+        "lineHeight": 32,
+        "letterSpacing": "-1.5%"
       }
     }
   }
