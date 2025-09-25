@@ -1,59 +1,75 @@
 {
-  "primary": {
-    "base": {
-      "$type": "color",
+  "radius": {
+    "0": {
+      "$type": "dimension",
       "$value": {
-        "blue": "{blue-500}",
-        "purple": "{purple-500}",
-        "orange": "{orange-500}",
-        "sky": "{sky-600}"
+        "_": 0
       }
     },
-    "darker": {
-      "$type": "color",
+    "2": {
+      "$type": "dimension",
       "$value": {
-        "blue": "{blue-700}",
-        "purple": "{purple-700}",
-        "orange": "{orange-700}",
-        "sky": "{sky-700}"
+        "_": 2
       }
     },
-    "alpha": {
-      "10": {
-        "$type": "color",
-        "$value": {
-          "blue": "{alpha-blue-alpha-10}",
-          "purple": "{alpha-purple-alpha-10}",
-          "orange": "{alpha-orange-alpha-10}",
-          "sky": "{alpha-sky-alpha-10}"
-        }
-      },
-      "16": {
-        "$type": "color",
-        "$value": {
-          "blue": "{alpha-blue-alpha-16}",
-          "purple": "{alpha-purple-alpha-16}",
-          "orange": "{alpha-orange-alpha-16}",
-          "sky": "{alpha-sky-alpha-16}"
-        }
-      },
-      "24": {
-        "$type": "color",
-        "$value": {
-          "blue": "{alpha-blue-alpha-24}",
-          "purple": "{alpha-purple-alpha-24}",
-          "orange": "{alpha-orange-alpha-24}",
-          "sky": "{alpha-sky-alpha-24}"
-        }
+    "4": {
+      "$type": "dimension",
+      "$value": {
+        "_": 4
       }
     },
-    "dark": {
-      "$type": "color",
+    "6": {
+      "$type": "dimension",
       "$value": {
-        "blue": "{blue-800}",
-        "purple": "{purple-800}",
-        "orange": "{orange-800}",
-        "sky": "{sky-800}"
+        "_": 6
+      }
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": {
+        "_": 8
+      }
+    },
+    "10": {
+      "$type": "dimension",
+      "$value": {
+        "_": 10
+      }
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": {
+        "_": 12
+      }
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": {
+        "_": 16
+      }
+    },
+    "20": {
+      "$type": "dimension",
+      "$value": {
+        "_": 20
+      }
+    },
+    "24": {
+      "$type": "dimension",
+      "$value": {
+        "_": 24
+      }
+    },
+    "28": {
+      "$type": "dimension",
+      "$value": {
+        "_": 28
+      }
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": {
+        "_": 999
       }
     }
   }
