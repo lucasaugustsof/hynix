@@ -1,5 +1,5 @@
 {
-  "radius": {
+  "spacing": {
     "0": {
       "$type": "dimension",
       "$value": {
@@ -42,16 +42,16 @@
         "_": 12
       }
     },
+    "14": {
+      "$type": "dimension",
+      "$value": {
+        "_": 14
+      }
+    },
     "16": {
       "$type": "dimension",
       "$value": {
         "_": 16
-      }
-    },
-    "20": {
-      "$type": "dimension",
-      "$value": {
-        "_": 20
       }
     },
     "24": {
@@ -60,16 +60,22 @@
         "_": 24
       }
     },
-    "28": {
+    "32": {
       "$type": "dimension",
       "$value": {
-        "_": 28
+        "_": 32
       }
     },
-    "full": {
+    "40": {
       "$type": "dimension",
       "$value": {
-        "_": 999
+        "_": 40
+      }
+    },
+    "48": {
+      "$type": "dimension",
+      "$value": {
+        "_": 48
       }
     }
   }
