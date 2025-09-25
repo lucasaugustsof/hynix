@@ -5,6 +5,18 @@ export async function fetchLocalTextStyles(): Promise<TokenBaseItem[]> {
 
   const textStylesMap = new Map<string, TokenBaseItem>()
 
+  const fontWeightMap: Record<string, string> = {
+    thin: '100',
+    extralight: '200',
+    light: '300',
+    regular: '400',
+    medium: '500',
+    semibold: '600',
+    bold: '700',
+    extrabold: '800',
+    black: '900',
+  }
+
   function formatMeasurementValue(
     measurement: LineHeight | LetterSpacing,
   ): string | number {
@@ -41,7 +53,7 @@ export async function fetchLocalTextStyles(): Promise<TokenBaseItem[]> {
       value: {
         fontSize,
         fontFamily: fontName.family,
-        fontWeight: fontName.style,
+        fontWeight: fontWeightMap[fontName.style.toLowerCase()],
         lineHeight: formatMeasurementValue(lineHeight),
         letterSpacing: formatMeasurementValue(letterSpacing),
       },

@@ -21,11 +21,6 @@ function buildTokenTree(tokens: TokenBaseItem[]): TokenTree {
     current[finalKey] = {
       $type: token.kind,
       $value: token.value,
-      attributes: {
-        ...(token.description && {
-          description: token.description,
-        }),
-      },
     }
   }
 
@@ -44,7 +39,7 @@ export function groupTokensByCollection(tokens: TokenBaseItem[]): TokenGroup[] {
   }
 
   return Array.from(collections.entries()).map(([collection, tokens]) => ({
-    filename: `${collection}.json`,
+    fileName: `${collection}.json`,
     content: buildTokenTree(tokens),
   }))
 }

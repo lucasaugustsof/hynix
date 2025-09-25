@@ -12,7 +12,7 @@ export type TokenBaseItem = {
 }
 
 export type TokenGroup = {
-  filename: string
+  fileName: string
   content: TokenTree
 }
 
@@ -22,9 +22,6 @@ export type TokenTree = {
     | {
         $type: string
         $value: unknown
-        attributes: {
-          description?: string
-        }
       }
 }
 

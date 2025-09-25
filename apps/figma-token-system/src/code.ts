@@ -27,8 +27,6 @@ async function main() {
     items: groupTokensByCollection(aggregatedTokens),
   }
 
-  console.log(exportedData.items)
-
   try {
     const url =
       'http://localhost:5678/webhook-test/8ad2bd98-b6dc-45da-a799-2ac0f16fe7ac'

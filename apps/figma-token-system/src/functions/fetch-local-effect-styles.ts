@@ -25,9 +25,11 @@ export async function fetchLocalEffectStyles(): Promise<TokenBaseItem[]> {
       return `${isInner ? 'inset ' : ''}${x}px ${y}px ${blur}px ${spread}px ${color}`
     })
 
+    const effectName = name.toLowerCase()
+
     effectStylesMap.set(id, {
-      name,
-      path: name.split('/'),
+      name: effectName,
+      path: effectName.split('/'),
       description: description || '',
       kind: 'shadow',
       collection: 'effects',

@@ -41,9 +41,11 @@ export async function fetchLocalPaintStyles(): Promise<TokenBaseItem[]> {
       }
     }
 
+    const paintName = name.toLowerCase()
+
     paintStylesMap.set(id, {
-      name,
-      path: name.split('/'),
+      name: paintName,
+      path: paintName.split('/'),
       description: description || '',
       kind: 'gradient',
       collection: 'paints',
