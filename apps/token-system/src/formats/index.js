@@ -1,4 +1,4 @@
-import { tailwindFormat } from './formats/tailwind-format.js'
+import { tailwindFormat } from './tailwind-format.js'
 
 /**
  * @typedef {import('style-dictionary/types').FormatFn} FormatFn

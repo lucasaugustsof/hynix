@@ -1,4 +1,4 @@
-import { formatEnums } from './formats.js'
+import { formatEnums } from './formats/index.js'
 import { transformGroups } from 'style-dictionary/enums'
 
 /** @type {import('style-dictionary').Config} */

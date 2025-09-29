@@ -1,5 +1,5 @@
 import sdConfig from './config.js'
-import { formats } from './formats.js'
+import { formats } from './formats/index.js'
 import StyleDictionary from 'style-dictionary'
 
 export async function main() {
