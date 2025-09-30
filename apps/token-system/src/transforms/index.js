@@ -2,6 +2,8 @@
  * @fileoverview Design token transforms for Style Dictionary
  * This module provides transformation functions to convert design tokens
  * from one format to another (e.g., color spaces, units, etc.)
+ *
+ * @module transforms/index
  */
 
 import chroma from 'chroma-js'

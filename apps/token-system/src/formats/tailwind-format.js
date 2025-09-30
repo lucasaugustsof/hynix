@@ -1,3 +1,15 @@
+/**
+ * @fileoverview TailwindCSS formatter for Style Dictionary
+ *
+ * This module provides a custom formatter that converts Style Dictionary design tokens
+ * into TailwindCSS-compatible CSS output. It handles theme-based color tokens and generates:
+ * - CSS custom properties grouped by theme selectors
+ * - TailwindCSS theme configuration with color variable references
+ * - Support for multiple themes (light, dark, etc.) using data-theme attributes
+ *
+ * @module formats/tailwind-format
+ */
+
 import { format } from 'prettier'
 
 /**

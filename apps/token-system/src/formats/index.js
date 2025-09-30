@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Format registry for Style Dictionary
+ *
+ * This module exports all available formatters for Style Dictionary and provides
+ * a centralized registry for format names and their implementations.
+ * Formatters define how design tokens are converted into output files.
+ *
+ * @module formats/index
+ */
+
 import { tailwindFormat } from './tailwind-format.js'
 
 /**
