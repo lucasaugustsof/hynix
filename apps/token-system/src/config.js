@@ -1,12 +1,12 @@
 import { formatEnums } from './formats/index.js'
-import { transformGroups } from 'style-dictionary/enums'
+import { transformEnums } from './transforms/index.js'
 
 /** @type {import('style-dictionary').Config} */
 export default {
   source: ['tokens/foundations.json'],
   platforms: {
     css: {
-      transformGroup: transformGroups.css,
+      transforms: [transformEnums.colorOklch],
       buildPath: 'dist/',
       files: [
         {
