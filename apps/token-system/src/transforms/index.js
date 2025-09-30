@@ -7,6 +7,7 @@
  */
 
 import chroma from 'chroma-js'
+import { transformTypes } from 'style-dictionary/enums'
 
 /**
  * @typedef {import('style-dictionary/types').TransformedToken} TransformedToken
@@ -24,7 +25,7 @@ export const transformEnums = {
  */
 export const transforms = {
   [transformEnums.colorOklch]: {
-    type: 'value',
+    type: transformTypes.value,
     filter: token => token.$type === 'color',
     transform: token => {
       const mappedValue = {}

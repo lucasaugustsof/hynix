@@ -67,13 +67,27 @@ class TailwindFormat {
     for (const token of allTokens) {
       if (typeof token.$value === 'object') {
         for (const theme in token.$value) {
+          const tokenName = token.path.join('-')
+
           if (!mapThemes.has(theme)) {
-            mapThemes.set(theme, [token])
+            mapThemes.set(theme, [
+              {
+                ...token,
+                name: tokenName,
+              },
+            ])
             continue
           }
 
           const previousTokens = mapThemes.get(theme) ?? []
-          mapThemes.set(theme, [...previousTokens, token])
+
+          mapThemes.set(theme, [
+            ...previousTokens,
+            {
+              ...token,
+              name: tokenName,
+            },
+          ])
         }
       }
     }
@@ -97,7 +111,7 @@ class TailwindFormat {
       `
     }
 
-    outThemeColors = mapThemes
+    outThemeColors += mapThemes
       .get('_')
       .map(token => {
         return `--color-${token.name}: var(--${token.name});`

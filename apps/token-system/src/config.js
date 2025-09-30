@@ -1,5 +1,6 @@
 import { formatEnums } from './formats/index.js'
 import { transformEnums } from './transforms/index.js'
+// import { logVerbosityLevels } from 'style-dictionary/enums'
 
 /** @type {import('style-dictionary').Config} */
 export default {
@@ -14,6 +15,9 @@ export default {
           format: formatEnums.tailwindV4,
         },
       ],
+      // log: {
+      //   verbosity: logVerbosityLevels.verbose,
+      // },
     },
   },
 }
