@@ -4,10 +4,10 @@ import { transformEnums } from './transforms/index.js'
 
 /** @type {import('style-dictionary').Config} */
 export default {
-  source: ['tokens/foundations.json'],
+  source: ['tokens/foundations.json', 'tokens/shadows.json'],
   platforms: {
     css: {
-      transforms: [transformEnums.colorOklch],
+      transforms: [transformEnums.colorOklch, transformEnums.shadowCSS],
       buildPath: 'dist/',
       files: [
         {

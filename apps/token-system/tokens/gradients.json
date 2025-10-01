@@ -1,0 +1,276 @@
+{
+  "fancy": {
+    "neutral": {
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.09, 0.09, 0.09],
+          "alpha": 1
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.09, 0.09, 0.09],
+          "alpha": 1
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.09, 0.09, 0.09],
+          "alpha": 1
+        }
+      }
+    },
+    "primary": {
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.2, 0.361, 1],
+          "alpha": 1
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.2, 0.361, 1],
+          "alpha": 1
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.2, 0.361, 1],
+          "alpha": 1
+        }
+      }
+    },
+    "error": {
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.984, 0.216, 0.282],
+          "alpha": 1
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.984, 0.216, 0.282],
+          "alpha": 1
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.984, 0.216, 0.282],
+          "alpha": 1
+        }
+      }
+    }
+  },
+  "linear": {
+    "12": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0.12
+          },
+          "position": 0
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0
+          },
+          "position": 1
+        }
+      ],
+      "$extensions": {
+        "angle": "-90deg"
+      }
+    },
+    "24": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0.24
+          },
+          "position": 0
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0
+          },
+          "position": 1
+        }
+      ],
+      "$extensions": {
+        "angle": "-90deg"
+      }
+    },
+    "36": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0.36
+          },
+          "position": 0
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0
+          },
+          "position": 1
+        }
+      ],
+      "$extensions": {
+        "angle": "-90deg"
+      }
+    },
+    "48": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0.48
+          },
+          "position": 0
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0
+          },
+          "position": 1
+        }
+      ],
+      "$extensions": {
+        "angle": "-90deg"
+      }
+    },
+    "60": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0.6
+          },
+          "position": 0
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0
+          },
+          "position": 1
+        }
+      ],
+      "$extensions": {
+        "angle": "-90deg"
+      }
+    },
+    "72": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0.72
+          },
+          "position": 0
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0
+          },
+          "position": 1
+        }
+      ],
+      "$extensions": {
+        "angle": "-90deg"
+      }
+    },
+    "84": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0.84
+          },
+          "position": 0
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0
+          },
+          "position": 1
+        }
+      ],
+      "$extensions": {
+        "angle": "-90deg"
+      }
+    },
+    "96": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0.96
+          },
+          "position": 0
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 0
+          },
+          "position": 1
+        }
+      ],
+      "$extensions": {
+        "angle": "-90deg"
+      }
+    }
+  }
+}

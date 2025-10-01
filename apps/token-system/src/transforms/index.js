@@ -8,6 +8,7 @@
 
 import chroma from 'chroma-js'
 import { transformTypes } from 'style-dictionary/enums'
+import { transformShadow } from './shadow-transform.js'
 
 /**
  * @typedef {import('style-dictionary/types').TransformedToken} TransformedToken
@@ -17,6 +18,8 @@ import { transformTypes } from 'style-dictionary/enums'
 export const transformEnums = {
   /** Transform color values to OKLCH color space */
   colorOklch: 'color/oklch',
+  /** Transform W3C shadow values to CSS box-shadow */
+  shadowCSS: 'shadow/css',
 }
 
 /**
@@ -38,5 +41,10 @@ export const transforms = {
 
       return mappedValue
     },
+  },
+  [transformEnums.shadowCSS]: {
+    type: transformTypes.value,
+    filter: token => token.$type === 'shadow',
+    transform: transformShadow,
   },
 }

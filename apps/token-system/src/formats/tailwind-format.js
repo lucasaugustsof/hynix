@@ -24,6 +24,8 @@ import { format } from 'prettier'
  */
 
 class TailwindFormat {
+  #rootVars = new Map()
+
   /**
    *
    * @param {FormatFnArguments} args - Arguments provided by the `Style Dicionary` formatter function
@@ -32,7 +34,12 @@ class TailwindFormat {
   async run({ dictionary }) {
     const { allTokens } = dictionary
 
-    const { outVarsColors, outThemeColors } = this.#getVariableColors(allTokens)
+    this.#rootVars.clear()
+
+    const { outThemeColors } = this.#getVariableColors(allTokens)
+    const { outThemeShadows } = this.#getVariableShadows(allTokens)
+
+    const rootBlocks = this.#buildRootBlocks()
 
     const outContent = await format(
       `@import "tailwindcss";\n
@@ -42,9 +49,11 @@ class TailwindFormat {
       @theme {
         --color-*: initial;
         ${outThemeColors}
+        --shadow-*: initial;
+        ${outThemeShadows}
       }
 
-      ${outVarsColors}
+      ${rootBlocks}
     `,
       {
         parser: 'css',
@@ -56,10 +65,40 @@ class TailwindFormat {
   }
 
   /**
+   * Adds a CSS variable to the rootVars map
+   *
+   * @param {string} selector - CSS selector (':root', '[data-theme="dark"]', etc.)
+   * @param {string} name - Variable name without '--' prefix
+   * @param {string} value - Variable value
+   */
+  #addRootVar(selector, name, value) {
+    if (!this.#rootVars.has(selector)) {
+      this.#rootVars.set(selector, [])
+    }
+
+    this.#rootVars.get(selector).push(`--${name}: ${value};`)
+  }
+
+  /**
+   * Builds CSS blocks from accumulated root variables
+   *
+   * @returns {string} CSS blocks with all selectors and their variables
+   */
+  #buildRootBlocks() {
+    let output = ''
+
+    for (const [selector, vars] of this.#rootVars.entries()) {
+      output += `${selector} {\n${vars.join('\n')}\n}\n\n`
+    }
+
+    return output
+  }
+
+  /**
    * Processes color tokens and generates formatted CSS output for TailwindCSS
    *
    * @param {TransformedTokenArray} allTokens - Array of transformed design tokens from Style Dictionary
-   * @returns {FormattedColorOutput} Object containing CSS variables and theme configuration
+   * @returns {Object} Object containing theme configuration
    */
   #getVariableColors(allTokens) {
     const mapThemes = new Map()
@@ -92,35 +131,55 @@ class TailwindFormat {
       }
     }
 
-    let outVarsColors = ''
-    let outThemeColors = ''
-
     for (const [theme, tokens] of mapThemes.entries()) {
-      const renamedTheme = theme === '_' ? ':root' : `[data-theme="${theme}"]`
+      const selector = theme === '_' ? ':root' : `[data-theme="${theme}"]`
 
-      const themeTokens = tokens
-        .map(token => {
-          return `--${token.name}: ${token.$value[theme]};`
-        })
-        .join('\n')
-
-      outVarsColors += `
-        ${renamedTheme} {
-          ${themeTokens}
-        }
-      `
+      for (const token of tokens) {
+        this.#addRootVar(selector, token.name, token.$value[theme])
+      }
     }
 
-    outThemeColors += mapThemes
-      .get('_')
-      .map(token => {
-        return `--color-${token.name}: var(--${token.name});`
-      })
-      .join('\n')
+    let outThemeColors = ''
+
+    if (mapThemes.has('_')) {
+      outThemeColors = mapThemes
+        .get('_')
+        .map(token => `--color-${token.name}: var(--${token.name});`)
+        .join('\n')
+    }
 
     return {
-      outVarsColors,
       outThemeColors,
+    }
+  }
+
+  /**
+   * Processes shadow tokens and generates formatted CSS output for TailwindCSS v4
+   *
+   * @param {TransformedTokenArray} allTokens - Array of transformed design tokens from Style Dictionary
+   * @returns {Object} Object containing theme configuration
+   */
+  #getVariableShadows(allTokens) {
+    const shadowTokens = allTokens.filter(token => token.$type === 'shadow')
+
+    if (shadowTokens.length === 0) {
+      return {
+        outThemeShadows: '',
+      }
+    }
+
+    let outThemeShadows = ''
+
+    for (const token of shadowTokens) {
+      const tokenName = token.path.join('-')
+
+      this.#addRootVar(':root', tokenName, token.$value)
+
+      outThemeShadows += `--shadow-${tokenName}: var(--${tokenName});\n`
+    }
+
+    return {
+      outThemeShadows,
     }
   }
 }
