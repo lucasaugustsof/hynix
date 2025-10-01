@@ -26,6 +26,8 @@
     --color-brand: var(--c-brand); /* Primary brand color for CTAs and brand elements */
     --color-danger: var(--c-danger); /* Error states, destructive actions, warnings */
     --color-success: var(--c-success); /* Success states, confirmations, positive feedback */
+
+    --font-sans: 'Inter', sans-serif;
 }
 
 :root {
@@ -71,7 +73,7 @@
     --c-success: oklch(0.8003 0.1821 151.71);
 }
 
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {
     :root {
         --c-surface-1: oklch(0.1913 0 0);
         --c-surface-2: oklch(0.2438 0.0061 17.58);
@@ -92,13 +94,20 @@
         --c-danger: oklch(0.6989 0.1919 23.47);
         --c-success: oklch(0.8003 0.1821 151.71);
     }
+}*/
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply antialiased border-border bg-surface-1;
+        text-rendering: optimizeLegibility;
+    }
 }
 
-html {
-    @apply scroll-smooth;
-}
-
-body {
-    @apply antialiased border-border;
-    text-rendering: optimizeLegibility;
+@utility focus-ring {
+    outline: 2px solid rgb(from var(--focus-color, var(--c-brand)) r g b / 0.1);
+    outline-offset: 2px;
 }
