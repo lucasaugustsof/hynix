@@ -14,7 +14,7 @@ export default {
 
 export const Basic: StoryObj = {
   render: () => (
-    <Button style="ghost" variant="success">
+    <Button size="2xs">
       <RiArrowLeftSLine />
       Button
       <RiArrowRightSLine />
