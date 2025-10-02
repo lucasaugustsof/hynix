@@ -8,8 +8,9 @@
     "lint": "biome lint --write",
     "check": "biome check --write"
   },
-  "license": "MIT",
-  "packageManager": "pnpm@10.15.1",
+  "exports": {
+    "./components/*": "./src/components/*/index.ts"
+  },
   "devDependencies": {
     "@ark-ui/react": "^5.23.0",
     "@remixicon/react": "^4.6.0",

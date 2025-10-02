@@ -2,7 +2,7 @@
 
 ## Components to develop:
 
-- [ ] button
+- [x] button
 - [ ] text-input
 - [ ] checkbox
 - [ ] badge

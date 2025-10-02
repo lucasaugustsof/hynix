@@ -108,6 +108,6 @@
 }
 
 @utility focus-ring {
-    outline: 2px solid rgb(from var(--focus-color, var(--c-brand)) r g b / 0.1);
+    outline: 2px solid --alpha(var(--focus-color, var(--c-brand)) / 0.1);
     outline-offset: 2px;
 }
