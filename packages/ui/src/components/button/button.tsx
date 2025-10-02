@@ -48,9 +48,9 @@ type ButtonProps = Assign<
 
 const buttonVariants = tv({
   base: [
-    'inline-flex cursor-pointer select-none items-center justify-center whitespace-nowrap rounded-lg outline-0 transition-[background-color,box-shadow]',
+    'inline-flex cursor-pointer select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-lg outline-0 transition-[background-color,box-shadow]',
     'disabled:inset-ring-0 disabled:cursor-not-allowed disabled:bg-fill-1 disabled:text-disabled',
-    'font-medium font-sans text-sm/5 [&>svg]:size-5',
+    'font-medium font-sans text-sm/5 [&>svg]:size-5 [&>svg]:shrink-0',
     'focus-visible:focus-ring',
   ],
   variants: {
