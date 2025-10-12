@@ -1,123 +1,124 @@
 {
-	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-	"assist": {
-		"actions": {
-			"source": {
-				"organizeImports": {
-					"level": "on",
-					"options": {
-						"groups": [
-							[":BUN:", ":NODE:"],
-							":BLANK_LINE:",
-							[":PACKAGE:"],
-							":BLANK_LINE:",
-							[":ALIAS:", ":PATH:"],
-							":BLANK_LINE:",
-							["@hynix/react/**"]
-						]
-					}
-				}
-			}
-		}
-	},
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"useIgnoreFile": true,
-		"defaultBranch": "main"
-	},
-	"files": {
-		"ignoreUnknown": false,
-		"maxSize": 1048576
-	},
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "root": true,
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              [":BUN:", ":NODE:"],
+              ":BLANK_LINE:",
+              [":PACKAGE:"],
+              ":BLANK_LINE:",
+              [":ALIAS:", ":PATH:"],
+              ":BLANK_LINE:",
+              ["@hynix/react/**"]
+            ]
+          }
+        }
+      }
+    }
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "maxSize": 1048576
+  },
 
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "space",
-		"indentWidth": 2,
-		"lineWidth": 100,
-		"lineEnding": "lf"
-	},
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
 
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true,
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
 
-			"a11y": {
-				"noSvgWithoutTitle": "off"
-			},
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      },
 
-			"complexity": {
-				"noExcessiveCognitiveComplexity": "warn"
-			},
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "warn"
+      },
 
-			"correctness": {
-				"noUnusedVariables": "error",
-				"noUnusedImports": "error"
-			},
+      "correctness": {
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error"
+      },
 
-			"style": {
-				"useImportType": "error",
-				"useExportType": "error",
-				"noNonNullAssertion": "warn"
-			},
+      "style": {
+        "useImportType": "error",
+        "useExportType": "error",
+        "noNonNullAssertion": "warn"
+      },
 
-			"suspicious": {
-				"noExplicitAny": "warn",
-				"noConsole": "warn"
-			}
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "single",
-			"jsxQuoteStyle": "double",
-			"quoteProperties": "asNeeded",
-			"trailingCommas": "es5",
-			"semicolons": "asNeeded",
-			"arrowParentheses": "asNeeded",
-			"bracketSpacing": true,
-			"bracketSameLine": false,
-			"attributePosition": "auto"
-		},
-		"linter": {
-			"enabled": true
-		}
-	},
-	"json": {
-		"parser": {
-			"allowComments": true,
-			"allowTrailingCommas": false
-		},
-		"formatter": {
-			"enabled": true,
-			"indentWidth": 2,
-			"trailingCommas": "none"
-		},
-		"linter": {
-			"enabled": true
-		}
-	},
-	"overrides": [
-		{
-			"includes": ["**/*.test.{ts,tsx,js,jsx}"],
-			"linter": {
-				"rules": {
-					"suspicious": {
-						"noExplicitAny": "off"
-					}
-				}
-			}
-		},
-		{
-			"includes": ["**/*.d.ts"],
-			"linter": {
-				"enabled": false
-			},
-			"formatter": {
-				"enabled": false
-			}
-		}
-	]
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noConsole": "warn"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "es5",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "asNeeded",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "attributePosition": "auto"
+    },
+    "linter": {
+      "enabled": true
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true,
+      "allowTrailingCommas": false
+    },
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2,
+      "trailingCommas": "none"
+    },
+    "linter": {
+      "enabled": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.test.{ts,tsx,js,jsx}"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.d.ts"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    }
+  ]
 }

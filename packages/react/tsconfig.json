@@ -1,12 +1,12 @@
 {
-	"extends": "../../tsconfig.base.json",
-	"compilerOptions": {
-		"jsxImportSource": "react",
-		"outDir": "./dist",
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["src/*"]
-		}
-	},
-	"include": ["src"]
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsxImportSource": "react",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src"]
 }
