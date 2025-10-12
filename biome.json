@@ -13,8 +13,7 @@
               [":PACKAGE:"],
               ":BLANK_LINE:",
               [":ALIAS:", ":PATH:"],
-              ":BLANK_LINE:",
-              ["@hynix/react/**"]
+              ":BLANK_LINE:"
             ]
           }
         }

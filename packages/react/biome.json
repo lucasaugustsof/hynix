@@ -2,6 +2,26 @@
   "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
   "extends": "//",
   "root": false,
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ["react"],
+              ["@ark-ui/react", "@ark-ui/react/*"],
+              ":BLANK_LINE:",
+              ["@storybook/*", "storybook/*"],
+              ":BLANK_LINE:",
+              ":PACKAGE:",
+              [":ALIAS:", ":PATH:"]
+            ]
+          }
+        }
+      }
+    }
+  },
   "linter": {
     "rules": {
       "suspicious": {
