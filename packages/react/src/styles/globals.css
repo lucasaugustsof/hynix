@@ -1,1 +1,154 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme inline {
+    --color-primary-dark: var(--primary-dark);
+    --color-primary-darker: var(--primary-darker);
+    --color-primary-base: var(--primary-base);
+    --color-primary-alpha-24: --alpha(var(--primary-base) / 0.24);
+    --color-primary-alpha-16: --alpha(var(--primary-base) /  0.16);
+    --color-primary-alpha-10: --alpha(var(--primary-base) / 0.1);
+
+    --color-static-black: var(--static-black);
+    --color-static-white: var(--static-white);
+
+    --color-strong-950: var(--strong-950);
+
+    --color-surface-800: var(--surface-800);
+
+    --color-sub-300: var(--sub-300);
+    --color-sub-600: var(--sub-600);
+
+    --color-soft-200: var(--soft-200);
+    --color-soft-400: var(--soft-400);
+
+    --color-weak-50: var(--weak-50);
+
+    --color-disabled-300: var(--disabled-300);
+
+    --color-faded-dark: var(--faded-dark);
+    --color-faded-base: var(--faded-base);
+    --color-faded-light: var(--faded-light);
+    --color-faded-lighter: var(--faded-lighter);
+
+    --color-info-dark: var(--info-dark);
+    --color-info-base: var(--info-base);
+    --color-info-light: var(--info-light);
+    --color-info-lighter: var(--info-lighter);
+
+    --color-warning-dark: var(--warning-dark);
+    --color-warning-base: var(--warning-base);
+    --color-warning-light: var(--warning-light);
+    --color-warning-lighter: var(--warning-lighter);
+
+    --color-error-dark: var(--error-dark);
+    --color-error-base: var(--error-base);
+    --color-error-light: var(--error-light);
+    --color-error-lighter: var(--error-lighter);
+
+    --color-success-dark: var(--success-dark);
+    --color-success-base: var(--success-base);
+    --color-success-light: var(--success-light);
+    --color-success-lighter: var(--success-lighter);
+
+    --color-away-dark: var(--away-dark);
+    --color-away-base: var(--away-base);
+    --color-away-light: var(--away-light);
+    --color-away-lighter: var(--away-lighter);
+
+    --color-feature-dark: var(--feature-dark);
+    --color-feature-base: var(--feature-base);
+    --color-feature-light: var(--feature-light);
+    --color-feature-lighter: var(--feature-lighter);
+
+    --color-verified-dark: var(--verified-dark);
+    --color-verified-base: var(--verified-base);
+    --color-verified-light: var(--verified-light);
+    --color-verified-lighter: var(--verified-lighter);
+
+    --color-highlighted-dark: var(--highlighted-dark);
+    --color-highlighted-base: var(--highlighted-base);
+    --color-highlighted-light: var(--highlighted-light);
+    --color-highlighted-lighter: var(--highlighted-lighter);
+
+    --color-overlay-gray: var(--overlay-gray);
+}
+
+:root {
+    --primary-dark: var(--color-blue-800);
+    --primary-darker: var(--color-blue-700);
+    --primary-base: var(--color-blue-500);
+
+    --static-black: var(--color-black);
+    --static-white: var(--color-white);
+
+    --strong-950: var(--color-neutral-950);
+
+    --surface-800: var(--color-neutral-800);
+
+    --sub-300: var(--color-neutral-300);
+    --sub-600: var(--color-neutral-600);
+
+    --soft-200: var(--color-neutral-200);
+    --soft-400: var(--color-neutral-400);
+
+    --weak-50: var(--color-neutral-50);
+
+    --disabled-300: var(--color-neutral-300);
+
+    --faded-dark: var(--color-neutral-800);
+    --faded-base: var(--color-neutral-500);
+    --faded-light: var(--color-neutral-200);
+    --faded-lighter: var(--color-neutral-100);
+
+    --info-dark: var(--color-blue-950);
+    --info-base: var(--color-blue-500);
+    --info-light: var(--color-blue-200);
+    --info-lighter: var(--color-blue-50);
+
+    --warning-dark: var(--color-orange-950);
+    --warning-base: var(--color-orange-500);
+    --warning-light: var(--color-orange-200);
+    --warning-lighter: var(--color-orange-50);
+
+    --error-dark: var(--color-red-950);
+    --error-base: var(--color-red-500);
+    --error-light: var(--color-red-200);
+    --error-lighter: var(--color-red-50);
+
+    --success-dark: var(--color-green-950);
+    --success-base: var(--color-green-500);
+    --success-light: var(--color-green-200);
+    --success-lighter: var(--color-green-50);
+
+    --away-dark: var(--color-yellow-950);
+    --away-base: var(--color-yellow-500);
+    --away-light: var(--color-yellow-200);
+    --away-lighter: var(--color-yellow-50);
+
+    --feature-dark: var(--color-purple-950);
+    --feature-base: var(--color-purple-500);
+    --feature-light: var(--color-purple-200);
+    --feature-lighter: var(--color-purple-50);
+
+    --verified-dark: var(--color-sky-950);
+    --verified-base: var(--color-sky-500);
+    --verified-light: var(--color-sky-200);
+    --verified-lighter: var(--color-sky-50);
+
+    --highlighted-dark: var(--color-pink-950);
+    --highlighted-base: var(--color-pink-500);
+    --highlighted-light: var(--color-pink-200);
+    --highlighted-lighter: var(--color-pink-50);
+
+    --stable-dark: var(--color-teal-950);
+    --stable-base: var(--color-teal-500);
+    --stable-light: var(--color-teal-200);
+    --stable-lighter: var(--color-teal-50);
+
+    --overlay-gray: --alpha(var(--color-gray-500) / 0.24);
+}
+
+
+[data-theme="dark"] {}
