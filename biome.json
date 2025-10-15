@@ -12,7 +12,9 @@
               ":BLANK_LINE:",
               [":PACKAGE:"],
               ":BLANK_LINE:",
-              [":ALIAS:", ":PATH:"],
+              [":ALIAS:"],
+              ":BLANK_LINE:",
+              [":PATH:"],
               ":BLANK_LINE:"
             ]
           }
@@ -49,7 +51,8 @@
       },
 
       "complexity": {
-        "noExcessiveCognitiveComplexity": "warn"
+        "noExcessiveCognitiveComplexity": "warn",
+        "noBannedTypes": "off"
       },
 
       "correctness": {
