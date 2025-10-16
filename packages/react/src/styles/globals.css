@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./shadows.css";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -20,8 +19,11 @@
   --color-disabled: var(--disabled);
 
   --color-brand: var(--brand);
+
   --color-danger: var(--danger);
   --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-information: var(--information);
 
   --font-sans: "Inter", sans-serif;
 }
@@ -43,8 +45,11 @@
   --disabled: oklch(0.2178 0 0 / 18%);
 
   --brand: oklch(0.2178 0 0);
+
   --danger: oklch(0.5785 0.2138 27.17);
   --success: oklch(0.5729 0.1544 149.22);
+  --warning: oklch(0.702 0.1832 48.56);
+  --information: oklch(0.523 0.2282 262.64);
 }
 
 [data-theme="dark"] {
@@ -64,8 +69,11 @@
   --disabled: oklch(1 0 0 / 18%);
 
   --brand: oklch(1 0 0);
+
   --danger: oklch(0.6989 0.1919 23.47);
   --success: oklch(0.8003 0.1821 151.71);
+  --warning: oklch(0.7576 0.159 55.93);
+  --information: oklch(0.7015 0.1596 253.87);
 }
 
 @layer base {
