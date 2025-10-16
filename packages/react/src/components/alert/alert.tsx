@@ -17,16 +17,19 @@ import type { PolymorphicProps } from '@/types/polymorphic'
 const ALERT_ROOT_NAME = 'Alert.Root'
 const ALERT_ICON_NAME = 'Alert.Icon'
 const ALERT_TITLE_NAME = 'Alert.Title'
+const ALERT_DESCRIPTION_NAME = 'Alert.Description'
 const ALERT_LINK_BUTTON_NAME = 'Alert.LinkButton'
 const ALERT_CLOSE_NAME = 'Alert.Close'
 
 const createAlertRecipe = tv({
   slots: {
-    root: 'inline-flex items-center gap-x-2 rounded-lg font-sans',
-    icon: '',
+    root: 'inline-flex w-full items-center gap-x-2 rounded-lg font-sans',
+    icon: 'shrink-0',
     title: 'line-clamp-2 flex-1 overflow-ellipsis',
-    linkButton: 'font-medium underline underline-offset-2',
-    close: 'cursor-pointer opacity-72',
+    description: 'mt-1',
+    linkButton:
+      'focus-visible:focus-outline cursor-pointer font-medium underline underline-offset-2',
+    close: 'focus-visible:focus-outline cursor-pointer opacity-72 [&_svg]:shrink-0',
   },
   variants: {
     variant: {
@@ -48,6 +51,9 @@ const createAlertRecipe = tv({
       },
       sm: {
         root: 'px-2.5 py-2 [&_svg]:size-5',
+      },
+      lg: {
+        root: 'items-start p-3.5 pb-4 [&_svg]:size-5',
       },
     },
   },
@@ -244,30 +250,27 @@ const createAlertRecipe = tv({
       class: 'text-xs/4',
     },
     {
-      slots: ['title', 'linkButton'],
-      size: 'sm',
+      slots: ['title', 'description', 'linkButton'],
+      size: ['sm', 'lg'],
       class: 'text-sm/5 tracking-[-0.00525rem]',
     },
   ],
-  defaultVariants: {
-    variant: 'filled',
-    status: 'information',
-    size: 'xs',
-  },
 })
 
 const alertRecipe = createAlertRecipe()
 
 type AlertSharedProps = VariantProps<typeof createAlertRecipe>
 
-interface AlertRootProps extends Assign<React.ComponentProps<'div'>, AlertSharedProps> {}
+export interface AlertRootProps extends Assign<React.ComponentProps<'div'>, AlertSharedProps> {}
 
 export function AlertRoot({
   children,
   className,
-  status,
-  variant,
-  size,
+  status = 'information',
+  variant = 'filled',
+  size = 'sm',
+  'aria-live': ariaLive = 'polite',
+  'aria-atomic': ariaAtomic = true,
   ...props
 }: AlertRootProps) {
   const { id, cloneChildren } = useCloneChildren({
@@ -292,6 +295,8 @@ export function AlertRoot({
         size,
       })}
       id={id}
+      aria-live={ariaLive}
+      aria-atomic={ariaAtomic}
     >
       {cloneChildren(children)}
     </div>
@@ -329,6 +334,7 @@ export function AlertIcon<T extends React.ElementType = RemixiconComponentType>(
         variant,
         size,
       })}
+      aria-hidden
     />
   )
 }
@@ -337,7 +343,8 @@ AlertIcon.displayName = ALERT_ICON_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface AlertTitleProps extends Assign<React.ComponentProps<typeof ark.h2>, AlertSharedProps> {}
+export interface AlertTitleProps
+  extends Assign<React.ComponentProps<typeof ark.h2>, AlertSharedProps> {}
 
 export function AlertTitle({ className, variant, status, size, ...props }: AlertTitleProps) {
   return (
@@ -357,9 +364,34 @@ AlertTitle.displayName = ALERT_TITLE_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface AlertCloseProps extends React.ComponentProps<'button'>, AlertSharedProps {}
+export interface AlertDescriptionProps extends React.ComponentProps<'p'> {}
 
-export function AlertClose({ className, status, variant, size }: AlertCloseProps) {
+export function AlertDescription({ className, ...props }: AlertDescriptionProps) {
+  return (
+    <p
+      {...props}
+      className={alertRecipe.description({
+        className,
+      })}
+    />
+  )
+}
+
+AlertDescription.displayName = ALERT_DESCRIPTION_NAME
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface AlertCloseProps extends React.ComponentProps<'button'>, AlertSharedProps {}
+
+export function AlertClose<T extends React.ElementType = RemixiconComponentType>({
+  className,
+  status,
+  variant,
+  size,
+  as,
+}: PolymorphicProps<T> & AlertCloseProps) {
+  const Component = as || RiCloseLine
+
   return (
     <button
       type="button"
@@ -370,7 +402,7 @@ export function AlertClose({ className, status, variant, size }: AlertCloseProps
         size,
       })}
     >
-      <RiCloseLine />
+      <Component aria-hidden />
     </button>
   )
 }
@@ -379,7 +411,9 @@ AlertClose.displayName = ALERT_CLOSE_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface AlertLinkButtonProps extends React.ComponentProps<typeof ark.a>, AlertSharedProps {}
+export interface AlertLinkButtonProps
+  extends React.ComponentProps<typeof ark.a>,
+    AlertSharedProps {}
 
 export function AlertLinkButton({
   className,
