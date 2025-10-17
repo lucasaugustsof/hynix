@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@remixicon/react':
+        specifier: ^4.7.0
+        version: 4.7.0(react@19.2.0)
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -536,6 +539,11 @@ packages:
     resolution: {integrity: sha512-naxcJgUJ6BTOROJ7C3QML7KvwKwCXQJYTc5L/b0eEsdYgPB6SxwoQ1vDGcS0Q7GVjAenVq/tXrybVdFShHYZWg==}
     peerDependencies:
       preact: 10.x
+
+  '@remixicon/react@4.7.0':
+    resolution: {integrity: sha512-ODBQjdbOjnFguCqctYkpDjERXOInNaBnRPDKfZOBvbzExBAwr2BaH/6AHFTg/UAFzBDkwtylfMT8iKPAkLwPLQ==}
+    peerDependencies:
+      react: '>=18.2.0'
 
   '@rolldown/pluginutils@1.0.0-beta.38':
     resolution: {integrity: sha512-N/ICGKleNhA5nc9XXQG/kkKHJ7S55u0x0XUJbbkmdCnFuoRkM1Il12q9q0eX19+M7KKUEPw/daUPIRnxhcxAIw==}
@@ -2644,6 +2652,10 @@ snapshots:
     dependencies:
       '@preact/signals-core': 1.12.1
       preact: 10.27.2
+
+  '@remixicon/react@4.7.0(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
 
   '@rolldown/pluginutils@1.0.0-beta.38': {}
 
