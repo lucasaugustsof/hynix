@@ -10,6 +10,7 @@
     "check": "biome check --write ."
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.14",
     "tailwindcss": "^4.1.14"
   },
   "dependencies": {
