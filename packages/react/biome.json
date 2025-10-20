@@ -44,6 +44,9 @@
             "maxAllowedComplexity": 20
           }
         }
+      },
+      "a11y": {
+        "useSemanticElements": "off"
       }
     }
   }

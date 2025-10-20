@@ -5,14 +5,11 @@ import type { PolymorphicProps } from '@/types/polymorphic'
 
 const BADGE_ROOT_NAME = 'Badge.Root'
 const BADGE_ICON_NAME = 'Badge.Icon'
-const BADGE_DOT_NAME = 'Bagde.Dot'
+const BADGE_DOT_NAME = 'Badge.Dot'
 
 const createBadgeRecipe = tv({
   slots: {
-    root: [
-      'isolate inline-flex w-fit items-center rounded-full px-2',
-      'font-medium font-sans text-xs/4',
-    ],
+    root: ['isolate inline-flex w-fit items-center rounded-full px-2', 'font-medium font-sans'],
     icon: 'shrink-0',
     dot: [
       'relative block',
@@ -36,20 +33,34 @@ const createBadgeRecipe = tv({
     },
     size: {
       sm: {
-        root: 'h-4 gap-x-1.5 uppercase',
+        root: ['h-4 gap-x-1.5 uppercase', 'text-[length:0.6875rem]/3'],
         icon: '-mx-1 size-3',
         dot: '-mx-2 size-4',
       },
       md: {
-        root: 'h-5',
+        root: ['h-5', 'text-xs/4'],
         icon: '-mx-1 size-4',
         dot: '-mx-1.5 size-4',
       },
     },
+    disabled: {
+      true: {
+        root: [
+          'inset-ring-1 inset-ring-border cursor-not-allowed select-none bg-fill-1',
+          'text-disabled',
+        ],
+      },
+    },
+    numberOnly: {
+      true: {
+        root: ['aspect-square justify-center p-0.5', 'tabular-nums leading-0'],
+      },
+    },
   },
   defaultVariants: {
-    variant: 'light',
+    variant: 'filled',
     size: 'sm',
+    disabled: false,
   },
 })
 
@@ -79,9 +90,11 @@ export function BadgeRoot({
   color = 'gray',
   variant,
   size,
+  disabled,
+  numberOnly,
   ...props
 }: BadgeRootProps) {
-  const badgeColorMap: Record<BadgeColor, string> = {
+  const BADGE_COLOR_MAP = {
     gray: '[--badge-bg:var(--color-gray-500)]',
     blue: '[--badge-bg:var(--information)]',
     orange: '[--badge-bg:var(--warning)]',
@@ -92,7 +105,9 @@ export function BadgeRoot({
     sky: '[--badge-bg:var(--color-sky-500)]',
     pink: '[--badge-bg:var(--color-pink-500)]',
     teal: '[--badge-bg:var(--color-teal-500)]',
-  }
+  } as const
+
+  const isNumberOnly = typeof children === 'number'
 
   const { id, cloneChildren } = useCloneChildren({
     targets: [BADGE_ICON_NAME, BADGE_DOT_NAME],
@@ -106,17 +121,21 @@ export function BadgeRoot({
   return (
     <div
       {...props}
+      role="status"
       className={cn(
-        badgeColorMap[color],
+        BADGE_COLOR_MAP[color],
         badgeRecipe.root({
           variant,
           size,
+          disabled,
+          numberOnly: numberOnly ?? isNumberOnly,
           className,
         })
       )}
       id={id}
       data-scope="badge"
       data-part="root"
+      aria-disabled={disabled}
     >
       {cloneChildren()}
     </div>
@@ -167,6 +186,7 @@ export function BadgeDot({
       })}
       data-scope="badge"
       data-part="dot"
+      aria-hidden
     />
   )
 }

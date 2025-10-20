@@ -70,12 +70,26 @@ export default {
         },
       },
     },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables the badge, reducing opacity',
+      table: {
+        category: 'State',
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: {
+          summary: 'false',
+        },
+      },
+    },
   },
   args: {
     children: 'Badge',
     variant: 'filled',
     color: 'blue',
     size: 'sm',
+    disabled: false,
   },
 } satisfies Meta<BadgeRootProps>
 
@@ -223,6 +237,50 @@ export const WithDot: BadgeStory = {
       </Badge.Root>
     </div>
   ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+}
+
+export const NumberOnly: BadgeStory = {
+  render: () => {
+    const colors = [
+      'gray',
+      'blue',
+      'orange',
+      'red',
+      'green',
+      'yellow',
+      'purple',
+      'sky',
+      'pink',
+      'teal',
+    ] as const
+
+    return (
+      <div className="flex flex-col gap-y-4">
+        {colors.map(color => (
+          <div key={color} className="flex items-center gap-x-3">
+            <span className="w-16 text-fg-1 text-xs capitalize">{color}</span>
+            <Badge.Root color={color} variant="filled">
+              {1}
+            </Badge.Root>
+            <Badge.Root color={color} variant="light">
+              {5}
+            </Badge.Root>
+            <Badge.Root color={color} variant="lighter">
+              {12}
+            </Badge.Root>
+            <Badge.Root color={color} variant="stroke">
+              {99}
+            </Badge.Root>
+          </div>
+        ))}
+      </div>
+    )
+  },
   parameters: {
     controls: {
       disable: true,
