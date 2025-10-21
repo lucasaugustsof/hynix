@@ -46,7 +46,8 @@
         }
       },
       "a11y": {
-        "useSemanticElements": "off"
+        "useSemanticElements": "off",
+        "noLabelWithoutControl": "off"
       }
     }
   }
