@@ -89,5 +89,5 @@
 
 @utility focus-outline {
   outline-offset: 2px;
-  outline: 2px solid --alpha(var(--focus-outline-color, var(--brand)) / 0.15);
+  outline: 2px solid --alpha(var(--focus-outline-color, var(--color-brand)) / 0.15);
 }
