@@ -59,7 +59,7 @@ export interface LabelSubTextProps {
 }
 
 export function LabelSubText({ children }: LabelSubTextProps) {
-  return <span className={cn('font-normal text-fg-1/40')}>{children}</span>
+  return <span className={cn('font-normal text-fg-1/40 text-xs/4')}>{children}</span>
 }
 
 LabelSubText.displayName = LABEL_SUB_TEXT_NAME
