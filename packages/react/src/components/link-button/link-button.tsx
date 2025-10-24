@@ -37,10 +37,19 @@ const createLinkButtonRecipe = tv({
         ],
       },
     },
+    underline: {
+      true: {
+        root: 'underline',
+      },
+      false: {
+        root: 'no-underline',
+      },
+    },
   },
   defaultVariants: {
     size: 'sm',
     disabled: false,
+    underline: false,
   },
 })
 
@@ -50,7 +59,9 @@ type LinkButtonSharedProps = VariantProps<typeof createLinkButtonRecipe>
 
 export interface LinkButtonRootProps
   extends React.ComponentProps<typeof ark.a>,
-    LinkButtonSharedProps {}
+    LinkButtonSharedProps {
+  underline?: boolean
+}
 
 export function LinkButtonRoot({
   children,
@@ -58,6 +69,7 @@ export function LinkButtonRoot({
   size,
   disabled,
   href,
+  underline,
   ...props
 }: LinkButtonRootProps) {
   const { cloneChildren } = useCloneChildren({
@@ -76,10 +88,13 @@ export function LinkButtonRoot({
         className,
         size,
         disabled,
+        underline,
       })}
       href={disabled ? undefined : href}
       tabIndex={disabled ? -1 : undefined}
       aria-disabled={disabled}
+      data-scope="link-button"
+      data-part="root"
     >
       {cloneChildren()}
     </ark.a>
@@ -102,6 +117,8 @@ export function LinkButtonIcon<T extends React.ElementType>({
       className={linkButtonRecipe.icon({
         size,
       })}
+      data-scope="link-button"
+      data-part="icon"
       aria-hidden
     />
   )

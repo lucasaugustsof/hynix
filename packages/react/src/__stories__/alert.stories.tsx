@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Alert, type AlertRootProps } from '@/components/alert'
+import { LinkButton } from '@/components/link-button'
 import { cn } from '@/lib/cn'
 
 export default {
@@ -84,7 +85,9 @@ export const Default: AlertStory = {
       <Alert.Root {...args}>
         <Alert.Icon />
         <Alert.Title>Insert your alert title here!</Alert.Title>
-        <Alert.LinkButton href="/">Upgrade</Alert.LinkButton>
+        <LinkButton.Root href="/" size="md" underline>
+          Upgrade
+        </LinkButton.Root>
         <Alert.Close />
       </Alert.Root>
     )
@@ -113,14 +116,18 @@ export const Large: AlertStory = {
           </hgroup>
 
           <div className="flex items-center gap-x-2">
-            <Alert.LinkButton>Upgrade</Alert.LinkButton>
+            <LinkButton.Root size="md" underline>
+              Upgrade
+            </LinkButton.Root>
             <span
               className={cn(
                 'inline size-0.5 rounded-full bg-fg-2/40',
                 args.variant === 'stroke' && 'bg-fg-1/40'
               )}
             />
-            <Alert.LinkButton className="no-underline">Learn More</Alert.LinkButton>
+            <LinkButton.Root className="no-underline" size="md">
+              Learn More
+            </LinkButton.Root>
           </div>
         </div>
 

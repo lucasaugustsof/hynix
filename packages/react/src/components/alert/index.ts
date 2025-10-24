@@ -1,7 +1,6 @@
 export type {
   AlertCloseProps,
   AlertDescriptionProps,
-  AlertLinkButtonProps,
   AlertRootProps,
   AlertTitleProps,
 } from './alert'
