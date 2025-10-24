@@ -3,6 +3,7 @@ import { ark } from '@ark-ui/react/factory'
 import type * as ArkFieldTypes from '@ark-ui/react/field'
 import { Field as ArkField } from '@ark-ui/react/field'
 
+import { useCloneChildren } from '@/hooks/use-clone-children'
 import { tv, type VariantProps } from '@/lib/tv'
 import type { PolymorphicProps } from '@/types/polymorphic'
 
@@ -13,9 +14,9 @@ const FIELD_ICON_NAME = 'Field.Icon'
 
 const createFieldRecipe = tv({
   slots: {
-    root: 'flex flex-col gap-y-1',
+    root: 'flex flex-col space-y-1',
     control: [
-      'group inset-ring-1 inset-ring-border flex w-80 cursor-text items-center gap-x-2 overflow-hidden rounded-[0.625rem] bg-surface-2 py-2.5 pr-2.5 pl-3 shadow-xs',
+      'group inset-ring-1 inset-ring-border flex h-fit cursor-text items-center gap-x-2 overflow-hidden rounded-[0.625rem] bg-surface-2 shadow-xs transition-[background-color]',
       // hover
       'not-has-data-[invalid]:not-focus-within:has-enabled:hover:inset-ring-transparent not-has-data-[invalid]:not-focus-within:has-enabled:hover:bg-fill-1 not-has-data-[invalid]:not-focus-within:has-enabled:hover:shadow-none',
       // focus
@@ -32,7 +33,7 @@ const createFieldRecipe = tv({
       'disabled:cursor-not-allowed disabled:text-disabled disabled:placeholder:text-disabled',
     ],
     icon: [
-      'size-5 shrink-0 fill-fill-4 group-not-has-placeholder-shown:first:fill-fill-5',
+      'size-5 shrink-0 fill-fill-4 transition-colors duration-100 group-not-has-[:is(:disabled,:placeholder-shown)]:first:fill-fill-5',
       // hover
       'group-has-enabled:group-hover:first:fill-fill-5',
       // focus
@@ -45,9 +46,15 @@ const createFieldRecipe = tv({
   },
   variants: {
     size: {
-      xs: {},
-      sm: {},
-      md: {},
+      xs: {
+        control: 'py-1.5 pr-1.5 pl-2',
+      },
+      sm: {
+        control: 'py-2 pr-2 pl-2.5',
+      },
+      md: {
+        control: 'py-2.5 pr-2.5 pl-3',
+      },
     },
   },
   defaultVariants: {
@@ -57,25 +64,51 @@ const createFieldRecipe = tv({
 
 const fieldRecipe = createFieldRecipe()
 
-interface FieldRootProps
-  extends ArkFieldTypes.FieldRootProps,
-    VariantProps<typeof createFieldRecipe> {}
+type FieldSharedProps = VariantProps<typeof createFieldRecipe>
 
-export function FieldRoot(props: FieldRootProps) {
-  return <ArkField.Root {...props} className={fieldRecipe.root()} />
+export interface FieldRootProps extends ArkFieldTypes.FieldRootProps, FieldSharedProps {}
+
+export function FieldRoot({ children, className, size, ...props }: FieldRootProps) {
+  const { cloneChildren, id } = useCloneChildren({
+    targets: [FIELD_CONTROL_NAME],
+    props: {
+      size,
+    },
+    idPrefix: 'field',
+    children,
+  })
+
+  return (
+    <ArkField.Root
+      {...props}
+      className={fieldRecipe.root({
+        size,
+        className,
+      })}
+      id={id}
+    >
+      {cloneChildren()}
+    </ArkField.Root>
+  )
 }
 
 FieldRoot.displayName = FIELD_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface FieldWrapperProps extends React.ComponentProps<'label'> {
+export interface FieldControlProps extends React.ComponentProps<'label'>, FieldSharedProps {
   children: React.ReactNode
 }
 
-export function FieldControl({ children, ...props }: FieldWrapperProps) {
+export function FieldControl({ children, className, size, ...props }: FieldControlProps) {
   return (
-    <label {...props} className={fieldRecipe.control()}>
+    <label
+      {...props}
+      className={fieldRecipe.control({
+        size,
+        className,
+      })}
+    >
       {children}
     </label>
   )
@@ -85,13 +118,21 @@ FieldControl.displayName = FIELD_CONTROL_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface FieldInputProps extends ArkFieldTypes.FieldInputProps {}
+export interface FieldInputProps extends ArkFieldTypes.FieldInputProps {}
 
 export const FieldInput = React.forwardRef<
   React.ComponentRef<typeof ArkField.Input>,
   FieldInputProps
->(({ ...props }, ref) => {
-  return <ArkField.Input {...props} ref={ref} className={fieldRecipe.input()} />
+>(({ className, ...props }, ref) => {
+  return (
+    <ArkField.Input
+      {...props}
+      ref={ref}
+      className={fieldRecipe.input({
+        className,
+      })}
+    />
+  )
 })
 
 FieldInput.displayName = FIELD_INPUT_NAME
@@ -103,7 +144,7 @@ export function FieldIcon<T extends React.ElementType = typeof ark.span>({
   ...props
 }: PolymorphicProps<T>) {
   const Component = as || ark.span
-  return <Component {...props} className={fieldRecipe.icon()} />
+  return <Component {...props} className={fieldRecipe.icon()} aria-hidden />
 }
 
 FieldIcon.displayName = FIELD_ICON_NAME
