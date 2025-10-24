@@ -4,6 +4,7 @@ import { action } from 'storybook/actions'
 import { RiMailLine } from '@remixicon/react'
 import { Field } from '@/components/field'
 import { Label, type LabelRootProps } from '@/components/label'
+import { LinkButton } from '@/components/link-button'
 
 export default {
   title: 'Components/Label',
@@ -108,7 +109,9 @@ export const WithButton: LabelStory = {
       <Field.Root>
         <Label.Root>
           <Label.Text>Password</Label.Text>
-          <Label.Button onClick={action('Help clicked!')}>Help?</Label.Button>
+          <LinkButton.Root onClick={action('Help clicked!')} href="#">
+            Help?
+          </LinkButton.Root>
         </Label.Root>
       </Field.Root>
     )
@@ -129,7 +132,9 @@ export const Complete: LabelStory = {
           <Label.Asterisk />
           <Label.SubText>(Optional)</Label.SubText>
           <Label.Info aria-label="More information about email" />
-          <Label.Button onClick={action('Help clicked!')}>Help?</Label.Button>
+          <LinkButton.Root onClick={action('Help clicked!')} href="#">
+            Help?
+          </LinkButton.Root>
         </Label.Root>
       </Field.Root>
     )
@@ -150,7 +155,9 @@ export const WithField: LabelStory = {
           <Label.Asterisk />
           <Label.SubText>(Required)</Label.SubText>
           <Label.Info aria-label="We'll never share your email" />
-          <Label.Button onClick={action('Why do we need this?')}>Why?</Label.Button>
+          <LinkButton.Root onClick={action('Why do we need this?')} href="#">
+            Why?
+          </LinkButton.Root>
         </Label.Root>
 
         <Field.Control>
@@ -176,7 +183,9 @@ export const DisabledState: LabelStory = {
           <Label.Asterisk />
           <Label.SubText>(Disabled)</Label.SubText>
           <Label.Info aria-label="This field is disabled" />
-          <Label.Button>Help?</Label.Button>
+          <LinkButton.Root href="#" disabled>
+            Why?
+          </LinkButton.Root>
         </Label.Root>
 
         <Field.Control>
@@ -229,7 +238,9 @@ export const Variations: LabelStory = {
         <Field.Root>
           <Label.Root>
             <Label.Text>With Action Button</Label.Text>
-            <Label.Button onClick={action('Forgot password?')}>Forgot?</Label.Button>
+            <LinkButton.Root onClick={action('Forgot password?')} href="#">
+              Forgot?
+            </LinkButton.Root>
           </Label.Root>
           <Field.Control>
             <Field.Input type="password" placeholder="Enter password" />
