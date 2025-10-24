@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { action } from 'storybook/actions'
 
 import { Button } from '@/components/button'
-import { Checkbox, type CheckboxRootProps } from '@/components/checkbox'
+import { Checkbox, CheckboxLabel, type CheckboxRootProps } from '@/components/checkbox'
 
 const meta = {
   title: 'Components/Checkbox',
@@ -210,6 +210,64 @@ export const Controlled: CheckboxStory = {
       </div>
     )
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    actions: {
+      disable: true,
+    },
+  },
+}
+
+export const WithLabel: CheckboxStory = {
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <CheckboxLabel
+        labelText="Email notifications"
+        labelSubText="(Recommended)"
+        description="Receive updates about your account activity, security alerts, and product news directly to your inbox."
+        badgeProps={{
+          enabled: true,
+          content: 'New',
+          color: 'green',
+        }}
+        linkButtonProps={{
+          enabled: true,
+          content: 'Manage preferences',
+        }}
+        defaultChecked
+      />
+
+      <CheckboxLabel
+        labelText="Two-factor authentication"
+        labelSubText="(Required for admin)"
+        description="Add an extra layer of security to your account by requiring a verification code in addition to your password."
+        linkButtonProps={{
+          enabled: true,
+          content: 'Learn more',
+        }}
+      />
+
+      <CheckboxLabel
+        labelText="Marketing communications"
+        description="Get the latest product updates, feature releases, and special offers from our team."
+      />
+
+      <CheckboxLabel
+        labelText="Beta features access"
+        badgeProps={{
+          enabled: true,
+          content: 'Beta',
+        }}
+        description="Get early access to experimental features. Note that these may be unstable or change without notice."
+        linkButtonProps={{
+          enabled: true,
+          content: 'View roadmap',
+        }}
+      />
+    </div>
+  ),
   parameters: {
     controls: {
       disable: true,
