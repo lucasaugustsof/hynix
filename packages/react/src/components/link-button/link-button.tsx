@@ -28,7 +28,7 @@ const createLinkButtonRecipe = tv({
     },
     disabled: {
       true: {
-        root: 'cursor-not-allowed text-disabled',
+        root: '!text-disabled cursor-not-allowed',
       },
       false: {
         root: [
@@ -42,7 +42,7 @@ const createLinkButtonRecipe = tv({
         root: 'underline',
       },
       false: {
-        root: 'no-underline',
+        root: 'no-underline hover:no-underline',
       },
     },
   },

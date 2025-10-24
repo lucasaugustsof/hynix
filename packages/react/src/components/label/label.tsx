@@ -1,5 +1,3 @@
-import type * as React from 'react'
-import { ark } from '@ark-ui/react/factory'
 import { Field as ArkField } from '@ark-ui/react/field'
 
 import { RiInformation2Fill } from '@remixicon/react'
@@ -10,7 +8,6 @@ const LABEL_TEXT_NAME = 'Label.Text'
 const LABEL_ASTERISK_NAME = 'Label.Asterisk'
 const LABEL_SUB_TEXT_NAME = 'Label.SubText'
 const LABEL_INFO_NAME = 'Label.Info'
-const LABEL_BUTTON_NAME = 'Label.Button'
 
 export interface LabelRootProps extends React.ComponentProps<typeof ArkField.Label> {}
 
@@ -21,6 +18,9 @@ export function LabelRoot(props: LabelRootProps) {
       className={cn(
         'group inline-flex items-center gap-x-1',
         'font-sans text-sm/5 tracking-[-0.00525rem]',
+        // scoped:link-button
+        '[&_[data-scope=link-button][data-part=root]]:ml-auto [&_[data-scope=link-button][data-part=root]]:text-fg-1/70',
+        // disabled
         'data-disabled:cursor-not-allowed [&>*]:group-data-disabled:text-disabled'
       )}
     />
@@ -78,23 +78,3 @@ export function LabelInfo(props: LabelInfoProps) {
 }
 
 LabelInfo.displayName = LABEL_INFO_NAME
-
-////////////////////////////////////////////////////////////////////////////////////
-
-export interface LabelButtonProps extends React.ComponentProps<typeof ark.button> {}
-
-export function LabelButton(props: LabelButtonProps) {
-  return (
-    <ark.button
-      type="button"
-      {...props}
-      className={cn(
-        'ml-auto cursor-pointer',
-        'font-medium text-fg-1/70 text-xs/4',
-        'group-data-disabled:cursor-not-allowed'
-      )}
-    />
-  )
-}
-
-LabelButton.displayName = LABEL_BUTTON_NAME
