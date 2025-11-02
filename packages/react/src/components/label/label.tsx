@@ -11,7 +11,7 @@ const LABEL_INFO_NAME = 'Label.Info'
 
 export interface LabelRootProps extends React.ComponentProps<typeof ArkField.Label> {}
 
-export function LabelRoot(props: LabelRootProps) {
+export function LabelRoot({ className, ...props }: LabelRootProps) {
   return (
     <ArkField.Label
       {...props}
@@ -21,7 +21,8 @@ export function LabelRoot(props: LabelRootProps) {
         // scoped:link-button
         '[&_[data-scope=link-button][data-part=root]]:ml-auto [&_[data-scope=link-button][data-part=root]]:text-fg-1/70',
         // disabled
-        'data-disabled:cursor-not-allowed [&>*]:group-data-disabled:text-disabled'
+        'data-disabled:cursor-not-allowed [&>*]:group-data-disabled:text-disabled',
+        className
       )}
     />
   )
@@ -31,12 +32,10 @@ LabelRoot.displayName = LABEL_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface LabelTextProps {
-  children: React.ReactNode
-}
+export interface LabelTextProps extends React.ComponentPropsWithoutRef<'span'> {}
 
-export function LabelText({ children }: LabelTextProps) {
-  return <span className={cn('font-medium text-fg-1')}>{children}</span>
+export function LabelText({ children, className }: LabelTextProps) {
+  return <span className={cn('font-medium text-fg-1', className)}>{children}</span>
 }
 
 LabelText.displayName = LABEL_TEXT_NAME
@@ -54,12 +53,10 @@ LabelAsterisk.displayName = LABEL_ASTERISK_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface LabelSubTextProps {
-  children: React.ReactNode
-}
+export interface LabelSubTextProps extends React.ComponentPropsWithoutRef<'span'> {}
 
-export function LabelSubText({ children }: LabelSubTextProps) {
-  return <span className={cn('font-normal text-fg-1/40 text-xs/4')}>{children}</span>
+export function LabelSubText({ children, className }: LabelSubTextProps) {
+  return <span className={cn('font-normal text-fg-1/40 text-xs/4', className)}>{children}</span>
 }
 
 LabelSubText.displayName = LABEL_SUB_TEXT_NAME
