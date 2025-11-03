@@ -1,6 +1,6 @@
 # UI
 
-A modern and accessible React component library built with TypeScript, Tailwind CSS, and Ark UI.
+A refined collection of accessible and consistent components built with React, Tailwind CSS, and Ark UI — designed for speed, aesthetics, and a flawless experience.
 
 ## Overview
 
