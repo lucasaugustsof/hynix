@@ -8,12 +8,14 @@ import {
 } from '@ark-ui/react/avatar'
 
 import { useCloneChildren } from '@/hooks/use-clone-children'
+import { cn } from '@/lib/cn'
 import { tv, type VariantProps } from '@/lib/tv'
 
 const AVATAR_ROOT_NAME = 'Avatar.Root'
 const AVATAR_IMAGE_NAME = 'Avatar.Image'
 const AVATAR_FALLBACK_NAME = 'Avatar.Fallback'
-const AVATAR_INDICATOR_NAME = 'Avatar.Indicator'
+const AVATAR_POSITIONER_NAME = 'Avatar.Positioner'
+const AVATAR_STATUS_NAME = 'Avatar.Status'
 
 const createAvatarRecipe = tv({
   slots: {
@@ -21,26 +23,31 @@ const createAvatarRecipe = tv({
     image: 'size-full rounded-full object-cover',
     fallback: [
       'grid flex-1 place-items-center rounded-full bg-brand',
-      'font-medium font-sans text-fg-2',
+      'font-medium font-sans text-fg-2 uppercase',
     ],
-    indicator: '-right-2 absolute grid size-8 shrink-0 place-items-center',
+    positioner: 'absolute grid size-8 shrink-0 place-items-center drop-shadow-xs',
   },
   variants: {
     size: {
       '80': {
         root: 'size-20',
+        fallback: 'text-2xl/8',
       },
       '72': {
         root: 'size-18',
+        fallback: 'text-2xl/8',
       },
       '64': {
         root: 'size-16',
+        fallback: 'text-2xl/8',
       },
       '56': {
         root: 'size-14',
+        fallback: 'text-lg/6 tracking-[-0.01688rem]',
       },
       '48': {
         root: 'size-12',
+        fallback: 'text-lg/6 tracking-[-0.01688rem]',
       },
       '40': {
         root: 'size-10',
@@ -52,29 +59,61 @@ const createAvatarRecipe = tv({
       },
       '24': {
         root: 'size-6',
+        fallback: 'text-xs/4',
       },
       '20': {
         root: 'size-5',
+        fallback: 'text-xs/4',
       },
     },
   },
   compoundVariants: [
     {
-      size: ['80', '72', '64'],
+      size: ['80', '72'],
       class: {
-        fallback: 'text-2xl/8',
+        positioner: '-right-2',
       },
     },
     {
-      size: ['56', '48'],
+      size: '64',
       class: {
-        fallback: 'text-lg/6 tracking-[-0.01688rem]',
+        positioner: '-right-2 scale-[.875]',
       },
     },
     {
-      size: ['24', '20'],
+      size: '56',
       class: {
-        fallback: 'text-xs/4',
+        positioner: '-right-1.5 scale-75',
+      },
+    },
+    {
+      size: '48',
+      class: {
+        positioner: '-right-1.5 scale-[.625]',
+      },
+    },
+    {
+      size: '40',
+      class: {
+        positioner: '-right-1.5 scale-[.5625]',
+      },
+    },
+    {
+      size: '32',
+      class: {
+        positioner: '-right-1.5 scale-50',
+      },
+    },
+    {
+      size: '24',
+      class: {
+        positioner: '-right-1 scale-[.375]',
+      },
+    },
+    {
+      size: '20',
+      class: {
+        positioner: '-right-1 scale-[.3125]',
       },
     },
   ],
@@ -97,7 +136,7 @@ export function AvatarRoot({ children, className, size, ...props }: AvatarRootPr
       size,
     },
     idPrefix: 'avatar',
-    targets: [AVATAR_IMAGE_NAME, AVATAR_FALLBACK_NAME],
+    targets: [AVATAR_IMAGE_NAME, AVATAR_FALLBACK_NAME, AVATAR_POSITIONER_NAME],
     children,
   })
 
@@ -168,26 +207,63 @@ AvatarFallback.displayName = AVATAR_FALLBACK_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface AvatarIndicatorProps {
+interface AvatarPositionerProps extends AvatarSharedProps {
   children: React.ReactNode
   placement?: 'top' | 'bottom'
 }
 
-export function AvatarIndicator({ children, placement = 'bottom' }: AvatarIndicatorProps) {
+export function AvatarPositioner({ children, placement = 'bottom', size }: AvatarPositionerProps) {
   return (
     <div
-      className={avatarRecipe.indicator({
-        className: placement === 'bottom' ? '-bottom-2' : '-top-2',
+      className={avatarRecipe.positioner({
+        className:
+          placement === 'bottom' ? 'bottom-0 origin-bottom-right' : 'top-0 origin-top-right',
+        size,
       })}
       data-scope="avatar"
-      data-part="indicator"
+      data-part="positioner"
     >
       {children}
     </div>
   )
 }
 
-AvatarIndicator.displayName = AVATAR_INDICATOR_NAME
+AvatarPositioner.displayName = AVATAR_POSITIONER_NAME
+
+////////////////////////////////////////////////////////////////////////////////////
+
+interface AvatarStatusProps extends React.AriaAttributes {
+  type?: 'online' | 'offline' | 'busy' | 'away'
+}
+
+export function AvatarStatus({ type = 'offline', ...props }: AvatarStatusProps) {
+  const STATUS_COLOR_MAP = {
+    online: '[--avatar-status-color:var(--color-success)]',
+    offline: '[--avatar-status-color:var(--color-fill-5)]',
+    busy: '[--avatar-status-color:var(--color-danger)]',
+    away: '[--avatar-status-color:var(--color-warning)]',
+  } as Record<typeof type, string>
+
+  return (
+    <div
+      {...props}
+      role="status"
+      className={cn('inline-flex shrink-0 items-center justify-center', STATUS_COLOR_MAP[type])}
+      data-scope="avatar"
+      data-part="status"
+    >
+      <span
+        className={cn(
+          'relative block size-5 rounded-full bg-surface-1',
+          'before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-3 before:rounded-[inherit] before:bg-(--avatar-status-color) before:content-[""]'
+        )}
+        aria-hidden
+      />
+    </div>
+  )
+}
+
+AvatarStatus.displayName = AVATAR_STATUS_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 

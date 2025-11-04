@@ -1,6 +1,7 @@
 export {
   AvatarFallback as Fallback,
   AvatarImage as Image,
-  AvatarIndicator as Indicator,
+  AvatarPositioner as Positioner,
   AvatarRoot as Root,
+  AvatarStatus as Status,
 } from './avatar'
