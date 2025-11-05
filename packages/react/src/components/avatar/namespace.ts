@@ -1,4 +1,5 @@
 export {
+  AvatarBadge as Badge,
   AvatarFallback as Fallback,
   AvatarImage as Image,
   AvatarPositioner as Positioner,

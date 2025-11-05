@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Avatar, type AvatarRootProps, getInitials } from '@/components/avatar'
+// import addSvg from '@/components/avatar/assets/add.svg'
+// import favoriteSvg from '@/components/avatar/assets/favorite.svg'
+// import pinSvg from '@/components/avatar/assets/pin.svg'
+// import removeSvg from '@/components/avatar/assets/remove.svg'
+import verifiedSvg from '@/components/avatar/assets/verified.svg'
 
 export default {
   title: 'Components/Avatar',
@@ -34,8 +39,8 @@ export const Default: AvatarStory = {
       <Avatar.Fallback>{getInitials('Lucas Augusto')}</Avatar.Fallback>
       <Avatar.Image src="https://github.com/lucasaugustsof.png" alt="Lucas Augusto" />
 
-      <Avatar.Positioner>
-        <Avatar.Status />
+      <Avatar.Positioner placement="top">
+        <Avatar.Badge src={verifiedSvg} alt="Verified" />
       </Avatar.Positioner>
     </Avatar.Root>
   ),

@@ -6,6 +6,7 @@ import {
   type AvatarImageProps as ArkAvatarImageProps,
   type AvatarRootProps as ArkAvatarRootProps,
 } from '@ark-ui/react/avatar'
+import { ark } from '@ark-ui/react/factory'
 
 import { useCloneChildren } from '@/hooks/use-clone-children'
 import { cn } from '@/lib/cn'
@@ -16,6 +17,7 @@ const AVATAR_IMAGE_NAME = 'Avatar.Image'
 const AVATAR_FALLBACK_NAME = 'Avatar.Fallback'
 const AVATAR_POSITIONER_NAME = 'Avatar.Positioner'
 const AVATAR_STATUS_NAME = 'Avatar.Status'
+const AVATAR_BADGE_NAME = 'Avatar.Badge'
 
 const createAvatarRecipe = tv({
   slots: {
@@ -264,6 +266,32 @@ export function AvatarStatus({ type = 'offline', ...props }: AvatarStatusProps) 
 }
 
 AvatarStatus.displayName = AVATAR_STATUS_NAME
+
+////////////////////////////////////////////////////////////////////////////////////
+
+interface AvatarBadgeProps extends React.ComponentProps<typeof ark.img> {
+  /**
+   * If true, marks the badge as decorative (alt="" and aria-hidden="true")
+   * Use this only if the badge's meaning is conveyed elsewhere
+   * @default false
+   */
+  decorative?: boolean
+}
+
+export function AvatarBadge({ alt, decorative: isDecorative = false, ...props }: AvatarBadgeProps) {
+  return (
+    <ark.img
+      {...props}
+      role="img"
+      alt={isDecorative ? '' : alt}
+      data-scope="avatar"
+      data-part="badge"
+      aria-hidden={isDecorative}
+    />
+  )
+}
+
+AvatarBadge.displayName = AVATAR_BADGE_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
