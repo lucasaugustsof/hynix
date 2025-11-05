@@ -18,6 +18,7 @@ const AVATAR_FALLBACK_NAME = 'Avatar.Fallback'
 const AVATAR_POSITIONER_NAME = 'Avatar.Positioner'
 const AVATAR_STATUS_NAME = 'Avatar.Status'
 const AVATAR_BADGE_NAME = 'Avatar.Badge'
+const AVATAR_NOTIFICATION_NAME = 'Avatar.Notification'
 
 const createAvatarRecipe = tv({
   slots: {
@@ -209,19 +210,27 @@ AvatarFallback.displayName = AVATAR_FALLBACK_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface AvatarPositionerProps extends AvatarSharedProps {
+interface AvatarPositionerProps extends Assign<React.ComponentProps<'div'>, AvatarSharedProps> {
   children: React.ReactNode
   placement?: 'top' | 'bottom'
 }
 
-export function AvatarPositioner({ children, placement = 'bottom', size }: AvatarPositionerProps) {
+export function AvatarPositioner({
+  children,
+  className,
+  placement = 'bottom',
+  size,
+}: AvatarPositionerProps) {
   return (
     <div
-      className={avatarRecipe.positioner({
-        className:
-          placement === 'bottom' ? 'bottom-0 origin-bottom-right' : 'top-0 origin-top-right',
-        size,
-      })}
+      className={cn(
+        avatarRecipe.positioner({
+          className:
+            placement === 'bottom' ? 'bottom-0 origin-bottom-right' : 'top-0 origin-top-right',
+          size,
+        }),
+        className
+      )}
       data-scope="avatar"
       data-part="positioner"
     >
@@ -234,11 +243,11 @@ AvatarPositioner.displayName = AVATAR_POSITIONER_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface AvatarStatusProps extends React.AriaAttributes {
+interface AvatarStatusProps extends React.ComponentProps<'span'> {
   type?: 'online' | 'offline' | 'busy' | 'away'
 }
 
-export function AvatarStatus({ type = 'offline', ...props }: AvatarStatusProps) {
+export function AvatarStatus({ className, type = 'offline', ...props }: AvatarStatusProps) {
   const STATUS_COLOR_MAP = {
     online: '[--avatar-status-color:var(--color-success)]',
     offline: '[--avatar-status-color:var(--color-fill-5)]',
@@ -247,21 +256,18 @@ export function AvatarStatus({ type = 'offline', ...props }: AvatarStatusProps) 
   } as Record<typeof type, string>
 
   return (
-    <div
+    <span
       {...props}
-      role="status"
-      className={cn('inline-flex shrink-0 items-center justify-center', STATUS_COLOR_MAP[type])}
+      className={cn(
+        'relative block size-5 rounded-full bg-surface-1',
+        'before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-3 before:rounded-[inherit] before:bg-(--avatar-status-color) before:content-[""]',
+        STATUS_COLOR_MAP[type],
+        className
+      )}
       data-scope="avatar"
       data-part="status"
-    >
-      <span
-        className={cn(
-          'relative block size-5 rounded-full bg-surface-1',
-          'before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-3 before:rounded-[inherit] before:bg-(--avatar-status-color) before:content-[""]'
-        )}
-        aria-hidden
-      />
-    </div>
+      aria-hidden
+    />
   )
 }
 
@@ -292,6 +298,29 @@ export function AvatarBadge({ alt, decorative: isDecorative = false, ...props }:
 }
 
 AvatarBadge.displayName = AVATAR_BADGE_NAME
+
+////////////////////////////////////////////////////////////////////////////////////
+
+interface AvatarNotificationProps extends React.ComponentProps<'span'> {}
+
+export function AvatarNotification({ className, ...props }: AvatarNotificationProps) {
+  return (
+    <span
+      {...props}
+      role="status"
+      className={cn(
+        'relative block size-4 rounded-full bg-surface-1',
+        'before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-3 before:rounded-[inherit] before:bg-danger before:content-[""]',
+        className
+      )}
+      data-scope="avatar"
+      data-part="notification"
+      aria-hidden
+    />
+  )
+}
+
+AvatarNotification.displayName = AVATAR_NOTIFICATION_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
