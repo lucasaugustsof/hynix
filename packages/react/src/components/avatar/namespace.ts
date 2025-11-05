@@ -5,5 +5,6 @@ export {
   AvatarNotification as Notification,
   AvatarPositioner as Positioner,
   AvatarRoot as Root,
+  AvatarRootProvider as RootProvider,
   AvatarStatus as Status,
 } from './avatar'
