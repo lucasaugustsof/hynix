@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import type { Assign } from '@ark-ui/react'
 import {
@@ -11,6 +13,8 @@ import { ark } from '@ark-ui/react/factory'
 import { useCloneChildren } from '@/hooks/use-clone-children'
 import { cn } from '@/lib/cn'
 import { tv, type VariantProps } from '@/lib/tv'
+import placeholderDark from './assets/placeholder-dark.png'
+import placeholderLight from './assets/placeholder-light.png'
 
 const AVATAR_ROOT_NAME = 'Avatar.Root'
 const AVATAR_IMAGE_NAME = 'Avatar.Image'
@@ -161,21 +165,48 @@ AvatarRoot.displayName = AVATAR_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export const AvatarImage = React.forwardRef<
-  HTMLImageElement,
-  Assign<ArkAvatarImageProps, AvatarSharedProps>
->(({ className, size, ...props }, ref) => {
-  return (
-    <ArkAvatar.Image
-      {...props}
-      ref={ref}
-      className={avatarRecipe.image({
-        className,
-        size,
-      })}
-    />
-  )
-})
+interface AvatarImageProps extends Assign<ArkAvatarImageProps, AvatarSharedProps> {
+  showPlaceholder?: boolean
+}
+
+export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
+  ({ className, size, src, showPlaceholder = false, ...props }, ref) => {
+    const [isDarkTheme, setIsDarkTheme] = React.useState(false)
+
+    React.useEffect(() => {
+      if (typeof document === 'undefined') return
+
+      const theme = document.documentElement.getAttribute('data-theme')
+      setIsDarkTheme(theme === 'dark')
+
+      const observer = new MutationObserver(() => {
+        const currentTheme = document.documentElement.getAttribute('data-theme')
+        setIsDarkTheme(currentTheme === 'dark')
+      })
+
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme'],
+      })
+
+      return () => observer.disconnect()
+    }, [])
+
+    const placeholderImg = isDarkTheme ? placeholderDark : placeholderLight
+
+    return (
+      <ArkAvatar.Image
+        {...props}
+        ref={ref}
+        className={avatarRecipe.image({
+          className,
+          size,
+        })}
+        src={showPlaceholder ? placeholderImg : src}
+      />
+    )
+  }
+)
 
 AvatarImage.displayName = AVATAR_IMAGE_NAME
 
