@@ -126,7 +126,7 @@ const createAvatarRecipe = tv({
     },
   ],
   defaultVariants: {
-    size: '80',
+    size: '56',
   },
 })
 
@@ -358,11 +358,19 @@ export function AvatarStatus({ className, type = 'offline', ...props }: AvatarSt
     offline: '[--avatar-status-color:var(--color-fill-5)]',
     busy: '[--avatar-status-color:var(--color-danger)]',
     away: '[--avatar-status-color:var(--color-warning)]',
-  } as Record<typeof type, string>
+  }
+
+  const STATUS_LABEL_MAP = {
+    online: 'Online',
+    offline: 'Offline',
+    busy: 'Busy',
+    away: 'Away',
+  }
 
   return (
     <span
       {...props}
+      role="status"
       className={cn(
         'relative block size-5 rounded-full bg-surface-1',
         'before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-3 before:rounded-[inherit] before:bg-(--avatar-status-color) before:content-[""]',
@@ -371,6 +379,7 @@ export function AvatarStatus({ className, type = 'offline', ...props }: AvatarSt
       )}
       data-scope="avatar"
       data-part="status"
+      aria-label={STATUS_LABEL_MAP[type]}
       aria-hidden
     />
   )
@@ -430,7 +439,11 @@ AvatarBadge.displayName = AVATAR_BADGE_NAME
  */
 interface AvatarNotificationProps extends React.ComponentProps<'span'> {}
 
-export function AvatarNotification({ className, ...props }: AvatarNotificationProps) {
+export function AvatarNotification({
+  className,
+  'aria-label': ariaLabel = 'Unread notifications',
+  ...props
+}: AvatarNotificationProps) {
   return (
     <span
       {...props}
@@ -442,6 +455,7 @@ export function AvatarNotification({ className, ...props }: AvatarNotificationPr
       )}
       data-scope="avatar"
       data-part="notification"
+      aria-label={ariaLabel}
       aria-hidden
     />
   )
@@ -461,13 +475,21 @@ AvatarNotification.displayName = AVATAR_NOTIFICATION_NAME
  * @example
  * ```tsx
  * getInitials('John Doe') // Returns "JD"
- * getInitials('Mary Jane Watson') // Returns "MJW"
+ * getInitials('Mary Jane Watson') // Returns "MJ"
  * getInitials('Prince') // Returns "P"
  * ```
  */
 export function getInitials(name: string): string {
-  const words = name.split(' ')
-  const initials = words.map(word => word.charAt(0).toUpperCase()).join('')
+  if (!name || typeof name !== 'string') return ''
+
+  const words = name.trim().split(/\s+/).filter(Boolean)
+
+  if (words.length === 0) return ''
+
+  const initials = words
+    .slice(0, 2)
+    .map(word => word.charAt(0).toUpperCase())
+    .join('')
 
   return initials
 }
