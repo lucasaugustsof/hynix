@@ -15,6 +15,8 @@ const CHECKBOX_GROUP_NAME = 'Checkbox.Group'
 const CHECKBOX_CONTROL_NAME = 'Checkbox.Control'
 const CHECKBOX_LABEL_NAME = 'Checkbox.Label'
 
+////////////////////////////////////////////////////////////////////////////////////
+
 export interface CheckboxRootProps extends ArkCheckboxRootProps {}
 
 export const CheckboxRootProvider = ArkCheckbox.RootProvider

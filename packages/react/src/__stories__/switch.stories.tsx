@@ -208,15 +208,15 @@ export const SwitchWithLabel: StoryObj<SwitchWithLabelProps> = {
       <div className="space-y-6">
         <ComponentSwitchWithLabel
           {...args}
-          labelText="Email notifications"
-          labelSubText="Recommended"
+          editLabel="Email notifications"
+          editSublabel="Recommended"
           badgeProps={{
             enabled: true,
             variant: 'light',
             color: 'blue',
             children: 'New',
           }}
-          description="Receive email notifications about activity in your account, including mentions and replies."
+          editDescription="Receive email notifications about activity in your account, including mentions and replies."
           linkButtonProps={{
             enabled: true,
             children: 'Manage preferences',
@@ -226,8 +226,9 @@ export const SwitchWithLabel: StoryObj<SwitchWithLabelProps> = {
 
         <ComponentSwitchWithLabel
           {...args}
-          labelText="Two-factor authentication"
-          description="Add an extra layer of security to your account by requiring a verification code in addition to your password."
+          editLabel="Two-factor authentication"
+          editSublabel="Recommended "
+          editDescription="Add an extra layer of security to your account by requiring a verification code in addition to your password."
           linkButtonProps={{
             enabled: true,
             children: 'Learn more',
@@ -237,8 +238,9 @@ export const SwitchWithLabel: StoryObj<SwitchWithLabelProps> = {
 
         <ComponentSwitchWithLabel
           {...args}
-          labelText="Dark mode"
-          description="Switch between light and dark theme for better visibility in different lighting conditions."
+          editLabel="Dark mode"
+          editSublabel="Recommended"
+          editDescription="Switch between light and dark theme for better visibility in different lighting conditions."
         />
       </div>
     )

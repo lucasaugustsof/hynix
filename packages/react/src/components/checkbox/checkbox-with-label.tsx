@@ -3,9 +3,9 @@
 import * as React from 'react'
 
 import { Badge, type BadgeRootProps } from '@/components/badge'
+import { Checkbox, type CheckboxRootProps } from '@/components/checkbox'
 import { Label } from '@/components/label'
 import { LinkButton, type LinkButtonRootProps } from '@/components/link-button'
-import { Switch, type SwitchRootProps } from '@/components/switch'
 import { cn } from '@/lib/cn'
 
 type BadgeProps = {
@@ -22,7 +22,7 @@ type LinkButtonProps = {
   enabled: boolean
 } & LinkButtonRootProps
 
-export interface SwitchWithLabelProps extends SwitchRootProps {
+export interface SwitchWithLabelProps extends CheckboxRootProps {
   /**
    * The main label text displayed next to the switch
    */
@@ -50,7 +50,7 @@ export interface SwitchWithLabelProps extends SwitchRootProps {
   flip?: boolean
 }
 
-export function SwitchWithLabel({
+export function CheckboxWithLabel({
   className,
   editLabel,
   editSublabel,
@@ -60,7 +60,7 @@ export function SwitchWithLabel({
   flip,
   ...switchProps
 }: SwitchWithLabelProps) {
-  const switchId = React.useId()
+  const checkboxId = React.useId()
   const descriptionId = React.useId()
 
   const hasLabelSubText = Boolean(editSublabel)
@@ -76,22 +76,22 @@ export function SwitchWithLabel({
         flip && 'grid-cols-[1fr_auto]',
         className
       )}
-      data-scope="switch-with-label"
+      data-scope="checkbox-with-label"
     >
-      <Switch.Root
+      <Checkbox.Root
         {...switchProps}
         ids={{
-          hiddenInput: switchId,
+          hiddenInput: checkboxId,
         }}
         className={cn(flip && 'order-2')}
         aria-describedby={hasDescription ? descriptionId : undefined}
       >
-        <Switch.Control className="mt-1" />
-      </Switch.Root>
+        <Checkbox.Control className="mt-1" />
+      </Checkbox.Root>
 
       <div className={cn('flex flex-col gap-y-2.5')}>
         <div className="space-y-1">
-          <Label.Root htmlFor={switchId} className="**:select-none">
+          <Label.Root htmlFor={checkboxId} className="**:select-none">
             <Label.Text className={cn(!hasDescription && 'font-normal')}>{editLabel}</Label.Text>
 
             <React.Activity mode={hasLabelSubText ? 'visible' : 'hidden'}>
@@ -118,4 +118,4 @@ export function SwitchWithLabel({
   )
 }
 
-SwitchWithLabel.displayName = 'SwitchWithLabel'
+CheckboxWithLabel.displayName = 'CheckboxWithLabel'

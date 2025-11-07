@@ -4,10 +4,11 @@ import { Label } from '@/components/label'
 import { cn } from '@/lib/cn'
 import type { PolymorphicProps } from '@/types/polymorphic'
 
-/**
- * Props for the ContentLabel component
- */
 export interface ContentLabelProps {
+  /**
+   * Additional CSS classes to apply to the root element
+   */
+  className?: string
   /**
    * The size of the label
    * @default 'md'
@@ -37,6 +38,7 @@ export interface ContentLabelProps {
 
 export function ContentLabel<C extends React.ElementType>({
   as,
+  className,
   size = 'md',
   editLabel,
   editSublabel,
@@ -53,7 +55,7 @@ export function ContentLabel<C extends React.ElementType>({
   return (
     <Component
       role="group"
-      className={cn('inline-flex w-fit items-center gap-x-3.5')}
+      className={cn('inline-flex w-fit items-center gap-x-3.5', className)}
       aria-labelledby={labelId}
       aria-describedby={descriptionId}
       data-scope="content-label"

@@ -4,7 +4,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { action } from 'storybook/actions'
 
 import { Button } from '@/components/button'
-import { Checkbox, CheckboxLabel, type CheckboxRootProps } from '@/components/checkbox'
+import {
+  Checkbox,
+  type CheckboxRootProps,
+  CheckboxWithLabel as ComponentCheckboxWithLabel,
+} from '@/components/checkbox'
 
 const meta = {
   title: 'Components/Checkbox',
@@ -220,50 +224,51 @@ export const Controlled: CheckboxStory = {
   },
 }
 
-export const WithLabel: CheckboxStory = {
+export const CheckboxWithLabel: CheckboxStory = {
   render: () => (
     <div className="flex flex-col gap-6">
-      <CheckboxLabel
-        labelText="Email notifications"
-        labelSubText="(Recommended)"
-        description="Receive updates about your account activity, security alerts, and product news directly to your inbox."
+      <ComponentCheckboxWithLabel
+        editLabel="Email notifications"
+        editSublabel="(Recommended)"
+        editDescription="Receive updates about your account activity, security alerts, and product news directly to your inbox."
         badgeProps={{
           enabled: true,
-          content: 'New',
+          children: 'New',
           color: 'green',
         }}
         linkButtonProps={{
           enabled: true,
-          content: 'Manage preferences',
+          children: 'Manage preferences',
         }}
         defaultChecked
       />
 
-      <CheckboxLabel
-        labelText="Two-factor authentication"
-        labelSubText="(Required for admin)"
-        description="Add an extra layer of security to your account by requiring a verification code in addition to your password."
+      <ComponentCheckboxWithLabel
+        editLabel="Two-factor authentication"
+        editSublabel="(Required for admin)"
+        editDescription="Add an extra layer of security to your account by requiring a verification code in addition to your password."
         linkButtonProps={{
           enabled: true,
-          content: 'Learn more',
+          children: 'Learn more',
         }}
       />
 
-      <CheckboxLabel
-        labelText="Marketing communications"
-        description="Get the latest product updates, feature releases, and special offers from our team."
+      <ComponentCheckboxWithLabel
+        editLabel="Marketing communications"
+        editSublabel="(Recommended)"
+        editDescription="Get the latest product updates, feature releases, and special offers from our team."
       />
 
-      <CheckboxLabel
-        labelText="Beta features access"
+      <ComponentCheckboxWithLabel
+        editLabel="Beta features access"
         badgeProps={{
           enabled: true,
-          content: 'Beta',
+          children: 'Beta',
         }}
-        description="Get early access to experimental features. Note that these may be unstable or change without notice."
+        editDescription="Get early access to experimental features. Note that these may be unstable or change without notice."
         linkButtonProps={{
           enabled: true,
-          content: 'View roadmap',
+          children: 'View roadmap',
         }}
       />
     </div>

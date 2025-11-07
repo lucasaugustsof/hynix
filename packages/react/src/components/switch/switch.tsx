@@ -14,6 +14,8 @@ const SWITCH_ROOT_NAME = 'Switch.Root'
 const SWITCH_CONTROL_NAME = 'Switch.Control'
 const SWITCH_LABEL_NAME = 'Switch.Label'
 
+////////////////////////////////////////////////////////////////////////////////////
+
 export interface SwitchRootProps extends ArkSwitchRootProps {}
 
 export const SwitchRootProvider = ArkSwitch.RootProvider
