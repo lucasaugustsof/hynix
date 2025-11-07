@@ -1,6 +1,5 @@
 export type {
   LabelAsteriskProps,
-  LabelButtonProps,
   LabelInfoProps,
   LabelRootProps,
   LabelSubTextProps,
