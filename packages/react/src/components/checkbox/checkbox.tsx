@@ -44,7 +44,7 @@ CheckboxGroup.displayName = CHECKBOX_GROUP_NAME
 ////////////////////////////////////////////////////////////////////////////////////
 
 const CheckIcon = () => (
-  <svg className="ml-px" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden>
+  <svg className={cn('w-fit pl-[0.5px]')} height="7" viewBox="0 0 10 7" fill="none" aria-hidden>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -69,8 +69,8 @@ export function CheckboxControl({ className, ...props }: CheckboxControlProps) {
       <ArkCheckbox.Control
         {...props}
         className={cn(
-          'relative inline-flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-fill-2 transition-[background-color]',
-          'before:absolute before:size-[calc(--spacing(3.5)_-_1px)] before:rounded-[calc(--spacing(0.5)_+_0.6px)] before:bg-surface-1 before:shadow-xs before:content-[""]',
+          'relative inline-flex size-4 shrink-0 overflow-hidden rounded-sm bg-fill-2 transition-[background-color]',
+          'before:-translate-y-1/2 before:-translate-x-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-[calc(--spacing(3.5)_-_1px)] before:rounded-[calc(--spacing(0.5)_+_0.6px)] before:bg-surface-1 before:shadow-xs before:content-[""]',
           // hover
           '[&:not([data-focus-visible],[data-disabled])]:data-hover:bg-fill-3',
           // focus
