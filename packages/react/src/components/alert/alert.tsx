@@ -264,6 +264,20 @@ const alertRecipe = createAlertRecipe()
 
 type AlertSharedProps = VariantProps<typeof createAlertRecipe>
 
+/**
+ * Alert root component that wraps the entire alert composition.
+ * Automatically injects status, variant, and size props to child components.
+ * Includes proper ARIA attributes for screen reader announcements.
+ *
+ * @example
+ * ```tsx
+ * <Alert.Root status="success" variant="filled" size="sm">
+ *   <Alert.Icon />
+ *   <Alert.Title>Success</Alert.Title>
+ *   <Alert.Description>Your changes have been saved.</Alert.Description>
+ * </Alert.Root>
+ * ```
+ */
 export interface AlertRootProps extends Assign<React.ComponentProps<'div'>, AlertSharedProps> {}
 
 export function AlertRoot({
@@ -317,6 +331,24 @@ AlertRoot.displayName = ALERT_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Alert icon component that displays a status-specific icon.
+ * Automatically selects the appropriate icon based on the status prop:
+ * - danger: Error warning icon
+ * - success: Checkbox circle icon
+ * - warning: Alert icon
+ * - information: Information icon
+ * - feature: Magic icon
+ *
+ * Supports custom icons via the `as` prop for polymorphic rendering.
+ *
+ * @example
+ * ```tsx
+ * <Alert.Icon />
+ * <Alert.Icon status="success" />
+ * <Alert.Icon as={CustomIcon} />
+ * ```
+ */
 export function AlertIcon<T extends React.ElementType = RemixiconComponentType>({
   as,
   className,
@@ -355,6 +387,17 @@ AlertIcon.displayName = ALERT_ICON_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Alert title component that displays the main heading of the alert.
+ * Renders as an h2 element and is used for the primary alert message.
+ * Automatically linked via aria-labelledby from the root component.
+ *
+ * @example
+ * ```tsx
+ * <Alert.Title>Operation successful</Alert.Title>
+ * <Alert.Title>Warning: Disk space low</Alert.Title>
+ * ```
+ */
 export interface AlertTitleProps
   extends Assign<React.ComponentProps<typeof ark.h2>, AlertSharedProps> {}
 
@@ -378,6 +421,17 @@ AlertTitle.displayName = ALERT_TITLE_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Alert description component that provides additional context to the alert.
+ * Renders as a paragraph element below the title for extended information.
+ * Automatically linked via aria-describedby from the root component.
+ *
+ * @example
+ * ```tsx
+ * <Alert.Description>Your changes have been saved successfully.</Alert.Description>
+ * <Alert.Description>Please free up space before continuing.</Alert.Description>
+ * ```
+ */
 export interface AlertDescriptionProps
   extends Assign<React.ComponentProps<'p'>, AlertSharedProps> {}
 
@@ -399,6 +453,19 @@ AlertDescription.displayName = ALERT_DESCRIPTION_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Alert actions component that provides a container for action buttons or links.
+ * Displays children in a horizontal flex layout with consistent spacing.
+ * Commonly used with LinkButton or Button components for alert actions.
+ *
+ * @example
+ * ```tsx
+ * <Alert.Actions>
+ *   <LinkButton href="/details">View Details</LinkButton>
+ *   <LinkButton href="/dismiss">Dismiss</LinkButton>
+ * </Alert.Actions>
+ * ```
+ */
 export interface AlertActionsProps {
   children?: React.ReactNode
 }
@@ -417,6 +484,19 @@ export function AlertActions(props: AlertActionsProps) {
 AlertActions.displayName = ALERT_ACTIONS_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Alert close button component that allows users to dismiss the alert.
+ * Displays a close icon (X) button with proper accessibility attributes.
+ * Supports custom icons via the `as` prop for polymorphic rendering.
+ *
+ * @example
+ * ```tsx
+ * <Alert.Close />
+ * <Alert.Close aria-label="Dismiss notification" />
+ * <Alert.Close as={CustomCloseIcon} />
+ * ```
+ */
 export interface AlertCloseProps extends React.ComponentProps<'button'>, AlertSharedProps {}
 
 export function AlertClose<T extends React.ElementType = RemixiconComponentType>({

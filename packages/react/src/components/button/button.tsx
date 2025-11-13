@@ -66,6 +66,28 @@ const buttonRecipe = createButtonRecipe()
 
 type ButtonSharedProps = VariantProps<typeof createButtonRecipe>
 
+/**
+ * Button root component that wraps the entire button composition.
+ * Automatically injects variant, size, and iconOnly props to child components.
+ * Supports multiple visual variants (primary, secondary, outline, danger) and sizes.
+ * Built on Ark UI with proper accessibility attributes.
+ *
+ * @example
+ * ```tsx
+ * <Button.Root variant="primary" size="md">
+ *   Click me
+ * </Button.Root>
+ *
+ * <Button.Root variant="secondary" iconOnly>
+ *   <Button.Icon as={SearchIcon} />
+ * </Button.Root>
+ *
+ * <Button.Root variant="outline">
+ *   <Button.Icon as={PlusIcon} />
+ *   Add Item
+ * </Button.Root>
+ * ```
+ */
 export interface ButtonRootProps
   extends React.ComponentProps<typeof ark.button>,
     ButtonSharedProps {}
@@ -116,6 +138,24 @@ ButtonRoot.displayName = BUTTON_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Button icon component for displaying icons within buttons.
+ * Supports polymorphic rendering via the `as` prop.
+ * Automatically scales based on the button size.
+ * Can be used standalone in icon-only buttons or combined with text.
+ *
+ * @example
+ * ```tsx
+ * <Button.Root iconOnly>
+ *   <Button.Icon as={SearchIcon} />
+ * </Button.Root>
+ *
+ * <Button.Root>
+ *   <Button.Icon as={DownloadIcon} />
+ *   Download
+ * </Button.Root>
+ * ```
+ */
 export function ButtonIcon<T extends React.ElementType = typeof ark.span>({
   as,
   className,

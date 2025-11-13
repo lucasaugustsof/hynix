@@ -16,6 +16,30 @@ const SWITCH_LABEL_NAME = 'Switch.Label'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Switch root component that wraps the entire switch composition.
+ * Built on Ark UI with proper accessibility and state management.
+ * Includes a hidden input for form integration.
+ * Manages toggle state for on/off interactions.
+ *
+ * @example
+ * ```tsx
+ * <Switch.Root>
+ *   <Switch.Control />
+ *   <Switch.Label>Enable notifications</Switch.Label>
+ * </Switch.Root>
+ *
+ * <Switch.Root defaultChecked>
+ *   <Switch.Control />
+ *   <Switch.Label>Dark mode</Switch.Label>
+ * </Switch.Root>
+ *
+ * <Switch.Root disabled>
+ *   <Switch.Control />
+ *   <Switch.Label>Unavailable feature</Switch.Label>
+ * </Switch.Root>
+ * ```
+ */
 export interface SwitchRootProps extends ArkSwitchRootProps {}
 
 export const SwitchRootProvider = ArkSwitch.RootProvider
@@ -34,6 +58,30 @@ SwitchRoot.displayName = SWITCH_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Switch control component that displays the visual toggle element.
+ * Includes an animated thumb that slides between checked/unchecked states.
+ * Provides visual feedback for hover, active, and disabled states.
+ * Features smooth transitions and radial mask effect on the thumb.
+ * Automatically detects disabled state from context.
+ *
+ * @example
+ * ```tsx
+ * <Switch.Root>
+ *   <Switch.Control />
+ * </Switch.Root>
+ *
+ * <Switch.Root defaultChecked>
+ *   <Switch.Control />
+ *   <Switch.Label>Auto-save</Switch.Label>
+ * </Switch.Root>
+ *
+ * <Switch.Root disabled>
+ *   <Switch.Control />
+ *   <Switch.Label>Premium feature</Switch.Label>
+ * </Switch.Root>
+ * ```
+ */
 export interface SwitchControlProps extends ArkSwitchControlProps {}
 
 export function SwitchControl({ className, ...props }: SwitchControlProps) {
@@ -73,5 +121,23 @@ SwitchControl.displayName = SWITCH_CONTROL_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Switch label component that displays text next to the switch.
+ * Automatically associates with the switch for proper accessibility.
+ * Clicking the label toggles the switch state.
+ *
+ * @example
+ * ```tsx
+ * <Switch.Root>
+ *   <Switch.Control />
+ *   <Switch.Label>Enable two-factor authentication</Switch.Label>
+ * </Switch.Root>
+ *
+ * <Switch.Root>
+ *   <Switch.Control />
+ *   <Switch.Label>Receive email updates</Switch.Label>
+ * </Switch.Root>
+ * ```
+ */
 export const SwitchLabel = ArkSwitch.Label
 SwitchLabel.displayName = SWITCH_LABEL_NAME

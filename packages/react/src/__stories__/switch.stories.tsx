@@ -4,12 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { action } from 'storybook/actions'
 
 import { Button } from '@/components/button'
-import {
-  SwitchWithLabel as ComponentSwitchWithLabel,
-  Switch,
-  type SwitchRootProps,
-  type SwitchWithLabelProps,
-} from '@/components/switch'
+import { Switch, type SwitchRootProps } from '@/components/switch'
 
 const meta = {
   title: 'Components/Switch',
@@ -184,70 +179,6 @@ export const Controlled: SwitchStory = {
   parameters: {
     controls: {
       disable: true,
-    },
-    actions: {
-      disable: true,
-    },
-  },
-}
-
-export const SwitchWithLabel: StoryObj<SwitchWithLabelProps> = {
-  args: {
-    flip: false,
-  },
-  argTypes: {
-    flip: {
-      control: 'boolean',
-      description:
-        'Reverses the layout, positioning the switch on the right side instead of the left',
-      defaultValue: false,
-    },
-  },
-  render(args) {
-    return (
-      <div className="space-y-6">
-        <ComponentSwitchWithLabel
-          {...args}
-          editLabel="Email notifications"
-          editSublabel="Recommended"
-          badgeProps={{
-            enabled: true,
-            variant: 'light',
-            color: 'blue',
-            children: 'New',
-          }}
-          editDescription="Receive email notifications about activity in your account, including mentions and replies."
-          linkButtonProps={{
-            enabled: true,
-            children: 'Manage preferences',
-            href: '#',
-          }}
-        />
-
-        <ComponentSwitchWithLabel
-          {...args}
-          editLabel="Two-factor authentication"
-          editSublabel="Recommended "
-          editDescription="Add an extra layer of security to your account by requiring a verification code in addition to your password."
-          linkButtonProps={{
-            enabled: true,
-            children: 'Learn more',
-            href: '#',
-          }}
-        />
-
-        <ComponentSwitchWithLabel
-          {...args}
-          editLabel="Dark mode"
-          editSublabel="Recommended"
-          editDescription="Switch between light and dark theme for better visibility in different lighting conditions."
-        />
-      </div>
-    )
-  },
-  parameters: {
-    controls: {
-      include: ['flip'],
     },
     actions: {
       disable: true,

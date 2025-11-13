@@ -4,11 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { action } from 'storybook/actions'
 
 import { Button } from '@/components/button'
-import {
-  Checkbox,
-  type CheckboxRootProps,
-  CheckboxWithLabel as ComponentCheckboxWithLabel,
-} from '@/components/checkbox'
+import { Checkbox, type CheckboxRootProps } from '@/components/checkbox'
 
 const meta = {
   title: 'Components/Checkbox',
@@ -214,65 +210,6 @@ export const Controlled: CheckboxStory = {
       </div>
     )
   },
-  parameters: {
-    controls: {
-      disable: true,
-    },
-    actions: {
-      disable: true,
-    },
-  },
-}
-
-export const CheckboxWithLabel: CheckboxStory = {
-  render: () => (
-    <div className="flex flex-col gap-6">
-      <ComponentCheckboxWithLabel
-        editLabel="Email notifications"
-        editSublabel="(Recommended)"
-        editDescription="Receive updates about your account activity, security alerts, and product news directly to your inbox."
-        badgeProps={{
-          enabled: true,
-          children: 'New',
-          color: 'green',
-        }}
-        linkButtonProps={{
-          enabled: true,
-          children: 'Manage preferences',
-        }}
-        defaultChecked
-      />
-
-      <ComponentCheckboxWithLabel
-        editLabel="Two-factor authentication"
-        editSublabel="(Required for admin)"
-        editDescription="Add an extra layer of security to your account by requiring a verification code in addition to your password."
-        linkButtonProps={{
-          enabled: true,
-          children: 'Learn more',
-        }}
-      />
-
-      <ComponentCheckboxWithLabel
-        editLabel="Marketing communications"
-        editSublabel="(Recommended)"
-        editDescription="Get the latest product updates, feature releases, and special offers from our team."
-      />
-
-      <ComponentCheckboxWithLabel
-        editLabel="Beta features access"
-        badgeProps={{
-          enabled: true,
-          children: 'Beta',
-        }}
-        editDescription="Get early access to experimental features. Note that these may be unstable or change without notice."
-        linkButtonProps={{
-          enabled: true,
-          children: 'View roadmap',
-        }}
-      />
-    </div>
-  ),
   parameters: {
     controls: {
       disable: true,

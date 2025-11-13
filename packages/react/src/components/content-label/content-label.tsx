@@ -4,6 +4,36 @@ import { Label } from '@/components/label'
 import { cn } from '@/lib/cn'
 import type { PolymorphicProps } from '@/types/polymorphic'
 
+/**
+ * Content label component that displays rich labeled content with slots.
+ * Combines a main label, optional sublabel, description text, and customizable start/end slots.
+ * Supports polymorphic rendering and two size variants.
+ * Includes proper ARIA attributes for accessibility with labelledby and describedby.
+ *
+ * @example
+ * ```tsx
+ * <ContentLabel
+ *   editLabel="Profile Settings"
+ *   editDescription="Manage your account information and preferences"
+ * />
+ *
+ * <ContentLabel
+ *   size="lg"
+ *   editLabel="Avatar"
+ *   editSublabel="JPG, PNG (max 2MB)"
+ *   editDescription="Upload a profile picture to personalize your account"
+ *   startSlot={<Avatar.Root><Avatar.Image src="/avatar.jpg" /></Avatar.Root>}
+ *   endSlot={<Button.Root>Upload</Button.Root>}
+ * />
+ *
+ * <ContentLabel
+ *   as="label"
+ *   editLabel="Email notifications"
+ *   editDescription="Control how you receive notifications"
+ *   endSlot={<Switch.Root />}
+ * />
+ * ```
+ */
 export interface ContentLabelProps {
   /**
    * Additional CSS classes to apply to the root element
