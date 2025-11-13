@@ -11,6 +11,7 @@ import {
   RiMagicFill,
 } from '@remixicon/react'
 import { useCloneChildren } from '@/hooks/use-clone-children'
+import { cn } from '@/lib/cn'
 import { tv, type VariantProps } from '@/lib/tv'
 import type { PolymorphicProps } from '@/types/polymorphic'
 
@@ -18,6 +19,7 @@ const ALERT_ROOT_NAME = 'Alert.Root'
 const ALERT_ICON_NAME = 'Alert.Icon'
 const ALERT_TITLE_NAME = 'Alert.Title'
 const ALERT_DESCRIPTION_NAME = 'Alert.Description'
+const ALERT_ACTIONS_NAME = 'Alert.Actions'
 const ALERT_CLOSE_NAME = 'Alert.Close'
 
 const createAlertRecipe = tv({
@@ -54,6 +56,7 @@ const createAlertRecipe = tv({
       },
       lg: {
         root: 'items-start p-3.5 pb-4 [&_svg]:size-5',
+        title: 'font-medium',
       },
     },
   },
@@ -273,7 +276,7 @@ export function AlertRoot({
   'aria-atomic': ariaAtomic = true,
   ...props
 }: AlertRootProps) {
-  const { id, cloneChildren } = useCloneChildren({
+  const { id, cloneChildren, getTargetId } = useCloneChildren({
     props: {
       status,
       variant,
@@ -281,8 +284,11 @@ export function AlertRoot({
     },
     children,
     idPrefix: 'alert',
-    targets: [ALERT_ICON_NAME, ALERT_TITLE_NAME, ALERT_CLOSE_NAME],
+    targets: [ALERT_ICON_NAME, ALERT_TITLE_NAME, ALERT_CLOSE_NAME, ALERT_DESCRIPTION_NAME],
   })
+
+  const computedAriaLive = ariaLive ?? (status === 'danger' ? 'assertive' : 'polite')
+  const clonedChildren = cloneChildren(children)
 
   return (
     <div
@@ -295,10 +301,14 @@ export function AlertRoot({
         size,
       })}
       id={id}
-      aria-live={ariaLive}
+      aria-live={computedAriaLive}
       aria-atomic={ariaAtomic}
+      data-scope="alert"
+      data-part="root"
+      aria-labelledby={getTargetId(ALERT_TITLE_NAME)}
+      aria-describedby={getTargetId(ALERT_DESCRIPTION_NAME)}
     >
-      {cloneChildren(children)}
+      {clonedChildren}
     </div>
   )
 }
@@ -335,6 +345,8 @@ export function AlertIcon<T extends React.ElementType = RemixiconComponentType>(
         size,
       })}
       aria-hidden
+      data-scope="alert"
+      data-part="icon"
     />
   )
 }
@@ -356,6 +368,8 @@ export function AlertTitle({ className, variant, status, size, ...props }: Alert
         status,
         size,
       })}
+      data-scope="alert"
+      data-part="title"
     />
   )
 }
@@ -364,15 +378,19 @@ AlertTitle.displayName = ALERT_TITLE_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface AlertDescriptionProps extends React.ComponentProps<'p'> {}
+export interface AlertDescriptionProps
+  extends Assign<React.ComponentProps<'p'>, AlertSharedProps> {}
 
-export function AlertDescription({ className, ...props }: AlertDescriptionProps) {
+export function AlertDescription({ className, size, ...props }: AlertDescriptionProps) {
   return (
     <p
       {...props}
       className={alertRecipe.description({
         className,
+        size,
       })}
+      data-scope="alert"
+      data-part="description"
     />
   )
 }
@@ -381,6 +399,24 @@ AlertDescription.displayName = ALERT_DESCRIPTION_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+export interface AlertActionsProps {
+  children?: React.ReactNode
+}
+
+export function AlertActions(props: AlertActionsProps) {
+  return (
+    <div
+      {...props}
+      className={cn('flex items-center gap-x-2')}
+      data-scope="alert"
+      data-part="actions"
+    />
+  )
+}
+
+AlertActions.displayName = ALERT_ACTIONS_NAME
+
+////////////////////////////////////////////////////////////////////////////////////
 export interface AlertCloseProps extends React.ComponentProps<'button'>, AlertSharedProps {}
 
 export function AlertClose<T extends React.ElementType = RemixiconComponentType>({
@@ -389,6 +425,7 @@ export function AlertClose<T extends React.ElementType = RemixiconComponentType>
   variant,
   size,
   as,
+  'aria-label': ariaLabel = 'Close',
 }: PolymorphicProps<T> & AlertCloseProps) {
   const Component = as || RiCloseLine
 
@@ -401,6 +438,9 @@ export function AlertClose<T extends React.ElementType = RemixiconComponentType>
         variant,
         size,
       })}
+      data-scope="alert"
+      data-part="close"
+      aria-label={ariaLabel}
     >
       <Component aria-hidden />
     </button>

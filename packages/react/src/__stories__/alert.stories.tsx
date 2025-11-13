@@ -85,9 +85,11 @@ export const Default: AlertStory = {
       <Alert.Root {...args}>
         <Alert.Icon />
         <Alert.Title>Insert your alert title here!</Alert.Title>
-        <LinkButton.Root href="/" size="md" underline>
+
+        <LinkButton.Root href="/" size={args.size === 'xs' ? 'sm' : 'md'} underline>
           Upgrade
         </LinkButton.Root>
+
         <Alert.Close />
       </Alert.Root>
     )
@@ -107,9 +109,11 @@ export const Large: AlertStory = {
     return (
       <Alert.Root {...args}>
         <Alert.Icon />
+
         <div className="space-y-2.5">
           <hgroup>
             <Alert.Title>Insert your alert title here!</Alert.Title>
+
             <Alert.Description>
               Insert the alert description here. It would look better as two lines of text.
             </Alert.Description>

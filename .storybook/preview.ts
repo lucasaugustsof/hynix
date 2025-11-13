@@ -4,6 +4,7 @@ import { withThemeByDataAttribute } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react-vite'
 
 import { withReactScan } from './decorators/with-react-scan'
+import { withStrictMode } from './decorators/with-strict-mode'
 
 const preview: Preview = {
   parameters: {
@@ -24,6 +25,7 @@ const preview: Preview = {
       defaultTheme: 'light',
     }),
     withReactScan,
+    withStrictMode,
   ],
 }
 
