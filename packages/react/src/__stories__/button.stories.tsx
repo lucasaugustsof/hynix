@@ -1,18 +1,7 @@
-import React from 'react'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import {
-  RiAddLine,
-  RiArrowLeftSLine,
-  RiArrowRightSLine,
-  RiCheckboxCircleLine,
-  RiDeleteBinLine,
-  RiFileCopyLine,
-} from '@remixicon/react'
-import { AnimatePresence, motion } from 'motion/react'
+import { RiAddLine, RiArrowLeftSLine, RiArrowRightSLine, RiDeleteBinLine } from '@remixicon/react'
 import { Button, type ButtonRootProps } from '@/components/button'
-import { cn } from '@/lib/cn'
 
 export default {
   title: 'Components/Button',
@@ -192,70 +181,6 @@ export const IconOnly: ButtonStory = {
       </Button.Root>
     </div>
   ),
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-}
-
-export const WithAnimation: ButtonStory = {
-  render() {
-    function CopyButton() {
-      const [isCopied, setIsCopied] = React.useState(false)
-
-      function handleCopyText() {
-        const TIMEOUT = 2000
-
-        navigator.clipboard.writeText('Hello World')
-        setIsCopied(true)
-
-        setTimeout(() => setIsCopied(false), TIMEOUT)
-      }
-
-      return (
-        <Button.Root
-          onClick={handleCopyText}
-          className={cn(
-            isCopied && 'pointer-events-none',
-            'transition-[background-color,box-shadow,scale] active:scale-98'
-          )}
-          variant="secondary"
-        >
-          <AnimatePresence initial={false} mode="popLayout">
-            <Button.Icon
-              as={motion.span}
-              key={isCopied ? 'copied' : 'copy'}
-              initial={{
-                opacity: 0.5,
-                filter: 'blur(2px)',
-                scale: 0.9,
-              }}
-              animate={{
-                opacity: 1,
-                filter: 'blur(0px)',
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                filter: 'blur(2px)',
-                scale: 0.9,
-              }}
-              transition={{
-                ease: 'easeOut',
-                duration: 0.15,
-              }}
-            >
-              {isCopied ? <RiCheckboxCircleLine /> : <RiFileCopyLine />}
-            </Button.Icon>
-          </AnimatePresence>
-          Copy
-        </Button.Root>
-      )
-    }
-
-    return <CopyButton />
-  },
   parameters: {
     controls: {
       disable: true,

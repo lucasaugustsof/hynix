@@ -118,6 +118,8 @@ export function BadgeRoot({
     idPrefix: 'badge',
   })
 
+  const clonedChildren = cloneChildren(children)
+
   return (
     <div
       {...props}
@@ -137,7 +139,7 @@ export function BadgeRoot({
       data-part="root"
       aria-disabled={disabled}
     >
-      {cloneChildren()}
+      {clonedChildren}
     </div>
   )
 }

@@ -78,6 +78,8 @@ export function FieldRoot({ children, className, size, ...props }: FieldRootProp
     children,
   })
 
+  const clonedChildren = cloneChildren(children)
+
   return (
     <ArkField.Root
       {...props}
@@ -87,7 +89,7 @@ export function FieldRoot({ children, className, size, ...props }: FieldRootProp
       })}
       id={id}
     >
-      {cloneChildren()}
+      {clonedChildren}
     </ArkField.Root>
   )
 }

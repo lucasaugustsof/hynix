@@ -81,6 +81,8 @@ export function LinkButtonRoot({
     children,
   })
 
+  const clonedChildren = cloneChildren(children)
+
   return (
     <ark.a
       {...props}
@@ -96,7 +98,7 @@ export function LinkButtonRoot({
       data-scope="link-button"
       data-part="root"
     >
-      {cloneChildren()}
+      {clonedChildren}
     </ark.a>
   )
 }

@@ -163,6 +163,8 @@ export function AvatarRoot({ children, className, size, ...props }: AvatarRootPr
     children,
   })
 
+  const clonedChildren = cloneChildren(children)
+
   return (
     <ArkAvatar.Root
       {...props}
@@ -172,7 +174,7 @@ export function AvatarRoot({ children, className, size, ...props }: AvatarRootPr
         size,
       })}
     >
-      {cloneChildren()}
+      {clonedChildren}
     </ArkAvatar.Root>
   )
 }

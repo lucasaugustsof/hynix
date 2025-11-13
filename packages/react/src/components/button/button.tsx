@@ -90,6 +90,8 @@ export function ButtonRoot({
     idPrefix: 'button',
   })
 
+  const clonedChildren = cloneChildren(children)
+
   return (
     <ark.button
       {...props}
@@ -105,7 +107,7 @@ export function ButtonRoot({
       data-part="root"
       aria-disabled={disabled ?? undefined}
     >
-      {cloneChildren()}
+      {clonedChildren}
     </ark.button>
   )
 }
