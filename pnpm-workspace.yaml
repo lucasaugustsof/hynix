@@ -1,5 +1,8 @@
 packages:
   - packages/*
 
+ignoredBuiltDependencies:
+  - esbuild
+
 onlyBuiltDependencies:
   - core-js
