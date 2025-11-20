@@ -1,7 +1,6 @@
 @import "tailwindcss";
-@import "./shadows.css";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-surface-1: var(--surface-1);
@@ -20,52 +19,44 @@
   --color-disabled: var(--disabled);
 
   --color-brand: var(--brand);
+
   --color-danger: var(--danger);
   --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-information: var(--information);
 
   --font-sans: "Inter", sans-serif;
 }
 
-:root {
-  --surface-1: oklch(1 0 0);
-  --surface-2: oklch(0.9911 0 0);
+:root,
+[data-theme="light"] {
+  color-scheme: light;
 
-  --fg-1: oklch(0.2178 0 0);
-  --fg-2: oklch(1 0 0);
+  --surface-1: light-dark(oklch(1 0 0), oklch(0.1913 0 0));
+  --surface-2: light-dark(oklch(0.9911 0 0), oklch(0.2438 0.0061 17.58));
 
-  --fill-1: oklch(0.9674 0.0013 286.37);
-  --fill-2: oklch(0.91 0.0013 286.37);
-  --fill-3: oklch(0.8588 0.0055 286.28);
-  --fill-4: oklch(0.7118 0.0129 286.07);
-  --fill-5: oklch(0.4419 0.0146 285.79);
+  --fg-1: light-dark(oklch(0.2178 0 0), oklch(1 0 0));
+  --fg-2: light-dark(oklch(1 0 0), oklch(0.2178 0 0));
 
-  --border: oklch(0.91 0.0013 286.37);
-  --disabled: oklch(0.2178 0 0 / 18%);
+  --fill-1: light-dark(oklch(0.9674 0.0013 286.37), oklch(0.3211 0 0));
+  --fill-2: light-dark(oklch(0.91 0.0013 286.37), oklch(0.36 0 0));
+  --fill-3: light-dark(oklch(0.8588 0.0055 286.28), oklch(0.4855 0 0));
+  --fill-4: light-dark(oklch(0.7118 0.0129 286.07), oklch(0.559 0 0));
+  --fill-5: light-dark(oklch(0.4419 0.0146 285.79), oklch(0.6895 0 0));
 
-  --brand: oklch(0.2178 0 0);
-  --danger: oklch(0.5785 0.2138 27.17);
-  --success: oklch(0.5729 0.1544 149.22);
+  --border: light-dark(oklch(0.91 0.0013 286.37), oklch(0.36 0 0));
+  --disabled: light-dark(oklch(0.2178 0 0 / 18%), oklch(1 0 0 / 18%));
+
+  --brand: light-dark(oklch(0.2178 0 0), oklch(1 0 0));
+
+  --danger: light-dark(oklch(0.5785 0.2138 27.17), oklch(0.6989 0.1919 23.47));
+  --success: light-dark(oklch(0.5729 0.1544 149.22), oklch(0.8003 0.1821 151.71));
+  --warning: light-dark(oklch(0.702 0.1832 48.56), oklch(0.7576 0.159 55.93));
+  --information: light-dark(oklch(0.523 0.2282 262.64), oklch(0.7015 0.1596 253.87));
 }
 
 [data-theme="dark"] {
-  --surface-1: oklch(0.1913 0 0);
-  --surface-2: oklch(0.2438 0.0061 17.58);
-
-  --fg-1: oklch(1 0 0);
-  --fg-2: oklch(0.2178 0 0);
-
-  --fill-1: oklch(0.3211 0 0);
-  --fill-2: oklch(0.36 0 0);
-  --fill-3: oklch(0.4855 0 0);
-  --fill-4: oklch(0.559 0 0);
-  --fill-5: oklch(0.6895 0 0);
-
-  --border: oklch(0.36 0 0);
-  --disabled: oklch(1 0 0 / 18%);
-
-  --brand: oklch(1 0 0);
-  --danger: oklch(0.6989 0.1919 23.47);
-  --success: oklch(0.8003 0.1821 151.71);
+  color-scheme: dark;
 }
 
 @layer base {
@@ -81,5 +72,5 @@
 
 @utility focus-outline {
   outline-offset: 2px;
-  outline: 2px solid --alpha(var(--focus-outline-color, var(--brand)) / 15%);
+  outline: 2px solid --alpha(var(--focus-outline-color, var(--color-brand)) / 0.15);
 }

@@ -26,6 +26,28 @@
     "rules": {
       "suspicious": {
         "noUnknownAtRules": "off"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "warn",
+          "options": {
+            "functions": ["cn", "tv"],
+            "attributes": ["className", "class"]
+          }
+        }
+      },
+      "complexity": {
+        "noExcessiveCognitiveComplexity": {
+          "level": "warn",
+          "options": {
+            "maxAllowedComplexity": 20
+          }
+        }
+      },
+      "a11y": {
+        "useSemanticElements": "off",
+        "noLabelWithoutControl": "off"
       }
     }
   }

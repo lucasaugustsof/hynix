@@ -3,3 +3,7 @@ dist/
 
 *storybook.log
 storybook-static
+
+# MacOS
+.DS_Store
+Thumbs.db

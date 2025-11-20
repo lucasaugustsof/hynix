@@ -10,14 +10,16 @@
     "check": "biome check --write ."
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.14",
     "tailwindcss": "^4.1.14"
   },
   "dependencies": {
     "@ark-ui/react": "^5.26.0",
+    "@remixicon/react": "^4.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.545.0",
     "motion": "^12.23.24",
     "tailwind-merge": "^3.3.1",
-    "tailwind-variants": "^3.1.1"
+    "tailwind-variants": "^3.1.1",
+    "usehooks-ts": "^3.1.1"
   }
 }

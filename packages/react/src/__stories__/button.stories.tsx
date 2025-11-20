@@ -1,15 +1,11 @@
-import React from 'react'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { ChevronLeft, ChevronRight, CircleCheck, Copy, Plus, Trash } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
-import { Button, type ButtonProps } from '@/components/button'
-import { cn } from '@/lib/cn'
+import { RiAddLine, RiArrowLeftSLine, RiArrowRightSLine, RiDeleteBinLine } from '@remixicon/react'
+import { Button, type ButtonRootProps } from '@/components/button'
 
 export default {
   title: 'Components/Button',
-  component: Button,
+  component: Button.Root,
   argTypes: {
     variant: {
       control: 'select',
@@ -94,9 +90,9 @@ export default {
     disabled: false,
     iconOnly: false,
   },
-} satisfies Meta<ButtonProps>
+} satisfies Meta<ButtonRootProps>
 
-type ButtonStory = StoryObj<ButtonProps>
+type ButtonStory = StoryObj<ButtonRootProps>
 
 export const Default: ButtonStory = {
   args: {
@@ -107,26 +103,26 @@ export const Default: ButtonStory = {
 export const AllVariants: ButtonStory = {
   render: () => (
     <div className="flex flex-wrap items-center gap-6">
-      <Button variant="primary">
-        <ChevronLeft />
+      <Button.Root variant="primary">
+        <Button.Icon as={RiArrowLeftSLine} />
         Button
-        <ChevronRight />
-      </Button>
-      <Button variant="secondary">
-        <ChevronLeft />
+        <Button.Icon as={RiArrowRightSLine} />
+      </Button.Root>
+      <Button.Root variant="secondary">
+        <Button.Icon as={RiArrowLeftSLine} />
         Button
-        <ChevronRight />
-      </Button>
-      <Button variant="outline">
-        <ChevronLeft />
+        <Button.Icon as={RiArrowRightSLine} />
+      </Button.Root>
+      <Button.Root variant="outline">
+        <Button.Icon as={RiArrowLeftSLine} />
         Button
-        <ChevronRight />
-      </Button>
-      <Button variant="danger">
-        <ChevronLeft />
+        <Button.Icon as={RiArrowRightSLine} />
+      </Button.Root>
+      <Button.Root variant="danger">
+        <Button.Icon as={RiArrowLeftSLine} />
         Button
-        <ChevronRight />
-      </Button>
+        <Button.Icon as={RiArrowRightSLine} />
+      </Button.Root>
     </div>
   ),
   parameters: {
@@ -139,26 +135,26 @@ export const AllVariants: ButtonStory = {
 export const AllSizes: ButtonStory = {
   render: () => (
     <div className="flex flex-wrap items-center gap-6">
-      <Button size="2xs">
-        <ChevronLeft />
+      <Button.Root size="2xs">
+        <Button.Icon as={RiArrowLeftSLine} />
         Button
-        <ChevronRight />
-      </Button>
-      <Button size="xs">
-        <ChevronLeft />
+        <Button.Icon as={RiArrowRightSLine} />
+      </Button.Root>
+      <Button.Root size="xs">
+        <Button.Icon as={RiArrowLeftSLine} />
         Button
-        <ChevronRight />
-      </Button>
-      <Button size="sm">
-        <ChevronLeft />
+        <Button.Icon as={RiArrowRightSLine} />
+      </Button.Root>
+      <Button.Root size="sm">
+        <Button.Icon as={RiArrowLeftSLine} />
         Button
-        <ChevronRight />
-      </Button>
-      <Button size="md">
-        <ChevronLeft />
+        <Button.Icon as={RiArrowRightSLine} />
+      </Button.Root>
+      <Button.Root size="md">
+        <Button.Icon as={RiArrowLeftSLine} />
         Button
-        <ChevronRight />
-      </Button>
+        <Button.Icon as={RiArrowRightSLine} />
+      </Button.Root>
     </div>
   ),
   parameters: {
@@ -171,83 +167,20 @@ export const AllSizes: ButtonStory = {
 export const IconOnly: ButtonStory = {
   render: () => (
     <div className="flex flex-wrap items-center gap-6">
-      <Button iconOnly variant="primary">
-        <Plus />
-      </Button>
-      <Button iconOnly variant="secondary">
-        <Plus />
-      </Button>
-      <Button iconOnly variant="outline">
-        <Plus />
-      </Button>
-      <Button iconOnly variant="danger">
-        <Trash />
-      </Button>
+      <Button.Root iconOnly variant="primary">
+        <Button.Icon as={RiAddLine} />
+      </Button.Root>
+      <Button.Root iconOnly variant="secondary">
+        <Button.Icon as={RiAddLine} />
+      </Button.Root>
+      <Button.Root iconOnly variant="outline">
+        <Button.Icon as={RiAddLine} />
+      </Button.Root>
+      <Button.Root iconOnly variant="danger">
+        <Button.Icon as={RiDeleteBinLine} />
+      </Button.Root>
     </div>
   ),
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-}
-
-export const WithAnimation: ButtonStory = {
-  render() {
-    function CopyButton() {
-      const [isCopied, setIsCopied] = React.useState(false)
-
-      function handleCopyText() {
-        const TIMEOUT = 2000
-
-        navigator.clipboard.writeText('Hello World')
-        setIsCopied(true)
-
-        setTimeout(() => setIsCopied(false), TIMEOUT)
-      }
-
-      return (
-        <Button
-          onClick={handleCopyText}
-          className={cn(
-            isCopied && 'pointer-events-none',
-            'transition-[background-color,box-shadow,scale] active:scale-98'
-          )}
-          variant="secondary"
-        >
-          <AnimatePresence initial={false} mode="popLayout">
-            <motion.span
-              key={isCopied ? 'copied' : 'copy'}
-              initial={{
-                opacity: 0.5,
-                filter: 'blur(2px)',
-                scale: 0.9,
-              }}
-              animate={{
-                opacity: 1,
-                filter: 'blur(0px)',
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                filter: 'blur(2px)',
-                scale: 0.9,
-              }}
-              transition={{
-                ease: 'easeOut',
-                duration: 0.15,
-              }}
-            >
-              {isCopied ? <CircleCheck /> : <Copy />}
-            </motion.span>
-          </AnimatePresence>
-          Copy
-        </Button>
-      )
-    }
-
-    return <CopyButton />
-  },
   parameters: {
     controls: {
       disable: true,
