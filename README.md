@@ -1,4 +1,8 @@
-# UI
+<p align="center">
+    <img src=".github/media/thumbnail.jpg" alt="UI Thumbnail">
+</p>
+
+<br/>
 
 A refined collection of accessible and consistent components built with React, Tailwind CSS, and Ark UI — designed for speed, aesthetics, and a flawless experience.
 

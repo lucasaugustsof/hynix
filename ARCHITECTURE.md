@@ -1,5 +1,5 @@
 # Architecture
-*last updated: 2025-11-03*
+*last updated: 2025-11-20*
 
 ## Overview
 
