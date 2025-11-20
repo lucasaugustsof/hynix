@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "hynix",
   "type": "module",
   "packageManager": "pnpm@10.22.0",
   "engines": {
@@ -8,6 +8,8 @@
   "private": true,
   "devDependencies": {
     "@biomejs/biome": "2.3.4",
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.7",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@storybook/addon-a11y": "^10.0.6",
@@ -26,8 +28,19 @@
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "prepare": "husky"
+    "build:storybook": "storybook build",
+    "clean:storybook": "rm -rf node_modules/.cache/storybook",
+    "husky:prepare": "husky",
+    "alpha:enter": "changeset pre enter alpha",
+    "alpha:exit": "changeset pre exit alpha",
+    "beta:enter": "changeset pre enter beta",
+    "beta:exit": "changeset pre exit beta",
+    "next:enter": "changeset pre enter next",
+    "next:exit": "changeset pre exit next",
+    "version": "changeset version",
+    "release": "changeset publish",
+    "version:dev": "changeset version --snapshot dev",
+    "release:dev": "cnageset publish --tag dev"
   },
   "dependencies": {
     "react": "^19.2.0",
