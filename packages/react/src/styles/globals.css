@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -30,7 +31,7 @@
 
 :root,
 [data-theme="light"] {
-  color-scheme: light;
+  color-scheme: light only;
 
   --surface-1: light-dark(oklch(1 0 0), oklch(0.1913 0 0));
   --surface-2: light-dark(oklch(0.9911 0 0), oklch(0.2438 0.0061 17.58));
@@ -56,21 +57,27 @@
 }
 
 [data-theme="dark"] {
-  color-scheme: dark;
+  color-scheme: dark only;
 }
 
 @layer base {
+  * {
+    @apply antialiased border-border;
+  }
+
   html {
     @apply scroll-smooth;
   }
 
   body {
-    @apply antialiased bg-surface-1 text-fg-1 border-border;
+    @apply bg-surface-1 text-fg-1;
     text-rendering: optimizeLegibility;
   }
 }
 
 @utility focus-outline {
-  outline-offset: 2px;
-  outline: 2px solid --alpha(var(--focus-outline-color, var(--color-brand)) / 0.15);
+  --outline-width: 0.125rem;
+
+  outline-offset: var(--outline-width);
+  outline: var(--outline-width) solid --alpha(var(--focus-outline-color, var(--color-brand)) / 0.15);
 }
