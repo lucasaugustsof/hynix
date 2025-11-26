@@ -9,6 +9,7 @@ export {
   ModalOverlay as Overlay,
   ModalRoot as Root,
   ModalRootProvider as RootProvider,
+  ModalStatus as Status,
   ModalTitle as Title,
   ModalTrigger as Trigger,
 } from './modal'

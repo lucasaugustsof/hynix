@@ -17,6 +17,7 @@ export type {
   ModalOverlayProps,
   ModalRootProps,
   ModalRootProviderProps,
+  ModalStatusProps,
   ModalTitleProps,
   ModalTriggerProps,
 } from './modal'

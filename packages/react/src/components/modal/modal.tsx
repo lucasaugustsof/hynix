@@ -34,6 +34,7 @@ const MODAL_BODY_NAME = 'Modal.Body'
 const MODAL_FOOTER_NAME = 'Modal.Footer'
 const MODAL_ACTIONS_NAME = 'Modal.Actions'
 const MODAL_CLOSE_TRIGGER_NAME = 'Modal.CloseTrigger'
+const MODAL_STATUS_NAME = 'Modal.Status'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -253,7 +254,7 @@ export function ModalContent({ className, ...props }: ModalContentProps) {
       <ArkDialog.Content
         {...props}
         className={cn(
-          '-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 max-w-[calc(100vw_-_--spacing(4))] origin-center overflow-hidden rounded-[1.25rem] border duration-150 ease-in-out',
+          '-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 max-w-[calc(100vw_-_--spacing(6))] origin-center overflow-hidden rounded-[1.25rem] border shadow-black/6 shadow-lg duration-150 ease-in-out',
           // open
           'data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in',
           // closed
@@ -626,3 +627,60 @@ export function ModalCloseTrigger(props: ModalCloseTriggerProps) {
 }
 
 ModalCloseTrigger.displayName = MODAL_CLOSE_TRIGGER_NAME
+
+////////////////////////////////////////////////////////////////////////////////////
+
+type ModalStatusIconType = 'error' | 'warning' | 'success' | 'information'
+
+export interface ModalStatusProps extends React.ComponentProps<'div'> {
+  type?: ModalStatusIconType
+}
+
+/**
+ * Displays a colored status icon for modals.
+ *
+ * @param type - The status type: 'error', 'warning', 'success', or 'information'. Defaults to 'information'.
+ * @param className - Additional CSS classes to apply.
+ *
+ * @example
+ * ```tsx
+ * <Modal.Status type="error" />
+ * <Modal.Status type="success" />
+ * ```
+ */
+export function ModalStatus({ className, type = 'information' }: ModalStatusProps) {
+  const iconByType = {
+    error: <RiErrorWarningFill />,
+    warning: <RiAlertFill />,
+    success: <RiCheckboxCircleFill />,
+    information: <RiInformationFill />,
+  } as const
+
+  const iconColorByType = {
+    error: '[--icon-color:var(--color-danger)]',
+    warning: '[--icon-color:var(--color-warning)]',
+    success: '[--icon-color:var(--color-success)]',
+    information: '[--icon-color:var(--color-information)]',
+  } as const
+
+  const currentIcon = iconByType[type]
+  const iconColorVar = iconColorByType[type]
+
+  return (
+    <div
+      role="presentation"
+      className={cn(
+        iconColorVar,
+        'inline-block rounded-[--spacing(2.5)] bg-(--icon-color)/12 p-2 [&_svg]:fill-(--icon-color)',
+        className
+      )}
+      aria-hidden
+      data-scope="modal"
+      data-part="status"
+    >
+      {currentIcon}
+    </div>
+  )
+}
+
+ModalStatus.displayName = MODAL_STATUS_NAME
