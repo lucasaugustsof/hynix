@@ -1,5 +1,5 @@
 export type {
-  AlertCloseProps,
+  AlertCloseTriggerProps,
   AlertDescriptionProps,
   AlertRootProps,
   AlertTitleProps,
