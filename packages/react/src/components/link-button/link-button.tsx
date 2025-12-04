@@ -10,7 +10,7 @@ const LINK_BUTTON_ICON_NAME = 'LinkButton.Icon'
 const createLinkButtonRecipe = tv({
   slots: {
     root: [
-      'inline-flex w-fit cursor-pointer items-center justify-center gap-x-1 whitespace-nowrap underline-offset-2 transition-colors',
+      'inline-flex w-fit cursor-pointer items-center justify-center gap-x-1 whitespace-nowrap underline-offset-2 outline-hidden transition-colors',
       'font-medium font-sans text-fg-1',
     ],
     icon: 'shrink-0',
