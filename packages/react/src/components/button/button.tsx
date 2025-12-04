@@ -24,6 +24,7 @@ const createButtonRecipe = tv({
       },
       secondary: {
         root: ['inset-ring-border bg-surface-2 enabled:hover:bg-fill-2', 'text-fg-1'],
+        icon: 'fill-fill-5',
       },
       outline: {
         root: ['inset-ring-brand bg-transparent enabled:hover:bg-brand/10', 'text-brand'],
