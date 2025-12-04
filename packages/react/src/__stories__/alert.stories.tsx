@@ -90,7 +90,7 @@ export const Default: AlertStory = {
           Upgrade
         </LinkButton.Root>
 
-        <Alert.Close />
+        <Alert.CloseTrigger />
       </Alert.Root>
     )
   },
@@ -135,7 +135,7 @@ export const Large: AlertStory = {
           </div>
         </div>
 
-        <Alert.Close />
+        <Alert.CloseTrigger />
       </Alert.Root>
     )
   },
