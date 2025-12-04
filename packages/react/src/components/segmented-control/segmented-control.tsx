@@ -117,7 +117,7 @@ export function SegmentedControlList({ children, className, ...props }: Segmente
       <ArkTabs.Indicator
         className={cn(
           'z-10 h-(--height) w-(--width) rounded-md bg-surface-1 shadow-black/6 shadow-md',
-          '[--transition-duration:200ms] [--transition-timing-function:cubic-bezier(.645,.045,.355,1)]',
+          '[--transition-duration:150ms] [--transition-timing-function:cubic-bezier(.645,.045,.355,1)]',
           'supports-[corner-shape:superellipse]:[corner-shape:superellipse(1.3)]'
         )}
       />
