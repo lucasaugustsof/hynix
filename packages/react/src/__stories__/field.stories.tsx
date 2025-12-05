@@ -55,9 +55,15 @@ export const Default: FieldStory = {
     return (
       <Field.Root {...args}>
         <Field.Control>
-          <Field.Icon as={RiUser6Line} />
+          <Field.Icon asChild>
+            <RiUser6Line />
+          </Field.Icon>
+
           <Field.Input placeholder="Placeholder text..." />
-          <Field.Icon as={RiInformation2Fill} />
+
+          <Field.Icon asChild>
+            <RiInformation2Fill />
+          </Field.Icon>
         </Field.Control>
       </Field.Root>
     )
@@ -89,9 +95,13 @@ export const Disabled: FieldStory = {
     return (
       <Field.Root {...args}>
         <Field.Control>
-          <Field.Icon as={RiUser6Line} />
+          <Field.Icon asChild>
+            <RiUser6Line />
+          </Field.Icon>
           <Field.Input disabled placeholder="This field is locked" value="disabled@domain.com" />
-          <Field.Icon as={RiInformation2Fill} />
+          <Field.Icon asChild>
+            <RiInformation2Fill />
+          </Field.Icon>
         </Field.Control>
       </Field.Root>
     )
@@ -111,14 +121,18 @@ export const Invalid: FieldStory = {
     return (
       <Field.Root {...args}>
         <Field.Control>
-          <Field.Icon as={RiUser6Line} />
+          <Field.Icon asChild>
+            <RiUser6Line />
+          </Field.Icon>
           <Field.Input
             aria-invalid
             data-invalid
             placeholder="Enter a valid username"
             defaultValue="user!"
           />
-          <Field.Icon as={RiInformation2Fill} />
+          <Field.Icon asChild>
+            <RiInformation2Fill />
+          </Field.Icon>
         </Field.Control>
       </Field.Root>
     )
@@ -135,9 +149,13 @@ export const AllSizes: FieldStory = {
           <div key={size} className="space-y-1">
             <Field.Root {...args} size={size}>
               <Field.Control>
-                <Field.Icon as={RiUser6Line} />
+                <Field.Icon asChild>
+                  <RiUser6Line />
+                </Field.Icon>
                 <Field.Input placeholder={`Field size "${size}"`} />
-                <Field.Icon as={RiInformation2Fill} />
+                <Field.Icon asChild>
+                  <RiInformation2Fill />
+                </Field.Icon>
               </Field.Control>
             </Field.Root>
           </div>

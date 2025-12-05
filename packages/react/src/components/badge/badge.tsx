@@ -1,7 +1,8 @@
-import { useCloneChildren } from '@/hooks/use-clone-children'
+import { ark } from '@ark-ui/react/factory'
+
+import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
 import { cn } from '@/lib/cn'
 import { tv, type VariantProps } from '@/lib/tv'
-import type { PolymorphicProps } from '@/types/polymorphic'
 
 const BADGE_ROOT_NAME = 'Badge.Root'
 const BADGE_ICON_NAME = 'Badge.Icon'
@@ -129,20 +130,16 @@ export function BadgeRoot({
 
   const isNumberOnly = typeof children === 'number'
 
-  const { id, cloneChildren } = useCloneChildren({
-    targets: [BADGE_ICON_NAME, BADGE_DOT_NAME],
+  const clonedChildren = cloneChildrenWithProps(children, {
+    keyPrefix: 'Badge',
     props: {
       size,
     },
-    children,
-    idPrefix: 'badge',
+    targetDisplayNames: [BADGE_ICON_NAME, BADGE_DOT_NAME],
   })
-
-  const clonedChildren = cloneChildren(children)
 
   return (
     <div
-      {...props}
       role="status"
       className={cn(
         BADGE_COLOR_MAP[color],
@@ -154,10 +151,10 @@ export function BadgeRoot({
           className,
         })
       )}
-      id={id}
       data-scope="badge"
       data-part="root"
       aria-disabled={disabled}
+      {...props}
     >
       {clonedChildren}
     </div>
@@ -170,29 +167,25 @@ BadgeRoot.displayName = BADGE_ROOT_NAME
 
 /**
  * Badge icon component for displaying icons within badges.
- * Supports polymorphic rendering via the `as` prop.
+ * Supports polymorphic rendering via the `asChild` prop.
  * Automatically scales based on the badge size.
  *
  * @example
  * ```tsx
  * <Badge.Root>
- *   <Badge.Icon as={StarIcon} />
+ *   <Badge.Icon asChild>
+ *    <StarIcon />
+ *   </Badge.Icon>
  *   Featured
  * </Badge.Root>
- * <Badge.Icon as={CheckIcon} />
  * ```
  */
-export function BadgeIcon<T extends React.ElementType>({
-  variant,
-  size,
-  as,
-  ...props
-}: PolymorphicProps<T> & BadgeSharedProps) {
-  const Component = as || 'span'
 
+export interface BadgeIconProps extends React.ComponentProps<typeof ark.div>, BadgeSharedProps {}
+
+export function BadgeIcon({ variant, size, ...props }: BadgeIconProps) {
   return (
-    <Component
-      {...props}
+    <ark.div
       className={badgeRecipe.icon({
         variant,
         size,
@@ -200,6 +193,7 @@ export function BadgeIcon<T extends React.ElementType>({
       data-scope="badge"
       data-part="icon"
       aria-hidden
+      {...props}
     />
   )
 }
@@ -225,14 +219,12 @@ BadgeIcon.displayName = BADGE_ICON_NAME
  * </Badge.Root>
  * ```
  */
-export function BadgeDot({
-  className,
-  size,
-  ...props
-}: React.ComponentProps<'span'> & BadgeSharedProps) {
+
+export interface BadgeDotProps extends React.ComponentProps<'span'>, BadgeSharedProps {}
+
+export function BadgeDot({ className, size, ...props }: BadgeDotProps) {
   return (
     <span
-      {...props}
       className={badgeRecipe.dot({
         size,
         className,
@@ -240,6 +232,7 @@ export function BadgeDot({
       data-scope="badge"
       data-part="dot"
       aria-hidden
+      {...props}
     />
   )
 }
