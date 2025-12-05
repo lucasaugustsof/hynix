@@ -89,7 +89,6 @@ export function SwitchControl({ className, ...props }: SwitchControlProps) {
 
   return (
     <ArkSwitch.Control
-      {...props}
       className={cn(
         'group relative inline-flex h-4 w-7 shrink-0 cursor-pointer rounded-full transition-colors duration-200',
         'before:-translate-y-1/2 before:-translate-x-1/2 before:absolute before:inset-0 before:top-1/2 before:left-1/2 before:h-5 before:w-8 before:content-[""]',
@@ -101,6 +100,7 @@ export function SwitchControl({ className, ...props }: SwitchControlProps) {
         'data-disabled:inset-ring-1 data-disabled:inset-ring-disabled data-disabled:cursor-not-allowed data-disabled:bg-transparent',
         className
       )}
+      {...props}
     >
       <ArkSwitch.Thumb
         className={cn(

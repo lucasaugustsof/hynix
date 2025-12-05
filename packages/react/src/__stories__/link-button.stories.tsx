@@ -77,15 +77,23 @@ export const AllSizes: LinkButtonStory = {
     return (
       <div className="flex flex-wrap items-center gap-6">
         <LinkButton.Root size="sm" href="#">
-          <LinkButton.Icon as={RiArrowLeftSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowLeftSLine />
+          </LinkButton.Icon>
           Small Link
-          <LinkButton.Icon as={RiArrowRightSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowRightSLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
 
         <LinkButton.Root size="md" href="#">
-          <LinkButton.Icon as={RiArrowLeftSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowLeftSLine />
+          </LinkButton.Icon>
           Medium Link
-          <LinkButton.Icon as={RiArrowRightSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowRightSLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
       </div>
     )
@@ -102,12 +110,16 @@ export const WithLeftIcon: LinkButtonStory = {
     return (
       <div className="flex flex-wrap items-center gap-6">
         <LinkButton.Root size="sm" href="#">
-          <LinkButton.Icon as={RiArrowLeftSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowLeftSLine />
+          </LinkButton.Icon>
           Go Back
         </LinkButton.Root>
 
         <LinkButton.Root size="md" href="#">
-          <LinkButton.Icon as={RiArrowLeftSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowLeftSLine />
+          </LinkButton.Icon>
           Go Back
         </LinkButton.Root>
       </div>
@@ -126,12 +138,16 @@ export const WithRightIcon: LinkButtonStory = {
       <div className="flex flex-wrap items-center gap-6">
         <LinkButton.Root size="sm" href="#">
           Continue
-          <LinkButton.Icon as={RiArrowRightSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowRightSLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
 
         <LinkButton.Root size="md" href="#">
           Continue
-          <LinkButton.Icon as={RiArrowRightSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowRightSLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
       </div>
     )
@@ -148,15 +164,23 @@ export const WithBothIcons: LinkButtonStory = {
     return (
       <div className="flex flex-wrap items-center gap-6">
         <LinkButton.Root size="sm" href="#">
-          <LinkButton.Icon as={RiArrowLeftSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowLeftSLine />
+          </LinkButton.Icon>
           Link Button
-          <LinkButton.Icon as={RiArrowRightSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowRightSLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
 
         <LinkButton.Root size="md" href="#">
-          <LinkButton.Icon as={RiArrowLeftSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowLeftSLine />
+          </LinkButton.Icon>
           Link Button
-          <LinkButton.Icon as={RiArrowRightSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowRightSLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
       </div>
     )
@@ -174,12 +198,16 @@ export const ExternalLink: LinkButtonStory = {
       <div className="flex flex-wrap items-center gap-6">
         <LinkButton.Root size="sm" href="https://example.com" target="_blank" rel="noopener">
           External Link
-          <LinkButton.Icon as={RiExternalLinkLine} />
+          <LinkButton.Icon asChild>
+            <RiExternalLinkLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
 
         <LinkButton.Root size="md" href="https://example.com" target="_blank" rel="noopener">
           External Link
-          <LinkButton.Icon as={RiExternalLinkLine} />
+          <LinkButton.Icon asChild>
+            <RiExternalLinkLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
       </div>
     )
@@ -196,15 +224,23 @@ export const DisabledState: LinkButtonStory = {
     return (
       <div className="flex flex-wrap items-center gap-6">
         <LinkButton.Root size="sm" href="#" disabled>
-          <LinkButton.Icon as={RiArrowLeftSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowLeftSLine />
+          </LinkButton.Icon>
           Disabled Link
-          <LinkButton.Icon as={RiArrowRightSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowRightSLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
 
         <LinkButton.Root size="md" href="#" disabled>
-          <LinkButton.Icon as={RiArrowLeftSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowLeftSLine />
+          </LinkButton.Icon>
           Disabled Link
-          <LinkButton.Icon as={RiArrowRightSLine} />
+          <LinkButton.Icon asChild>
+            <RiArrowRightSLine />
+          </LinkButton.Icon>
         </LinkButton.Root>
       </div>
     )
@@ -245,13 +281,17 @@ export const Variations: LinkButtonStory = {
           <span className="font-medium text-fg-1 text-sm">Navigation Links</span>
           <div className="flex flex-wrap items-center gap-4">
             <LinkButton.Root href="#">
-              <LinkButton.Icon as={RiArrowLeftSLine} />
+              <LinkButton.Icon asChild>
+                <RiArrowLeftSLine />
+              </LinkButton.Icon>
               Back
             </LinkButton.Root>
 
             <LinkButton.Root href="#">
               Next
-              <LinkButton.Icon as={RiArrowRightSLine} />
+              <LinkButton.Icon asChild>
+                <RiArrowRightSLine />
+              </LinkButton.Icon>
             </LinkButton.Root>
           </div>
         </div>
@@ -261,12 +301,16 @@ export const Variations: LinkButtonStory = {
           <div className="flex flex-wrap items-center gap-4">
             <LinkButton.Root href="https://example.com" target="_blank" rel="noopener">
               Documentation
-              <LinkButton.Icon as={RiExternalLinkLine} />
+              <LinkButton.Icon asChild>
+                <RiExternalLinkLine />
+              </LinkButton.Icon>
             </LinkButton.Root>
 
             <LinkButton.Root href="https://example.com" target="_blank" rel="noopener">
               GitHub
-              <LinkButton.Icon as={RiExternalLinkLine} />
+              <LinkButton.Icon asChild>
+                <RiExternalLinkLine />
+              </LinkButton.Icon>
             </LinkButton.Root>
           </div>
         </div>
@@ -283,7 +327,9 @@ export const Variations: LinkButtonStory = {
           <span className="font-medium text-fg-1 text-sm">Disabled State</span>
           <div className="flex flex-wrap items-center gap-4">
             <LinkButton.Root href="#" disabled>
-              <LinkButton.Icon as={RiArrowLeftSLine} />
+              <LinkButton.Icon asChild>
+                <RiArrowLeftSLine />
+              </LinkButton.Icon>
               Can't click
             </LinkButton.Root>
 

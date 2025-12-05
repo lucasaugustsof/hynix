@@ -66,7 +66,6 @@ export function HintText({ children, className, leftIcon = false, ...props }: Hi
 
   return (
     <Component
-      {...props}
       className={cn(
         'group inline-flex items-start gap-x-1',
         'font-normal font-sans text-fg-1/70 text-xs/4',
@@ -74,6 +73,7 @@ export function HintText({ children, className, leftIcon = false, ...props }: Hi
         invalid && 'text-danger',
         className
       )}
+      {...props}
     >
       {leftIcon && (
         <RiInformationFill

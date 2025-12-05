@@ -1,8 +1,8 @@
 import * as React from 'react'
+import { ark } from '@ark-ui/react/factory'
 
 import { Label } from '@/components/label'
 import { cn } from '@/lib/cn'
-import type { PolymorphicProps } from '@/types/polymorphic'
 
 /**
  * Content label component that displays rich labeled content with slots.
@@ -25,16 +25,9 @@ import type { PolymorphicProps } from '@/types/polymorphic'
  *   startSlot={<Avatar.Root><Avatar.Image src="/avatar.jpg" /></Avatar.Root>}
  *   endSlot={<Button.Root>Upload</Button.Root>}
  * />
- *
- * <ContentLabel
- *   as="label"
- *   editLabel="Email notifications"
- *   editDescription="Control how you receive notifications"
- *   endSlot={<Switch.Root />}
- * />
  * ```
  */
-export interface ContentLabelProps {
+export interface ContentLabelProps extends React.ComponentProps<typeof ark.div> {
   /**
    * Additional CSS classes to apply to the root element
    */
@@ -66,8 +59,7 @@ export interface ContentLabelProps {
   endSlot?: React.ReactNode
 }
 
-export function ContentLabel<C extends React.ElementType>({
-  as,
+export function ContentLabel({
   className,
   size = 'md',
   editLabel,
@@ -75,15 +67,14 @@ export function ContentLabel<C extends React.ElementType>({
   editDescription,
   startSlot,
   endSlot,
-}: PolymorphicProps<C> & ContentLabelProps) {
-  const Component = as || 'div'
-  const hasSublabel = Boolean(editSublabel)
+}: ContentLabelProps) {
+  const hasSublabel = !!editSublabel
 
   const labelId = React.useId()
   const descriptionId = React.useId()
 
   return (
-    <Component
+    <ark.div
       role="group"
       className={cn('inline-flex w-fit items-center gap-x-3.5', className)}
       aria-labelledby={labelId}
@@ -118,7 +109,7 @@ export function ContentLabel<C extends React.ElementType>({
       </div>
 
       {endSlot}
-    </Component>
+    </ark.div>
   )
 }
 

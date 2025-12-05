@@ -10,7 +10,7 @@ import {
 } from '@ark-ui/react/avatar'
 import { ark } from '@ark-ui/react/factory'
 
-import { useCloneChildren } from '@/hooks/use-clone-children'
+import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
 import { cn } from '@/lib/cn'
 import { tv, type VariantProps } from '@/lib/tv'
 import placeholderDark from './assets/placeholder-dark.png'
@@ -154,25 +154,21 @@ AvatarRootProvider.displayName = AVATAR_ROOT_PROVIDER_NAME
 export interface AvatarRootProps extends Assign<ArkAvatarRootProps, AvatarSharedProps> {}
 
 export function AvatarRoot({ children, className, size, ...props }: AvatarRootProps) {
-  const { id, cloneChildren } = useCloneChildren({
+  const clonedChildren = cloneChildrenWithProps(children, {
+    keyPrefix: 'Avatar',
     props: {
       size,
     },
-    idPrefix: 'avatar',
-    targets: [AVATAR_IMAGE_NAME, AVATAR_FALLBACK_NAME, AVATAR_POSITIONER_NAME],
-    children,
+    targetDisplayNames: [AVATAR_IMAGE_NAME, AVATAR_FALLBACK_NAME, AVATAR_POSITIONER_NAME],
   })
-
-  const clonedChildren = cloneChildren(children)
 
   return (
     <ArkAvatar.Root
-      {...props}
-      id={id}
       className={avatarRecipe.root({
         className,
         size,
       })}
+      {...props}
     >
       {clonedChildren}
     </ArkAvatar.Root>
@@ -229,13 +225,13 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
 
     return (
       <ArkAvatar.Image
-        {...props}
         ref={ref}
         className={avatarRecipe.image({
           className,
           size,
         })}
         src={showPlaceholder ? placeholderImg : src}
+        {...props}
       />
     )
   }
@@ -270,11 +266,11 @@ export function AvatarFallback({
 
   return (
     <ArkAvatar.Fallback
-      {...props}
       className={avatarRecipe.fallback({
         className,
         size,
       })}
+      {...props}
     >
       {fallbackContent}
     </ArkAvatar.Fallback>
@@ -313,6 +309,7 @@ export function AvatarPositioner({
   className,
   placement = 'bottom',
   size,
+  ...props
 }: AvatarPositionerProps) {
   return (
     <div
@@ -326,6 +323,7 @@ export function AvatarPositioner({
       )}
       data-scope="avatar"
       data-part="positioner"
+      {...props}
     >
       {children}
     </div>
@@ -371,7 +369,6 @@ export function AvatarStatus({ className, type = 'offline', ...props }: AvatarSt
 
   return (
     <span
-      {...props}
       role="status"
       className={cn(
         'relative block size-5 rounded-full bg-surface-1',
@@ -383,6 +380,7 @@ export function AvatarStatus({ className, type = 'offline', ...props }: AvatarSt
       data-part="status"
       aria-label={STATUS_LABEL_MAP[type]}
       aria-hidden
+      {...props}
     />
   )
 }
@@ -414,12 +412,12 @@ interface AvatarBadgeProps extends React.ComponentProps<typeof ark.img> {
 export function AvatarBadge({ alt, decorative: isDecorative = false, ...props }: AvatarBadgeProps) {
   return (
     <ark.img
-      {...props}
       role="img"
       alt={isDecorative ? '' : alt}
       data-scope="avatar"
       data-part="badge"
       aria-hidden={isDecorative}
+      {...props}
     />
   )
 }
@@ -448,7 +446,6 @@ export function AvatarNotification({
 }: AvatarNotificationProps) {
   return (
     <span
-      {...props}
       role="status"
       className={cn(
         'relative block size-4 rounded-full bg-surface-1',
@@ -459,6 +456,7 @@ export function AvatarNotification({
       data-part="notification"
       aria-label={ariaLabel}
       aria-hidden
+      {...props}
     />
   )
 }

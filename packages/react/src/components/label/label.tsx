@@ -1,3 +1,4 @@
+import { ark } from '@ark-ui/react/factory'
 import { Field as ArkField } from '@ark-ui/react/field'
 
 import { RiInformation2Fill } from '@remixicon/react'
@@ -40,7 +41,6 @@ export interface LabelRootProps extends React.ComponentProps<typeof ArkField.Lab
 export function LabelRoot({ className, ...props }: LabelRootProps) {
   return (
     <ArkField.Label
-      {...props}
       className={cn(
         'group inline-flex items-center gap-x-1',
         'font-sans text-sm/5 tracking-[-0.00525rem]',
@@ -52,6 +52,7 @@ export function LabelRoot({ className, ...props }: LabelRootProps) {
       )}
       data-scope="label"
       data-part="root"
+      {...props}
     />
   )
 }
@@ -77,13 +78,18 @@ LabelRoot.displayName = LABEL_ROOT_NAME
  * </Label.Root>
  * ```
  */
-export interface LabelTextProps extends React.ComponentPropsWithoutRef<'span'> {}
+export interface LabelTextProps extends React.ComponentPropsWithoutRef<typeof ark.span> {}
 
-export function LabelText({ children, className }: LabelTextProps) {
+export function LabelText({ children, className, ...props }: LabelTextProps) {
   return (
-    <span className={cn('font-medium text-fg-1', className)} data-scope="label" data-part="text">
+    <ark.span
+      className={cn('font-medium text-fg-1', className)}
+      data-scope="label"
+      data-part="text"
+      {...props}
+    >
       {children}
-    </span>
+    </ark.span>
   )
 }
 
@@ -121,10 +127,10 @@ export interface LabelAsteriskProps
 export function LabelAsterisk(props: LabelAsteriskProps) {
   return (
     <ArkField.RequiredIndicator
-      {...props}
       className={cn('font-medium text-information')}
       data-scope="label"
       data-part="asterisk"
+      {...props}
     />
   )
 }
@@ -151,17 +157,18 @@ LabelAsterisk.displayName = LABEL_ASTERISK_NAME
  * </Label.Root>
  * ```
  */
-export interface LabelSubTextProps extends React.ComponentPropsWithoutRef<'span'> {}
+export interface LabelSubTextProps extends React.ComponentPropsWithoutRef<typeof ark.small> {}
 
-export function LabelSubText({ children, className }: LabelSubTextProps) {
+export function LabelSubText({ children, className, ...props }: LabelSubTextProps) {
   return (
-    <small
+    <ark.small
       className={cn('font-normal text-fg-1/40 text-xs/4', className)}
       data-scope="label"
       data-part="subtext"
+      {...props}
     >
       {children}
-    </small>
+    </ark.small>
   )
 }
 
@@ -193,10 +200,10 @@ export interface LabelInfoProps extends React.AriaAttributes {}
 export function LabelInfo(props: LabelInfoProps) {
   return (
     <RiInformation2Fill
-      {...props}
       className={cn('size-4 shrink-0 fill-fill-3', 'group-data-disabled:fill-disabled')}
       data-scope="label"
       data-part="info"
+      {...props}
     />
   )
 }

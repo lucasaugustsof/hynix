@@ -128,7 +128,6 @@ export function CheckboxControl({ className, ...props }: CheckboxControlProps) {
   return (
     <div className={cn('grid size-5 cursor-pointer place-items-center')}>
       <ArkCheckbox.Control
-        {...props}
         className={cn(
           'relative inline-flex size-4 shrink-0 overflow-hidden rounded-sm bg-fill-2 transition-[background-color]',
           'before:-translate-y-1/2 before:-translate-x-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-[calc(--spacing(3.5)_-_1px)] before:rounded-[calc(--spacing(0.5)_+_0.6px)] before:bg-surface-1 before:shadow-xs before:content-[""]',
@@ -140,6 +139,7 @@ export function CheckboxControl({ className, ...props }: CheckboxControlProps) {
           'data-disabled:cursor-not-allowed data-disabled:bg-disabled data-disabled:before:hidden',
           className
         )}
+        {...props}
       >
         <ArkCheckbox.Indicator
           className={cn(

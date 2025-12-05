@@ -1,8 +1,7 @@
 import { ark } from '@ark-ui/react/factory'
 
-import { useCloneChildren } from '@/hooks/use-clone-children'
+import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
 import { tv, type VariantProps } from '@/lib/tv'
-import type { PolymorphicProps } from '@/types/polymorphic'
 
 const BUTTON_ROOT_NAME = 'Button.Root'
 const BUTTON_ICON_NAME = 'Button.Icon'
@@ -47,7 +46,7 @@ const createButtonRecipe = tv({
         root: 'h-9 px-2',
       },
       md: {
-        root: 'h-10 rounded-[calc(var(--radius-lg)_+_2px)] px-2.5',
+        root: 'h-10 rounded-[--spacing(2.5)] px-2.5',
       },
     },
     iconOnly: {
@@ -100,24 +99,21 @@ export function ButtonRoot({
   size,
   iconOnly,
   disabled,
+
   ...props
 }: ButtonRootProps) {
-  const { id, cloneChildren } = useCloneChildren({
-    targets: [BUTTON_ICON_NAME],
+  const clonedChildren = cloneChildrenWithProps(children, {
+    keyPrefix: 'Button',
     props: {
       variant,
       size,
-      iconOnly,
     },
-    children,
-    idPrefix: 'button',
+    targetDisplayNames: [BUTTON_ICON_NAME],
+    unwrap: props.asChild,
   })
-
-  const clonedChildren = cloneChildren(children)
 
   return (
     <ark.button
-      {...props}
       className={buttonRecipe.root({
         variant,
         size,
@@ -125,10 +121,10 @@ export function ButtonRoot({
         className,
       })}
       disabled={disabled}
-      id={id}
       data-scope="button"
       data-part="root"
       aria-disabled={disabled ?? undefined}
+      {...props}
     >
       {clonedChildren}
     </ark.button>
@@ -141,35 +137,32 @@ ButtonRoot.displayName = BUTTON_ROOT_NAME
 
 /**
  * Button icon component for displaying icons within buttons.
- * Supports polymorphic rendering via the `as` prop.
+ * Supports polymorphic rendering via the `asChild` prop.
  * Automatically scales based on the button size.
  * Can be used standalone in icon-only buttons or combined with text.
  *
  * @example
  * ```tsx
  * <Button.Root iconOnly>
- *   <Button.Icon as={SearchIcon} />
+ *   <Button.Icon asChild>
+ *     <SearchIcon />
+ *   </Button.Icon>
  * </Button.Root>
  *
  * <Button.Root>
- *   <Button.Icon as={DownloadIcon} />
+ *   <Button.Icon asChild>
+ *     <DownloadIcon />
+ *   </Button.Icon>
  *   Download
  * </Button.Root>
  * ```
  */
-export function ButtonIcon<T extends React.ElementType = typeof ark.span>({
-  as,
-  className,
-  variant,
-  size,
-  iconOnly,
-  ...props
-}: PolymorphicProps<T> & ButtonSharedProps) {
-  const Component = as || ark.span
 
+export interface ButtonIconProps extends React.ComponentProps<typeof ark.div>, ButtonSharedProps {}
+
+export function ButtonIcon({ className, variant, size, iconOnly, ...props }: ButtonIconProps) {
   return (
-    <Component
-      {...props}
+    <ark.div
       className={buttonRecipe.icon({
         variant,
         size,
@@ -179,6 +172,7 @@ export function ButtonIcon<T extends React.ElementType = typeof ark.span>({
       data-scope="button"
       data-part="icon"
       aria-hidden
+      {...props}
     />
   )
 }
