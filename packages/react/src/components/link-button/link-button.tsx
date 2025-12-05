@@ -115,7 +115,6 @@ export function LinkButtonRoot({
 
   return (
     <ark.a
-      {...props}
       className={linkButtonRecipe.root({
         className,
         size,
@@ -124,9 +123,10 @@ export function LinkButtonRoot({
       })}
       href={disabled ? undefined : href}
       tabIndex={disabled ? -1 : undefined}
-      aria-disabled={disabled}
       data-scope="link-button"
       data-part="root"
+      aria-disabled={disabled}
+      {...props}
     >
       {clonedChildren}
     </ark.a>
