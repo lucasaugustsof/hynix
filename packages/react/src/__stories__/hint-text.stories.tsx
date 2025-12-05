@@ -90,7 +90,9 @@ export const ErrorState: HintTextStory = {
     return (
       <Field.Root invalid>
         <Field.Control>
-          <Field.Icon as={RiMailLine} />
+          <Field.Icon asChild>
+            <RiMailLine />
+          </Field.Icon>
           <Field.Input type="email" placeholder="john@example.com" />
         </Field.Control>
         <HintText>Please enter a valid email address.</HintText>
@@ -109,7 +111,9 @@ export const ErrorStateWithIcon: HintTextStory = {
     return (
       <Field.Root invalid>
         <Field.Control>
-          <Field.Icon as={RiMailLine} />
+          <Field.Icon asChild>
+            <RiMailLine />
+          </Field.Icon>
           <Field.Input type="email" placeholder="john@example.com" />
         </Field.Control>
         <HintText leftIcon>Please enter a valid email address.</HintText>
@@ -128,7 +132,9 @@ export const DisabledState: HintTextStory = {
     return (
       <Field.Root disabled>
         <Field.Control>
-          <Field.Icon as={RiMailLine} />
+          <Field.Icon asChild>
+            <RiMailLine />
+          </Field.Icon>
           <Field.Input type="email" placeholder="john@example.com" />
         </Field.Control>
         <HintText leftIcon>This field is currently disabled.</HintText>
@@ -147,7 +153,9 @@ export const WithField: HintTextStory = {
     return (
       <Field.Root>
         <Field.Control>
-          <Field.Icon as={RiMailLine} />
+          <Field.Icon asChild>
+            <RiMailLine />
+          </Field.Icon>
           <Field.Input type="email" placeholder="john@example.com" />
         </Field.Control>
         <HintText leftIcon>We'll never share your email with anyone else.</HintText>

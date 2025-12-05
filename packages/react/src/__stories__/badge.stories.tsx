@@ -191,21 +191,31 @@ export const WithIcon: BadgeStory = {
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
       <Badge.Root color="orange" variant="filled">
-        <Badge.Icon as={RiFlashlightFill} />
+        <Badge.Icon asChild>
+          <RiFlashlightFill />
+        </Badge.Icon>
         Badge
       </Badge.Root>
       <Badge.Root color="orange" variant="light">
-        <Badge.Icon as={RiStarFill} />
+        <Badge.Icon asChild>
+          <RiStarFill />
+        </Badge.Icon>
         Badge
       </Badge.Root>
       <Badge.Root color="orange" variant="lighter">
         Badge
-        <Badge.Icon as={RiFlashlightFill} />
+        <Badge.Icon asChild>
+          <RiFlashlightFill />
+        </Badge.Icon>
       </Badge.Root>
       <Badge.Root color="orange" variant="stroke">
-        <Badge.Icon as={RiStarFill} />
+        <Badge.Icon asChild>
+          <RiStarFill />
+        </Badge.Icon>
         Badge
-        <Badge.Icon as={RiFlashlightFill} />
+        <Badge.Icon asChild>
+          <RiFlashlightFill />
+        </Badge.Icon>
       </Badge.Root>
     </div>
   ),

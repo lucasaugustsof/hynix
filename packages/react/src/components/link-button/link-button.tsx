@@ -1,8 +1,7 @@
 import { ark } from '@ark-ui/react/factory'
 
-import { useCloneChildren } from '@/hooks/use-clone-children'
+import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
 import { tv, type VariantProps } from '@/lib/tv'
-import type { PolymorphicProps } from '@/types/polymorphic'
 
 const LINK_BUTTON_ROOT_NAME = 'LinkButton.Root'
 const LINK_BUTTON_ICON_NAME = 'LinkButton.Icon'
@@ -75,7 +74,9 @@ type LinkButtonSharedProps = VariantProps<typeof createLinkButtonRecipe>
  * </LinkButton.Root>
  *
  * <LinkButton.Root href="/profile" size="sm">
- *   <LinkButton.Icon as={UserIcon} />
+ *   <LinkButton.Icon asChild>
+ *     <UserIcon />
+ *   </LinkButton.Icon>
  *   My Profile
  * </LinkButton.Root>
  *
@@ -103,16 +104,14 @@ export function LinkButtonRoot({
   underline,
   ...props
 }: LinkButtonRootProps) {
-  const { cloneChildren } = useCloneChildren({
-    targets: [LINK_BUTTON_ICON_NAME],
+  const clonedChildren = cloneChildrenWithProps(children, {
+    keyPrefix: 'LinkButton',
     props: {
       size,
     },
-    idPrefix: 'link-button',
-    children,
+    targetDisplayNames: [LINK_BUTTON_ICON_NAME],
+    unwrap: props.asChild,
   })
-
-  const clonedChildren = cloneChildren(children)
 
   return (
     <ark.a
@@ -140,7 +139,7 @@ LinkButtonRoot.displayName = LINK_BUTTON_ROOT_NAME
 
 /**
  * Link button icon component for displaying icons within link buttons.
- * Supports polymorphic rendering via the `as` prop.
+ * Supports polymorphic rendering via the `asChild` prop.
  * Automatically scales based on the link button size.
  * Can be positioned before or after text content.
  *
@@ -148,35 +147,42 @@ LinkButtonRoot.displayName = LINK_BUTTON_ROOT_NAME
  * ```tsx
  * <LinkButton.Root href="/external">
  *   Visit Site
- *   <LinkButton.Icon as={ExternalLinkIcon} />
+ *   <LinkButton.Icon asChild>
+ *     <ExternalLinkIcon />
+ *   </LinkButton.Icon>
  * </LinkButton.Root>
  *
  * <LinkButton.Root href="/back">
- *   <LinkButton.Icon as={ArrowLeftIcon} />
+ *   <LinkButton.Icon asChild>
+ *    <ArrowLeftIcon />
+ *   </LinkButton.Icon>
  *   Go Back
  * </LinkButton.Root>
  *
  * <LinkButton.Root href="/download">
- *   <LinkButton.Icon as={DownloadIcon} />
+ *   <LinkButton.Icon asChild>
+ *    <DownloadIcon />
+ *   </LinkButton.Icon>
  *   Download File
  * </LinkButton.Root>
  * ```
  */
-export function LinkButtonIcon<T extends React.ElementType>({
-  as,
-  size,
-  ...props
-}: PolymorphicProps<T, LinkButtonSharedProps>) {
-  const Component = as || 'span'
+
+export interface LinkButtonIconProps
+  extends React.ComponentProps<typeof ark.div>,
+    LinkButtonSharedProps {}
+
+export function LinkButtonIcon({ className, size, ...props }: LinkButtonIconProps) {
   return (
-    <Component
-      {...props}
+    <ark.div
       className={linkButtonRecipe.icon({
         size,
+        className,
       })}
       data-scope="link-button"
       data-part="icon"
       aria-hidden
+      {...props}
     />
   )
 }
