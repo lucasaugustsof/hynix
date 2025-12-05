@@ -104,24 +104,40 @@ export const AllVariants: ButtonStory = {
   render: () => (
     <div className="flex flex-wrap items-center gap-6">
       <Button.Root variant="primary">
-        <Button.Icon as={RiArrowLeftSLine} />
+        <Button.Icon asChild>
+          <RiArrowLeftSLine />
+        </Button.Icon>
         Button
-        <Button.Icon as={RiArrowRightSLine} />
+        <Button.Icon asChild>
+          <RiArrowRightSLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root variant="secondary">
-        <Button.Icon as={RiArrowLeftSLine} />
+        <Button.Icon asChild>
+          <RiArrowLeftSLine />
+        </Button.Icon>
         Button
-        <Button.Icon as={RiArrowRightSLine} />
+        <Button.Icon asChild>
+          <RiArrowRightSLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root variant="outline">
-        <Button.Icon as={RiArrowLeftSLine} />
+        <Button.Icon asChild>
+          <RiArrowLeftSLine />
+        </Button.Icon>
         Button
-        <Button.Icon as={RiArrowRightSLine} />
+        <Button.Icon asChild>
+          <RiArrowRightSLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root variant="danger">
-        <Button.Icon as={RiArrowLeftSLine} />
+        <Button.Icon asChild>
+          <RiArrowLeftSLine />
+        </Button.Icon>
         Button
-        <Button.Icon as={RiArrowRightSLine} />
+        <Button.Icon asChild>
+          <RiArrowRightSLine />
+        </Button.Icon>
       </Button.Root>
     </div>
   ),
@@ -136,24 +152,40 @@ export const AllSizes: ButtonStory = {
   render: () => (
     <div className="flex flex-wrap items-center gap-6">
       <Button.Root size="2xs">
-        <Button.Icon as={RiArrowLeftSLine} />
+        <Button.Icon asChild>
+          <RiArrowLeftSLine />
+        </Button.Icon>
         Button
-        <Button.Icon as={RiArrowRightSLine} />
+        <Button.Icon asChild>
+          <RiArrowRightSLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root size="xs">
-        <Button.Icon as={RiArrowLeftSLine} />
+        <Button.Icon asChild>
+          <RiArrowLeftSLine />
+        </Button.Icon>
         Button
-        <Button.Icon as={RiArrowRightSLine} />
+        <Button.Icon asChild>
+          <RiArrowRightSLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root size="sm">
-        <Button.Icon as={RiArrowLeftSLine} />
+        <Button.Icon asChild>
+          <RiArrowLeftSLine />
+        </Button.Icon>
         Button
-        <Button.Icon as={RiArrowRightSLine} />
+        <Button.Icon asChild>
+          <RiArrowRightSLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root size="md">
-        <Button.Icon as={RiArrowLeftSLine} />
+        <Button.Icon asChild>
+          <RiArrowLeftSLine />
+        </Button.Icon>
         Button
-        <Button.Icon as={RiArrowRightSLine} />
+        <Button.Icon asChild>
+          <RiArrowRightSLine />
+        </Button.Icon>
       </Button.Root>
     </div>
   ),
@@ -168,16 +200,24 @@ export const IconOnly: ButtonStory = {
   render: () => (
     <div className="flex flex-wrap items-center gap-6">
       <Button.Root iconOnly variant="primary">
-        <Button.Icon as={RiAddLine} />
+        <Button.Icon asChild>
+          <RiAddLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root iconOnly variant="secondary">
-        <Button.Icon as={RiAddLine} />
+        <Button.Icon asChild>
+          <RiAddLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root iconOnly variant="outline">
-        <Button.Icon as={RiAddLine} />
+        <Button.Icon asChild>
+          <RiAddLine />
+        </Button.Icon>
       </Button.Root>
       <Button.Root iconOnly variant="danger">
-        <Button.Icon as={RiDeleteBinLine} />
+        <Button.Icon asChild>
+          <RiDeleteBinLine />
+        </Button.Icon>
       </Button.Root>
     </div>
   ),

@@ -6,9 +6,8 @@ import {
   type FieldRootProps as ArkFieldRootProps,
 } from '@ark-ui/react/field'
 
-import { useCloneChildren } from '@/hooks/use-clone-children'
+import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
 import { tv, type VariantProps } from '@/lib/tv'
-import type { PolymorphicProps } from '@/types/polymorphic'
 
 const FIELD_ROOT_NAME = 'Field.Root'
 const FIELD_CONTROL_NAME = 'Field.Control'
@@ -101,25 +100,21 @@ type FieldSharedProps = VariantProps<typeof createFieldRecipe>
 export interface FieldRootProps extends ArkFieldRootProps, FieldSharedProps {}
 
 export function FieldRoot({ children, className, size, ...props }: FieldRootProps) {
-  const { cloneChildren, id } = useCloneChildren({
-    targets: [FIELD_CONTROL_NAME],
+  const clonedChildren = cloneChildrenWithProps(children, {
+    keyPrefix: 'Field',
     props: {
       size,
     },
-    idPrefix: 'field',
-    children,
+    targetDisplayNames: [FIELD_CONTROL_NAME],
   })
-
-  const clonedChildren = cloneChildren(children)
 
   return (
     <ArkField.Root
-      {...props}
       className={fieldRecipe.root({
         size,
         className,
       })}
-      id={id}
+      {...props}
     >
       {clonedChildren}
     </ArkField.Root>
@@ -160,11 +155,11 @@ export interface FieldControlProps extends React.ComponentProps<'label'>, FieldS
 export function FieldControl({ children, className, size, ...props }: FieldControlProps) {
   return (
     <label
-      {...props}
       className={fieldRecipe.control({
         size,
         className,
       })}
+      {...props}
     >
       {children}
     </label>
@@ -197,11 +192,11 @@ export const FieldInput = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <ArkField.Input
-      {...props}
       ref={ref}
       className={fieldRecipe.input({
         className,
       })}
+      {...props}
     />
   )
 })
@@ -212,29 +207,43 @@ FieldInput.displayName = FIELD_INPUT_NAME
 
 /**
  * Field icon component for displaying icons inside the field control.
- * Supports polymorphic rendering via the `as` prop.
+ * Supports polymorphic rendering via the `asChild` prop.
  * Automatically changes color based on field state (hover, focus, disabled, invalid).
  * When placed first and field has value, icon color changes to indicate active state.
  *
  * @example
  * ```tsx
  * <Field.Control>
- *   <Field.Icon as={SearchIcon} />
- *   <Field.Input placeholder="Search..." />
+ *   <Field.Icon asChild>
+ *    <SearchIcon />
+ *   </Field.Icon>
+ *
+ *  <Field.Input placeholder="Search..." />
  * </Field.Control>
  *
  * <Field.Control>
  *   <Field.Input type="password" />
- *   <Field.Icon as={EyeIcon} />
+ *
+ *   <Field.Icon asChild>
+ *    <EyeIcon />
+ *   </Field.Icon>
  * </Field.Control>
  * ```
  */
-export function FieldIcon<T extends React.ElementType = typeof ark.span>({
-  as,
-  ...props
-}: PolymorphicProps<T>) {
-  const Component = as || ark.span
-  return <Component {...props} className={fieldRecipe.icon()} aria-hidden />
+export type FieldIconProps = React.ComponentProps<typeof ark.div>
+
+export function FieldIcon({ className, ...props }: FieldIconProps) {
+  return (
+    <ark.div
+      className={fieldRecipe.icon({
+        className,
+      })}
+      data-scope="field"
+      data-part="icon"
+      aria-hidden
+      {...props}
+    />
+  )
 }
 
 FieldIcon.displayName = FIELD_ICON_NAME
