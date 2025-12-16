@@ -60,17 +60,30 @@
 }
 
 @layer base {
-  html {
-    @apply scroll-smooth;
+  * {
+    @apply border-border scroll-smooth;
   }
 
   body {
-    @apply antialiased bg-surface-1 text-fg-1 border-border;
+    @apply antialiased bg-surface-1 text-fg-1;
     text-rendering: optimizeLegibility;
+  }
+
+  ::placeholder {
+    @apply text-fg-1/40;
   }
 }
 
 @utility focus-outline {
   outline-offset: 2px;
   outline: 2px solid --alpha(var(--focus-outline-color, var(--color-brand)) / 0.15);
+}
+
+@utility scrollbar-hidden {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
