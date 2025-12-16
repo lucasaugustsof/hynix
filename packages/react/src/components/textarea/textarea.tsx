@@ -110,6 +110,10 @@ export interface TextareaCharCounterProps {
    * Maximum number of characters allowed.
    */
   max: number
+  /**
+   * Whether the character count is invalid.
+   */
+  invalid?: boolean
 }
 
 /**
@@ -121,7 +125,11 @@ export interface TextareaCharCounterProps {
  * <Textarea.CharCounter current={value.length} max={200} />
  * ```
  */
-export function TextareaCharCounter({ current = 0, max = 200 }: TextareaCharCounterProps) {
+export function TextareaCharCounter({
+  current = 0,
+  max = 200,
+  invalid: isInvalid = false,
+}: TextareaCharCounterProps) {
   return (
     <div
       role="status"
@@ -134,7 +142,9 @@ export function TextareaCharCounter({ current = 0, max = 200 }: TextareaCharCoun
         className={cn(
           'block select-none font-medium text-fg-1/40 text-xs/3 uppercase tabular-nums tracking-[0.01375rem]',
           // disabled
-          'group-has-[textarea:disabled]:text-disabled'
+          'group-has-[textarea:disabled]:text-disabled',
+          // invalid
+          isInvalid && 'text-danger'
         )}
         aria-hidden
       >

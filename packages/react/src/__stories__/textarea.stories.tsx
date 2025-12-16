@@ -93,9 +93,12 @@ export const BioEditor: TextareaStory = {
           placeholder="Write a short bio about yourself..."
           value={bio}
           onChange={event => setBio(event.target.value)}
-          maxLength={MAX_LENGTH}
         >
-          <Textarea.CharCounter max={MAX_LENGTH} current={bio.length} />
+          <Textarea.CharCounter
+            max={MAX_LENGTH}
+            current={bio.length}
+            invalid={bio.length > MAX_LENGTH}
+          />
         </Textarea.Root>
 
         <HintText>Brief description that appears on your profile.</HintText>
