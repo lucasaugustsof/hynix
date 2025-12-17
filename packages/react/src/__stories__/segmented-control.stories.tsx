@@ -38,20 +38,29 @@ export const Default: SegmentedControlStory = {
         </Label.Root>
 
         <SegmentedControl.List>
-          <SegmentedControl.Trigger value="light">
-            <SegmentedControl.TriggerIcon as={RiSunLine} />
-            Light
-          </SegmentedControl.Trigger>
+          <SegmentedControl.Item value="light">
+            <SegmentedControl.ItemIcon asChild>
+              <RiSunLine />
+            </SegmentedControl.ItemIcon>
 
-          <SegmentedControl.Trigger value="dark">
-            <SegmentedControl.TriggerIcon as={RiMoonLine} />
-            Dark
-          </SegmentedControl.Trigger>
+            <SegmentedControl.ItemText>Light</SegmentedControl.ItemText>
+          </SegmentedControl.Item>
 
-          <SegmentedControl.Trigger value="system">
-            <SegmentedControl.TriggerIcon as={RiEqualizer3Fill} />
-            System
-          </SegmentedControl.Trigger>
+          <SegmentedControl.Item value="dark">
+            <SegmentedControl.ItemIcon asChild>
+              <RiMoonLine />
+            </SegmentedControl.ItemIcon>
+
+            <SegmentedControl.ItemText>Dark</SegmentedControl.ItemText>
+          </SegmentedControl.Item>
+
+          <SegmentedControl.Item value="system">
+            <SegmentedControl.ItemIcon asChild>
+              <RiEqualizer3Fill />
+            </SegmentedControl.ItemIcon>
+
+            <SegmentedControl.ItemText>System</SegmentedControl.ItemText>
+          </SegmentedControl.Item>
         </SegmentedControl.List>
       </SegmentedControl.Root>
     )
@@ -286,8 +295,13 @@ export const UseCaseRecentTransactions: SegmentedControlStory = {
               aria-label="Filter transactions by type"
             >
               <SegmentedControl.List>
-                <SegmentedControl.Trigger value="incoming">Incoming</SegmentedControl.Trigger>
-                <SegmentedControl.Trigger value="outgoing">Outgoing</SegmentedControl.Trigger>
+                <SegmentedControl.Item value="incoming">
+                  <SegmentedControl.ItemText>Incoming</SegmentedControl.ItemText>
+                </SegmentedControl.Item>
+
+                <SegmentedControl.Item value="outgoing">
+                  <SegmentedControl.ItemText>Outgoing</SegmentedControl.ItemText>
+                </SegmentedControl.Item>
               </SegmentedControl.List>
             </SegmentedControl.Root>
 

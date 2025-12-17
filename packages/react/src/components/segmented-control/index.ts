@@ -1,15 +1,15 @@
 export {
-  type TabsFocusChangeDetails as SegmentedControlFocusChangeDetails,
-  type UseTabsContext as UseSegmentedControlContext,
-  type UseTabsReturn as UseSegmentedControlReturn,
-  useTabs as useSegmentedControl,
-  useTabsContext as useSegmentedControlContext,
-} from '@ark-ui/react/tabs'
+  type UseSegmentGroupContext as UseSegmentedControlContext,
+  type UseSegmentGroupReturn as UseSegmentedControlReturn,
+  useSegmentGroup as useSegmentedControl,
+  useSegmentGroupContext as useSegmentedControlContext,
+} from '@ark-ui/react/segment-group'
 
 export * as SegmentedControl from './namespace'
 export type {
-  SegmentedControlContentProps,
+  SegmentedControlItemIconProps,
+  SegmentedControlItemProps,
+  SegmentedControlItemTextProps,
   SegmentedControlListProps,
   SegmentedControlRootProps,
-  SegmentedControlTriggerProps,
 } from './segmented-control'
