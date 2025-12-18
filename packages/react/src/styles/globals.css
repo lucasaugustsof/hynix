@@ -73,6 +73,10 @@
     @apply bg-surface-1 text-fg-1;
     text-rendering: optimizeLegibility;
   }
+
+  ::placeholder {
+    @apply text-fg-1/40;
+  }
 }
 
 @utility focus-outline {
@@ -89,4 +93,13 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+@utility scrollbar-hidden {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

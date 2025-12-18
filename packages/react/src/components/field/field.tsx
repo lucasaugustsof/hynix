@@ -16,7 +16,7 @@ const FIELD_ICON_NAME = 'Field.Icon'
 
 const createFieldRecipe = tv({
   slots: {
-    root: 'flex flex-col space-y-1',
+    root: 'flex flex-col gap-y-1',
     control: [
       'group inset-ring-1 inset-ring-border flex h-fit cursor-text items-center gap-x-2 overflow-hidden rounded-[0.625rem] bg-surface-2 shadow-xs transition-[background-color]',
       // hover
