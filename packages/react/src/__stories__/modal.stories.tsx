@@ -60,9 +60,15 @@ export const Default: ModalStory = {
                 </Label.Root>
 
                 <Field.Control>
-                  <Field.Icon as={RiMailLine} />
+                  <Field.Icon asChild>
+                    <RiMailLine />
+                  </Field.Icon>
+
                   <Field.Input type="email" ref={fieldInputRef} placeholder="contact@hynix.cc" />
-                  <Field.Icon as={RiInformation2Fill} />
+
+                  <Field.Icon asChild>
+                    <RiInformation2Fill />
+                  </Field.Icon>
                 </Field.Control>
               </Field.Root>
             </Modal.Body>
@@ -312,7 +318,9 @@ export const IntegrationSettings: ModalStory = {
       <Modal.RootProvider value={dialogStore} onExitComplete={handleExitComplete}>
         <Modal.Trigger asChild>
           <Button.Root variant="secondary">
-            <Button.Icon as={RiLinksLine} />
+            <Button.Icon asChild>
+              <RiLinksLine />
+            </Button.Icon>
             Integration Settings
           </Button.Root>
         </Modal.Trigger>
@@ -391,12 +399,14 @@ export const IntegrationSettings: ModalStory = {
                     >
                       <ArkPresence present={submitState === 'saving' || submitState === 'saved'}>
                         <Button.Icon
-                          as={submitState === 'saving' ? RiLoader4Line : RiCheckboxCircleFill}
                           className={cn(
                             submitState === 'saving' ? 'animate-spin' : 'zoom-in-0 animate-in'
                           )}
                           aria-hidden
-                        />
+                          asChild
+                        >
+                          {submitState === 'saving' ? <RiLoader4Line /> : <RiCheckboxCircleFill />}
+                        </Button.Icon>
                       </ArkPresence>
 
                       {SUBMIT_BUTTON_LABELS[submitState]}
