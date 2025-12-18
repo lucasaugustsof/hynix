@@ -50,5 +50,10 @@
         "noLabelWithoutControl": "off"
       }
     }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
   }
 }

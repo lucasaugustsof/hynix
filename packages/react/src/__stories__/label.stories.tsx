@@ -161,7 +161,10 @@ export const WithField: LabelStory = {
         </Label.Root>
 
         <Field.Control>
-          <Field.Icon as={RiMailLine} />
+          <Field.Icon asChild>
+            <RiMailLine />
+          </Field.Icon>
+
           <Field.Input type="email" placeholder="john@example.com" />
         </Field.Control>
       </Field.Root>
@@ -189,7 +192,9 @@ export const DisabledState: LabelStory = {
         </Label.Root>
 
         <Field.Control>
-          <Field.Icon as={RiMailLine} />
+          <Field.Icon asChild>
+            <RiMailLine />
+          </Field.Icon>
           <Field.Input type="email" placeholder="john@example.com" />
         </Field.Control>
       </Field.Root>

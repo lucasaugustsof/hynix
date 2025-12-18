@@ -1,6 +1,6 @@
 export {
   AlertActions as Actions,
-  AlertClose as Close,
+  AlertCloseTrigger as CloseTrigger,
   AlertDescription as Description,
   AlertIcon as Icon,
   AlertRoot as Root,

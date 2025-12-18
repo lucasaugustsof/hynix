@@ -1,73 +1,20 @@
 import * as React from 'react'
+import { ark } from '@ark-ui/react/factory'
 
 import { Label } from '@/components/label'
 import { cn } from '@/lib/cn'
-import type { PolymorphicProps } from '@/types/polymorphic'
 
-/**
- * Content label component that displays rich labeled content with slots.
- * Combines a main label, optional sublabel, description text, and customizable start/end slots.
- * Supports polymorphic rendering and two size variants.
- * Includes proper ARIA attributes for accessibility with labelledby and describedby.
- *
- * @example
- * ```tsx
- * <ContentLabel
- *   editLabel="Profile Settings"
- *   editDescription="Manage your account information and preferences"
- * />
- *
- * <ContentLabel
- *   size="lg"
- *   editLabel="Avatar"
- *   editSublabel="JPG, PNG (max 2MB)"
- *   editDescription="Upload a profile picture to personalize your account"
- *   startSlot={<Avatar.Root><Avatar.Image src="/avatar.jpg" /></Avatar.Root>}
- *   endSlot={<Button.Root>Upload</Button.Root>}
- * />
- *
- * <ContentLabel
- *   as="label"
- *   editLabel="Email notifications"
- *   editDescription="Control how you receive notifications"
- *   endSlot={<Switch.Root />}
- * />
- * ```
- */
-export interface ContentLabelProps {
-  /**
-   * Additional CSS classes to apply to the root element
-   */
+export interface ContentLabelProps extends React.ComponentProps<typeof ark.div> {
   className?: string
-  /**
-   * The size of the label
-   * @default 'md'
-   */
   size?: 'md' | 'lg'
-  /**
-   * The main label text
-   */
   editLabel: string
-  /**
-   * Optional secondary label text
-   */
   editSublabel?: string
-  /**
-   * The description text for the label
-   */
   editDescription: string
-  /**
-   * Content to render before the label
-   */
   startSlot?: React.ReactNode
-  /**
-   * Content to render after the label
-   */
   endSlot?: React.ReactNode
 }
 
-export function ContentLabel<C extends React.ElementType>({
-  as,
+export function ContentLabel({
   className,
   size = 'md',
   editLabel,
@@ -75,15 +22,14 @@ export function ContentLabel<C extends React.ElementType>({
   editDescription,
   startSlot,
   endSlot,
-}: PolymorphicProps<C> & ContentLabelProps) {
-  const Component = as || 'div'
-  const hasSublabel = Boolean(editSublabel)
+}: ContentLabelProps) {
+  const hasSublabel = !!editSublabel
 
   const labelId = React.useId()
   const descriptionId = React.useId()
 
   return (
-    <Component
+    <ark.div
       role="group"
       className={cn('inline-flex w-fit items-center gap-x-3.5', className)}
       aria-labelledby={labelId}
@@ -118,7 +64,7 @@ export function ContentLabel<C extends React.ElementType>({
       </div>
 
       {endSlot}
-    </Component>
+    </ark.div>
   )
 }
 

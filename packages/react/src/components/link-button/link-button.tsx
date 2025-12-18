@@ -1,8 +1,7 @@
 import { ark } from '@ark-ui/react/factory'
 
-import { useCloneChildren } from '@/hooks/use-clone-children'
+import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
 import { tv, type VariantProps } from '@/lib/tv'
-import type { PolymorphicProps } from '@/types/polymorphic'
 
 const LINK_BUTTON_ROOT_NAME = 'LinkButton.Root'
 const LINK_BUTTON_ICON_NAME = 'LinkButton.Icon'
@@ -10,7 +9,7 @@ const LINK_BUTTON_ICON_NAME = 'LinkButton.Icon'
 const createLinkButtonRecipe = tv({
   slots: {
     root: [
-      'inline-flex w-fit cursor-pointer items-center justify-center gap-x-1 whitespace-nowrap underline-offset-2 transition-colors',
+      'inline-flex w-fit cursor-pointer items-center justify-center gap-x-1 whitespace-nowrap underline-offset-2 outline-hidden transition-colors',
       'font-medium font-sans text-fg-1',
     ],
     icon: 'shrink-0',
@@ -57,40 +56,9 @@ const linkButtonRecipe = createLinkButtonRecipe()
 
 type LinkButtonSharedProps = VariantProps<typeof createLinkButtonRecipe>
 
-/**
- * Link button root component that renders a styled anchor element.
- * Combines link functionality with button-like appearance and behavior.
- * Automatically injects size props to child icon components.
- * Supports disabled state that prevents navigation and keyboard interaction.
- * Built on Ark UI with proper accessibility attributes.
- *
- * @example
- * ```tsx
- * <LinkButton.Root href="/docs" size="md">
- *   View Documentation
- * </LinkButton.Root>
- *
- * <LinkButton.Root href="/settings" underline>
- *   Settings
- * </LinkButton.Root>
- *
- * <LinkButton.Root href="/profile" size="sm">
- *   <LinkButton.Icon as={UserIcon} />
- *   My Profile
- * </LinkButton.Root>
- *
- * <LinkButton.Root href="/disabled" disabled>
- *   Unavailable Link
- * </LinkButton.Root>
- * ```
- */
 export interface LinkButtonRootProps
   extends React.ComponentProps<typeof ark.a>,
     LinkButtonSharedProps {
-  /**
-   * Whether to show underline on the link
-   * @default false
-   */
   underline?: boolean
 }
 
@@ -103,20 +71,17 @@ export function LinkButtonRoot({
   underline,
   ...props
 }: LinkButtonRootProps) {
-  const { cloneChildren } = useCloneChildren({
-    targets: [LINK_BUTTON_ICON_NAME],
+  const clonedChildren = cloneChildrenWithProps(children, {
+    keyPrefix: 'LinkButton',
     props: {
       size,
     },
-    idPrefix: 'link-button',
-    children,
+    targetDisplayNames: [LINK_BUTTON_ICON_NAME],
+    unwrap: props.asChild,
   })
-
-  const clonedChildren = cloneChildren(children)
 
   return (
     <ark.a
-      {...props}
       className={linkButtonRecipe.root({
         className,
         size,
@@ -125,9 +90,10 @@ export function LinkButtonRoot({
       })}
       href={disabled ? undefined : href}
       tabIndex={disabled ? -1 : undefined}
-      aria-disabled={disabled}
       data-scope="link-button"
       data-part="root"
+      aria-disabled={disabled}
+      {...props}
     >
       {clonedChildren}
     </ark.a>
@@ -138,45 +104,21 @@ LinkButtonRoot.displayName = LINK_BUTTON_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Link button icon component for displaying icons within link buttons.
- * Supports polymorphic rendering via the `as` prop.
- * Automatically scales based on the link button size.
- * Can be positioned before or after text content.
- *
- * @example
- * ```tsx
- * <LinkButton.Root href="/external">
- *   Visit Site
- *   <LinkButton.Icon as={ExternalLinkIcon} />
- * </LinkButton.Root>
- *
- * <LinkButton.Root href="/back">
- *   <LinkButton.Icon as={ArrowLeftIcon} />
- *   Go Back
- * </LinkButton.Root>
- *
- * <LinkButton.Root href="/download">
- *   <LinkButton.Icon as={DownloadIcon} />
- *   Download File
- * </LinkButton.Root>
- * ```
- */
-export function LinkButtonIcon<T extends React.ElementType>({
-  as,
-  size,
-  ...props
-}: PolymorphicProps<T, LinkButtonSharedProps>) {
-  const Component = as || 'span'
+export interface LinkButtonIconProps
+  extends React.ComponentProps<typeof ark.div>,
+    LinkButtonSharedProps {}
+
+export function LinkButtonIcon({ className, size, ...props }: LinkButtonIconProps) {
   return (
-    <Component
-      {...props}
+    <ark.div
       className={linkButtonRecipe.icon({
         size,
+        className,
       })}
       data-scope="link-button"
       data-part="icon"
       aria-hidden
+      {...props}
     />
   )
 }

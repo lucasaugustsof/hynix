@@ -1,5 +1,24 @@
 # @hynix/react
 
+## 1.1.0
+
+### Minor Changes
+
+- ## New Components
+
+  - **Modal**: Accessible dialog component built on Ark UI Dialog with full keyboard navigation and focus management
+  - **Textarea**: Flexible textarea component with character counter and resize handle support
+  - **SegmentedControl**: Segmented control component for mutually exclusive selections with horizontal orientation
+
+  ## Breaking Changes
+
+  - **Removed `useCloneChildren` hook**: Replaced with the more robust `cloneChildrenWithProps` utility function
+  - **Removed `PolymorphicProps` type**: All components now use Ark UI's `asChild` factory pattern for polymorphic behavior, providing better type safety and consistency
+
+  ## Improvements
+
+  - **New `cloneChildrenWithProps` function**: Enhanced props injection system that prevents overwriting predefined child properties while maintaining type safety
+
 ## 1.0.0
 
 ### Major Changes

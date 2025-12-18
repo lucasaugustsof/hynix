@@ -1,2 +1,2 @@
-export type { BadgeRootProps } from './badge'
+export type { BadgeDotProps, BadgeIconProps, BadgeRootProps } from './badge'
 export * as Badge from './namespace'

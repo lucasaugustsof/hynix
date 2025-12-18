@@ -6,9 +6,8 @@ import {
   type FieldRootProps as ArkFieldRootProps,
 } from '@ark-ui/react/field'
 
-import { useCloneChildren } from '@/hooks/use-clone-children'
+import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
 import { tv, type VariantProps } from '@/lib/tv'
-import type { PolymorphicProps } from '@/types/polymorphic'
 
 const FIELD_ROOT_NAME = 'Field.Root'
 const FIELD_CONTROL_NAME = 'Field.Control'
@@ -17,7 +16,7 @@ const FIELD_ICON_NAME = 'Field.Icon'
 
 const createFieldRecipe = tv({
   slots: {
-    root: 'flex flex-col space-y-1',
+    root: 'flex flex-col gap-y-1',
     control: [
       'group inset-ring-1 inset-ring-border flex h-fit cursor-text items-center gap-x-2 overflow-hidden rounded-[0.625rem] bg-surface-2 shadow-xs transition-[background-color]',
       // hover
@@ -69,57 +68,24 @@ const fieldRecipe = createFieldRecipe()
 
 type FieldSharedProps = VariantProps<typeof createFieldRecipe>
 
-/**
- * Field root component that wraps the entire field composition.
- * Built on Ark UI with proper form integration and validation support.
- * Automatically injects size props to child components.
- * Manages field state including validation, disabled, and focus states.
- *
- * @example
- * ```tsx
- * <Field.Root size="md">
- *   <Label.Root>
- *     <Label.Text>Email</Label.Text>
- *   </Label.Root>
- *   <Field.Control>
- *     <Field.Input type="email" placeholder="Enter your email" />
- *   </Field.Control>
- *   <HintText>We'll never share your email</HintText>
- * </Field.Root>
- *
- * <Field.Root invalid>
- *   <Label.Root>
- *     <Label.Text>Password</Label.Text>
- *   </Label.Root>
- *   <Field.Control>
- *     <Field.Input type="password" />
- *   </Field.Control>
- *   <HintText>Password must be at least 8 characters</HintText>
- * </Field.Root>
- * ```
- */
 export interface FieldRootProps extends ArkFieldRootProps, FieldSharedProps {}
 
 export function FieldRoot({ children, className, size, ...props }: FieldRootProps) {
-  const { cloneChildren, id } = useCloneChildren({
-    targets: [FIELD_CONTROL_NAME],
+  const clonedChildren = cloneChildrenWithProps(children, {
+    keyPrefix: 'Field',
     props: {
       size,
     },
-    idPrefix: 'field',
-    children,
+    targetDisplayNames: [FIELD_CONTROL_NAME],
   })
-
-  const clonedChildren = cloneChildren(children)
 
   return (
     <ArkField.Root
-      {...props}
       className={fieldRecipe.root({
         size,
         className,
       })}
-      id={id}
+      {...props}
     >
       {clonedChildren}
     </ArkField.Root>
@@ -130,29 +96,6 @@ FieldRoot.displayName = FIELD_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Field control component that wraps the input and its associated icons.
- * Renders as a label element for proper click handling and accessibility.
- * Provides visual styling for hover, focus, disabled, and invalid states.
- * Clicking the control focuses the input inside.
- *
- * @example
- * ```tsx
- * <Field.Control>
- *   <Field.Input placeholder="Enter text" />
- * </Field.Control>
- *
- * <Field.Control>
- *   <Field.Icon as={SearchIcon} />
- *   <Field.Input placeholder="Search..." />
- * </Field.Control>
- *
- * <Field.Control>
- *   <Field.Input type="email" placeholder="Email" />
- *   <Field.Icon as={MailIcon} />
- * </Field.Control>
- * ```
- */
 export interface FieldControlProps extends React.ComponentProps<'label'>, FieldSharedProps {
   children: React.ReactNode
 }
@@ -160,11 +103,11 @@ export interface FieldControlProps extends React.ComponentProps<'label'>, FieldS
 export function FieldControl({ children, className, size, ...props }: FieldControlProps) {
   return (
     <label
-      {...props}
       className={fieldRecipe.control({
         size,
         className,
       })}
+      {...props}
     >
       {children}
     </label>
@@ -175,20 +118,6 @@ FieldControl.displayName = FIELD_CONTROL_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Field input component that renders the actual text input element.
- * Built on Ark UI with automatic form integration and validation.
- * Supports all standard HTML input attributes and types.
- * Automatically styled with brand-colored caret and proper disabled states.
- *
- * @example
- * ```tsx
- * <Field.Input type="text" placeholder="Enter your name" />
- * <Field.Input type="email" placeholder="email@example.com" required />
- * <Field.Input type="password" placeholder="Password" disabled />
- * <Field.Input type="number" min={0} max={100} />
- * ```
- */
 export interface FieldInputProps extends ArkFieldInputProps {}
 
 export const FieldInput = React.forwardRef<
@@ -197,11 +126,11 @@ export const FieldInput = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <ArkField.Input
-      {...props}
       ref={ref}
       className={fieldRecipe.input({
         className,
       })}
+      {...props}
     />
   )
 })
@@ -210,31 +139,20 @@ FieldInput.displayName = FIELD_INPUT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Field icon component for displaying icons inside the field control.
- * Supports polymorphic rendering via the `as` prop.
- * Automatically changes color based on field state (hover, focus, disabled, invalid).
- * When placed first and field has value, icon color changes to indicate active state.
- *
- * @example
- * ```tsx
- * <Field.Control>
- *   <Field.Icon as={SearchIcon} />
- *   <Field.Input placeholder="Search..." />
- * </Field.Control>
- *
- * <Field.Control>
- *   <Field.Input type="password" />
- *   <Field.Icon as={EyeIcon} />
- * </Field.Control>
- * ```
- */
-export function FieldIcon<T extends React.ElementType = typeof ark.span>({
-  as,
-  ...props
-}: PolymorphicProps<T>) {
-  const Component = as || ark.span
-  return <Component {...props} className={fieldRecipe.icon()} aria-hidden />
+export type FieldIconProps = React.ComponentProps<typeof ark.div>
+
+export function FieldIcon({ className, ...props }: FieldIconProps) {
+  return (
+    <ark.div
+      className={fieldRecipe.icon({
+        className,
+      })}
+      data-scope="field"
+      data-part="icon"
+      aria-hidden
+      {...props}
+    />
+  )
 }
 
 FieldIcon.displayName = FIELD_ICON_NAME
