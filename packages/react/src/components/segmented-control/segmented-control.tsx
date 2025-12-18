@@ -44,9 +44,6 @@ SegmentedControlRoot.displayName = SEGMENTED_CONTROL_ROOT_NAME
 
 export interface SegmentedControlListProps extends React.ComponentProps<'div'> {}
 
-/**
- * Container for segmented control items with animated indicator.
- */
 export function SegmentedControlList({ children, className, ...props }: SegmentedControlListProps) {
   return (
     <div
