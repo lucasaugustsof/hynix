@@ -139,18 +139,6 @@ type AvatarSharedProps = VariantProps<typeof createAvatarRecipe>
 export const AvatarRootProvider = ArkAvatar.RootProvider
 AvatarRootProvider.displayName = AVATAR_ROOT_PROVIDER_NAME
 
-/**
- * Avatar root component that wraps the entire avatar composition.
- * Automatically injects size props to child components.
- *
- * @example
- * ```tsx
- * <Avatar.Root size="56">
- *   <Avatar.Image src="avatar.jpg" alt="User" />
- *   <Avatar.Fallback>JD</Avatar.Fallback>
- * </Avatar.Root>
- * ```
- */
 export interface AvatarRootProps extends Assign<ArkAvatarRootProps, AvatarSharedProps> {}
 
 export function AvatarRoot({ children, className, size, ...props }: AvatarRootProps) {
@@ -179,22 +167,7 @@ AvatarRoot.displayName = AVATAR_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Avatar image component that displays the user's profile picture.
- * Automatically falls back to AvatarFallback if the image fails to load.
- * Supports theme-aware placeholder images.
- *
- * @example
- * ```tsx
- * <Avatar.Image src="https://github.com/user.png" alt="User Name" />
- * <Avatar.Image showPlaceholder alt="Placeholder" />
- * ```
- */
 interface AvatarImageProps extends Assign<ArkAvatarImageProps, AvatarSharedProps> {
-  /**
-   * If true, shows a theme-aware placeholder image instead of src
-   * @default false
-   */
   showPlaceholder?: boolean
 }
 
@@ -241,17 +214,6 @@ AvatarImage.displayName = AVATAR_IMAGE_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Avatar fallback component shown when the image fails to load.
- * Typically displays user initials or a default icon.
- * For small avatars (≤24px), automatically shows only the first character.
- *
- * @example
- * ```tsx
- * <Avatar.Fallback>JD</Avatar.Fallback>
- * <Avatar.Fallback>{getInitials('John Doe')}</Avatar.Fallback>
- * ```
- */
 export function AvatarFallback({
   children,
   className,
@@ -281,26 +243,7 @@ AvatarFallback.displayName = AVATAR_FALLBACK_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Avatar positioner component for placing badges, status indicators, or notifications.
- * Automatically scales based on avatar size and supports top/bottom placement.
- *
- * @example
- * ```tsx
- * <Avatar.Positioner placement="bottom">
- *   <Avatar.Status type="online" />
- * </Avatar.Positioner>
- *
- * <Avatar.Positioner placement="top">
- *   <Avatar.Badge src="/verified.svg" alt="Verified" />
- * </Avatar.Positioner>
- * ```
- */
 interface AvatarPositionerProps extends Assign<React.ComponentProps<'div'>, AvatarSharedProps> {
-  /**
-   * Position relative to the avatar
-   * @default "bottom"
-   */
   placement?: 'top' | 'bottom'
 }
 
@@ -334,21 +277,7 @@ AvatarPositioner.displayName = AVATAR_POSITIONER_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Avatar status indicator component that displays user presence status.
- * Shows a colored dot indicator: green (online), gray (offline), red (busy), yellow (away).
- *
- * @example
- * ```tsx
- * <Avatar.Status type="online" />
- * <Avatar.Status type="busy" />
- * ```
- */
 interface AvatarStatusProps extends React.ComponentProps<'span'> {
-  /**
-   * User presence status type
-   * @default "offline"
-   */
   type?: 'online' | 'offline' | 'busy' | 'away'
 }
 
@@ -389,23 +318,7 @@ AvatarStatus.displayName = AVATAR_STATUS_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Avatar badge component for displaying icon badges (verified, premium, etc.).
- * Supports both informative and decorative badges with proper accessibility.
- *
- * @example
- * ```tsx
- * <Avatar.Badge src="/verified.svg" alt="Verified account" />
- * <Avatar.Badge src="/premium.svg" alt="Premium member" />
- * <Avatar.Badge src="/decoration.svg" alt="" decorative />
- * ```
- */
 interface AvatarBadgeProps extends React.ComponentProps<typeof ark.img> {
-  /**
-   * If true, marks the badge as decorative (alt="" and aria-hidden="true")
-   * Use this only if the badge's meaning is conveyed elsewhere
-   * @default false
-   */
   decorative?: boolean
 }
 
@@ -426,17 +339,6 @@ AvatarBadge.displayName = AVATAR_BADGE_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Avatar notification indicator component that displays an unread notification dot.
- * Shows a red dot to indicate pending notifications or alerts.
- *
- * @example
- * ```tsx
- * <Avatar.Positioner>
- *   <Avatar.Notification />
- * </Avatar.Positioner>
- * ```
- */
 interface AvatarNotificationProps extends React.ComponentProps<'span'> {}
 
 export function AvatarNotification({
@@ -465,20 +367,6 @@ AvatarNotification.displayName = AVATAR_NOTIFICATION_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Utility function to extract initials from a full name.
- * Takes the first character of each word and returns them uppercased.
- *
- * @param name - Full name to extract initials from
- * @returns Uppercase initials string
- *
- * @example
- * ```tsx
- * getInitials('John Doe') // Returns "JD"
- * getInitials('Mary Jane Watson') // Returns "MJ"
- * getInitials('Prince') // Returns "P"
- * ```
- */
 export function getInitials(name: string): string {
   if (!name || typeof name !== 'string') return ''
 

@@ -12,28 +12,10 @@ const TEXTAREA_RESIZE_HANDLE_NAME = 'Textarea.ResizeHandle'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Props for the Textarea root component.
- */
 export interface TextareaRootProps extends ArkFieldTextareaProps {
-  /**
-   * Whether the textarea can be resized by the user.
-   * @default true
-   */
   allowResize?: boolean
 }
 
-/**
- * Textarea root component with styled container and accessibility support.
- * Should be used inside Field.Root for proper form integration.
- *
- * @example
- * ```tsx
- * <Textarea.Root placeholder="Type something...">
- *   <Textarea.CharCounter current={value.length} max={200} />
- * </Textarea.Root>
- * ```
- */
 export const TextareaRoot = React.forwardRef<HTMLTextAreaElement, TextareaRootProps>(
   ({ children, className, allowResize: isAllowResize = true, ...props }, ref) => {
     return (
@@ -98,33 +80,12 @@ TextareaRoot.displayName = TEXTAREA_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Props for the character counter component.
- */
 export interface TextareaCharCounterProps {
-  /**
-   * Current number of characters in the textarea.
-   */
   current: number
-  /**
-   * Maximum number of characters allowed.
-   */
   max: number
-  /**
-   * Whether the character count is invalid.
-   */
   invalid?: boolean
 }
 
-/**
- * Displays character count with screen reader support.
- * Shows "X/Y" visually and announces "X of Y characters used" to screen readers.
- *
- * @example
- * ```tsx
- * <Textarea.CharCounter current={value.length} max={200} />
- * ```
- */
 export function TextareaCharCounter({
   current = 0,
   max = 200,
@@ -162,12 +123,6 @@ TextareaCharCounter.displayName = TEXTAREA_CHAR_COUNTER_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Internal resize handle component.
- * Displays a visual indicator for textarea resizing (decorative only).
- *
- * @internal
- */
 function TextareaResizeHandle() {
   return (
     <div

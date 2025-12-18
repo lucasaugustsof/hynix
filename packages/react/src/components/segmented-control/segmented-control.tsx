@@ -20,21 +20,12 @@ const SEGMENTED_CONTROL_ITEM_ICON_NAME = 'SegmentedControl.ItemIcon'
 
 export interface SegmentedControlRootProviderProps extends ArkSegmentGroupRootProviderProps {}
 
-/**
- * Root provider for managing segmented control state externally.
- */
 export const SegmentedControlRootProvider = ArkSegmentGroup.RootProvider
 
-/**
- * Context hook for accessing segmented control state.
- */
 export const SegmentedControlContext = ArkSegmentGroup.Context
 
 export interface SegmentedControlRootProps extends ArkSegmentGroupRootProps {}
 
-/**
- * Root container for the segmented control component.
- */
 export function SegmentedControlRoot({ className, ...props }: SegmentedControlRootProps) {
   return (
     <ArkSegmentGroup.Root
@@ -87,9 +78,6 @@ SegmentedControlList.displayName = SEGMENTED_CONTROL_LIST_NAME
 
 export interface SegmentedControlItemProps extends ArkSegmentGroupItemProps {}
 
-/**
- * Individual selectable segment within the control.
- */
 export function SegmentedControlItem({ children, ...props }: SegmentedControlItemProps) {
   return (
     <ArkSegmentGroup.Item
@@ -117,9 +105,6 @@ SegmentedControlItem.displayName = SEGMENTED_CONTROL_ITEM_NAME
 
 export interface SegmentedControlItemTextProps extends ArkSegmentGroupItemTextProps {}
 
-/**
- * Text label for a segmented control item.
- */
 export function SegmentedControlItemText({ className, ...props }: SegmentedControlItemTextProps) {
   return (
     <ArkSegmentGroup.ItemText
@@ -144,9 +129,6 @@ SegmentedControlItemText.displayName = SEGMENTED_CONTROL_ITEM_TEXT_NAME
 
 export interface SegmentedControlItemIconProps extends React.ComponentProps<typeof ark.span> {}
 
-/**
- * Icon container for a segmented control item.
- */
 export function SegmentedControlItemIcon({ ...props }: SegmentedControlItemIconProps) {
   return (
     <ark.span

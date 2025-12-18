@@ -81,27 +81,7 @@ type BadgeColor =
 
 type BadgeSharedProps = VariantProps<typeof createBadgeRecipe>
 
-/**
- * Badge root component that wraps the entire badge composition.
- * Automatically injects variant, size, and disabled props to child components.
- * Supports color variants, number-only mode, and icon/dot indicators.
- * When children is a number, automatically enables number-only mode for optimal styling.
- *
- * @example
- * ```tsx
- * <Badge.Root color="blue" variant="filled" size="sm">New</Badge.Root>
- * <Badge.Root color="red" numberOnly>{5}</Badge.Root>
- * <Badge.Root color="green">
- *   <Badge.Dot />
- *   Active
- * </Badge.Root>
- * ```
- */
 export interface BadgeRootProps extends React.ComponentProps<'div'>, BadgeSharedProps {
-  /**
-   * Color theme for the badge
-   * @default "gray"
-   */
   color?: BadgeColor
 }
 
@@ -165,22 +145,6 @@ BadgeRoot.displayName = BADGE_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Badge icon component for displaying icons within badges.
- * Supports polymorphic rendering via the `asChild` prop.
- * Automatically scales based on the badge size.
- *
- * @example
- * ```tsx
- * <Badge.Root>
- *   <Badge.Icon asChild>
- *    <StarIcon />
- *   </Badge.Icon>
- *   Featured
- * </Badge.Root>
- * ```
- */
-
 export interface BadgeIconProps extends React.ComponentProps<typeof ark.div>, BadgeSharedProps {}
 
 export function BadgeIcon({ variant, size, ...props }: BadgeIconProps) {
@@ -201,24 +165,6 @@ export function BadgeIcon({ variant, size, ...props }: BadgeIconProps) {
 BadgeIcon.displayName = BADGE_ICON_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
-
-/**
- * Badge dot component that displays a status indicator dot.
- * Shows a small circular dot using the badge's current color.
- * Commonly used to indicate status or presence (e.g., active, online).
- *
- * @example
- * ```tsx
- * <Badge.Root color="green">
- *   <Badge.Dot />
- *   Active
- * </Badge.Root>
- * <Badge.Root color="red">
- *   <Badge.Dot />
- *   Offline
- * </Badge.Root>
- * ```
- */
 
 export interface BadgeDotProps extends React.ComponentProps<'span'>, BadgeSharedProps {}
 

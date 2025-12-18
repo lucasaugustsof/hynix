@@ -17,24 +17,6 @@ const CHECKBOX_LABEL_NAME = 'Checkbox.Label'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Checkbox root component that wraps the entire checkbox composition.
- * Built on Ark UI with proper accessibility and state management.
- * Includes a hidden input for form integration.
- *
- * @example
- * ```tsx
- * <Checkbox.Root>
- *   <Checkbox.Control />
- *   <Checkbox.Label>Accept terms</Checkbox.Label>
- * </Checkbox.Root>
- *
- * <Checkbox.Root defaultChecked>
- *   <Checkbox.Control />
- *   <Checkbox.Label>Subscribe to newsletter</Checkbox.Label>
- * </Checkbox.Root>
- * ```
- */
 export interface CheckboxRootProps extends ArkCheckboxRootProps {}
 
 export const CheckboxRootProvider = ArkCheckbox.RootProvider
@@ -53,34 +35,9 @@ CheckboxRoot.displayName = CHECKBOX_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Checkbox group provider component for managing multiple checkboxes.
- * Provides shared context and state management for grouped checkboxes.
- * Use this when you need to control multiple checkboxes as a group.
- *
- * @example
- * ```tsx
- * <Checkbox.GroupProvider value={['option1', 'option2']}>
- *   <Checkbox.Group>
- *     <Checkbox.Root value="option1">
- *       <Checkbox.Control />
- *       <Checkbox.Label>Option 1</Checkbox.Label>
- *     </Checkbox.Root>
- *     <Checkbox.Root value="option2">
- *       <Checkbox.Control />
- *       <Checkbox.Label>Option 2</Checkbox.Label>
- *     </Checkbox.Root>
- *   </Checkbox.Group>
- * </Checkbox.GroupProvider>
- * ```
- */
 export const CheckboxGroupProvider = ArkCheckbox.GroupProvider
 CheckboxGroupProvider.displayName = CHECKBOX_GROUP_PROVIDER_NAME
 
-/**
- * Checkbox group component that wraps multiple checkboxes.
- * Works with CheckboxGroupProvider to manage grouped checkbox state.
- */
 export const CheckboxGroup = ArkCheckbox.Group
 CheckboxGroup.displayName = CHECKBOX_GROUP_NAME
 
@@ -102,24 +59,6 @@ const IndeterminateIcon = () => (
   </svg>
 )
 
-/**
- * Checkbox control component that displays the visual checkbox element.
- * Shows a checkmark when checked, a dash when indeterminate, and empty when unchecked.
- * Includes proper hover, focus, and disabled states with animations.
- * Automatically detects indeterminate state from context.
- *
- * @example
- * ```tsx
- * <Checkbox.Root>
- *   <Checkbox.Control />
- * </Checkbox.Root>
- *
- * <Checkbox.Root indeterminate>
- *   <Checkbox.Control />
- *   <Checkbox.Label>Select all</Checkbox.Label>
- * </Checkbox.Root>
- * ```
- */
 export interface CheckboxControlProps extends ArkCheckboxControlProps {}
 
 export function CheckboxControl({ className, ...props }: CheckboxControlProps) {
@@ -160,18 +99,5 @@ CheckboxControl.displayName = CHECKBOX_CONTROL_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Checkbox label component that displays text next to the checkbox.
- * Automatically associates with the checkbox for proper accessibility.
- * Clicking the label toggles the checkbox state.
- *
- * @example
- * ```tsx
- * <Checkbox.Root>
- *   <Checkbox.Control />
- *   <Checkbox.Label>I agree to the terms</Checkbox.Label>
- * </Checkbox.Root>
- * ```
- */
 export const CheckboxLabel = ArkCheckbox.Label
 CheckboxLabel.displayName = CHECKBOX_LABEL_NAME
