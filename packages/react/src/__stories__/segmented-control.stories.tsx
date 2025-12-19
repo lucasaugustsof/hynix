@@ -22,7 +22,7 @@ import { SegmentedControl, type SegmentedControlRootProps } from '@/components/s
 import { cn } from '@/lib/cn'
 
 export default {
-  title: 'Components/SegmentedControl',
+  title: 'Components/Forms/SegmentedControl',
   component: SegmentedControl.Root,
 } satisfies Meta
 

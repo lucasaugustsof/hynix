@@ -5,7 +5,7 @@ import { LinkButton } from '@/components/link-button'
 import { cn } from '@/lib/cn'
 
 export default {
-  title: 'Components/Alert',
+  title: 'Components/Feedback/Alert',
   component: Alert.Root,
   argTypes: {
     variant: {

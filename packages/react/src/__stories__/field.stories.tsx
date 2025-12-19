@@ -5,7 +5,7 @@ import { RiInformation2Fill, RiUser6Line } from '@remixicon/react'
 import { Field, type FieldRootProps } from '@/components/field'
 
 const meta = {
-  title: 'Components/Field',
+  title: 'Components/Forms/Field',
   component: Field.Root,
   argTypes: {
     size: {

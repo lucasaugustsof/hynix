@@ -7,7 +7,7 @@ import { Button } from '@/components/button'
 import { Checkbox, type CheckboxRootProps } from '@/components/checkbox'
 
 const meta = {
-  title: 'Components/Checkbox',
+  title: 'Components/Forms/Checkbox',
   component: Checkbox.Root,
   argTypes: {
     checked: {

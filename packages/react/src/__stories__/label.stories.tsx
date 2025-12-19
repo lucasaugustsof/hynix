@@ -7,7 +7,7 @@ import { Label, type LabelRootProps } from '@/components/label'
 import { LinkButton } from '@/components/link-button'
 
 export default {
-  title: 'Components/Label',
+  title: 'Components/Forms/Label',
   component: Label.Root,
   argTypes: {
     children: {

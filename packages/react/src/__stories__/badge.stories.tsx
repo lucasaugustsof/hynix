@@ -4,7 +4,7 @@ import { RiFlashlightFill, RiStarFill } from '@remixicon/react'
 import { Badge, type BadgeRootProps } from '@/components/badge'
 
 export default {
-  title: 'Components/Badge',
+  title: 'Components/Data Display/Badge',
   component: Badge.Root,
   argTypes: {
     variant: {

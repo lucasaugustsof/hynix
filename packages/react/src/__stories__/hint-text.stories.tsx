@@ -5,7 +5,7 @@ import { Field } from '@/components/field'
 import { HintText, type HintTextProps } from '@/components/hint-text'
 
 export default {
-  title: 'Components/HintText',
+  title: 'Components/Forms/HintText',
   component: HintText,
   argTypes: {
     leftIcon: {
