@@ -8,7 +8,7 @@ import { Label } from '@/components/label'
 import { Textarea, type TextareaRootProps } from '@/components/textarea'
 
 export default {
-  title: 'Components/Textarea',
+  title: 'Components/Forms/Textarea',
   component: Textarea.Root,
   decorators: [
     Story => (

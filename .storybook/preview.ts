@@ -1,4 +1,4 @@
-import '../packages/react/src/styles/globals.css'
+import '@/styles/globals.css'
 
 import { withThemeByDataAttribute } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react-vite'
@@ -22,7 +22,7 @@ const preview: Preview = {
         Dark: 'dark',
       },
       attributeName: 'data-theme',
-      defaultTheme: 'light',
+      defaultTheme: 'Light',
     }),
     withReactScan,
     withStrictMode,

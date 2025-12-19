@@ -3,7 +3,7 @@
   "type": "module",
   "packageManager": "pnpm@10.22.0",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "private": true,
   "devDependencies": {
@@ -12,9 +12,9 @@
     "@changesets/cli": "^2.29.7",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
-    "@storybook/addon-a11y": "^10.0.6",
-    "@storybook/addon-themes": "^10.0.6",
-    "@storybook/react-vite": "^10.0.6",
+    "@storybook/addon-a11y": "^10.1.10",
+    "@storybook/addon-themes": "^10.1.10",
+    "@storybook/react-vite": "^10.1.10",
     "@tailwindcss/vite": "^4.1.17",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
@@ -22,7 +22,7 @@
     "@vitejs/plugin-react": "^5.1.0",
     "husky": "^9.1.7",
     "react-scan": "^0.4.3",
-    "storybook": "^10.0.6",
+    "storybook": "^10.1.10",
     "typescript": "^5.9.3",
     "vite": "^7.2.2"
   },

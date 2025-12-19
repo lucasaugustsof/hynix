@@ -24,7 +24,7 @@ import { Switch } from '@/components/switch'
 import { cn } from '@/lib/cn'
 
 export default {
-  title: 'Components/Modal',
+  title: 'Components/Overlays/Modal',
 } satisfies Meta<ModalRootProps>
 
 type ModalStory<T = {}> = StoryObj<ModalRootProps & T>

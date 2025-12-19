@@ -7,7 +7,7 @@ import { Button } from '@/components/button'
 import { Switch, type SwitchRootProps } from '@/components/switch'
 
 const meta = {
-  title: 'Components/Switch',
+  title: 'Components/Forms/Switch',
   component: Switch.Root,
   argTypes: {
     checked: {

@@ -5,7 +5,7 @@ import { Badge } from '@/components/badge'
 import { ContentLabel, type ContentLabelProps } from '@/components/content-label'
 
 export default {
-  title: 'Components/ContentLabel',
+  title: 'Components/Data Display/ContentLabel',
   component: ContentLabel,
   argTypes: {
     size: {

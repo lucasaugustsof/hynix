@@ -9,7 +9,7 @@ import removeSvg from '@/components/avatar/assets/remove.svg'
 import verifiedSvg from '@/components/avatar/assets/verified.svg'
 
 export default {
-  title: 'Components/Avatar',
+  title: 'Components/Data Display/Avatar',
   component: Avatar.Root,
   argTypes: {
     size: {
