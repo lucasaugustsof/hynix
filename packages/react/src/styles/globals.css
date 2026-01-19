@@ -3,6 +3,7 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme inline {
+  /* COLOR PALETTE */
   --color-*: initial;
 
   /* NEUTRALS */
@@ -261,6 +262,114 @@
   --color-stable-base: light-dark(var(--color-teal-500), var(--color-teal-600));
   --color-stable-light: light-dark(var(--color-teal-200), var(--color-teal-alpha-24));
   --color-stable-lighter: light-dark(var(--color-teal-50), var(--color-teal-alpha-16));
+
+  /* TYPOGRAPHY */
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Inter Display", sans-serif;
+
+  /* INTER DISPLAY FOR TITLES */
+  --text-title-h1: 3.5rem;
+  --text-title-h1--font-weight: 500;
+  --text-title-h1--line-height: 4rem;
+  --text-title-h1--letter-spacing: -1%;
+
+  --text-title-h2: 3rem;
+  --text-title-h2--font-weight: 500;
+  --text-title-h2--line-height: 3.5rem;
+  --text-title-h2--letter-spacing: -1%;
+
+  --text-title-h3: 2.5rem;
+  --text-title-h3--font-weight: 500;
+  --text-title-h3--line-height: 3rem;
+  --text-title-h3--letter-spacing: -1%;
+
+  --text-title-h4: 2rem;
+  --text-title-h4--font-weight: 500;
+  --text-title-h4--line-height: 2.5rem;
+  --text-title-h4--letter-spacing: -0.5%;
+
+  --text-title-h5: 1.5rem;
+  --text-title-h5--font-weight: 500;
+  --text-title-h5--line-height: 2rem;
+  --text-title-h5--letter-spacing: 0%;
+
+  --text-title-h6: 1.25rem;
+  --text-title-h6--font-weight: 500;
+  --text-title-h6--line-height: 1.75rem;
+  --text-title-h6--letter-spacing: 0%;
+
+  /* INTER FOR LABELS */
+  --text-label-xl: 1.5rem;
+  --text-label-xl--font-weight: 500;
+  --text-label-xl--line-height: 2rem;
+  --text-label-xl--letter-spacing: -1.5%;
+
+  --text-label-lg: 1.125rem;
+  --text-label-lg--font-weight: 500;
+  --text-label-lg--line-height: 1.5rem;
+  --text-label-lg--letter-spacing: -1.5%;
+
+  --text-label-md: 1rem;
+  --text-label-md--font-weight: 500;
+  --text-label-md--line-height: 1.5rem;
+  --text-label-md--letter-spacing: -1.1%;
+
+  --text-label-sm: 0.875rem;
+  --text-label-sm--font-weight: 500;
+  --text-label-sm--line-height: 1.25rem;
+  --text-label-sm--letter-spacing: -0.6%;
+
+  --text-label-xs: 0.75rem;
+  --text-label-xs--font-weight: 500;
+  --text-label-xs--line-height: 1rem;
+  --text-label-xs--letter-spacing: 0%;
+
+  /* INTER FOR PARAGRAPHS */
+  --text-paragraph-xl: 1.5rem;
+  --text-paragraph-xl--font-weight: 400;
+  --text-paragraph-xl--line-height: 2rem;
+  --text-paragraph-xl--letter-spacing: -1.5%;
+
+  --text-paragraph-lg: 1.125rem;
+  --text-paragraph-lg--font-weight: 400;
+  --text-paragraph-lg--line-height: 1.5rem;
+  --text-paragraph-lg--letter-spacing: -1.5%;
+
+  --text-paragraph-md: 1rem;
+  --text-paragraph-md--font-weight: 400;
+  --text-paragraph-md--line-height: 1.5rem;
+  --text-paragraph-md--letter-spacing: -1.1%;
+
+  --text-paragraph-sm: 0.875rem;
+  --text-paragraph-sm--font-weight: 400;
+  --text-paragraph-sm--line-height: 1.25rem;
+  --text-paragraph-sm--letter-spacing: -0.6%;
+
+  --text-paragraph-xs: 0.75rem;
+  --text-paragraph-xs--font-weight: 400;
+  --text-paragraph-xs--line-height: 1rem;
+  --text-paragraph-xs--letter-spacing: 0%;
+
+  /* INTER FOR SUBHEADING */
+  --text-subheading-md: 1rem;
+  --text-subheading-md--font-weight: 500;
+  --text-subheading-md--line-height: 1.5rem;
+  --text-subheading-md--letter-spacing: 6%;
+
+  --text-subheading-sm: 0.875rem;
+  --text-subheading-sm--font-weight: 500;
+  --text-subheading-sm--line-height: 1.25rem;
+  --text-subheading-sm--letter-spacing: 6%;
+
+  --text-subheading-xs: 0.75rem;
+  --text-subheading-xs--font-weight: 500;
+  --text-subheading-xs--line-height: 1rem;
+  --text-subheading-xs--letter-spacing: 4%;
+
+  --text-subheading-2xs: 0.625rem;
+  --text-subheading-2xs--font-weight: 500;
+  --text-subheading-2xs--line-height: 0.75rem;
+  --text-subheading-2xs--letter-spacing: 2%;
 }
 
 @layer base {
@@ -277,6 +386,6 @@
   }
 
   body {
-    @apply antialiased bg-strong-950;
+    @apply antialiased bg-static-white dark:bg-static-black;
   }
 }

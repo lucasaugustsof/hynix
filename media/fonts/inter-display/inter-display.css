@@ -1,0 +1,152 @@
+/* Inter Display - Thin */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Display - Extra Light */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Display - Light */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Display - Regular */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Display - Medium */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Display - Semi Bold */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Display - Bold */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Display - Extra Bold */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Display - Black */
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('https://cdn.jsdelivr.net/gh/lucasaugustsof/hynix@main/media/fonts/inter-display/InterDisplay-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
