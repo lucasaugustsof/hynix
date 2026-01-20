@@ -23,7 +23,7 @@ export function LabelRoot({ className, ...props }: LabelRootProps) {
         // scoped:link-button
         '[&_[data-scope=link-button][data-part=root]]:ml-auto [&_[data-scope=link-button][data-part=root]]:text-fg-1/70',
         // disabled
-        'data-disabled:cursor-not-allowed [&>*]:group-data-disabled:text-disabled',
+        'data-disabled:cursor-not-allowed *:group-data-disabled:text-disabled',
         className
       )}
       data-scope="label"

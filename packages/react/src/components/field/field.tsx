@@ -20,13 +20,13 @@ const createFieldRecipe = tv({
     control: [
       'group inset-ring-1 inset-ring-border flex h-fit cursor-text items-center gap-x-2 overflow-hidden rounded-[0.625rem] bg-surface-2 shadow-xs transition-[background-color]',
       // hover
-      'not-has-data-[invalid]:not-focus-within:has-enabled:hover:inset-ring-transparent not-has-data-[invalid]:not-focus-within:has-enabled:hover:bg-fill-1 not-has-data-[invalid]:not-focus-within:has-enabled:hover:shadow-none',
+      'not-has-data-invalid:not-focus-within:has-enabled:hover:inset-ring-transparent not-has-data-invalid:not-focus-within:has-enabled:hover:bg-fill-1 not-has-data-invalid:not-focus-within:has-enabled:hover:shadow-none',
       // focus
       'focus-within:focus-outline focus-within:inset-ring-brand',
       // disabled
       'has-disabled:inset-ring-transparent has-disabled:cursor-not-allowed has-disabled:bg-fill-1 has-disabled:shadow-none',
       // invalid
-      'has-data-[invalid]:inset-ring-danger has-data-[invalid]:[--focus-outline-color:var(--color-danger)]',
+      'has-data-invalid:inset-ring-danger has-data-invalid:[--focus-outline-color:var(--color-danger)]',
     ],
     input: [
       'flex-1 outline-0',
@@ -43,7 +43,7 @@ const createFieldRecipe = tv({
       // disabled
       'group-has-disabled:fill-disabled',
       // invalid
-      'group-has-data-[invalid]:first:fill-fill-5',
+      'group-has-data-invalid:first:fill-fill-5',
     ],
   },
   variants: {

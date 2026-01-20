@@ -4,7 +4,7 @@ import { RiArrowLeftSLine, RiArrowRightSLine, RiExternalLinkLine } from '@remixi
 import { LinkButton, type LinkButtonRootProps } from '@/components/link-button'
 
 export default {
-  title: 'Components/Buttons/LinkButton',
+  title: 'Components/Actions/LinkButton',
   component: LinkButton.Root,
   argTypes: {
     size: {

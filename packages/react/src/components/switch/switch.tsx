@@ -47,7 +47,7 @@ export function SwitchControl({ className, ...props }: SwitchControlProps) {
         // unchecked
         'data-[state=unchecked]:not-data-disabled:data-hover:bg-fill-3 data-[state=unchecked]:not-data-disabled:bg-fill-2',
         // checked
-        'data-[state=checked]:not-data-disabled:data-hover:bg-[color-mix(in_oklab,var(--color-brand)_80%,black))] data-[state=checked]:not-data-disabled:bg-brand',
+        'data-[state=checked]:not-data-disabled:data-hover:bg-[color-mix(in_oklab,var(--color-brand)_80%,black)] data-[state=checked]:not-data-disabled:bg-brand',
         // disabled
         'data-disabled:inset-ring-1 data-disabled:inset-ring-disabled data-disabled:cursor-not-allowed data-disabled:bg-transparent',
         className

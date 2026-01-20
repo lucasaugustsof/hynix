@@ -105,7 +105,7 @@ export function ModalContent({ className, ...props }: ModalContentProps) {
       <ArkDialog.Content
         {...props}
         className={cn(
-          '-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 max-w-[calc(100vw_-_--spacing(6))] origin-center overflow-hidden rounded-[1.25rem] border shadow-black/6 shadow-lg duration-150 ease-in-out',
+          '-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 max-w-[calc(100vw---spacing(6))] origin-center overflow-hidden rounded-[1.25rem] border shadow-black/6 shadow-lg duration-150 ease-in-out',
           // open
           'data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in',
           // closed
@@ -195,7 +195,7 @@ export function ModalHeader({
         type="button"
         aria-label={closeLabel || 'Close modal'}
         className={cn(
-          'group inline-flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-[0.375rem] p-0.5 outline-hidden transition-colors',
+          'group inline-flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-md p-0.5 outline-hidden transition-colors',
           'enabled:hover:bg-fill-1'
         )}
       >

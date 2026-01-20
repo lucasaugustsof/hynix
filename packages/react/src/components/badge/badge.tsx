@@ -23,10 +23,10 @@ const createBadgeRecipe = tv({
         root: 'bg-(--badge-bg) text-fg-2',
       },
       light: {
-        root: 'bg-[--alpha(var(--badge-bg)_/_0.3)] text-[color-mix(in_oklab,var(--badge-bg)_80%,black)] dark:text-(--badge-bg)',
+        root: 'bg-[--alpha(var(--badge-bg)/0.3)] text-[color-mix(in_oklab,var(--badge-bg)_80%,black)] dark:text-(--badge-bg)',
       },
       lighter: {
-        root: 'bg-[--alpha(var(--badge-bg)_/_0.15)] text-(--badge-bg)',
+        root: 'bg-[--alpha(var(--badge-bg)/0.15)] text-(--badge-bg)',
       },
       stroke: {
         root: 'inset-ring-(--badge-bg) inset-ring-1 bg-surface-1 text-(--badge-bg)',
@@ -34,7 +34,7 @@ const createBadgeRecipe = tv({
     },
     size: {
       sm: {
-        root: ['h-4 gap-x-1.5 uppercase', 'text-[length:0.6875rem]/3'],
+        root: ['h-4 gap-x-1.5 uppercase', 'text-[0.6875rem]/3'],
         icon: '-mx-1 size-3',
         dot: '-mx-2 size-4',
       },

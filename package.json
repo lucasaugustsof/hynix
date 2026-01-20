@@ -8,23 +8,23 @@
   "private": true,
   "devDependencies": {
     "@biomejs/biome": "2.3.4",
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.7",
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "@storybook/addon-a11y": "^10.1.10",
-    "@storybook/addon-themes": "^10.1.10",
-    "@storybook/react-vite": "^10.1.10",
-    "@tailwindcss/vite": "^4.1.17",
-    "@types/node": "^24.10.0",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react": "^5.1.0",
+    "@changesets/changelog-github": "^0.5.2",
+    "@changesets/cli": "^2.29.8",
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
+    "@storybook/addon-a11y": "^10.1.11",
+    "@storybook/addon-themes": "^10.1.11",
+    "@storybook/react-vite": "^10.1.11",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "^24.10.9",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
     "husky": "^9.1.7",
     "react-scan": "^0.4.3",
-    "storybook": "^10.1.10",
+    "storybook": "^10.1.11",
     "typescript": "^5.9.3",
-    "vite": "^7.2.2"
+    "vite": "^7.3.1"
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
@@ -44,7 +44,7 @@
     "release:dev": "cnageset publish --tag dev"
   },
   "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   }
 }

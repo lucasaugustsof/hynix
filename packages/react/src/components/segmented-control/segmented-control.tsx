@@ -49,7 +49,7 @@ export function SegmentedControlList({ children, className, ...props }: Segmente
     <div
       {...props}
       className={cn(
-        'flex items-center gap-x-1 overflow-hidden rounded-[calc(--spacing(1.5)_+_--spacing(1))] bg-fill-1 p-1',
+        'flex items-center gap-x-1 overflow-hidden rounded-[calc(--spacing(1.5)+--spacing(1))] bg-fill-1 p-1',
         'supports-[corner-shape:superellipse]:[corner-shape:superellipse(1.3)]',
         className
       )}
@@ -61,7 +61,7 @@ export function SegmentedControlList({ children, className, ...props }: Segmente
       <ArkSegmentGroup.Indicator
         className={cn(
           'z-10 h-(--height) w-(--width) rounded-md bg-surface-1 shadow-black/6 shadow-md',
-          '[--transition-duration:150ms] [--transition-timing-function:cubic-bezier(0.165,0.84,0.44,1))]',
+          '[--transition-duration:150ms] [--transition-timing-function:cubic-bezier(0.165,0.84,0.44,1)]',
           'supports-[corner-shape:superellipse]:[corner-shape:superellipse(1.3)]'
         )}
       />

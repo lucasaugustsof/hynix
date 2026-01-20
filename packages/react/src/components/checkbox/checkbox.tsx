@@ -69,7 +69,7 @@ export function CheckboxControl({ className, ...props }: CheckboxControlProps) {
       <ArkCheckbox.Control
         className={cn(
           'relative inline-flex size-4 shrink-0 overflow-hidden rounded-sm bg-fill-2 transition-[background-color]',
-          'before:-translate-y-1/2 before:-translate-x-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-[calc(--spacing(3.5)_-_1px)] before:rounded-[calc(--spacing(0.5)_+_0.6px)] before:bg-surface-1 before:shadow-xs before:content-[""]',
+          'before:-translate-y-1/2 before:-translate-x-1/2 before:absolute before:top-1/2 before:left-1/2 before:size-[calc(--spacing(3.5)-1px)] before:rounded-[calc(--spacing(0.5)+0.6px)] before:bg-surface-1 before:shadow-xs before:content-[""]',
           // hover
           '[&:not([data-focus-visible],[data-disabled])]:data-hover:bg-fill-3',
           // focus
@@ -84,7 +84,7 @@ export function CheckboxControl({ className, ...props }: CheckboxControlProps) {
           className={cn(
             'absolute grid size-full place-items-center bg-brand transition-colors [&_svg]:fill-fg-2',
             // hover
-            '[&:not([data-focus-visible],[data-disabled])]:data-hover:bg-[color-mix(in_oklab,var(--color-brand)_80%,black))]'
+            '[&:not([data-focus-visible],[data-disabled])]::data-hover:bg-[color-mix(in_oklab,var(--color-brand)_80%,black)]'
           )}
           indeterminate={isIndeterminate}
         >

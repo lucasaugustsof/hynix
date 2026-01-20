@@ -4,7 +4,7 @@ import { RiAddLine, RiArrowLeftSLine, RiArrowRightSLine, RiDeleteBinLine } from 
 import { Button, type ButtonRootProps } from '@/components/button'
 
 export default {
-  title: 'Components/Buttons/Button',
+  title: 'Components/Actions/Button',
   component: Button.Root,
   argTypes: {
     variant: {
