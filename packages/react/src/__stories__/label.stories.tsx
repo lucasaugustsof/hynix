@@ -3,8 +3,10 @@ import { action } from 'storybook/actions'
 
 import { RiMailLine } from '@remixicon/react'
 import { Field } from '@/components/field'
-import { Label, type LabelRootProps } from '@/components/label'
+import { Label } from '@/components/label'
 import { LinkButton } from '@/components/link-button'
+
+type LabelProps = React.ComponentProps<typeof Label.Root>
 
 export default {
   title: 'Components/Forms/Label',
@@ -28,9 +30,9 @@ export default {
       </div>
     ),
   ],
-} satisfies Meta<LabelRootProps>
+} satisfies Meta<LabelProps>
 
-type LabelStory = StoryObj<LabelRootProps>
+type LabelStory = StoryObj<LabelProps>
 
 export const Default: LabelStory = {
   render() {
