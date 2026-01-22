@@ -1,55 +1,61 @@
+import type { Assign } from '@ark-ui/react'
 import { ark } from '@ark-ui/react/factory'
 
-import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
-import { tv, type VariantProps } from '@/lib/tv'
+import type { PolymorphicProps } from '@/utils/polymorphic'
+import { tv, type VariantProps } from '@/utils/tv'
 
 const BUTTON_ROOT_NAME = 'Button.Root'
 const BUTTON_ICON_NAME = 'Button.Icon'
 
-const createButtonRecipe = tv({
+const buttonVariants = tv({
   slots: {
     root: [
-      'inset-ring-1 isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-x-2 whitespace-nowrap rounded-lg px-1.5 transition-[background-color,box-shadow]',
-      'font-medium text-sm/5 tracking-[-0.00525rem]',
-      'focus-visible:focus-outline',
+      'inset-ring-1 isolate inline-flex cursor-pointer items-center justify-center whitespace-nowrap px-1.5 [transition:background-color_0.2s,scale_0.18s] enabled:active:scale-98',
+      'text-fg-2 text-label-sm',
+      'focus-visible:outline-2 focus-visible:outline-offset-2',
       'disabled:inset-ring-0 disabled:cursor-not-allowed disabled:bg-fill-1 disabled:text-disabled',
     ],
-    icon: ['size-5 shrink-0 [&_svg]:size-full [&_svg]:shrink-0'],
+    icon: 'size-5 shrink-0 fill-current',
   },
   variants: {
     variant: {
       primary: {
-        root: ['inset-ring-brand bg-brand enabled:hover:bg-brand/90', 'text-fg-2'],
+        root: [
+          'inset-ring-brand bg-brand focus-visible:outline-brand/15 enabled:not-focus-visible:hover:bg-brand/90',
+        ],
       },
       secondary: {
-        root: ['inset-ring-border bg-surface-2 enabled:hover:bg-fill-2', 'text-fg-1'],
-        icon: 'fill-fill-5',
+        root: [
+          'inset-ring-border bg-surface-2 focus-visible:outline-brand/15 enabled:not-focus-visible:hover:bg-fill-2',
+          'text-fg-1 *:data-[part=icon]:fill-fill-5',
+        ],
+      },
+
+      danger: {
+        root: 'bg-danger focus-visible:outline-danger/15 enabled:not-focus-visible:hover:bg-danger/90',
       },
       outline: {
-        root: ['inset-ring-brand bg-transparent enabled:hover:bg-brand/10', 'text-brand'],
-      },
-      danger: {
         root: [
-          'inset-ring-danger bg-danger [--focus-outline-color:var(--danger)] enabled:hover:bg-danger/90',
-          'text-fg-2',
+          'inset-ring-brand bg-transparent focus-visible:outline-brand/15 enabled:not-focus-visible:hover:bg-brand/10',
+          'text-brand',
         ],
       },
     },
     size: {
-      '2xs': {
-        root: 'h-7',
-      },
-      xs: {
-        root: 'h-8',
+      md: {
+        root: 'h-10 gap-x-2 rounded-[--spacing(2.5)] px-2.5',
       },
       sm: {
-        root: 'h-9 px-2',
+        root: 'h-9 gap-x-2 rounded-lg px-2',
       },
-      md: {
-        root: 'h-10 rounded-[--spacing(2.5)] px-2.5',
+      xs: {
+        root: 'h-8 gap-x-1.5 rounded-lg px-1.5',
+      },
+      '2xs': {
+        root: 'h-7 gap-x-1.5 rounded-lg px-1.5',
       },
     },
-    iconOnly: {
+    onlyIcon: {
       true: {
         root: 'aspect-square px-0',
       },
@@ -58,54 +64,31 @@ const createButtonRecipe = tv({
   defaultVariants: {
     variant: 'primary',
     size: 'md',
-    iconOnly: false,
   },
 })
 
-const buttonRecipe = createButtonRecipe()
+const { root: rootClasses, icon: iconClasses } = buttonVariants()
 
-type ButtonSharedProps = VariantProps<typeof createButtonRecipe>
+type ButtonSharedProps = VariantProps<typeof buttonVariants>
 
-export interface ButtonRootProps
-  extends React.ComponentProps<typeof ark.button>,
-    ButtonSharedProps {}
+////////////////////////////////////////////////////////////////////////////////////
 
-export function ButtonRoot({
-  children,
-  className,
-  variant,
-  size,
-  iconOnly,
-  disabled,
+interface ButtonProps
+  extends Assign<React.ComponentPropsWithRef<typeof ark.button>, ButtonSharedProps> {}
 
-  ...props
-}: ButtonRootProps) {
-  const clonedChildren = cloneChildrenWithProps(children, {
-    keyPrefix: 'Button',
-    props: {
-      variant,
-      size,
-    },
-    targetDisplayNames: [BUTTON_ICON_NAME],
-    unwrap: props.asChild,
-  })
-
+export function ButtonRoot({ className, variant, size, onlyIcon, ...props }: ButtonProps) {
   return (
     <ark.button
-      className={buttonRecipe.root({
+      {...props}
+      className={rootClasses({
+        className,
         variant,
         size,
-        iconOnly,
-        className,
+        onlyIcon,
       })}
-      disabled={disabled}
       data-scope="button"
-      data-part="root"
-      aria-disabled={disabled ?? undefined}
-      {...props}
-    >
-      {clonedChildren}
-    </ark.button>
+      data-part="icon"
+    />
   )
 }
 
@@ -113,21 +96,20 @@ ButtonRoot.displayName = BUTTON_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface ButtonIconProps extends React.ComponentProps<typeof ark.div>, ButtonSharedProps {}
-
-export function ButtonIcon({ className, variant, size, iconOnly, ...props }: ButtonIconProps) {
+export function ButtonIcon<T extends React.ElementType>({
+  as,
+  className,
+  ...props
+}: PolymorphicProps<T, ButtonSharedProps>) {
+  const Component = as || 'div'
   return (
-    <ark.div
-      className={buttonRecipe.icon({
-        variant,
-        size,
-        iconOnly,
+    <Component
+      {...props}
+      className={iconClasses({
         className,
       })}
       data-scope="button"
       data-part="icon"
-      aria-hidden
-      {...props}
     />
   )
 }
