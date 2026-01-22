@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { RiMailLine } from '@remixicon/react'
 import { Field } from '@/components/field'
-import { HintText, type HintTextProps } from '@/components/hint-text'
+import { HintText } from '@/components/hint-text'
+
+export type HintTextProps = React.ComponentPropsWithRef<typeof HintText>
 
 export default {
   title: 'Components/Forms/HintText',
