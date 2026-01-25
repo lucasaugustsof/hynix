@@ -54,7 +54,24 @@ export function renderChildren<TProps extends Record<string, unknown>>({
     const childDisplayName = childType.displayName
 
     if (childDisplayName && displayNames.includes(childDisplayName)) {
-      return React.cloneElement(child, Object.assign({}, props, child.props))
+      return React.cloneElement(child, {
+        ...props,
+        ...(child.props ?? {}),
+      })
+    }
+
+    const childProps = child.props as {
+      children?: React.ReactNode
+    }
+
+    if (childProps.children) {
+      const newChildren = renderChildren({
+        children: childProps.children,
+        props,
+        displayNames,
+      })
+
+      return React.cloneElement(child, undefined, newChildren)
     }
 
     return child

@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Alert, type AlertRootProps } from '@/components/alert'
+import { Alert } from '@/components/alert'
 import { LinkButton } from '@/components/link-button'
 import { cn } from '@/lib/cn'
+
+type AlertProps = React.ComponentProps<typeof Alert.Root>
 
 export default {
   title: 'Components/Feedback/Alert',
@@ -75,9 +77,9 @@ export default {
       </div>
     ),
   ],
-} as Meta<AlertRootProps>
+} as Meta<AlertProps>
 
-type AlertStory = StoryObj<AlertRootProps>
+type AlertStory = StoryObj<AlertProps>
 
 export const Default: AlertStory = {
   render(args) {
@@ -112,7 +114,7 @@ export const Large: AlertStory = {
 
         <div className="space-y-2.5">
           <hgroup>
-            <Alert.Title>Insert your alert title here!</Alert.Title>
+            <Alert.Title size="lg">Insert your alert title here!</Alert.Title>
 
             <Alert.Description>
               Insert the alert description here. It would look better as two lines of text.
