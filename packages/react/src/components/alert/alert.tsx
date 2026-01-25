@@ -2,6 +2,7 @@ import type { Assign } from '@ark-ui/react'
 import { ark } from '@ark-ui/react/factory'
 
 import {
+  type RemixiconComponentType,
   RiAlertFill,
   RiCheckboxCircleFill,
   RiCloseLine,
@@ -9,9 +10,10 @@ import {
   RiInformationFill,
   RiMagicFill,
 } from '@remixicon/react'
-import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
-import { cn } from '@/lib/cn'
-import { tv, type VariantProps } from '@/lib/tv'
+import { cn } from '@/utils/cn'
+import type { PolymorphicProps } from '@/utils/polymorphic'
+import { renderChildren } from '@/utils/render-children'
+import { tv, type VariantProps } from '@/utils/tv'
 
 const ALERT_ROOT_NAME = 'Alert.Root'
 const ALERT_ICON_NAME = 'Alert.Icon'
@@ -20,15 +22,15 @@ const ALERT_DESCRIPTION_NAME = 'Alert.Description'
 const ALERT_ACTIONS_NAME = 'Alert.Actions'
 const ALERT_CLOSE_TRIGGER_NAME = 'Alert.CloseTrigger'
 
-const createAlertRecipe = tv({
+const alertVariants = tv({
   slots: {
     root: [
-      'inline-flex w-full items-center gap-x-2 rounded-lg font-sans',
+      'inline-flex w-full items-center gap-x-2 rounded-lg',
       '[&_[data-scope=link-button][data-part=root]]:text-inherit',
     ],
     icon: 'shrink-0',
     title: 'line-clamp-2 flex-1 overflow-ellipsis',
-    description: 'mt-1',
+    description: 'mt-1 text-paragraph-sm',
     closeTrigger: 'focus-visible:focus-outline cursor-pointer opacity-72 [&_svg]:shrink-0',
   },
   variants: {
@@ -47,14 +49,22 @@ const createAlertRecipe = tv({
     },
     size: {
       xs: {
-        root: 'p-2 [&_svg]:size-4',
+        root: 'p-2',
+        title: 'text-paragraph-xs',
+        icon: 'size-4',
+        closeTrigger: '[&_svg]:size-4',
       },
       sm: {
-        root: 'px-2.5 py-2 [&_svg]:size-5',
+        root: 'px-2.5 py-2',
+        title: 'text-paragraph-sm',
+        icon: 'size-5',
+        closeTrigger: '[&_svg]:size-5',
       },
       lg: {
-        root: 'items-start p-3.5 pb-4 [&_svg]:size-5',
-        title: 'font-medium',
+        root: 'items-start p-3.5 pb-4',
+        title: 'text-label-sm',
+        icon: 'size-5',
+        closeTrigger: '[&_svg]:size-5',
       },
     },
   },
@@ -244,25 +254,19 @@ const createAlertRecipe = tv({
     },
     // #region end: feature
   ],
-  compoundSlots: [
-    {
-      slots: ['title'],
-      size: 'xs',
-      class: 'text-xs/4',
-    },
-    {
-      slots: ['title', 'description'],
-      size: ['sm', 'lg'],
-      class: 'text-sm/5 tracking-[-0.00525rem]',
-    },
-  ],
 })
 
-const alertRecipe = createAlertRecipe()
+const {
+  root: rootClasses,
+  icon: iconClasses,
+  title: titleClasses,
+  description: descriptionClasses,
+  closeTrigger: closeTriggerClasses,
+} = alertVariants()
 
-type AlertSharedProps = VariantProps<typeof createAlertRecipe>
+type AlertSharedProps = VariantProps<typeof alertVariants>
 
-export interface AlertRootProps extends Assign<React.ComponentProps<'div'>, AlertSharedProps> {}
+interface AlertRootProps extends Assign<React.ComponentProps<'div'>, AlertSharedProps> {}
 
 export function AlertRoot({
   children,
@@ -274,27 +278,13 @@ export function AlertRoot({
   'aria-atomic': ariaAtomic = true,
   ...props
 }: AlertRootProps) {
-  const clonedChildren = cloneChildrenWithProps(children, {
-    keyPrefix: 'Alert',
-    props: {
-      status,
-      variant,
-      size,
-    },
-    targetDisplayNames: [
-      ALERT_ICON_NAME,
-      ALERT_TITLE_NAME,
-      ALERT_CLOSE_TRIGGER_NAME,
-      ALERT_DESCRIPTION_NAME,
-    ],
-  })
-
   const computedAriaLive = ariaLive ?? (status === 'danger' ? 'assertive' : 'polite')
 
   return (
     <div
+      {...props}
       role="alert"
-      className={alertRecipe.root({
+      className={rootClasses({
         className,
         status,
         variant,
@@ -304,9 +294,21 @@ export function AlertRoot({
       data-part="root"
       aria-live={computedAriaLive}
       aria-atomic={ariaAtomic}
-      {...props}
     >
-      {clonedChildren}
+      {renderChildren({
+        children,
+        props: {
+          status,
+          variant,
+          size,
+        },
+        displayNames: [
+          ALERT_ICON_NAME,
+          ALERT_TITLE_NAME,
+          ALERT_CLOSE_TRIGGER_NAME,
+          ALERT_DESCRIPTION_NAME,
+        ],
+      })}
     </div>
   )
 }
@@ -315,43 +317,29 @@ AlertRoot.displayName = ALERT_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface AlertIconProps extends React.ComponentProps<typeof ark.div>, AlertSharedProps {}
-
-export function AlertIcon({
+export function AlertIcon<T extends React.ElementType = RemixiconComponentType>({
+  as,
   children,
   className,
   status = 'information',
   variant,
   size,
   ...props
-}: AlertIconProps) {
-  let leftIcon: React.ReactNode
+}: PolymorphicProps<T, AlertSharedProps>) {
+  const statusIconMap = {
+    danger: RiErrorWarningFill,
+    success: RiCheckboxCircleFill,
+    warning: RiAlertFill,
+    information: RiInformationFill,
+    feature: RiMagicFill,
+  } as Record<typeof status, RemixiconComponentType>
 
-  switch (status) {
-    case 'danger':
-      leftIcon = <RiErrorWarningFill />
-      break
-    case 'success':
-      leftIcon = <RiCheckboxCircleFill />
-      break
-    case 'warning':
-      leftIcon = <RiAlertFill />
-      break
-    case 'information':
-      leftIcon = <RiInformationFill />
-      break
-    case 'feature':
-      leftIcon = <RiMagicFill />
-      break
-    default:
-      leftIcon = null
-  }
-
-  const content = props.asChild ? children : leftIcon
+  const Component = as || statusIconMap[status]
 
   return (
-    <ark.div
-      className={alertRecipe.icon({
+    <Component
+      {...props}
+      className={iconClasses({
         className,
         status,
         variant,
@@ -360,10 +348,7 @@ export function AlertIcon({
       aria-hidden
       data-scope="alert"
       data-part="icon"
-      {...props}
-    >
-      {content}
-    </ark.div>
+    />
   )
 }
 
@@ -371,13 +356,13 @@ AlertIcon.displayName = ALERT_ICON_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface AlertTitleProps
-  extends Assign<React.ComponentProps<typeof ark.h2>, AlertSharedProps> {}
+interface AlertTitleProps extends Assign<React.ComponentProps<typeof ark.span>, AlertSharedProps> {}
 
 export function AlertTitle({ className, variant, status, size, ...props }: AlertTitleProps) {
   return (
-    <ark.h2
-      className={alertRecipe.title({
+    <ark.span
+      {...props}
+      className={titleClasses({
         className,
         variant,
         status,
@@ -385,7 +370,6 @@ export function AlertTitle({ className, variant, status, size, ...props }: Alert
       })}
       data-scope="alert"
       data-part="title"
-      {...props}
     />
   )
 }
@@ -394,19 +378,18 @@ AlertTitle.displayName = ALERT_TITLE_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface AlertDescriptionProps
-  extends Assign<React.ComponentProps<'p'>, AlertSharedProps> {}
+interface AlertDescriptionProps extends Assign<React.ComponentProps<'p'>, AlertSharedProps> {}
 
 export function AlertDescription({ className, size, ...props }: AlertDescriptionProps) {
   return (
     <p
-      className={alertRecipe.description({
+      {...props}
+      className={descriptionClasses({
         className,
         size,
       })}
       data-scope="alert"
       data-part="description"
-      {...props}
     />
   )
 }
@@ -415,15 +398,15 @@ AlertDescription.displayName = ALERT_DESCRIPTION_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface AlertActionsProps extends React.ComponentProps<'div'> {}
+interface AlertActionsProps extends React.ComponentProps<'div'> {}
 
 export function AlertActions({ className, ...props }: AlertActionsProps) {
   return (
     <div
+      {...props}
       className={cn('flex items-center gap-x-2', className)}
       data-scope="alert"
       data-part="actions"
-      {...props}
     />
   )
 }
@@ -432,7 +415,7 @@ AlertActions.displayName = ALERT_ACTIONS_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface AlertCloseTriggerProps extends React.ComponentProps<'button'>, AlertSharedProps {}
+interface AlertCloseTriggerProps extends React.ComponentProps<'button'>, AlertSharedProps {}
 
 export function AlertCloseTrigger({
   className,
@@ -444,8 +427,9 @@ export function AlertCloseTrigger({
 }: AlertCloseTriggerProps) {
   return (
     <button
+      {...props}
       type="button"
-      className={alertRecipe.closeTrigger({
+      className={closeTriggerClasses({
         className,
         status,
         variant,
@@ -454,7 +438,6 @@ export function AlertCloseTrigger({
       data-scope="alert"
       data-part="close"
       aria-label={ariaLabel}
-      {...props}
     >
       <RiCloseLine aria-hidden />
     </button>
