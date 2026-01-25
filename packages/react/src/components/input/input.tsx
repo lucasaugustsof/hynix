@@ -10,20 +10,19 @@ import { tv, type VariantProps } from '@/utils/tv'
 const INPUT_ROOT_NAME = 'Input.Root'
 const INPUT_CONTROL_NAME = 'Input.Control'
 const INPUT_TEXT_INPUT_NAME = 'Input.TextInput'
-const INPUT_PREFIX_NAME = 'Input.Prefix'
+const INPUT_ADDON_PREFIX_NAME = 'Input.AddonPrefix'
 const INPUT_ICON_NAME = 'Input.Icon'
 
 const inputVariants = tv({
   slots: {
     root: [
-      'group relative overflow-hidden shadow-[0_1px_2px_0_rgba(10,13,20,0.03)] [transition:box-shadow_0.2s]',
+      'group relative flex overflow-hidden shadow-[0_1px_2px_0_rgba(10,13,20,0.03)] [transition:box-shadow_0.2s]',
       'before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:ring-1 before:ring-border before:ring-inset before:[transition:box-shadow_0.2s]',
       // hover
       'not-focus-within:has-enabled:hover:border-fill-1 not-focus-within:has-enabled:hover:shadow-none',
       // focus
-      'focus-within:ring-2 focus-within:ring-brand/16 focus-within:ring-offset-2 focus-within:ring-offset-surface-1 focus-within:before:ring-brand focus-within:has-data-invalid:ring-danger/16',
-      // disabled
-      'has-disabled:cursor-not-allowed has-disabled:**:cursor-not-allowed group-has-disabled:before:hidden',
+      'focus-within:ring-2 focus-within:ring-brand/16 focus-within:ring-offset-2 focus-within:ring-offset-surface-1 focus-within:before:ring-brand focus-within:has-data-invalid:ring-danger/16', // disabled
+      'has-[input:disabled]:cursor-not-allowed has-[input:disabled]:before:hidden has-[input:disabled]:**:cursor-not-allowed',
       // invalid
       'has-data-invalid:before:ring-danger',
     ],
@@ -41,7 +40,14 @@ const inputVariants = tv({
       // disabled
       'disabled:text-disabled disabled:placeholder:text-disabled',
     ],
-    prefix: '',
+    addonPrefix: [
+      'inline-flex h-[inherit] shrink-0 items-center justify-center whitespace-nowrap border-e bg-surface-1 [transition:color_0.2s]',
+      'text-fg-1/40 text-paragraph-sm',
+      // focus
+      'group-focus-within:text-fg-1/70',
+      // disabled
+      'group-has-disabled:bg-fill-1 group-has-disabled:text-disabled',
+    ],
     icon: [
       'flex size-5 shrink-0 items-center justify-center fill-fill-4 [transition:fill_0.2s]',
       // hover
@@ -57,14 +63,17 @@ const inputVariants = tv({
       md: {
         root: 'h-10 rounded-[--spacing(2.5)]',
         control: 'pr-2.5 pl-3',
+        addonPrefix: 'px-3',
       },
       sm: {
         root: 'h-9 rounded-lg',
         control: 'pr-2 pl-2.5',
+        addonPrefix: 'px-2.5',
       },
       xs: {
         root: 'h-8 rounded-lg',
         control: 'pr-1.5 pl-2',
+        addonPrefix: 'px-2.5',
       },
     },
   },
@@ -77,7 +86,7 @@ const {
   root: rootClasses,
   control: controlClasses,
   text: textClasses,
-  prefix: prefixClasses,
+  addonPrefix: addonPrefixClasses,
   icon: iconClasses,
 } = inputVariants()
 
@@ -103,7 +112,7 @@ export function InputRoot({ children, className, size, ...props }: InputRootProp
         props: {
           size,
         },
-        displayNames: [INPUT_CONTROL_NAME],
+        displayNames: [INPUT_CONTROL_NAME, INPUT_ADDON_PREFIX_NAME],
       })}
     </div>
   )
@@ -154,19 +163,23 @@ InputTextInput.displayName = INPUT_TEXT_INPUT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface InputPrefixProps extends React.ComponentProps<'div'> {}
+interface InputAddonProps extends Assign<React.ComponentProps<'div'>, InputSharedProps> {}
 
-export function InputPrefix({ className }: InputPrefixProps) {
+export function InputAddonPrefix({ className, size, ...props }: InputAddonProps) {
   return (
     <div
-      className={prefixClasses({
+      {...props}
+      className={addonPrefixClasses({
         className,
+        size,
       })}
+      data-scope="input"
+      data-part="addon-prefix"
     />
   )
 }
 
-InputPrefix.displayName = INPUT_PREFIX_NAME
+InputAddonPrefix.displayName = INPUT_ADDON_PREFIX_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
