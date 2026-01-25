@@ -4,12 +4,28 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { action } from 'storybook/actions'
 
 import { Button } from '@/components/button'
-import { Checkbox, type CheckboxRootProps } from '@/components/checkbox'
+import { Checkbox, useCheckbox } from '@/components/checkbox'
+
+type CheckboxProps = React.ComponentPropsWithRef<typeof Checkbox.Root>
 
 const meta = {
   title: 'Components/Forms/Checkbox',
   component: Checkbox.Root,
   argTypes: {
+    size: {
+      control: 'select',
+      options: ['md', 'sm'],
+      description: 'Determines the size of the checkbox',
+      table: {
+        category: 'Appearance',
+        type: {
+          summary: 'string',
+        },
+        defaultValue: {
+          summary: 'md',
+        },
+      },
+    },
     checked: {
       control: 'select',
       options: [true, false, 'indeterminate'],
@@ -69,23 +85,17 @@ const meta = {
     },
   },
   args: {
+    size: 'md',
     disabled: false,
     required: false,
     onCheckedChange: action('onCheckedChange'),
     defaultChecked: false,
   },
-  decorators: [
-    Story => (
-      <div className="w-80">
-        <Story />
-      </div>
-    ),
-  ],
-} satisfies Meta<CheckboxRootProps>
+} satisfies Meta<CheckboxProps>
 
 export default meta
 
-type CheckboxStory = StoryObj<CheckboxRootProps>
+type CheckboxStory = StoryObj<CheckboxProps>
 
 export const Default: CheckboxStory = {
   render(args) {
@@ -199,14 +209,120 @@ export const Controlled: CheckboxStory = {
         >
           <Checkbox.Control />
 
-          <span className="select-none text-fg-1 text-sm">
-            Controlled checkbox (current: {checked ? 'checked' : 'unchecked'})
-          </span>
+          <span className="select-none text-fg-1 text-sm">Controlled checkbox</span>
         </Checkbox.Root>
 
         <Button.Root variant="secondary" size="xs" onClick={() => setChecked(!checked)}>
           Toggle from outside
         </Button.Root>
+      </div>
+    )
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    actions: {
+      disable: true,
+    },
+  },
+}
+
+export const Group: CheckboxStory = {
+  render(_args) {
+    const todoList = [
+      {
+        id: 1,
+        title: 'Learn React',
+        completed: false,
+      },
+      {
+        id: 2,
+        title: 'Learn TypeScript',
+        completed: false,
+      },
+      {
+        id: 3,
+        title: 'Learn Next.js',
+        completed: false,
+      },
+    ]
+
+    return (
+      <Checkbox.Group className="flex flex-col gap-y-3" defaultValue={['1']} name="todo">
+        {todoList.map(todo => (
+          <Checkbox.Root
+            key={todo.id}
+            value={String(todo.id)}
+            className="inline-flex items-center gap-x-2"
+          >
+            <Checkbox.Control />
+            <span className="select-none text-fg-1 text-paragraph-sm">{todo.title}</span>
+          </Checkbox.Root>
+        ))}
+      </Checkbox.Group>
+    )
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    actions: {
+      disable: true,
+    },
+  },
+}
+
+export const WithProvider: CheckboxStory = {
+  render(_args) {
+    const checkboxStore = useCheckbox()
+
+    const isChecked = checkboxStore.checkedState === true
+    const isIndeterminate = checkboxStore.checkedState === 'indeterminate'
+
+    return (
+      <div className="space-y-4">
+        <Checkbox.RootProvider value={checkboxStore}>
+          <div className="flex items-center gap-2">
+            <Checkbox.Control />
+            <span className="select-none text-fg-1 text-paragraph-sm">
+              Accept terms and conditions
+            </span>
+          </div>
+        </Checkbox.RootProvider>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <Button.Root variant="secondary" size="xs" onClick={() => checkboxStore.setChecked(true)}>
+            Check
+          </Button.Root>
+
+          <Button.Root
+            variant="secondary"
+            size="xs"
+            onClick={() => checkboxStore.setChecked(false)}
+          >
+            Uncheck
+          </Button.Root>
+
+          <Button.Root
+            variant="secondary"
+            size="xs"
+            onClick={() => checkboxStore.setChecked('indeterminate')}
+          >
+            Indeterminate
+          </Button.Root>
+
+          <Button.Root variant="secondary" size="xs" onClick={() => checkboxStore.toggleChecked()}>
+            Toggle
+          </Button.Root>
+        </div>
+
+        <pre className="text-fg-1 text-paragraph-sm">
+          Current state:{' '}
+          <output className="text-danger text-label-sm">
+            {isIndeterminate ? 'indeterminate' : isChecked ? 'checked' : 'unchecked'}
+          </output>
+        </pre>
       </div>
     )
   },

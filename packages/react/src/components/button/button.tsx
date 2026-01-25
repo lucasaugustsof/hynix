@@ -10,7 +10,7 @@ const BUTTON_ICON_NAME = 'Button.Icon'
 const buttonVariants = tv({
   slots: {
     root: [
-      'inset-ring-1 isolate inline-flex cursor-pointer select-none items-center justify-center whitespace-nowrap px-1.5 [transition:background-color_0.2s,scale_0.18s] enabled:active:scale-98',
+      'inset-ring-1 isolate inline-flex cursor-pointer select-none items-center justify-center whitespace-nowrap px-1.5 [transition:background-color_0.2s,scale_0.18s]',
       'text-fg-2 text-label-sm',
       'focus-visible:outline-2 focus-visible:outline-offset-2',
       'disabled:inset-ring-0 disabled:cursor-not-allowed disabled:bg-fill-1 disabled:text-disabled',
