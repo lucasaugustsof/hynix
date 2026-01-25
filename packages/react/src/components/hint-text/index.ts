@@ -1,1 +1,1 @@
-export { HintText, type HintTextProps } from './hint-text'
+export { HintText } from './hint-text'
