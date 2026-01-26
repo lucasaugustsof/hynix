@@ -5,7 +5,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Field } from '@/components/field'
 import { HintText } from '@/components/hint-text'
 import { Label } from '@/components/label'
-import { Textarea, type TextareaRootProps } from '@/components/textarea'
+import { Textarea } from '@/components/textarea'
+
+type TextareaProps = React.ComponentProps<typeof Textarea.Root>
 
 export default {
   title: 'Components/Forms/Textarea',
@@ -17,9 +19,9 @@ export default {
       </div>
     ),
   ],
-} satisfies Meta<TextareaRootProps>
+} satisfies Meta<TextareaProps>
 
-type TextareaStory = StoryObj<TextareaRootProps>
+type TextareaStory = StoryObj<TextareaProps>
 
 export const Default: TextareaStory = {
   render() {
