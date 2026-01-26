@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { RiFlashlightFill, RiStarFill } from '@remixicon/react'
-import { Badge, type BadgeRootProps } from '@/components/badge'
+import { Badge } from '@/components/badge'
+
+type BadgeProps = React.ComponentProps<typeof Badge.Root>
 
 export default {
   title: 'Components/Data Display/Badge',
@@ -91,9 +93,9 @@ export default {
     size: 'sm',
     disabled: false,
   },
-} satisfies Meta<BadgeRootProps>
+} satisfies Meta<BadgeProps>
 
-type BadgeStory = StoryObj<BadgeRootProps>
+type BadgeStory = StoryObj<BadgeProps>
 
 export const Default: BadgeStory = {
   args: {
@@ -191,31 +193,21 @@ export const WithIcon: BadgeStory = {
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
       <Badge.Root color="orange" variant="filled">
-        <Badge.Icon asChild>
-          <RiFlashlightFill />
-        </Badge.Icon>
+        <Badge.Icon as={RiFlashlightFill} />
         Badge
       </Badge.Root>
       <Badge.Root color="orange" variant="light">
-        <Badge.Icon asChild>
-          <RiStarFill />
-        </Badge.Icon>
+        <Badge.Icon as={RiStarFill} />
         Badge
       </Badge.Root>
       <Badge.Root color="orange" variant="lighter">
         Badge
-        <Badge.Icon asChild>
-          <RiFlashlightFill />
-        </Badge.Icon>
+        <Badge.Icon as={RiFlashlightFill} />
       </Badge.Root>
       <Badge.Root color="orange" variant="stroke">
-        <Badge.Icon asChild>
-          <RiStarFill />
-        </Badge.Icon>
+        <Badge.Icon as={RiStarFill} />
         Badge
-        <Badge.Icon asChild>
-          <RiFlashlightFill />
-        </Badge.Icon>
+        <Badge.Icon as={RiFlashlightFill} />
       </Badge.Root>
     </div>
   ),
