@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { action } from 'storybook/actions'
 
-import { Avatar, type AvatarRootProps, getInitials } from '@/components/avatar'
+import { Avatar, getInitials } from '@/components/avatar'
 import addSvg from '@/components/avatar/assets/add.svg'
 import favoriteSvg from '@/components/avatar/assets/favorite.svg'
 import pinSvg from '@/components/avatar/assets/pin.svg'
 import removeSvg from '@/components/avatar/assets/remove.svg'
 import verifiedSvg from '@/components/avatar/assets/verified.svg'
+
+type AvatarProps = React.ComponentProps<typeof Avatar.Root>
 
 export default {
   title: 'Components/Data Display/Avatar',
@@ -41,9 +43,9 @@ export default {
     size: '56',
     onStatusChange: action('onStatusChange'),
   },
-} satisfies Meta<AvatarRootProps>
+} satisfies Meta<AvatarProps>
 
-type AvatarStory = StoryObj<AvatarRootProps>
+type AvatarStory = StoryObj<AvatarProps>
 
 export const Default: AvatarStory = {
   render: args => (
