@@ -9,7 +9,7 @@ const TEXTAREA_RESIZE_HANDLE_NAME = 'Textarea.ResizeHandle'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface TextareaRootProps extends React.ComponentPropsWithRef<typeof ArkField.Textarea> {
+interface TextareaRootProps extends React.ComponentPropsWithRef<typeof ArkField.Textarea> {
   allowResize?: boolean
 }
 
@@ -78,7 +78,7 @@ TextareaRoot.displayName = TEXTAREA_ROOT_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface TextareaCharCounterProps {
+interface TextareaCharCounterProps {
   current: number
   max: number
   invalid?: boolean
