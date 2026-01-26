@@ -1,7 +1,8 @@
 export {
+  InputAddonInlinePrefix as AddonInlinePrefix,
   InputAddonPrefix as AddonPrefix,
   InputControl as Control,
   InputIcon as Icon,
   InputRoot as Root,
-  InputTextInput as TextInput,
+  InputTextField as TextField,
 } from './input'

@@ -9,14 +9,15 @@ import { tv, type VariantProps } from '@/utils/tv'
 
 const INPUT_ROOT_NAME = 'Input.Root'
 const INPUT_CONTROL_NAME = 'Input.Control'
-const INPUT_TEXT_INPUT_NAME = 'Input.TextInput'
+const INPUT_TEXT_FIELD_NAME = 'Input.TextField'
 const INPUT_ADDON_PREFIX_NAME = 'Input.AddonPrefix'
+const INPUT_ADDON_INLINE_PREFIX_NAME = 'Input.AddonInlinePrefix'
 const INPUT_ICON_NAME = 'Input.Icon'
 
 const inputVariants = tv({
   slots: {
     root: [
-      'group relative flex overflow-hidden shadow-[0_1px_2px_0_rgba(10,13,20,0.03)] [transition:box-shadow_0.2s]',
+      'group relative flex items-center overflow-hidden shadow-[0_1px_2px_0_rgba(10,13,20,0.03)] motion-reduce:transition-none motion-safe:[transition:box-shadow_0.2s]',
       'before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:ring-1 before:ring-border before:ring-inset before:[transition:box-shadow_0.2s]',
       // hover
       'not-focus-within:has-enabled:hover:border-fill-1 not-focus-within:has-enabled:hover:shadow-none',
@@ -27,7 +28,7 @@ const inputVariants = tv({
       'has-data-invalid:before:ring-danger',
     ],
     control: [
-      'inline-flex size-full items-center gap-x-2 bg-surface-2 [transition:background-color_0.2s]',
+      'inline-flex size-full items-center bg-surface-2 [transition:background-color_0.2s]',
       // hover
       'group-not-focus-within:group-has-enabled:group-hover:bg-fill-1',
       // disabled
@@ -48,6 +49,12 @@ const inputVariants = tv({
       // disabled
       'group-has-disabled:bg-fill-1 group-has-disabled:text-disabled',
     ],
+    addonInlinePrefix: [
+      'text-nowrap',
+      'text-fg-1/70 text-paragraph-sm',
+      // disabled
+      'group-has-disabled:text-disabled',
+    ],
     icon: [
       'flex size-5 shrink-0 items-center justify-center fill-fill-4 [transition:fill_0.2s]',
       // hover
@@ -62,17 +69,17 @@ const inputVariants = tv({
     size: {
       md: {
         root: 'h-10 rounded-[--spacing(2.5)]',
-        control: 'pr-2.5 pl-3',
+        control: 'gap-x-2 pr-2.5 pl-3',
         addonPrefix: 'px-3',
       },
       sm: {
         root: 'h-9 rounded-lg',
-        control: 'pr-2 pl-2.5',
+        control: 'gap-x-2 pr-2 pl-2.5',
         addonPrefix: 'px-2.5',
       },
       xs: {
         root: 'h-8 rounded-lg',
-        control: 'pr-1.5 pl-2',
+        control: 'gap-1.5 pr-1.5 pl-2',
         addonPrefix: 'px-2.5',
       },
     },
@@ -87,6 +94,7 @@ const {
   control: controlClasses,
   text: textClasses,
   addonPrefix: addonPrefixClasses,
+  addonInlinePrefix: addonInlinePrefixClasses,
   icon: iconClasses,
 } = inputVariants()
 
@@ -100,6 +108,7 @@ export function InputRoot({ children, className, size, ...props }: InputRootProp
   return (
     <div
       {...props}
+      role="group"
       className={rootClasses({
         className,
         size,
@@ -142,12 +151,12 @@ InputControl.displayName = INPUT_CONTROL_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-interface InputTextInputProps extends React.ComponentProps<'input'> {}
+interface InputTextFieldProps extends Omit<React.ComponentProps<'input'>, 'type'> {}
 
-export function InputTextInput({ className, ...props }: InputTextInputProps) {
+export function InputTextField({ className, autoComplete = 'off', ...props }: InputTextFieldProps) {
   return (
     <ArkField.Input
-      autoComplete="off"
+      autoComplete={autoComplete}
       {...props}
       type="text"
       className={textClasses({
@@ -159,7 +168,7 @@ export function InputTextInput({ className, ...props }: InputTextInputProps) {
   )
 }
 
-InputTextInput.displayName = INPUT_TEXT_INPUT_NAME
+InputTextField.displayName = INPUT_TEXT_FIELD_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -175,11 +184,32 @@ export function InputAddonPrefix({ className, size, ...props }: InputAddonProps)
       })}
       data-scope="input"
       data-part="addon-prefix"
+      aria-hidden
     />
   )
 }
 
 InputAddonPrefix.displayName = INPUT_ADDON_PREFIX_NAME
+
+////////////////////////////////////////////////////////////////////////////////////
+
+interface InputAddonInlinePrefixProps extends React.ComponentProps<typeof ark.span> {}
+
+export function InputAddonInlinePrefix({ className, ...props }: InputAddonInlinePrefixProps) {
+  return (
+    <ark.span
+      {...props}
+      className={addonInlinePrefixClasses({
+        className,
+      })}
+      data-scope="input"
+      data-part="addon-inline-prefix"
+      aria-hidden
+    />
+  )
+}
+
+InputAddonInlinePrefix.displayName = INPUT_ADDON_INLINE_PREFIX_NAME
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -198,6 +228,7 @@ export function InputIcon<T extends React.ElementType = RemixiconComponentType>(
         className,
         size,
       })}
+      aria-hidden
     />
   )
 }
