@@ -10,9 +10,9 @@ import {
 } from '@ark-ui/react/avatar'
 import { ark } from '@ark-ui/react/factory'
 
-import { cloneChildrenWithProps } from '@/lib/clone-children-with-props'
-import { cn } from '@/lib/cn'
-import { tv, type VariantProps } from '@/lib/tv'
+import { cn } from '@/utils/cn'
+import { renderChildren } from '@/utils/render-children'
+import { tv, type VariantProps } from '@/utils/tv'
 import placeholderDark from './assets/placeholder-dark.png'
 import placeholderLight from './assets/placeholder-light.png'
 
@@ -25,53 +25,50 @@ const AVATAR_STATUS_NAME = 'Avatar.Status'
 const AVATAR_BADGE_NAME = 'Avatar.Badge'
 const AVATAR_NOTIFICATION_NAME = 'Avatar.Notification'
 
-const createAvatarRecipe = tv({
+const avatarVariants = tv({
   slots: {
     root: 'relative inline-flex shrink-0',
     image: 'size-full rounded-full object-cover',
-    fallback: [
-      'grid flex-1 place-items-center rounded-full bg-brand',
-      'font-medium font-sans text-fg-2 uppercase',
-    ],
+    fallback: ['grid flex-1 place-items-center rounded-full bg-brand', 'text-fg-2 uppercase'],
     positioner: 'absolute grid size-8 shrink-0 place-items-center drop-shadow-xs',
   },
   variants: {
     size: {
       '80': {
         root: 'size-20',
-        fallback: 'text-2xl/8',
+        fallback: 'text-title-h5',
       },
       '72': {
         root: 'size-18',
-        fallback: 'text-2xl/8',
+        fallback: 'text-title-h5',
       },
       '64': {
         root: 'size-16',
-        fallback: 'text-2xl/8',
+        fallback: 'text-title-h5',
       },
       '56': {
         root: 'size-14',
-        fallback: 'text-lg/6 tracking-[-0.01688rem]',
+        fallback: 'text-label-lg',
       },
       '48': {
         root: 'size-12',
-        fallback: 'text-lg/6 tracking-[-0.01688rem]',
+        fallback: 'text-label-lg',
       },
       '40': {
         root: 'size-10',
-        fallback: 'text-base tracking-[-0.011rem]',
+        fallback: 'text-label-md',
       },
       '32': {
         root: 'size-8',
-        fallback: 'text-sm/5 tracking-[-0.00525rem]',
+        fallback: 'text-label-sm',
       },
       '24': {
         root: 'size-6',
-        fallback: 'text-xs/4',
+        fallback: 'text-label-xs',
       },
       '20': {
         root: 'size-5',
-        fallback: 'text-xs/4',
+        fallback: 'text-label-xs',
       },
     },
   },
@@ -130,35 +127,38 @@ const createAvatarRecipe = tv({
   },
 })
 
-const avatarRecipe = createAvatarRecipe()
+const {
+  root: rootClasses,
+  image: imageClasses,
+  fallback: fallbackClasses,
+  positioner: positionerClasses,
+} = avatarVariants()
 
-type AvatarSharedProps = VariantProps<typeof createAvatarRecipe>
+type AvatarSharedProps = VariantProps<typeof avatarVariants>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
 export const AvatarRootProvider = ArkAvatar.RootProvider
 AvatarRootProvider.displayName = AVATAR_ROOT_PROVIDER_NAME
 
-export interface AvatarRootProps extends Assign<ArkAvatarRootProps, AvatarSharedProps> {}
+interface AvatarRootProps extends Assign<ArkAvatarRootProps, AvatarSharedProps> {}
 
 export function AvatarRoot({ children, className, size, ...props }: AvatarRootProps) {
-  const clonedChildren = cloneChildrenWithProps(children, {
-    keyPrefix: 'Avatar',
-    props: {
-      size,
-    },
-    targetDisplayNames: [AVATAR_IMAGE_NAME, AVATAR_FALLBACK_NAME, AVATAR_POSITIONER_NAME],
-  })
-
   return (
     <ArkAvatar.Root
-      className={avatarRecipe.root({
+      className={rootClasses({
         className,
         size,
       })}
       {...props}
     >
-      {clonedChildren}
+      {renderChildren({
+        children,
+        displayNames: [AVATAR_IMAGE_NAME, AVATAR_FALLBACK_NAME, AVATAR_POSITIONER_NAME],
+        props: {
+          size,
+        },
+      })}
     </ArkAvatar.Root>
   )
 }
@@ -199,7 +199,7 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
     return (
       <ArkAvatar.Image
         ref={ref}
-        className={avatarRecipe.image({
+        className={imageClasses({
           className,
           size,
         })}
@@ -228,7 +228,7 @@ export function AvatarFallback({
 
   return (
     <ArkAvatar.Fallback
-      className={avatarRecipe.fallback({
+      className={fallbackClasses({
         className,
         size,
       })}
@@ -257,7 +257,7 @@ export function AvatarPositioner({
   return (
     <div
       className={cn(
-        avatarRecipe.positioner({
+        positionerClasses({
           className:
             placement === 'bottom' ? 'bottom-0 origin-bottom-right' : 'top-0 origin-top-right',
           size,

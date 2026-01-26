@@ -6,5 +6,5 @@ export type {
 } from '@ark-ui/react/avatar'
 export { useAvatar, useAvatarContext } from '@ark-ui/react/avatar'
 
-export { type AvatarRootProps, getInitials } from './avatar'
+export { getInitials } from './avatar'
 export * as Avatar from './namespace'
