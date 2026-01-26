@@ -25,7 +25,7 @@ const inputVariants = tv({
       'focus-within:ring-2 focus-within:ring-brand/16 focus-within:ring-offset-2 focus-within:ring-offset-surface-1 focus-within:before:ring-brand focus-within:has-data-invalid:ring-danger/16', // disabled
       'has-[input:disabled]:cursor-not-allowed has-[input:disabled]:before:hidden has-[input:disabled]:**:cursor-not-allowed',
       // invalid
-      'has-data-invalid:before:ring-danger',
+      'has-[input[data-invalid]]:before:ring-danger',
     ],
     control: [
       'inline-flex size-full items-center bg-surface-2 [transition:background-color_0.2s]',
