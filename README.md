@@ -20,4 +20,4 @@ UI component library focused on accessibility, strong typing, and exceptional de
 
 ## License
 
-[MIT License](./LICENSE) - Copyright (c) 2025 Lucas Augusto
+[MIT License](./LICENSE) - Copyright (c) 2026 Lucas Augusto
