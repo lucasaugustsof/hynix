@@ -1,0 +1,20 @@
+{
+  "name": "hint-text",
+  "type": "registry:component",
+  "externalDependencies": [
+    "@remixicon/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "index.ts",
+      "content": "export { HintText } from './hint-text'\n"
+    },
+    {
+      "name": "hint-text.tsx",
+      "content": "import type { Assign } from '@ark-ui/react'\nimport {\n  Field as ArkField,\n  type FieldErrorTextProps as ArkFieldErrorTextProps,\n  type FieldHelperTextProps as ArkFieldHelperTextProps,\n  useFieldContext,\n} from '@ark-ui/react/field'\n\nimport { RiInformationFill } from '@remixicon/react'\nimport { cn } from '<%= it.aliases.utils %>/cn'\n\ninterface HintTextProps extends Assign<ArkFieldHelperTextProps, ArkFieldErrorTextProps> {\n  leftIcon?: boolean\n}\n\nexport function HintText({ children, className, leftIcon = false, ...props }: HintTextProps) {\n  const { invalid } = useFieldContext()\n  const Component = invalid ? ArkField.ErrorText : ArkField.HelperText\n\n  if (!children) return null\n\n  return (\n    <Component\n      className={cn(\n        'group inline-flex gap-x-1',\n        'text-fg-1/70 text-paragraph-sm',\n        'data-disabled:cursor-not-allowed data-disabled:text-disabled',\n        invalid && 'text-danger',\n        className\n      )}\n      {...props}\n    >\n      {leftIcon && (\n        <RiInformationFill\n          className={cn(\n            'mt-0.5 size-4 shrink-0 self-baseline fill-fill-4 group-data-disabled:fill-disabled',\n            invalid && 'fill-danger'\n          )}\n          aria-hidden\n        />\n      )}\n      {children}\n    </Component>\n  )\n}\n\nHintText.displayName = 'HintText'\n"
+    }
+  ],
+  "createdAt": "2026-01-31T19:41:09.553Z",
+  "updatedAt": "2026-01-31T19:41:09.553Z"
+}

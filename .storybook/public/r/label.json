@@ -1,0 +1,24 @@
+{
+  "name": "label",
+  "type": "registry:component",
+  "externalDependencies": [
+    "@remixicon/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "index.ts",
+      "content": "export * as Label from './namespace'\n"
+    },
+    {
+      "name": "namespace.ts",
+      "content": "export {\n  LabelAsterisk as Asterisk,\n  LabelInfo as Info,\n  LabelRoot as Root,\n  LabelSubText as SubText,\n  LabelText as Text,\n} from './label'\n"
+    },
+    {
+      "name": "label.tsx",
+      "content": "import { ark } from '@ark-ui/react/factory'\nimport { Field as ArkField } from '@ark-ui/react/field'\n\nimport { RiInformation2Fill } from '@remixicon/react'\nimport { cn } from '<%= it.aliases.utils %>/cn'\n\nconst LABEL_ROOT_NAME = 'Label.Root'\nconst LABEL_TEXT_NAME = 'Label.Text'\nconst LABEL_ASTERISK_NAME = 'Label.Asterisk'\nconst LABEL_SUB_TEXT_NAME = 'Label.SubText'\nconst LABEL_INFO_NAME = 'Label.Info'\n\n////////////////////////////////////////////////////////////////////////////////////\n\ninterface LabelRootProps extends React.ComponentProps<typeof ArkField.Label> {}\n\nexport function LabelRoot({ className, ...props }: LabelRootProps) {\n  return (\n    <ArkField.Label\n      {...props}\n      className={cn(\n        'group inline-flex items-center gap-x-1',\n        'text-label-sm',\n        '[&_[data-scope=link-button][data-part=root]]:ml-auto [&_[data-scope=link-button][data-part=root]]:text-fg-1/70',\n        'data-disabled:cursor-not-allowed *:group-data-disabled:text-disabled',\n        className\n      )}\n      data-scope=\"label\"\n      data-part=\"root\"\n    />\n  )\n}\n\nLabelRoot.displayName = LABEL_ROOT_NAME\n\n////////////////////////////////////////////////////////////////////////////////////\n\nexport interface LabelTextProps extends React.ComponentPropsWithoutRef<typeof ark.span> {}\n\nexport function LabelText({ children, className, ...props }: LabelTextProps) {\n  return (\n    <ark.span\n      {...props}\n      className={cn('font-medium text-fg-1', className)}\n      data-scope=\"label\"\n      data-part=\"text\"\n    >\n      {children}\n    </ark.span>\n  )\n}\n\nLabelText.displayName = LABEL_TEXT_NAME\n\n////////////////////////////////////////////////////////////////////////////////////\n\ninterface LabelAsteriskProps extends React.ComponentProps<typeof ArkField.RequiredIndicator> {}\n\nexport function LabelAsterisk({ className, ...props }: LabelAsteriskProps) {\n  return (\n    <ArkField.RequiredIndicator\n      {...props}\n      className={cn('font-medium text-danger', className)}\n      data-scope=\"label\"\n      data-part=\"asterisk\"\n    />\n  )\n}\n\nLabelAsterisk.displayName = LABEL_ASTERISK_NAME\n\n////////////////////////////////////////////////////////////////////////////////////\n\ninterface LabelSubTextProps extends React.ComponentPropsWithoutRef<typeof ark.small> {}\n\nexport function LabelSubText({ className, ...props }: LabelSubTextProps) {\n  return (\n    <ark.small\n      {...props}\n      className={cn('text-paragraph-sm', className)}\n      data-scope=\"label\"\n      data-part=\"subtext\"\n    />\n  )\n}\n\nLabelSubText.displayName = LABEL_SUB_TEXT_NAME\n\n////////////////////////////////////////////////////////////////////////////////////\n\ninterface LabelInfoProps extends React.AriaAttributes {}\n\nexport function LabelInfo(props: LabelInfoProps) {\n  return (\n    <RiInformation2Fill\n      {...props}\n      className={cn('size-4 shrink-0 fill-fill-3', 'group-data-disabled:fill-disabled')}\n      data-scope=\"label\"\n      data-part=\"info\"\n      aria-hidden\n    />\n  )\n}\n\nLabelInfo.displayName = LABEL_INFO_NAME\n"
+    }
+  ],
+  "createdAt": "2026-01-31T19:41:09.553Z",
+  "updatedAt": "2026-01-31T19:41:09.553Z"
+}

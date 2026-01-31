@@ -1,0 +1,22 @@
+{
+  "name": "switch",
+  "type": "registry:component",
+  "externalDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "index.ts",
+      "content": "export type { UseSwitchContext, UseSwitchProps, UseSwitchReturn } from '@ark-ui/react/switch'\nexport { useSwitch, useSwitchContext } from '@ark-ui/react/switch'\n\nexport * as Switch from './namespace'\nexport type { SwitchControlProps, SwitchRootProps } from './switch'\n"
+    },
+    {
+      "name": "namespace.ts",
+      "content": "export {\n  SwitchControl as Control,\n  SwitchLabel as Label,\n  SwitchRoot as Root,\n  SwitchRootProvider as RootProvider,\n} from './switch'\n"
+    },
+    {
+      "name": "switch.tsx",
+      "content": "'use client'\n\nimport {\n  Switch as ArkSwitch,\n  type SwitchControlProps as ArkSwitchControlProps,\n  type SwitchRootProps as ArkSwitchRootProps,\n  useSwitchContext,\n} from '@ark-ui/react/switch'\n\nimport { cn } from '<%= it.aliases.lib %>/cn'\n\nconst SWITCH_ROOT_PROVIDER_NAME = 'Switch.RootProvider'\nconst SWITCH_ROOT_NAME = 'Switch.Root'\nconst SWITCH_CONTROL_NAME = 'Switch.Control'\nconst SWITCH_LABEL_NAME = 'Switch.Label'\n\n////////////////////////////////////////////////////////////////////////////////////\n\nexport interface SwitchRootProps extends ArkSwitchRootProps {}\n\nexport const SwitchRootProvider = ArkSwitch.RootProvider\nSwitchRootProvider.displayName = SWITCH_ROOT_PROVIDER_NAME\n\nexport function SwitchRoot({ children, ...props }: SwitchRootProps) {\n  return (\n    <ArkSwitch.Root {...props}>\n      {children}\n      <ArkSwitch.HiddenInput />\n    </ArkSwitch.Root>\n  )\n}\n\nSwitchRoot.displayName = SWITCH_ROOT_NAME\n\n////////////////////////////////////////////////////////////////////////////////////\n\nexport interface SwitchControlProps extends ArkSwitchControlProps {}\n\nexport function SwitchControl({ className, ...props }: SwitchControlProps) {\n  const { disabled: isDisabled } = useSwitchContext()\n\n  return (\n    <ArkSwitch.Control\n      className={cn(\n        'group relative inline-flex h-4 w-7 shrink-0 cursor-pointer rounded-full transition-colors duration-200',\n        'before:-translate-y-1/2 before:-translate-x-1/2 before:absolute before:inset-0 before:top-1/2 before:left-1/2 before:h-5 before:w-8 before:content-[\"\"]',\n        // unchecked\n        'data-[state=unchecked]:not-data-disabled:data-hover:bg-fill-3 data-[state=unchecked]:not-data-disabled:bg-fill-2',\n        // checked\n        'data-[state=checked]:not-data-disabled:data-hover:bg-[color-mix(in_oklab,var(--color-brand)_80%,black)] data-[state=checked]:not-data-disabled:bg-brand',\n        // disabled\n        'data-disabled:inset-ring-1 data-disabled:inset-ring-disabled data-disabled:cursor-not-allowed data-disabled:bg-transparent',\n        className\n      )}\n      {...props}\n    >\n      <ArkSwitch.Thumb\n        className={cn(\n          '-translate-y-1/2 absolute top-1/2 left-0.5 size-3 rounded-[inherit] bg-fg-2 shadow-xs transition-transform duration-250 ease-out',\n          // checked\n          'data-[state=checked]:translate-x-full group-data-active:scale-95',\n          // disabled\n          'data-disabled:bg-disabled',\n          !isDisabled &&\n            'mask-radial-at-center mask-radial-from-transparent mask-radial-to-black mask-radial-to-0.5 mask-radial-from-0.5'\n        )}\n      />\n    </ArkSwitch.Control>\n  )\n}\n\nSwitchControl.displayName = SWITCH_CONTROL_NAME\n\n////////////////////////////////////////////////////////////////////////////////////\n\nexport const SwitchLabel = ArkSwitch.Label\nSwitchLabel.displayName = SWITCH_LABEL_NAME\n"
+    }
+  ],
+  "createdAt": "2026-01-31T19:41:09.553Z",
+  "updatedAt": "2026-01-31T19:41:09.553Z"
+}
