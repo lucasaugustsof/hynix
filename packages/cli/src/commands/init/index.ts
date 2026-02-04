@@ -1,14 +1,18 @@
+import ora from 'ora'
 import prompt from 'prompts'
 
-import { BaseCommand } from '@/abstracts/base-command'
-import { CliError } from '@/common/errors'
+import { PEER_DEPENDENCIES } from '@/common/const'
+import { exec } from '@/common/exec'
 import { logger } from '@/common/logger'
+import { resolvePMCommand } from '@/common/resolve-pm-command'
+import { BaseCommand } from '@/core/base-command'
 
+import { checkDependencies } from './checks/dependencies'
+import { checkNotInitialized } from './checks/not-initialized'
+import { checkTailwindVersion } from './checks/tailwind-version'
+import { checkValidProject } from './checks/valid-project'
+import { InitPreflightWarning } from './enums'
 import { resetInitialization } from './functions/reset-initialization'
-import { ensureDependencies } from './validations/ensure-dependencies'
-import { ensureNotInitialized } from './validations/ensure-not-initialized'
-import { ensureValidProject } from './validations/ensure-valid-project'
-import { InitErrorCode } from './validations/errors'
 
 class InitCommand extends BaseCommand {
   constructor() {
@@ -17,64 +21,78 @@ class InitCommand extends BaseCommand {
   }
 
   protected async run() {
-    // Command implementation
-  }
-
-  protected async runPreflightChecks() {
-    logger.highlight('magenta', 'Preflight checks...')
-    logger.break()
-
     try {
-      const { message } = await ensureValidProject()
-      logger.success(message)
-    } catch (error) {
-      if (error instanceof CliError) {
-        logger.error(error.message, true)
+      const { warnings, errors } = await this.runPreflightChecks([
+        checkValidProject(),
+        checkNotInitialized(),
+        checkDependencies(),
+        checkTailwindVersion(),
+      ])
+
+      if (errors.size > 0) {
+        logger.break()
+        logger.error('Preflight checks failed. Please fix the errors above and try again.', {
+          exitOnError: true,
+        })
       }
-    }
 
-    const queueChecks = await Promise.allSettled([ensureNotInitialized(), ensureDependencies()])
+      if (warnings.has(InitPreflightWarning.ALREADY_INITIALIZED)) {
+        logger.break()
+        const { overwrite: isOverwrite } = await prompt({
+          type: 'confirm',
+          name: 'overwrite',
+          message: 'Project already initialized. Do you want to overwrite it?',
+          initial: false,
+        })
 
-    for (const result of queueChecks) {
-      if (result.status === 'rejected' && result.reason instanceof CliError) {
-        const { code } = result.reason.props
-
-        switch (code) {
-          case InitErrorCode.ALREADY_INITIALIZED: {
-            const { overwrite } = await prompt({
-              name: 'overwrite',
-              type: 'confirm',
-              message: 'Project already initialized. Do you want to overwrite it?',
-              initial: false,
-            })
-
-            if (!overwrite) {
-              logger.warning('Initialization cancelled. Existing configuration was preserved.')
-              logger.break()
-              process.exit(0)
-            }
-
-            await resetInitialization()
-
-            break
-          }
-
-          case InitErrorCode.MISSING_DEPENDENCIES:
-          case InitErrorCode.INCOMPATIBLE_TAILWIND_VERSION:
-            logger.error(result.reason.message, true)
-            break
-
-          default:
-            logger.error(result.reason.message)
+        if (isOverwrite) {
+          await resetInitialization()
         }
       }
 
-      if (result.status === 'fulfilled') {
-        logger.success(result.value.message)
-      }
-    }
+      if (warnings.has(InitPreflightWarning.MISSING_PEER_DEPENDENCIES)) {
+        logger.break()
+        const { install: isAcceptInstall } = await prompt({
+          type: 'confirm',
+          name: 'install',
+          message: 'Some peer dependencies are missing. Install them now?',
+          initial: true,
+        })
 
-    logger.break()
+        if (isAcceptInstall) {
+          const installSpinner = ora('Installing peer dependencies...').start()
+
+          try {
+            const { full: command } = await resolvePMCommand('add', PEER_DEPENDENCIES)
+            await exec(command)
+            installSpinner.succeed('Peer dependencies installed')
+          } catch {
+            installSpinner.fail('Failed to install peer dependencies')
+          }
+        }
+      }
+
+      if (warnings.has(InitPreflightWarning.INCOMPATIBLE_TAILWIND_VERSION)) {
+        logger.break()
+        const { upgrade: isAcceptUpgrade } = await prompt({
+          type: 'confirm',
+          name: 'upgrade',
+          message: 'Tailwind CSS v3 detected. Upgrade to v4 for full compatibility?',
+          initial: true,
+        })
+
+        if (isAcceptUpgrade) {
+          // TODO: fazer upgrade do Tailwind
+        }
+      }
+
+      logger.break()
+    } catch (error) {
+      logger.break()
+      logger.error(error instanceof Error ? error.message : 'An unexpected error occurred', {
+        exitOnError: true,
+      })
+    }
   }
 }
 

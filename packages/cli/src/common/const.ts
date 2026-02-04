@@ -10,3 +10,5 @@ export const LIL_CONFIG_SEARCH_OPTIONS: LilConfigSearchOptions = {
   searchPlaces: [MANIFEST_FILE_NAME],
   ignoreEmptySearchPlaces: false,
 }
+
+export const PEER_DEPENDENCIES = ['react', 'react-dom', 'tailwindcss']

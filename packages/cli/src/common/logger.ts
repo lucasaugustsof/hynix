@@ -7,11 +7,11 @@ export const logger = {
   success(log: string) {
     console.log(chalk.green('✔︎'), log)
   },
-  error(log: string, interrupt = false) {
+  error(log: string, { exitOnError = false } = {}) {
     console.log(chalk.red('✖'), log)
     console.log()
 
-    if (interrupt) {
+    if (exitOnError) {
       process.exit(0)
     }
   },

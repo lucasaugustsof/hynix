@@ -1,11 +1,34 @@
 {
-  "name": "@hynix/cli",
+  "name": "hynix",
   "version": "0.1.0",
-  "private": true,
+  "description": "Add production-ready components to your React app. Powered by Tailwind CSS + Ark UI.",
   "type": "module",
+  "bin": {
+    "hynix": "./bin/index.mjs"
+  },
+  "files": [
+    "bin"
+  ],
   "scripts": {
     "dev": "tsdown --watch",
-    "start:dev": "node dist/index.mjs"
+    "build": "tsdown",
+    "start:dev": "node bin/index.mjs"
+  },
+  "keywords": [
+    "cli",
+    "hynix",
+    "ui",
+    "components",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucasaugustsof/ui",
+    "directory": "packages/cli"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
   },
   "devDependencies": {
     "@types/prompts": "^2.4.9",
@@ -16,6 +39,9 @@
     "chalk": "^5.6.2",
     "commander": "^14.0.3",
     "lilconfig": "^3.1.3",
+    "listr2": "^10.1.0",
+    "ora": "^9.2.0",
+    "package-manager-detector": "^1.6.0",
     "prompts": "^2.4.2",
     "semver": "^7.7.3",
     "zod": "^4.3.6"
