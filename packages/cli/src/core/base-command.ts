@@ -8,10 +8,10 @@ export interface PreflightContext {
   errors: Set<string>
 }
 
-export abstract class BaseCommand<TArgs extends unknown[] = unknown[]> extends Command {
+export abstract class BaseCommand<TOptions = void> extends Command {
   constructor(name: string) {
     super(name)
-    this.action((...args: TArgs) => this.run(...args))
+    this.action((options: TOptions) => this.run(options))
   }
 
   protected async runPreflightChecks(
@@ -23,7 +23,7 @@ export abstract class BaseCommand<TArgs extends unknown[] = unknown[]> extends C
       errors: new Set(),
     }
 
-    logger.highlight('yellowBright', 'Preflight Checks...')
+    logger.highlight('white', '🛫 Preflight Checks...')
     logger.break()
 
     await new Listr(tasks, {
@@ -34,5 +34,5 @@ export abstract class BaseCommand<TArgs extends unknown[] = unknown[]> extends C
     return ctx
   }
 
-  protected abstract run(...args: TArgs): Promise<void> | void
+  protected abstract run(options: TOptions): Promise<void> | void
 }

@@ -1,25 +1,33 @@
 import chalk, { type ColorName } from 'chalk'
 
 export const logger = {
-  info(log: string) {
-    console.log(chalk.blue('◆'), log)
+  log(message: string) {
+    console.log(message)
   },
-  success(log: string) {
-    console.log(chalk.green('✔︎'), log)
+  info(message: string, { exit = false } = {}) {
+    console.log(chalk.blue('◆'), message)
+    console.log()
+
+    if (exit) {
+      process.exit(0)
+    }
   },
-  error(log: string, { exitOnError = false } = {}) {
-    console.log(chalk.red('✖'), log)
+  success(message: string) {
+    console.log(chalk.green('✔︎'), message)
+  },
+  error(message: string, { exitOnError = false } = {}) {
+    console.log(chalk.red('✖'), message)
     console.log()
 
     if (exitOnError) {
       process.exit(0)
     }
   },
-  warning(log: string) {
-    console.log(chalk.yellow('▲'), log)
+  warning(message: string) {
+    console.log(chalk.yellow('▲'), message)
   },
-  highlight(color: ColorName, log: string) {
-    console.log(chalk[color](log))
+  highlight(color: ColorName, message: string) {
+    console.log(chalk[color](message))
   },
   break() {
     console.log()
