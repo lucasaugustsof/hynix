@@ -1,0 +1,13 @@
+{
+  "rsc": false,
+  "tsx": true,
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/utils",
+    "hooks": "@/hooks",
+    "styles": "@/styles"
+  },
+  "tailwind": {
+    "css": "./styles/globals.css"
+  }
+}

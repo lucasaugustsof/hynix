@@ -2,6 +2,7 @@
 
 import { program } from 'commander'
 
+import { add } from '@/commands/add'
 import { init } from '@/commands/init'
 
 import { description, name, version } from '../package.json' with { type: 'json' }
@@ -16,6 +17,7 @@ function main() {
     .version(version || '1.0.0', '-v, --version', 'display the version number')
 
   program.addCommand(init)
+  program.addCommand(add)
 
   program.parse()
 }

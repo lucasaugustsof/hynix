@@ -4,13 +4,15 @@ import path from 'node:path'
 import { lilconfig } from 'lilconfig'
 import type { z } from 'zod'
 
+import type { HynixConfig } from '@/schemas/config'
+
 import { CONFIG_FILE_NAME, CWD } from './const'
 
 /**
  * Utility class for managing configuration files
  * Handles reading, writing, and deleting configuration files
  */
-export class ConfigFile<T = unknown> {
+export class ConfigFile<T = HynixConfig> {
   private readonly searchPlaces: string[]
   private readonly configName: string
   private readonly schema?: z.ZodSchema<T>
@@ -151,7 +153,7 @@ export const hynixConfig = new ConfigFile('hynix')
  * @param configName - Configuration name (default: 'hynix')
  * @param searchPlaces - Places to search for config file
  */
-export function createConfigFile<T>(
+export function createConfigFile<T = HynixConfig>(
   schema: z.ZodSchema<T>,
   configName = 'hynix',
   searchPlaces: string[] = [CONFIG_FILE_NAME]
