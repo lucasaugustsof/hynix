@@ -1,203 +1,201 @@
+import { Command } from 'commander'
 import ora from 'ora'
+import pc from 'picocolors'
+import prompt from 'prompts'
+import { z } from 'zod'
 
-import { CORE_DEPENDENCIES, DEFAULT_MANIFEST, PEER_DEPENDENCIES } from '@/common/const'
-import { exec } from '@/common/exec'
-import { logger } from '@/common/logger'
-import { manifest } from '@/common/manifest'
-import { prompt } from '@/common/prompt'
-import { resolvePMCommand } from '@/common/resolve-pm-command'
-import { BaseCommand } from '@/core/base-command'
+import { DEFAULT_CONFIG } from '@/schemas/config'
+import { hynixConfig } from '@/utils/config-file'
+import { CORE_DEPENDENCIES } from '@/utils/const'
+import { exec } from '@/utils/exec'
+import { logger } from '@/utils/logger'
+import { resolvePMCommand } from '@/utils/resolve-pm-command'
+import { runPreflight } from '@/utils/run-preflight'
 
 import { checkDependencies } from './checks/dependencies'
-import { checkNotInitialized } from './checks/not-initialized'
+import { checkNotInitialized, PREFLIGHT_CHECK_NOT_INITIALIZED } from './checks/not-initialized'
 import { checkTailwindVersion } from './checks/tailwind-version'
 import { checkValidProject } from './checks/valid-project'
-import { InitPreflightWarning } from './enums'
 
-type InitOptions = {
-  yes?: boolean
-}
+const initCommandOptionsSchema = z.object({
+  yes: z.coerce.boolean().default(false).describe('Skip prompts and use default values'),
+})
 
-class InitCommand extends BaseCommand<InitOptions> {
-  constructor() {
-    super('init')
+async function runInitCommand(options: unknown) {
+  try {
+    const opts = initCommandOptionsSchema.parse(options)
 
-    this.description('configure your project to use Hynix')
-    this.option('-y, --yes', 'skip prompts and accept defaults')
-  }
+    logger.intro()
 
-  protected async run(options: InitOptions) {
-    const skipPrompts = options.yes ?? false
+    if (opts.yes) {
+      logger.info('Using default configuration (--yes flag detected)')
+    }
+
+    const { skippedChecks } = await runPreflight([
+      checkValidProject,
+      checkDependencies,
+      checkTailwindVersion,
+      checkNotInitialized,
+    ])
+
+    if (skippedChecks.has(PREFLIGHT_CHECK_NOT_INITIALIZED)) {
+      logger.break()
+      const { initOverwrite: isInitOverwrite } = await prompt({
+        type: 'confirm',
+        name: 'initOverwrite',
+        message:
+          'Project is already initialized. Do you want to overwrite the existing configuration?',
+        initial: false,
+      })
+
+      if (!isInitOverwrite) {
+        logger.info('Initialization cancelled. Your existing configuration has been preserved.')
+        return
+      }
+
+      const existingConfig = await hynixConfig.find()
+
+      if (existingConfig) {
+        await hynixConfig.delete()
+        logger.success(`Removed existing configuration from ${pc.cyan(existingConfig.filepath)}`)
+      }
+    }
+
+    logger.break()
+    logger.dim('Initializing Hynix...')
+    logger.break()
+
+    const config = opts.yes ? DEFAULT_CONFIG : await promptForConfiguration()
+
+    logger.break()
+    logger.info('Installing core dependencies')
+    logger.dim(`Dependencies: ${CORE_DEPENDENCIES.join(', ')}`)
+    logger.break()
+
+    const { full: installCommand } = await resolvePMCommand('add', [...CORE_DEPENDENCIES])
+    const installDependenciesSpinner = ora('Installing dependencies...').start()
 
     try {
-      const { warnings, errors } = await this.runPreflightChecks([
-        checkValidProject(),
-        checkNotInitialized(),
-        checkDependencies(),
-        checkTailwindVersion(),
-      ])
-
-      if (errors.size > 0) {
-        logger.break()
-        logger.error('Preflight checks failed. Please fix the errors above and try again.', {
-          exitOnError: true,
-        })
-      }
-
-      if (warnings.has(InitPreflightWarning.ALREADY_INITIALIZED)) {
-        logger.break()
-        const { overwrite } = await prompt({
-          type: 'confirm',
-          name: 'overwrite',
-          message: 'Project already initialized. Overwrite existing configuration?',
-          initial: false,
-        })
-
-        if (!overwrite) {
-          logger.info('No changes made. Your existing configuration is preserved.', {
-            exit: true,
-          })
-        }
-
-        await manifest.delete()
-      }
-
-      if (warnings.has(InitPreflightWarning.MISSING_PEER_DEPENDENCIES)) {
-        logger.break()
-        const { install: isAcceptInstallPeerDependencies } = await prompt({
-          type: 'confirm',
-          name: 'install',
-          message: 'Some peer dependencies are missing. Install them now?',
-          initial: true,
-        })
-
-        if (isAcceptInstallPeerDependencies) {
-          await this.installDependencies(PEER_DEPENDENCIES, 'peer dependencies')
-        } else {
-          logger.break()
-          logger.warning('Skipping peer dependencies installation. Some features may not work.')
-        }
-      }
-
-      if (
-        warnings.has(InitPreflightWarning.INCOMPATIBLE_TAILWIND_VERSION) &&
-        !warnings.has(InitPreflightWarning.MISSING_PEER_DEPENDENCIES)
-      ) {
-        logger.break()
-
-        const { upgrade: isAcceptUpgradeTailwindCSS } = await prompt({
-          type: 'confirm',
-          name: 'upgrade',
-          message: 'Tailwind CSS v3 detected. Upgrade to v4 for full compatibility?',
-          initial: true,
-        })
-
-        if (isAcceptUpgradeTailwindCSS) {
-          const upgradeSpinner = ora('Upgrading Tailwind CSS...').start()
-
-          try {
-            const { full: command } = await resolvePMCommand('add', ['tailwindcss@latest'])
-            await exec(command)
-            upgradeSpinner.succeed('Tailwind CSS upgraded')
-          } catch {
-            upgradeSpinner.fail('Failed to upgrade Tailwind CSS')
-            logger.break()
-            logger.warning(
-              'Continuing with Tailwind CSS v3. Some features may not work as expected.'
-            )
-          }
-        }
-      }
-
-      logger.break()
-
-      const config = skipPrompts ? DEFAULT_MANIFEST : await this.collectConfig()
-
-      await this.installDependencies(CORE_DEPENDENCIES, 'core dependencies')
-
-      logger.break()
-
-      const configSpinner = ora('Creating manifest...').start()
-      await manifest.create(config)
-      configSpinner.succeed('Created hynix.json')
-
-      this.logSummary()
+      await exec(installCommand)
+      installDependenciesSpinner.succeed('Core dependencies installed successfully')
     } catch (error) {
+      installDependenciesSpinner.fail('Failed to install dependencies')
+      logger.error(error instanceof Error ? error.message : 'An error occurred during installation')
+      return
+    }
+
+    logger.break()
+    logger.info('Saving configuration...')
+
+    const configPath = await hynixConfig.write(config)
+
+    logger.success(`Configuration saved to ${configPath}`)
+
+    logger.success('Hynix has been initialized successfully!', {
+      withoutSymbol: true,
+    })
+    logger.break()
+  } catch (error) {
+    if (error instanceof Error) {
       logger.break()
-      logger.error(error instanceof Error ? error.message : 'An unexpected error occurred', {
+      logger.error(error.message, {
         exitOnError: true,
       })
     }
   }
+}
 
-  private async collectConfig() {
-    const paths = await prompt([
-      {
-        type: 'text',
-        name: 'components',
-        message: 'Where do you want to add components?',
-        initial: '@/components',
-      },
-      {
-        type: 'text',
-        name: 'utils',
-        message: 'Where do you want to add utilities?',
-        initial: '@/utils',
-      },
-      {
-        type: 'text',
-        name: 'styles',
-        message: 'Where do you want to add styles?',
-        initial: '@/styles',
-      },
-    ])
-
-    logger.break()
-
-    const { rsc } = await prompt({
+async function promptForConfiguration() {
+  const answers = await prompt([
+    {
+      type: 'confirm',
+      name: 'tsx',
+      message: 'Are you using TypeScript?',
+      initial: true,
+    },
+    {
       type: 'confirm',
       name: 'rsc',
       message: 'Are you using React Server Components?',
       initial: false,
-    })
+    },
+  ])
 
-    return {
-      aliases: {
-        components: paths.components,
-        utils: paths.utils,
-        styles: paths.styles,
+  if (answers.tsx === undefined) {
+    logger.warning('Configuration cancelled')
+    process.exit(0)
+  }
+
+  logger.break()
+  logger.info('Configure import aliases (press Enter to use defaults)')
+
+  const aliases = await prompt([
+    {
+      type: 'text',
+      name: 'components',
+      message: 'Where are your components located?',
+      initial: '@/components',
+      validate: value => (value.length > 0 ? true : 'Alias path cannot be empty'),
+    },
+    {
+      type: 'text',
+      name: 'utils',
+      message: 'Where are your utility functions located?',
+      initial: '@/utils',
+      validate: value => (value.length > 0 ? true : 'Alias path cannot be empty'),
+    },
+    {
+      type: 'text',
+      name: 'hooks',
+      message: 'Where are your custom hooks located?',
+      initial: '@/hooks',
+      validate: value => (value.length > 0 ? true : 'Alias path cannot be empty'),
+    },
+    {
+      type: 'text',
+      name: 'styles',
+      message: 'Where are your styles located?',
+      initial: '@/styles',
+      validate: value => (value.length > 0 ? true : 'Alias path cannot be empty'),
+    },
+  ])
+
+  if (aliases.components === undefined) {
+    logger.warning('Configuration cancelled')
+    process.exit(0)
+  }
+
+  logger.break()
+  logger.info('Configure Tailwind CSS')
+
+  const tailwind = await prompt({
+    type: 'text',
+    name: 'css',
+    message: 'Path to your global CSS file:',
+    initial: './styles/globals.css',
+  })
+
+  return {
+    rsc: answers.rsc,
+    tsx: answers.tsx,
+    aliases: {
+      components: aliases.components,
+      utils: aliases.utils,
+      hooks: aliases.hooks,
+      styles: aliases.styles,
+    },
+    ...(tailwind.css && {
+      tailwind: {
+        css: tailwind.css,
       },
-      rsc,
-    }
-  }
-
-  private async installDependencies(deps: readonly string[], label: string) {
-    const spinner = ora(`Installing ${label}...`).start()
-
-    try {
-      const { full: command } = await resolvePMCommand('add', [...deps])
-      await exec(command)
-      spinner.succeed(`${label} installed`)
-    } catch {
-      spinner.fail(`Failed to install ${label}`)
-      logger.break()
-      logger.error(`Cannot continue without ${label}.`, { exitOnError: true })
-    }
-  }
-
-  private logSummary() {
-    logger.break()
-    logger.success('Success! Project initialized.')
-    logger.break()
-    logger.info('Next steps:')
-    logger.break()
-    logger.highlight('white', '  1. Add your first component:')
-    logger.highlight('cyan', '     hynix add button')
-    logger.break()
-    logger.highlight('white', '  2. Import and use it:')
-    logger.highlight('cyan', "     import { Button } from '@/components/button'")
-    logger.break()
+    }),
   }
 }
 
-export const init = new InitCommand()
+export const init = new Command()
+  .name('init')
+  .description('set up Hynix for your project')
+  .option('-y, --yes', 'automatically answer yes to all prompts')
+  .allowUnknownOption(false)
+  .showHelpAfterError(true)
+  .action(runInitCommand)

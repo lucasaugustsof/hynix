@@ -1,23 +1,35 @@
-import { lilconfig } from 'lilconfig'
-import type { ListrTask } from 'listr2'
+import pc from 'picocolors'
 
-import { LIL_CONFIG_SEARCH_OPTIONS } from '@/common/const'
-import type { PreflightContext } from '@/core/base-command'
+import { hynixConfig } from '@/utils/config-file'
+import type { PromisePreflightCheck } from '@/utils/run-preflight'
 
-import { InitPreflightWarning } from '../enums'
+export const PREFLIGHT_CHECK_NOT_INITIALIZED = 'init:project-not-initialized'
 
-export function checkNotInitialized(): ListrTask<PreflightContext> {
-  return {
-    title: `Checking if project is not initialized`,
-    task: async (ctx, task) => {
-      const config = await lilconfig('hynix', LIL_CONFIG_SEARCH_OPTIONS).search()
+export async function checkNotInitialized(): PromisePreflightCheck {
+  try {
+    const existingConfig = await hynixConfig.find()
 
-      if (config) {
-        ctx.warnings.add(InitPreflightWarning.ALREADY_INITIALIZED)
-        throw new Error('Project already initialized')
+    if (existingConfig) {
+      return {
+        name: PREFLIGHT_CHECK_NOT_INITIALIZED,
+        status: 'skipped',
+        reason: 'Project is already initialized',
+        message: `Found existing configuration at ${pc.cyan(existingConfig.filepath)}`,
       }
+    }
 
-      task.title = `Project is ready to initialize`
-    },
+    return {
+      name: PREFLIGHT_CHECK_NOT_INITIALIZED,
+      status: 'passed',
+      message: 'Project is ready to initialize',
+    }
+  } catch {
+    return {
+      name: PREFLIGHT_CHECK_NOT_INITIALIZED,
+      status: 'failed',
+      reason: 'Could not check initialization status',
+      message: 'Failed to search for configuration',
+      hint: 'Make sure you have proper file system permissions',
+    }
   }
 }

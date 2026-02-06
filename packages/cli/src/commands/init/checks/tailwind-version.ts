@@ -1,44 +1,58 @@
-import chalk from 'chalk'
-import type { ListrTask } from 'listr2'
+import pc from 'picocolors'
 import semver from 'semver'
 
-import { readPackageJson } from '@/common/read-package-json'
-import type { PreflightContext } from '@/core/base-command'
-
-import { InitPreflightWarning } from '../enums'
+import { readPackageJson } from '@/utils/read-package-json'
+import type { PromisePreflightCheck } from '@/utils/run-preflight'
 
 const MIN_TAILWIND_VERSION = '4.0.0'
 
-export function checkTailwindVersion(): ListrTask<PreflightContext> {
-  return {
-    title: 'Checking Tailwind CSS version',
-    task: async (ctx, task) => {
-      const packageJson = await readPackageJson()
+export const PREFLIGHT_CHECK_TAILWIND_VERSION = 'init:tailwind-version-compatible'
 
-      const allDependencies: Record<string, string> = {
-        ...packageJson.dependencies,
-        ...packageJson.devDependencies,
+export async function checkTailwindVersion(): PromisePreflightCheck {
+  try {
+    const packageJson = await readPackageJson()
+
+    const allDependencies: Record<string, string> = {
+      ...packageJson.dependencies,
+      ...packageJson.devDependencies,
+    }
+
+    const tailwindVersion = allDependencies.tailwindcss
+
+    if (!tailwindVersion) {
+      return {
+        name: PREFLIGHT_CHECK_TAILWIND_VERSION,
+        status: 'failed',
+        reason: 'Tailwind CSS is not installed',
+        message: 'Tailwind CSS not found',
+        hint: `Install Tailwind CSS ${pc.cyan(`v${MIN_TAILWIND_VERSION}+`)} to continue`,
       }
+    }
 
-      const tailwindVersion = allDependencies.tailwindcss
+    const cleanVersion = semver.coerce(tailwindVersion)
 
-      if (!tailwindVersion) {
-        task.skip('Tailwind CSS not installed')
-        return
+    if (!cleanVersion || semver.lt(cleanVersion, MIN_TAILWIND_VERSION)) {
+      return {
+        name: PREFLIGHT_CHECK_TAILWIND_VERSION,
+        status: 'failed',
+        reason: `Tailwind CSS ${pc.cyan(`v${MIN_TAILWIND_VERSION}+`)} is required`,
+        message: `Found ${pc.dim(tailwindVersion)}`,
+        hint: `Update Tailwind CSS to ${pc.cyan(`v${MIN_TAILWIND_VERSION}+`)}`,
       }
+    }
 
-      const cleanVersion = semver.coerce(tailwindVersion)
-
-      if (!cleanVersion || semver.lt(cleanVersion, MIN_TAILWIND_VERSION)) {
-        ctx.warnings.add(InitPreflightWarning.INCOMPATIBLE_TAILWIND_VERSION)
-
-        task.skip(
-          `Tailwind CSS ${chalk.cyan(`v${MIN_TAILWIND_VERSION}+`)} required. Found ${chalk.dim(tailwindVersion)}`
-        )
-        return
-      }
-
-      task.title = `Tailwind CSS ${chalk.cyan(`v${cleanVersion}`)} detected`
-    },
+    return {
+      name: PREFLIGHT_CHECK_TAILWIND_VERSION,
+      status: 'passed',
+      message: `Tailwind CSS ${pc.cyan(`v${cleanVersion}`)} detected`,
+    }
+  } catch {
+    return {
+      name: PREFLIGHT_CHECK_TAILWIND_VERSION,
+      status: 'failed',
+      reason: 'Could not check Tailwind CSS version',
+      message: 'Failed to read package.json',
+      hint: 'Make sure package.json exists and is valid',
+    }
   }
 }

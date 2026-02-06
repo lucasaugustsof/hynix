@@ -3,7 +3,7 @@ import path from 'node:path'
 
 import * as z from 'zod'
 
-import { CWD } from '@/common/const'
+import { CWD } from './const'
 
 const packageJsonSchema = z.object({
   name: z.string({
