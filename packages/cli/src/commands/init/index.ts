@@ -1,9 +1,9 @@
 import { Command } from 'commander'
 import ora from 'ora'
 import pc from 'picocolors'
-import prompt from 'prompts'
 import { z } from 'zod'
 
+import prompt from '@/lib/prompts'
 import { DEFAULT_CONFIG } from '@/schemas/config'
 import { hynixConfig } from '@/utils/config-file'
 import { CORE_DEPENDENCIES } from '@/utils/const'

@@ -3,37 +3,143 @@ import path from 'node:path'
 
 import { Eta } from 'eta'
 import ora from 'ora'
+import pc from 'picocolors'
+import { pascalCase } from 'scule'
 
 import type { HynixConfig } from '@/schemas/config'
 import { fetchComponentRegistry } from '@/services/fetch-registry'
-import { logger } from '@/utils/logger'
 import { resolveAliasToAbsolutePath } from '@/utils/resolve-alias-to-absolute-path'
 
-type ComponentInstallStatus = 'installed' | 'failed' | 'already-installed'
-
-interface ComponentInstallResult {
+type ComponentInstalled = {
+  status: 'installed'
   name: string
-  status: ComponentInstallStatus
-  error?: string
   externalDependencies?: string[]
-  filesWritten?: number
+  registryDependencies?: string[]
+  filesWritten: number
 }
 
+type ComponentFailed = {
+  status: 'failed'
+  name: string
+  error: string
+}
+
+type ComponentAlreadyInstalled = {
+  status: 'already-installed'
+  name: string
+  onOverwrite: () => Promise<void>
+}
+
+type ComponentSkipped = {
+  status: 'skipped'
+  name: string
+  reason: 'dependency'
+}
+
+type ComponentInstallResult =
+  | ComponentInstalled
+  | ComponentFailed
+  | ComponentAlreadyInstalled
+  | ComponentSkipped
+
 type InstallResultsMap = Map<string, ComponentInstallResult>
+
+type RegistryComponent = Awaited<ReturnType<typeof fetchComponentRegistry>>
+
+async function resolveComponentDependencyTree(
+  componentNames: string[],
+  visited: Set<string> = new Set()
+): Promise<string[]> {
+  const resolved: string[] = []
+
+  for (const componentName of componentNames) {
+    if (visited.has(componentName)) {
+      continue
+    }
+
+    visited.add(componentName)
+
+    try {
+      const registryComponent = await fetchComponentRegistry(componentName)
+
+      if (registryComponent.registryDependencies.length > 0) {
+        const deps = await resolveComponentDependencyTree(
+          registryComponent.registryDependencies,
+          visited
+        )
+        resolved.push(...deps)
+      }
+
+      resolved.push(componentName)
+    } catch {
+      resolved.push(componentName)
+    }
+  }
+
+  return resolved
+}
 
 export async function installComponents(
   componentNames: string[],
   config: HynixConfig
 ): Promise<InstallResultsMap> {
   const results: InstallResultsMap = new Map()
-  const etaEngine = new Eta()
 
-  for (const componentName of componentNames) {
+  const etaEngine = new Eta({
+    autoEscape: false,
+    cache: true,
+  })
+
+  const resolvedComponents = await resolveComponentDependencyTree(componentNames)
+
+  const uniqueComponents = [...new Set(resolvedComponents)]
+
+  for (const componentName of uniqueComponents) {
     const result = await installSingleComponent(componentName, config, etaEngine)
     results.set(componentName, result)
   }
 
   return results
+}
+
+async function writeComponentFiles(
+  registryComponent: RegistryComponent,
+  componentsPath: string,
+  componentName: string,
+  etaEngine: Eta,
+  config: HynixConfig
+): Promise<number> {
+  const templateData = {
+    aliases: config.aliases,
+  }
+
+  await Promise.all(
+    registryComponent.files.map(({ name, content }) =>
+      writeComponentFile(componentsPath, componentName, name, content, etaEngine, templateData)
+    )
+  )
+
+  return registryComponent.files.length
+}
+
+async function writeComponentFile(
+  componentsPath: string,
+  componentName: string,
+  fileName: string,
+  fileContent: string,
+  etaEngine: Eta,
+  templateData: {
+    aliases: HynixConfig['aliases']
+  }
+): Promise<void> {
+  const filePath = path.join(componentsPath, componentName, fileName)
+
+  await fs.mkdir(path.dirname(filePath), {
+    recursive: true,
+  })
+
+  const renderedContent = etaEngine.renderString(fileContent, templateData)
+  await fs.writeFile(filePath, renderedContent, 'utf-8')
 }
 
 export async function installSingleComponent(
@@ -42,50 +148,55 @@ export async function installSingleComponent(
   etaEngine: Eta
 ): Promise<ComponentInstallResult> {
   const componentsPath = resolveAliasToAbsolutePath(config.aliases.components)
+  const componentDir = path.join(componentsPath, componentName)
 
-  const componentSpinner = ora(`Installing ${componentName}`).start()
+  const installSpinner = ora(`Installing ${componentName}`).start()
 
   try {
-    const componentDir = path.join(componentsPath, componentName)
-    const isExists = existsSync(componentDir)
+    const registryComponent = await fetchComponentRegistry(componentName)
 
-    if (isExists) {
+    if (existsSync(componentDir)) {
       return {
         name: componentName,
         status: 'already-installed',
+        onOverwrite: async () => {
+          const componentDisplayName = pascalCase(componentName)
+          installSpinner.text = `Overwriting ${pc.cyan(componentDisplayName)}`
+
+          await fs.rm(componentDir, {
+            recursive: true,
+          })
+
+          await writeComponentFiles(
+            registryComponent,
+            componentsPath,
+            componentName,
+            etaEngine,
+            config
+          )
+
+          installSpinner.stop()
+        },
       }
     }
 
-    const registryComponent = await fetchComponentRegistry(componentName)
-    let filesWritten = 0
-
-    for (const { name, content } of registryComponent.files) {
-      const filePath = path.join(componentsPath, componentName, name)
-
-      await fs.mkdir(path.dirname(filePath), {
-        recursive: true,
-      })
-
-      const renderedContent = etaEngine.renderString(content, {
-        aliases: config.aliases,
-      })
-      await fs.writeFile(filePath, renderedContent, 'utf-8')
-
-      filesWritten++
-    }
+    const filesWritten = await writeComponentFiles(
+      registryComponent,
+      componentsPath,
+      componentName,
+      etaEngine,
+      config
+    )
 
     return {
       name: componentName,
       status: 'installed',
       externalDependencies: registryComponent.externalDependencies,
+      registryDependencies: registryComponent.registryDependencies,
       filesWritten,
     }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-
-    logger.error(errorMessage, {
-      indent: 1,
-    })
 
     return {
       name: componentName,
@@ -93,6 +204,6 @@ export async function installSingleComponent(
       error: errorMessage,
     }
   } finally {
-    componentSpinner.stop()
+    installSpinner.stop()
   }
 }

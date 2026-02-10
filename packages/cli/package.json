@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "tsdown --watch",
     "build": "tsdown",
-    "start:dev": "node bin/index.mjs"
+    "start:dev": "REGISTRY_API_URL=http://localhost:6006 node bin/index.mjs"
   },
   "keywords": [
     "cli",

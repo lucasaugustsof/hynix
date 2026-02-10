@@ -1,8 +1,9 @@
 import { Command } from 'commander'
 import ora from 'ora'
-import prompt from 'prompts'
+import pc from 'picocolors'
 import { pascalCase } from 'scule'
 
+import prompt from '@/lib/prompts'
 import { fetchRegistry } from '@/services/fetch-registry'
 import { hynixConfig } from '@/utils/config-file'
 import { logger } from '@/utils/logger'
@@ -12,6 +13,7 @@ import { checkValidProject } from '../init/checks/valid-project'
 import { checkComponentsDirectory } from './checks/components-directory'
 import { checkIsInitialized } from './checks/is-initialized'
 import { installComponents } from './functions/install-components'
+import { logInstallationSummary } from './functions/log-installation-summary'
 
 async function runAddCommand(components: string[]) {
   try {
@@ -52,21 +54,72 @@ async function runAddCommand(components: string[]) {
 
     const installedComponents = await installComponents(selectedComponents, config)
 
-    for (const [componentName, { status }] of installedComponents) {
+    const skippedComponents: string[] = []
+    const successfulComponents: string[] = []
+    const overwrittenComponents: string[] = []
+
+    for (const [componentName, installResult] of installedComponents) {
       const componentDisplayName = pascalCase(componentName)
 
-      if (status === 'already-installed') {
+      if (installResult.status === 'already-installed') {
         const { overwrite: isComponentOverwrite } = await prompt({
           type: 'confirm',
           name: 'overwrite',
-          message: `${componentDisplayName} already exists. Overwrite?`,
+          message: `Component ${pc.cyan(componentDisplayName)} already exists. Do you want to overwrite it?`,
           initial: false,
         })
 
-        console.log(isComponentOverwrite)
+        if (isComponentOverwrite) {
+          await installResult.onOverwrite()
+          overwrittenComponents.push(componentDisplayName)
+        } else {
+          skippedComponents.push(componentDisplayName)
+        }
+
+        continue
+      }
+
+      if (installResult.status === 'installed') {
+        successfulComponents.push(componentDisplayName)
+      }
+
+      if (installResult.status === 'failed') {
+        logger.error(`Failed to install component ${pc.cyan(componentDisplayName)}`)
+        logger.dim(`Reason: ${installResult.error}`, {
+          indent: 1,
+        })
       }
     }
-  } catch {}
+
+    logInstallationSummary({
+      successfulComponents,
+      overwrittenComponents,
+      skippedComponents,
+    })
+  } catch (error) {
+    logger.break()
+
+    if (error instanceof Error) {
+      logger.error(error.message, {
+        withoutSymbol: true,
+      })
+
+      if (error.stack) {
+        logger.dim('Stack trace:', {
+          indent: 1,
+        })
+        logger.dim(error.stack, {
+          indent: 2,
+        })
+      }
+    } else {
+      logger.error('An unexpected error occurred while installing components', {
+        withoutSymbol: true,
+      })
+    }
+  } finally {
+    logger.break()
+  }
 }
 
 export const add = new Command()

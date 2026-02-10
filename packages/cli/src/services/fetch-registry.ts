@@ -1,5 +1,5 @@
 const API_BASE_URL = 'https://api.github.com'
-const REGISTRY_API_URL = 'http://localhost:6006'
+const REGISTRY_API_URL = process.env.REGISTRY_API_URL || 'https://storybook.hynix.cc'
 const REQUEST_TIMEOUT = 10000 // 10 seconds
 
 export interface ComponentFile {
@@ -17,81 +17,128 @@ export interface ComponentRegistry {
   updatedAt: string
 }
 
-export async function fetchRegistry() {
+class RegistryError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'RegistryError'
+  }
+}
+
+function isAbortError(error: Error): boolean {
+  return error.name === 'AbortError'
+}
+
+function isNetworkError(error: Error): boolean {
+  return error.message === 'fetch failed' || error.name === 'TypeError'
+}
+
+function handleFetchError(
+  error: unknown,
+  context: 'registry' | 'component',
+  componentName?: string
+): never {
+  if (!(error instanceof Error)) {
+    const message = componentName
+      ? `Unknown error fetching component "${componentName}"`
+      : 'Unknown error fetching registry'
+
+    throw new RegistryError(message)
+  }
+
+  if (isAbortError(error)) {
+    throw new RegistryError(`Request timeout after ${REQUEST_TIMEOUT / 1000} seconds`)
+  }
+
+  if (isNetworkError(error)) {
+    if (context === 'registry') {
+      throw new RegistryError(
+        'Failed to connect to GitHub API. Please check your internet connection and try again.'
+      )
+    }
+    throw new RegistryError(
+      `Failed to connect to component registry at ${REGISTRY_API_URL}. Make sure the registry server is running.`
+    )
+  }
+
+  throw new RegistryError(error.message)
+}
+
+function handleResponseError(response: Response, componentName?: string): never {
+  if (componentName && response.status === 404) {
+    throw new RegistryError(`Component not found in the registry`)
+  }
+
+  if (componentName) {
+    throw new RegistryError(
+      `Failed to fetch component "${componentName}": ${response.status} ${response.statusText}`
+    )
+  }
+
+  throw new RegistryError(`GitHub API returned ${response.status}: ${response.statusText}`)
+}
+
+async function fetchWithTimeout(url: string, options: RequestInit): Promise<Response> {
   const abortController = new AbortController()
   const timeoutId = setTimeout(() => abortController.abort(), REQUEST_TIMEOUT)
 
   try {
-    const response = await fetch(
+    const response = await fetch(url, {
+      ...options,
+      signal: abortController.signal,
+    })
+
+    clearTimeout(timeoutId)
+    return response
+  } catch (error) {
+    clearTimeout(timeoutId)
+    throw error
+  }
+}
+
+export async function fetchRegistry(): Promise<string[]> {
+  try {
+    const response = await fetchWithTimeout(
       `${API_BASE_URL}/repos/lucasaugustsof/hynix/contents/packages/react/src/components`,
       {
         method: 'GET',
         headers: {
           Accept: 'application/vnd.github+json',
-          'X-GitHub-Api-Version': '2022-11-28',
         },
-        signal: abortController.signal,
       }
     )
 
-    clearTimeout(timeoutId)
-
     if (!response.ok) {
-      throw new Error(`GitHub API returned ${response.status}: ${response.statusText}`)
+      handleResponseError(response)
     }
 
-    const data = (await response.json()) as {
+    const data = (await response.json()) as Array<{
       name: string
-    }[]
+    }>
 
-    return data.map(registry => registry.name)
+    return data.map(item => item.name)
   } catch (error) {
-    clearTimeout(timeoutId)
-
-    if (error instanceof Error) {
-      if (error.name === 'AbortError') {
-        throw new Error(`Request timeout after ${REQUEST_TIMEOUT / 1000} seconds`)
-      }
-      throw new Error(error.message || 'Error fetching registry')
-    }
-
-    throw new Error('Unknown error fetching registry')
+    handleFetchError(error, 'registry')
   }
 }
 
 export async function fetchComponentRegistry(componentName: string): Promise<ComponentRegistry> {
-  const abortController = new AbortController()
-  const timeoutId = setTimeout(() => abortController.abort(), REQUEST_TIMEOUT)
-
   try {
     const url = `${REGISTRY_API_URL}/r/${componentName}.json`
-    const response = await fetch(url, {
+    const response = await fetchWithTimeout(url, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
       },
-      signal: abortController.signal,
     })
 
-    clearTimeout(timeoutId)
-
     if (!response.ok) {
-      throw new Error(`Component registry returned ${response.status}: ${response.statusText}`)
+      handleResponseError(response, componentName)
     }
 
     const data = (await response.json()) as ComponentRegistry
 
     return data
   } catch (error) {
-    clearTimeout(timeoutId)
-
-    if (error instanceof Error) {
-      if (error.name === 'AbortError') {
-        throw new Error(`Request timeout after ${REQUEST_TIMEOUT / 1000} seconds`)
-      }
-      throw new Error(error.message || `Error fetching component "${componentName}"`)
-    }
-
-    throw new Error(`Unknown error fetching component "${componentName}"`)
+    handleFetchError(error, 'component', componentName)
   }
 }
