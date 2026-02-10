@@ -1,9 +1,7 @@
 {
   "name": "hint-text",
   "type": "registry:component",
-  "externalDependencies": [
-    "@remixicon/react"
-  ],
+  "externalDependencies": [],
   "registryDependencies": [],
   "files": [
     {

@@ -13,6 +13,7 @@ import { checkValidProject } from '../init/checks/valid-project'
 import { checkComponentsDirectory } from './checks/components-directory'
 import { checkIsInitialized } from './checks/is-initialized'
 import { installComponents } from './functions/install-components'
+import { installExternalDependencies } from './functions/install-external-dependencies'
 import { logInstallationSummary } from './functions/log-installation-summary'
 
 async function runAddCommand(components: string[]) {
@@ -57,6 +58,7 @@ async function runAddCommand(components: string[]) {
     const skippedComponents: string[] = []
     const successfulComponents: string[] = []
     const overwrittenComponents: string[] = []
+    const externalDependenciesToInstall: string[] = []
 
     for (const [componentName, installResult] of installedComponents) {
       const componentDisplayName = pascalCase(componentName)
@@ -81,6 +83,10 @@ async function runAddCommand(components: string[]) {
 
       if (installResult.status === 'installed') {
         successfulComponents.push(componentDisplayName)
+
+        if (installResult.externalDependencies && installResult.externalDependencies.length > 0) {
+          externalDependenciesToInstall.push(...installResult.externalDependencies)
+        }
       }
 
       if (installResult.status === 'failed') {
@@ -91,10 +97,15 @@ async function runAddCommand(components: string[]) {
       }
     }
 
+    if (externalDependenciesToInstall.length > 0) {
+      await installExternalDependencies(externalDependenciesToInstall)
+    }
+
     logInstallationSummary({
       successfulComponents,
       overwrittenComponents,
       skippedComponents,
+      installedExternalDependencies: externalDependenciesToInstall,
     })
   } catch (error) {
     logger.break()

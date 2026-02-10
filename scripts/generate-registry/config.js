@@ -8,7 +8,14 @@ export const ROOT_DIR = path.join(__dirname, '../..')
 export const COMPONENTS_DIR = path.join(ROOT_DIR, 'packages/react/src/components')
 export const OUTPUT_DIR = path.join(ROOT_DIR, '.storybook/public/r')
 
-export const IGNORED_PACKAGES = ['react', 'react-dom', 'tailwind-merge', 'clsx', '@ark-ui/react']
+export const IGNORED_PACKAGES = [
+  'react',
+  'react-dom',
+  'tailwind-merge',
+  'clsx',
+  '@ark-ui/react',
+  '@remixicon/react',
+]
 
 export const ALIAS_MAPPINGS = {
   '@/utils/': '<%= it.aliases.utils %>/',

@@ -29,7 +29,6 @@
     "vite": "^7.3.1"
   },
   "scripts": {
-    "hynix": "node --experimental-strip-types packages/cli/src/index.ts",
     "generate-registry": "node scripts/generate-registry/index.js",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",

@@ -4,15 +4,16 @@ type InstallationSummary = {
   successfulComponents: string[]
   overwrittenComponents: string[]
   skippedComponents: string[]
+  installedExternalDependencies: string[]
 }
 
 type ComponentGroup = {
   components: string[]
   title: string
-  logMethod: 'success' | 'warning'
+  logMethod: 'success' | 'warning' | 'info'
 }
 
-function logComponentGroup(group: ComponentGroup): void {
+function logComponentGroup(group: ComponentGroup) {
   if (group.components.length === 0) {
     return
   }
@@ -27,8 +28,13 @@ function logComponentGroup(group: ComponentGroup): void {
   }
 }
 
-export function logInstallationSummary(summary: InstallationSummary): void {
-  const { successfulComponents, overwrittenComponents, skippedComponents } = summary
+export function logInstallationSummary(summary: InstallationSummary) {
+  const {
+    successfulComponents,
+    overwrittenComponents,
+    skippedComponents,
+    installedExternalDependencies,
+  } = summary
 
   const groups: ComponentGroup[] = [
     {
@@ -45,6 +51,11 @@ export function logInstallationSummary(summary: InstallationSummary): void {
       components: skippedComponents,
       title: 'The following components were skipped (no changes were made):',
       logMethod: 'warning',
+    },
+    {
+      components: installedExternalDependencies,
+      title: 'External dependencies installed via package manager:',
+      logMethod: 'info',
     },
   ]
 

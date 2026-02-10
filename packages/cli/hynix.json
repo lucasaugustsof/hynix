@@ -2,7 +2,7 @@
   "rsc": false,
   "tsx": true,
   "aliases": {
-    "components": "@/components",
+    "components": "@/components/ui",
     "utils": "@/utils",
     "hooks": "@/hooks",
     "styles": "@/styles"

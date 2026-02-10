@@ -11,9 +11,9 @@ export const logger = {
   },
   info(message: string, { exit = false } = {}) {
     console.log(pc.blue('◆'), message)
-    console.log()
 
     if (exit) {
+      console.log()
       process.exit(0)
     }
   },
