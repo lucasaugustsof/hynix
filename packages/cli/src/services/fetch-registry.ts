@@ -6,7 +6,7 @@ const API_BASE_URL = 'https://api.github.com'
 /**
  * Registry API URL - can be overridden via REGISTRY_API_URL environment variable
  */
-const REGISTRY_API_URL = process.env.REGISTRY_API_URL || 'https://staging.hynix.cc'
+const REGISTRY_API_URL = process.env.REGISTRY_API_URL || 'https://preview-storybook.hynix.cc'
 
 /**
  * Request timeout in milliseconds
