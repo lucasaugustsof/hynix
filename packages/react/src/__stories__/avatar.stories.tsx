@@ -51,7 +51,11 @@ export const Default: AvatarStory = {
   render: args => (
     <Avatar.Root {...args}>
       <Avatar.Fallback>{getInitials('Lucas Augusto')}</Avatar.Fallback>
-      <Avatar.Image src="https://github.com/lucasaugustsof.png" alt="Lucas Augusto" />
+      <Avatar.Image
+        showPlaceholder
+        src="https://github.com/lucasaugustsof.png"
+        alt="Lucas Augusto"
+      />
     </Avatar.Root>
   ),
 }

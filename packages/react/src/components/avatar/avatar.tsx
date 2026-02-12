@@ -13,8 +13,6 @@ import { ark } from '@ark-ui/react/factory'
 import { cn } from '@/utils/cn'
 import { renderChildren } from '@/utils/render-children'
 import { tv, type VariantProps } from '@/utils/tv'
-import placeholderDark from './assets/placeholder-dark.png'
-import placeholderLight from './assets/placeholder-light.png'
 
 const AVATAR_ROOT_PROVIDER_NAME = 'Avatar.RootProvider'
 const AVATAR_ROOT_NAME = 'Avatar.Root'
@@ -194,7 +192,7 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
       return () => observer.disconnect()
     }, [])
 
-    const placeholderImg = isDarkTheme ? placeholderDark : placeholderLight
+    const placeholderImgSrc = `https://storybook.hynix.cc/images/placeholder-${isDarkTheme ? 'dark' : 'light'}.png`
 
     return (
       <ArkAvatar.Image
@@ -203,7 +201,7 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
           className,
           size,
         })}
-        src={showPlaceholder ? placeholderImg : src}
+        src={showPlaceholder ? placeholderImgSrc : src}
         {...props}
       />
     )
