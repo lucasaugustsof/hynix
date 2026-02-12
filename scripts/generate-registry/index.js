@@ -10,16 +10,40 @@ import { logger } from './logger.js'
 import { convertAliasesToEtaFormat } from './transform.js'
 
 /**
- * Gets all TypeScript files in a component directory
+ * Gets all files in a component directory recursively
  * @param {string} componentDir
- * @returns {Promise<string[]>}
+ * @param {string} [relativePath='']
+ * @returns {Promise<Array<{path: string, relativePath: string}>>}
  */
-async function getComponentFiles(componentDir) {
+async function getComponentFiles(componentDir, relativePath = '') {
   const entries = await fs.readdir(componentDir, { withFileTypes: true })
+  const files = []
 
-  return entries
-    .filter(entry => entry.isFile() && (entry.name.endsWith('.ts') || entry.name.endsWith('.tsx')))
-    .map(entry => path.join(componentDir, entry.name))
+  for (const entry of entries) {
+    const fullPath = path.join(componentDir, entry.name)
+    const relPath = path.join(relativePath, entry.name)
+
+    if (entry.isDirectory()) {
+      const subFiles = await getComponentFiles(fullPath, relPath)
+      files.push(...subFiles)
+    } else if (entry.isFile()) {
+      files.push({
+        path: fullPath,
+        relativePath: relPath,
+      })
+    }
+  }
+
+  return files
+}
+
+/**
+ * Determines if a file is a TypeScript/JavaScript file
+ * @param {string} filePath
+ * @returns {boolean}
+ */
+function isCodeFile(filePath) {
+  return /\.(ts|tsx|js|jsx)$/.test(filePath)
 }
 
 /**
@@ -36,27 +60,30 @@ async function generateComponentRegistry(componentName, componentDir, project) {
   const componentFiles = await getComponentFiles(componentDir)
 
   const files = await Promise.all(
-    componentFiles.map(async filePath => {
-      const sourceFile = project.addSourceFileAtPath(filePath)
-      const fileName = path.basename(filePath)
+    componentFiles.map(async ({ path: filePath, relativePath }) => {
+      let content = await fs.readFile(filePath, 'utf-8')
 
-      const externalDeps = extractExternalDependencies(sourceFile)
-      const registryDeps = extractRegistryDependencies(sourceFile, componentName)
+      // Only process dependencies for TypeScript/JavaScript files
+      if (isCodeFile(filePath)) {
+        const sourceFile = project.addSourceFileAtPath(filePath)
 
-      for (const dep of externalDeps) {
-        allExternalDeps.add(dep)
+        const externalDeps = extractExternalDependencies(sourceFile)
+        const registryDeps = extractRegistryDependencies(sourceFile, componentName)
+
+        for (const dep of externalDeps) {
+          allExternalDeps.add(dep)
+        }
+
+        for (const dep of registryDeps) {
+          allRegistryDeps.add(dep)
+        }
+
+        content = convertAliasesToEtaFormat(content)
       }
-
-      for (const dep of registryDeps) {
-        allRegistryDeps.add(dep)
-      }
-
-      const content = await fs.readFile(filePath, 'utf-8')
-      const etaContent = convertAliasesToEtaFormat(content)
 
       return {
-        name: fileName,
-        content: etaContent,
+        name: relativePath,
+        content,
       }
     })
   )
