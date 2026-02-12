@@ -4,6 +4,38 @@ import * as tsConfigPaths from 'tsconfig-paths'
 
 import { CWD } from './const'
 
+/**
+ * Resolves a TypeScript path alias to an absolute file system path
+ *
+ * Loads the tsconfig.json from the current working directory and resolves
+ * the provided alias import to its absolute path based on the configured
+ * path mappings and baseUrl.
+ *
+ * @param aliasImport - The aliased import path to resolve (e.g., '@/components/button')
+ * @returns The absolute file system path corresponding to the alias
+ * @throws {Error} If tsconfig.json cannot be loaded
+ * @throws {Error} If no paths are configured in tsconfig.json
+ * @throws {Error} If the alias cannot be resolved to any configured path mapping
+ *
+ * @example
+ * ```ts
+ * // With tsconfig.json:
+ * // {
+ * //   "compilerOptions": {
+ * //     "baseUrl": ".",
+ * //     "paths": {
+ * //       "@/*": ["src/*"]
+ * //     }
+ * //   }
+ * // }
+ *
+ * const absolutePath = resolveAliasToAbsolutePath('@/components/button')
+ * // Returns: '/project/root/src/components/button'
+ *
+ * const utilPath = resolveAliasToAbsolutePath('@/utils/helpers')
+ * // Returns: '/project/root/src/utils/helpers'
+ * ```
+ */
 export function resolveAliasToAbsolutePath(aliasImport: string) {
   const configResult = tsConfigPaths.loadConfig(CWD)
 
