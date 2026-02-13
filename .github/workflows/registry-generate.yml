@@ -1,0 +1,55 @@
+name: Generate Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/react/src/components/**'
+  pull_request:
+    paths:
+      - 'packages/react/src/components/**'
+
+jobs:
+  generate-registry:
+    name: Generate & Commit Registry
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.22.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate registry
+        run: pnpm generate-registry
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code .storybook/public/r/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push registry changes
+        if: steps.git-check.outputs.changed == 'true' && github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/ci/cli')
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .storybook/public/r/
+          git commit -m "chore(registry): auto-generate registry files [skip ci]"
+          git push

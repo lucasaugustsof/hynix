@@ -11,9 +11,13 @@
   ],
   "scripts": {
     "dev": "tsdown --watch",
+    "start:dev": "REGISTRY_API_URL=http://localhost:6006 node bin/index.mjs",
     "test": "vitest",
     "build": "tsdown",
-    "start:dev": "REGISTRY_API_URL=http://localhost:6006 node bin/index.mjs"
+    "typecheck": "tsc --noEmit",
+    "lint": "biome lint",
+    "format": "biome format",
+    "check": "biome check --write"
   },
   "keywords": [
     "cli",
